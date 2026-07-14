@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk tolerance — Riskled</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F3A; --gold:#C9A84C; --cream:#FBF8F0; --cream-2:#F3ECDC;
+    --line:#d9d0bd; --muted:#5d6b7e; --bar:#14181d;
+    --z1:#3d6fa0; --z2:#C9A84C; --z3:#c07a2b; --z4:#8a3535;
+    --serif:'Playfair Display',Georgia,serif;
+    --sans:'Source Sans 3',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--cream);color:var(--navy);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:500;margin:0 0 18px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5.4vw,44px);line-height:1.12;letter-spacing:-.01em;margin:0 0 18px}
+  h1 .em{font-style:italic}
+  .lede{font-size:19px;color:var(--muted);max-width:58ch;margin:0 0 8px}
+  .tline{margin:26px 0 40px;height:14px}
+  .tline svg{display:block;width:100%;height:100%;overflow:visible}
+
+  .card{background:var(--cream-2);border:1px solid var(--line);border-radius:4px;padding:28px 26px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 22px}
+  .field.full{grid-column:1 / -1}
+  label{display:block;font-weight:600;font-size:15.5px;margin-bottom:5px}
+  .help{font-size:13.5px;color:var(--muted);margin:0 0 9px}
+  .input-money{position:relative;display:flex;align-items:center}
+  .input-money .sym{position:absolute;left:14px;font-family:var(--mono);color:var(--muted);font-size:17px}
+  input[type=text]{width:100%;font-family:var(--mono);font-size:19px;font-weight:500;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:3px;padding:12px 14px 12px 32px;outline:none}
+  input[type=text]:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.18)}
+  .margin-derived{grid-column:1 / -1;font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.03em;margin-top:-4px}
+  .margin-derived b{color:var(--z3)}
+  .err{color:var(--z4);font-size:14px;margin-top:12px;min-height:1px}
+
+  #results{display:none;margin-top:40px}
+  #results.show{display:block;animation:rise .45s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .tolblock{margin-bottom:8px}
+  .tolblock .cap{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .tolblock .fig{font-family:var(--serif);font-weight:600;font-size:clamp(38px,8vw,56px);line-height:1;letter-spacing:-.02em}
+
+  .chartwrap{margin:26px 0 0}
+  .chart{width:100%;height:220px;display:block;overflow:visible}
+  .sliderrow{margin-top:2px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:4px;background:var(--bar);outline:none;margin:0;cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--cream);border:3px solid var(--navy);cursor:grab;box-shadow:0 2px 6px rgba(11,31,58,.35)}
+  input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
+  input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--cream);border:3px solid var(--navy);cursor:grab;box-shadow:0 2px 6px rgba(11,31,58,.35)}
+  .scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px;letter-spacing:.03em}
+  .howto{font-size:13px;color:var(--muted);margin:14px 0 0;text-align:center;font-family:var(--mono);letter-spacing:.03em}
+
+  .primary{margin-top:30px;padding:24px;background:var(--navy);color:var(--cream);border-radius:4px}
+  .primary .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  .primary .big{font-family:var(--serif);font-weight:600;font-size:clamp(26px,6.5vw,38px);line-height:1.08}
+  .primary .cd{font-size:14.5px;color:#c7d2e0;margin-top:10px}
+  .primary.ruinbox{background:var(--z4)}
+  .primary.ruinbox .k{color:#f0d2d2}.primary.ruinbox .cd{color:#f3dede}
+
+  .support{margin-top:22px}
+  .sr{display:flex;align-items:baseline;gap:14px;padding:18px 0;border-top:1px solid var(--line)}
+  .sr .num{font-family:var(--mono);font-weight:600;font-size:clamp(20px,5vw,26px);color:var(--navy);white-space:nowrap;min-width:6ch}
+  .sr .num.ruin{color:var(--z4)}
+  .sr .txt{font-size:14.5px;color:var(--muted)}
+
+  .consent{margin-top:28px;display:flex;gap:12px;align-items:flex-start;background:var(--cream-2);border:1px solid var(--line);border-radius:4px;padding:16px 18px}
+  .consent input{margin-top:3px;width:17px;height:17px;accent-color:var(--navy);flex-shrink:0}
+  .consent label{font-weight:400;font-size:14.5px;color:var(--muted);margin:0}
+  .close{margin-top:28px;padding-top:24px;border-top:1px solid var(--line);font-size:15.5px;color:var(--muted)}
+  .close a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+  footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+  footer .pb{font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;font-size:11px;color:var(--gold);margin-bottom:8px}
+
+  @media(max-width:560px){
+    body{font-size:16px}.wrap{padding:36px 18px 64px}.card{padding:22px 18px}
+    .grid{grid-template-columns:1fr}
+    .sr{flex-direction:column;gap:3px}.sr .num{min-width:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Riskled · Risk tolerance</p>
+  <h1>General insurance that starts with <span class="em">your</span> risk tolerance. Not the insurer's.</h1>
+  <p class="lede">Enter three numbers you already know, then move the marker to see how the difficulty of recovering from a loss changes as it grows against your cash.</p>
+
+  <div class="tline" aria-hidden="true">
+    <svg viewBox="0 0 760 14" preserveAspectRatio="none">
+      <defs><linearGradient id="tlg" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#3d6fa0"/><stop offset="0.5" stop-color="#C9A84C"/>
+        <stop offset="0.78" stop-color="#c07a2b"/><stop offset="1" stop-color="#8a3535"/>
+      </linearGradient></defs>
+      <line x1="0" y1="7" x2="760" y2="7" stroke="url(#tlg)" stroke-width="2"/>
+      <circle cx="0" cy="7" r="3.5" fill="#3d6fa0"/><circle cx="760" cy="7" r="3.5" fill="#8a3535"/>
+    </svg>
+  </div>
+
+  <div class="card">
+    <div class="grid">
+      <div class="field">
+        <label for="rev">Estimated annual revenue</label>
+        <p class="help">Roughly what the business turns over in a year.</p>
+        <div class="input-money"><span class="sym">$</span><input type="text" id="rev" inputmode="numeric" placeholder="1,000,000" autocomplete="off"></div>
+      </div>
+      <div class="field">
+        <label for="gp">Estimated gross profit</label>
+        <p class="help">Revenue less the cost of the goods or services you sell.</p>
+        <div class="input-money"><span class="sym">$</span><input type="text" id="gp" inputmode="numeric" placeholder="400,000" autocomplete="off"></div>
+      </div>
+      <div class="field full">
+        <label for="wc">Surplus cash</label>
+        <p class="help">Cash reserves beyond day-to-day operating needs — the buffer that would take the hit if a loss landed tomorrow. Not property, not equipment.</p>
+        <div class="input-money" style="max-width:340px"><span class="sym">$</span><input type="text" id="wc" inputmode="numeric" placeholder="500,000" autocomplete="off"></div>
+      </div>
+      <div class="margin-derived" id="marginDerived" style="display:none"></div>
+    </div>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="results">
+
+    <div class="tolblock">
+      <div class="cap">Your risk tolerance</div>
+      <div class="fig" id="tolFig">$0</div>
+    </div>
+
+    <div class="chartwrap">
+      <svg class="chart" id="chart" viewBox="0 0 720 220" preserveAspectRatio="none"></svg>
+      <div class="sliderrow">
+        <input type="range" id="lossSlider" min="0" max="100" step="0.2" value="8.33">
+        <div class="scale"><span>No loss</span><span>Surplus cash</span><span></span></div>
+      </div>
+      <p class="howto">Drag the marker to model any loss</p>
+    </div>
+
+    <div class="primary" id="primaryBox">
+      <div class="k">Extra sales generating equivalent gross profit</div>
+      <div class="big" id="primBig">$0</div>
+      <div class="cd" id="primCd"></div>
+    </div>
+
+    <div class="support">
+      <div class="sr">
+        <div class="num" id="climbMult">+20%</div>
+        <div class="txt">the amount your remaining surplus cash would have to grow by to return to today's level.</div>
+      </div>
+      <div class="sr">
+        <div class="num" id="yardNum">0.17×</div>
+        <div class="txt">this loss measured against your annual revenue.</div>
+      </div>
+    </div>
+
+    <div class="consent">
+      <input type="checkbox" id="consent">
+      <label for="consent">These figures reflect what I could absorb before insurance kicks in. I understand they're indicative only, not personal advice.</label>
+    </div>
+
+    <p class="close">These figures are general information for you to explore. To turn them into a decision, <a href="#" id="bookLink">book a review with a licensed broker</a>.</p>
+
+  </div>
+
+  <footer>
+    <div class="pb">Powered by Geometrisk</div>
+    General information only. It is not financial product advice. Your insurance needs depend on your specific financial situation. Speak with a licensed insurance broker before making coverage decisions.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var fmtAUD=new Intl.NumberFormat('en-AU',{style:'currency',currency:'AUD',maximumFractionDigits:0});
+  var fmtNum=new Intl.NumberFormat('en-AU',{maximumFractionDigits:0});
+  var $=function(id){return document.getElementById(id)};
+  var revEl=$('rev'),gpEl=$('gp'),wcEl=$('wc'),errEl=$('err'),results=$('results'),slider=$('lossSlider');
+  var W=0,R=0,GP=0,M=0,chartDrawn=false,wOfChart=null,started=false;
+
+  function groom(el){el.addEventListener('input',function(){
+    var end=el.selectionStart===el.value.length;var d=el.value.replace(/[^\d]/g,'');
+    el.value=d?fmtNum.format(parseInt(d,10)):'';
+    if(end){el.selectionStart=el.selectionEnd=el.value.length;}
+    update();
+  });}
+  groom(revEl);groom(gpEl);groom(wcEl);
+  function val(el){var d=el.value.replace(/[^\d]/g,'');return d?parseInt(d,10):0;}
+
+  // chart geometry — x spans full width so it aligns with the slider
+  var VB_W=720,VB_H=220,padT=14,padB=10,innerH=VB_H-padT-padB,MAXF=0.985;
+  function xOfL(L){return (L/(2*W))*VB_W;}
+  function felt(L){return Math.log(W/(W-L));}
+
+  function drawCurve(){
+    var maxL=MAXF*W,maxC=felt(maxL),b=padT+innerH,pts=[],N=150;
+    for(var i=0;i<=N;i++){var L=(i/N)*maxL;var y=b-Math.min(felt(L)/maxC,1)*innerH;pts.push([xOfL(L),y]);}
+    var d='M '+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+    for(var j=1;j<pts.length;j++)d+=' L '+pts[j][0].toFixed(1)+' '+pts[j][1].toFixed(1);
+    var z1=xOfL(W/3),z2=xOfL(4*W/5),wall=xOfL(W); // difficulty bands
+    function band(x0,x1,c){return '<rect x="'+x0.toFixed(1)+'" y="'+padT+'" width="'+(x1-x0).toFixed(1)+'" height="'+innerH+'" fill="'+c+'" fill-opacity="0.22"/>';}
+    $('chart').innerHTML=
+      band(0,z1,'#3d6fa0')+band(z1,z2,'#C9A84C')+band(z2,wall,'#c07a2b')+band(wall,VB_W,'#8a3535')+
+      '<line x1="0" y1="'+b+'" x2="'+VB_W+'" y2="'+b+'" stroke="#0B1F3A" stroke-opacity="0.35"/>'+
+      '<path d="'+d+'" fill="none" stroke="#0B1F3A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>'+
+      '<g id="live"><line id="mLine" x1="0" y1="'+padT+'" x2="0" y2="'+b+'" stroke="#0B1F3A" stroke-width="1.25" opacity="0.5"/>'+
+      '<circle id="mDot" cx="0" cy="0" r="6.5" fill="#FBF8F0" stroke="#0B1F3A" stroke-width="2.5"/></g>';
+    chartDrawn=true;
+  }
+  function moveMarker(L){
+    if(!chartDrawn)return;
+    var maxL=MAXF*W,maxC=felt(maxL),b=padT+innerH,x=xOfL(Math.min(L,2*W));
+    var ln=$('mLine'),dot=$('mDot');ln.setAttribute('x1',x.toFixed(1));ln.setAttribute('x2',x.toFixed(1));
+    if(L<maxL){var y=b-Math.min(felt(L)/maxC,1)*innerH;dot.setAttribute('cx',x.toFixed(1));dot.setAttribute('cy',y.toFixed(1));}
+    else{dot.setAttribute('cx',x.toFixed(1));dot.setAttribute('cy',(padT+2).toFixed(1));}
+  }
+  function currentL(){return (parseFloat(slider.value)/100)*(2*W);}
+
+  function update(){
+    R=val(revEl);GP=val(gpEl);W=val(wcEl);errEl.textContent='';
+    var md=$('marginDerived');
+    if(R>0&&GP>0){M=GP/R;md.style.display='block';md.innerHTML='Your gross margin, from those two figures: <b>'+(M*100).toFixed(0)+'%</b> \u2014 we use this, we don\u2019t assume it.';}
+    else md.style.display='none';
+    if(!(R>0&&GP>0&&W>0)){results.classList.remove('show');started=false;return;}
+    if(GP>R){errEl.textContent='Gross profit can\u2019t be larger than revenue \u2014 check those two figures.';results.classList.remove('show');return;}
+    if(!started){slider.value=8.33;started=true;} // open at middle of the first (blue) zone
+    if(!chartDrawn||wOfChart!==W){drawCurve();wOfChart=W;}
+    render();results.classList.add('show');
+  }
+
+  function render(){
+    var L=currentL();
+    $('tolFig').textContent=fmtAUD.format(Math.round(L));
+    var climbMult=$('climbMult'),yardNum=$('yardNum'),box=$('primaryBox'),big=$('primBig'),cd=$('primCd');
+    yardNum.textContent=(L/R<1?(L/R).toFixed(2):(L/R).toFixed(1))+'\u00d7';
+
+    if(L>=W){
+      $('tolFig').style.color='var(--z4)';
+      climbMult.textContent='\u2014';climbMult.classList.add('ruin');
+      box.className='primary ruinbox';big.textContent='Exceeds surplus cash';
+      cd.textContent='This loss is larger than your surplus cash. There is no remaining balance to grow from.';
+    }else{
+      $('tolFig').style.color='';climbMult.classList.remove('ruin');box.className='primary';
+      var mult=L/(W-L);
+      climbMult.textContent='+'+(mult*100>=1000?fmtNum.format(Math.round(mult*100/10)*10):Math.round(mult*100))+'%';
+      var extraRev=L/M,lift=L/GP*100;
+      big.textContent=fmtAUD.format(Math.round(extraRev));
+      cd.innerHTML='About <b>+'+(lift>=1000?fmtNum.format(Math.round(lift/10)*10):Math.round(lift))+'%</b> of your current revenue \u2014 before tax and fixed costs.';
+    }
+    moveMarker(L);
+  }
+
+  slider.addEventListener('input',render);
+  $('bookLink').addEventListener('click',function(e){e.preventDefault();});
+})();
+</script>
+</body>
+</html>
