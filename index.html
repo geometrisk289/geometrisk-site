@@ -244,6 +244,13 @@
   .bform .cta[disabled]{opacity:.45;cursor:default;pointer-events:none}
   .bdone{display:none;font-family:var(--serif);font-size:20px;color:var(--cream-hi);margin:10px 0 6px}
 
+  /* ---------- positioning band ---------- */
+  .whatis{background:var(--cream);padding:72px 32px}
+  .whatis .win{max-width:720px;margin:0 auto;text-align:center}
+  .whatis h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,2.8vw,32px);
+             letter-spacing:-.3px;color:var(--navy);margin-bottom:16px}
+  .whatis p{font-size:17px;color:var(--muted);line-height:1.65}
+
   /* ---------- referral: floating button + panel ---------- */
   .fab{position:fixed;right:24px;bottom:24px;z-index:60;background:var(--gold);color:var(--deep);
        border:none;border-radius:2px;padding:14px 22px;font-family:var(--body);font-weight:600;
@@ -543,6 +550,14 @@
   </section>
 </main>
 
+<!-- ============ WHAT GEOMETRISK IS ============ -->
+<section class="whatis">
+  <div class="win">
+    <h2>What Geometrisk is</h2>
+    <p>Geometrisk is a risk and capital advisory. We help you find your line &mdash; the loss your business can carry, and the loss it cannot. We don't sell or advise on insurance. When you're ready to transfer risk, we refer you to an independent broker.</p>
+  </div>
+</section>
+
 <button class="fab" id="fabAdvisor" type="button">Find your insurance advisor</button>
 
 <div class="overlay" id="advOverlay" role="dialog" aria-modal="true" aria-labelledby="advTitle">
@@ -585,7 +600,7 @@
 <footer>
   <div class="foot">
     <div class="fmark">geometrisk</div>
-    <div class="disc">Illustrative figures only. General information, not financial product advice. Your insurance needs depend on your specific financial situation.</div>
+    <div class="disc">Illustrative figures only. General information, not financial product advice. Your insurance needs depend on your specific financial situation. Geometrisk is not an insurance broker or insurer and does not provide financial product advice. We refer clients to independent brokers and may receive a fee for doing so.</div>
   </div>
 </footer>
 
