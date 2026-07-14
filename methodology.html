@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How this works · Geometrisk</title>
 <meta name="description" content="The thinking behind Geometrisk's risk-tolerance model: surplus cash as the base, the cost of recovery, the felt cost of loss, and what the model deliberately leaves out. General information only, not financial product advice.">
+<link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,7 +13,7 @@
   :root{
     --navy:#16294A; --deep:#0E1D38; --navy-2:#5A7099;
     --gold:#A8843E; --gold-soft:#C9A85F;
-    --cream:#F1E8D6; --cream-hi:#F7F1E4;
+    --cream:#F5F5F2; --cream-hi:#FFFFFF;
     --ink:#1A2438; --muted:#5C6577;
     --line:rgba(22,41,74,.14);
     --serif:'Playfair Display',Georgia,serif;
@@ -26,9 +27,8 @@
 
   nav{position:relative;z-index:5;display:flex;align-items:center;
       justify-content:space-between;padding:26px 32px;max-width:1180px;margin:0 auto}
-  .wordmark{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:.3px;
-            color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:12px}
-  .wordmark .mk{width:34px;height:20px;flex:0 0 34px}
+  .wordmark{text-decoration:none;display:flex;align-items:center}
+  .wordmark .logoimg{height:52px;width:auto;display:block}
   .navlinks{display:flex;align-items:center;gap:30px}
   .navlinks a{font-family:var(--mono);font-size:12px;letter-spacing:.6px;text-transform:uppercase;
               color:var(--muted);text-decoration:none;transition:color .2s}
@@ -82,11 +82,7 @@
 
 <nav>
   <a class="wordmark" href="index.html">
-    <svg class="mk" viewBox="0 0 60 34" aria-hidden="true">
-      <path d="M2 12 C14 12 20 27 34 27 C44 27 50 26 58 26" fill="none" stroke="#16294A" stroke-width="2.4" stroke-linecap="round"/>
-      <path d="M24 30 C36 28 46 20 50 3" fill="none" stroke="#A8843E" stroke-width="2.4" stroke-linecap="round"/>
-    </svg>
-    geometrisk
+    <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
   </a>
   <div class="navlinks">
     <a href="index.html#businesses">For businesses</a>
