@@ -282,6 +282,8 @@
   .advcard li{font-size:14px;color:var(--muted);padding:3px 0}
   .advcard .contact{font-family:var(--mono);font-size:13px;margin-top:12px;color:var(--navy);word-break:break-word}
   .advcard .fine{font-size:12px;color:var(--muted);margin-top:12px}
+  .privnote{font-size:12.5px;color:var(--muted);margin-top:12px}
+  .bform .privnote{color:rgba(241,232,214,.55)}
 
   footer{background:var(--navy);color:rgba(241,232,214,.6);padding:40px 32px}
   .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;
@@ -544,6 +546,7 @@
       <label for="bBiz">Business name</label>
       <input type="text" id="bBiz" name="business" required autocomplete="organization">
       <button class="cta gold" id="brokerSubmit" type="submit">Join the waitlist <span class="arw">&rarr;</span></button>
+      <p class="privnote">We use your details only to contact you about the network.</p>
     </form>
     <p class="bdone" id="brokerDone">Thanks &mdash; you're on the list.</p>
     <div class="chips">No cost to join · Pilot partners onboarding now</div>
@@ -577,6 +580,7 @@
         <label for="refMsg">Message <span class="opt">(optional)</span></label>
         <textarea id="refMsg" name="message"></textarea>
         <button class="cta gold" id="refSubmit" type="submit">Request an introduction <span class="arw">&rarr;</span></button>
+        <p class="privnote">We share your details only with the advisor you're contacting.</p>
       </form>
     </div>
 
