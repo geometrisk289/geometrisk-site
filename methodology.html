@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How this works · Geometrisk</title>
+<meta name="description" content="The thinking behind Geometrisk's risk-tolerance model: surplus cash as the base, the cost of recovery, the felt cost of loss, and what the model deliberately leaves out. General information only, not financial product advice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16294A; --deep:#0E1D38; --navy-2:#5A7099;
+    --gold:#A8843E; --gold-soft:#C9A85F;
+    --cream:#F1E8D6; --cream-hi:#F7F1E4;
+    --ink:#1A2438; --muted:#5C6577;
+    --line:rgba(22,41,74,.14);
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Sans 3',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--cream-hi);
+       -webkit-font-smoothing:antialiased;line-height:1.55}
+
+  nav{position:relative;z-index:5;display:flex;align-items:center;
+      justify-content:space-between;padding:26px 32px;max-width:1180px;margin:0 auto}
+  .wordmark{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:.3px;
+            color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:12px}
+  .wordmark .mk{width:34px;height:20px;flex:0 0 34px}
+  .navlinks{display:flex;align-items:center;gap:30px}
+  .navlinks a{font-family:var(--mono);font-size:12px;letter-spacing:.6px;text-transform:uppercase;
+              color:var(--muted);text-decoration:none;transition:color .2s}
+  .navlinks a:hover{color:var(--navy)}
+  .navlinks a.here{color:var(--navy)}
+
+  .page{max-width:720px;margin:0 auto;padding:44px 24px 96px}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:2.4px;text-transform:uppercase;
+           color:var(--gold);margin-bottom:20px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,5.4vw,54px);
+     line-height:1.06;letter-spacing:-.5px;color:var(--navy);margin-bottom:16px}
+  .lede{font-size:18px;color:var(--muted);max-width:56ch;margin-bottom:14px}
+
+  .sec{margin-top:52px;padding-top:36px;border-top:1px solid var(--line)}
+  .sec:first-of-type{margin-top:44px}
+  .sec .num{font-family:var(--mono);font-size:12px;letter-spacing:1.8px;text-transform:uppercase;
+            color:var(--gold);margin-bottom:10px}
+  .sec h2{font-family:var(--serif);font-weight:600;font-size:clamp(23px,3vw,30px);
+          line-height:1.12;letter-spacing:-.3px;color:var(--navy);margin-bottom:12px}
+  .sec p{font-size:16.5px;color:var(--ink);max-width:60ch;margin-bottom:12px}
+  .sec p.soft{color:var(--muted)}
+  .sec .formula{font-family:var(--mono);font-size:15px;color:var(--navy);background:var(--cream);
+                border:1px solid var(--line);border-radius:3px;display:inline-block;
+                padding:10px 16px;margin:6px 0 12px;overflow-x:auto;max-width:100%}
+  .sec cite{font-style:normal;font-size:15px;color:var(--muted)}
+
+  .backrow{margin-top:64px;padding-top:30px;border-top:1px solid var(--line)}
+  .cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:600;
+       font-size:16px;padding:15px 30px;border-radius:2px;text-decoration:none;cursor:pointer;
+       border:1px solid transparent;transition:all .22s ease}
+  .cta .arw{transition:transform .22s ease}
+  .cta:hover .arw{transform:translateX(4px)}
+  .cta.solid{background:var(--navy);color:var(--cream-hi)}
+  .cta.solid:hover{background:var(--deep)}
+
+  footer{background:var(--navy);color:rgba(241,232,214,.6);padding:40px 32px}
+  .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;
+        justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .foot .fmark{font-family:var(--serif);font-weight:600;font-size:17px;color:var(--cream-hi)}
+  .foot .disc{font-family:var(--mono);font-size:11px;letter-spacing:.5px;max-width:560px}
+
+  a:focus-visible,.cta:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+  @media (max-width:860px){
+    .navlinks{display:none}
+    .page{padding:32px 20px 72px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="index.html">
+    <svg class="mk" viewBox="0 0 60 34" aria-hidden="true">
+      <path d="M2 12 C14 12 20 27 34 27 C44 27 50 26 58 26" fill="none" stroke="#16294A" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M24 30 C36 28 46 20 50 3" fill="none" stroke="#A8843E" stroke-width="2.4" stroke-linecap="round"/>
+    </svg>
+    geometrisk
+  </a>
+  <div class="navlinks">
+    <a href="index.html#businesses">For businesses</a>
+    <a href="index.html#brokers">For brokers</a>
+    <a class="here" href="methodology.html">Risk Library</a>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="eyebrow">Risk Library</div>
+  <h1>How this works</h1>
+  <p class="lede">The model behind the calculator, in plain language. Seven short sections, one idea each.</p>
+
+  <section class="sec">
+    <div class="num">01 · The idea</div>
+    <h2>Insurers average. You can't.</h2>
+    <p>Insurers price risk arithmetically &mdash; the law of large numbers works across thousands of policies. A single business can't. It faces one path, once. That gap is where this sits.</p>
+  </section>
+
+  <section class="sec">
+    <div class="num">02 · The base</div>
+    <h2>Surplus cash is the base.</h2>
+    <p><span class="formula">W = surplus cash</span></p>
+    <p>The only asset that reliably absorbs a loss. Property and equipment are excluded, because the event that destroys them is often the one you'd need them to absorb.</p>
+  </section>
+
+  <section class="sec">
+    <div class="num">03 · The climb</div>
+    <h2>Recovery gets steeper, then vertical.</h2>
+    <p><span class="formula">climb = L / (W &minus; L)</span></p>
+    <p>To recover a loss L from a base W, what's left must grow by L / (W &minus; L). Lose 10%, grow 11%. Lose half, it must double. Lose 90%, it must grow tenfold. The cost of recovery curves, then goes vertical.</p>
+  </section>
+
+  <section class="sec">
+    <div class="num">04 · The felt cost</div>
+    <h2>Money's value depends on how much you have.</h2>
+    <p><span class="formula">felt cost = ln(W / (W &minus; L))</span></p>
+    <p>Bernoulli, 1738: money's value is its usefulness, which depends on how much you already have. As L approaches W, the felt cost tends to infinity.</p>
+  </section>
+
+  <section class="sec">
+    <div class="num">05 · The revenue climb</div>
+    <h2>Cash rebuilds out of sales.</h2>
+    <p><span class="formula">extra sales = L / margin</span></p>
+    <p>Cash rebuilds out of sales, and only a slice of each dollar survives costs. Margin comes from your figures. Because it ignores tax and fixed costs, it's a floor.</p>
+  </section>
+
+  <section class="sec">
+    <div class="num">06 · What's deliberately absent</div>
+    <h2>No probability. No time horizon. No assumed margin.</h2>
+    <p>Each would need a number the model has no honest way to know.</p>
+  </section>
+
+  <section class="sec">
+    <div class="num">07 · Source</div>
+    <h2>One source, and an old one.</h2>
+    <p><cite>Bernoulli, D. (1738), <em>Exposition of a New Theory on the Measurement of Risk</em>.</cite></p>
+  </section>
+
+  <div class="backrow">
+    <a class="cta solid" href="index.html#tool">Find your line <span class="arw">&rarr;</span></a>
+  </div>
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="fmark">geometrisk</div>
+    <div class="disc">Illustrative figures only. General information, not financial product advice. Your insurance needs depend on your specific financial situation. Geometrisk is not an insurance broker or insurer and does not provide financial product advice. We refer clients to independent brokers and may receive a fee for doing so.</div>
+  </div>
+</footer>
+
+</body>
+</html>
