@@ -233,6 +233,38 @@
   .chips{margin-top:18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.4px;color:var(--muted)}
   .panel.adv .chips{color:rgba(241,232,214,.5)}
 
+  /* ---------- referral: floating button + panel ---------- */
+  .fab{position:fixed;right:24px;bottom:24px;z-index:60;background:var(--gold);color:var(--deep);
+       border:none;border-radius:2px;padding:14px 22px;font-family:var(--body);font-weight:600;
+       font-size:15px;cursor:pointer;box-shadow:0 6px 18px rgba(14,29,56,.28);transition:background .22s ease}
+  .fab:hover{background:var(--gold-soft)}
+  .overlay{position:fixed;inset:0;z-index:70;background:rgba(14,29,56,.55);display:none;
+           align-items:flex-start;justify-content:center;padding:6vh 20px 40px;overflow-y:auto}
+  .overlay.open{display:flex}
+  .modal{background:var(--cream-hi);border-radius:4px;max-width:480px;width:100%;
+         padding:34px 32px;position:relative}
+  .modal .mclose{position:absolute;top:12px;right:12px;background:none;border:none;font-size:24px;
+                 line-height:1;color:var(--muted);cursor:pointer;padding:6px}
+  .modal .mclose:hover{color:var(--navy)}
+  .modal h3{font-family:var(--serif);font-weight:600;font-size:24px;color:var(--navy);
+            line-height:1.15;margin-bottom:10px}
+  .modal .mnote{font-size:14px;color:var(--muted);margin-bottom:20px}
+  .modal label{display:block;font-weight:600;font-size:14.5px;color:var(--navy);margin:14px 0 4px}
+  .modal label .opt{font-weight:400;color:var(--muted)}
+  .modal input[type=text],.modal input[type=email],.modal input[type=tel],.modal textarea{
+    width:100%;font-family:var(--body);font-size:15.5px;color:var(--navy);background:#fff;
+    border:1px solid var(--line);border-radius:3px;padding:10px 12px;outline:none}
+  .modal input:focus,.modal textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(168,132,62,.18)}
+  .modal textarea{min-height:84px;resize:vertical}
+  .modal .cta{margin-top:22px;width:100%;justify-content:center}
+  .advcard{border:1px solid var(--line);border-radius:4px;background:var(--cream);padding:20px;margin-top:18px}
+  .advcard .aname{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--navy)}
+  .advcard .arole{font-size:14.5px;color:var(--muted);margin-top:2px}
+  .advcard ul{list-style:none;margin-top:12px}
+  .advcard li{font-size:14px;color:var(--muted);padding:3px 0}
+  .advcard .contact{font-family:var(--mono);font-size:13px;margin-top:12px;color:var(--navy);word-break:break-word}
+  .advcard .fine{font-size:12px;color:var(--muted);margin-top:12px}
+
   footer{background:var(--navy);color:rgba(241,232,214,.6);padding:40px 32px}
   .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;
         justify-content:space-between;gap:24px;flex-wrap:wrap}
@@ -397,6 +429,7 @@
 
       <div class="toolclose">
         <p class="small">These figures are general information for you to explore. To turn them into a decision, speak with an independent insurance advisor.</p>
+        <button class="cta gold" id="resultCta" type="button">Find your insurance advisor <span class="arw">&rarr;</span></button>
       </div>
 
     </div>
@@ -485,6 +518,45 @@
     <div class="chips">No cost to join · Pilot partners onboarding now</div>
   </section>
 </main>
+
+<button class="fab" id="fabAdvisor" type="button">Find your insurance advisor</button>
+
+<div class="overlay" id="advOverlay" role="dialog" aria-modal="true" aria-labelledby="advTitle">
+  <div class="modal">
+    <button class="mclose" id="advClose" type="button" aria-label="Close">&times;</button>
+
+    <div id="advFormState">
+      <h3 id="advTitle">Find your insurance advisor</h3>
+      <p class="mnote">Geometrisk refers you to an independent insurance advisor. We don't advise on or sell insurance.</p>
+      <form id="refForm">
+        <label for="refName">Your name</label>
+        <input type="text" id="refName" name="name" required autocomplete="name">
+        <label for="refEmail">Email</label>
+        <input type="email" id="refEmail" name="email" required autocomplete="email">
+        <label for="refPhone">Phone <span class="opt">(optional)</span></label>
+        <input type="tel" id="refPhone" name="phone" autocomplete="tel">
+        <label for="refMsg">Message <span class="opt">(optional)</span></label>
+        <textarea id="refMsg" name="message"></textarea>
+        <button class="cta gold" id="refSubmit" type="submit">Request an introduction <span class="arw">&rarr;</span></button>
+      </form>
+    </div>
+
+    <div id="advDoneState" style="display:none">
+      <h3>We'll introduce you to Matthew Faulkner.</h3>
+      <div class="advcard">
+        <div class="aname">Matthew Faulkner</div>
+        <div class="arole">Principal Broker, Everclear Insurance Solutions (independent)</div>
+        <ul>
+          <li>Fee-for-service. No insurer commissions.</li>
+          <li>20+ years across broking and insurer leadership.</li>
+        </ul>
+        <div class="contact">0401 629 239 &middot; matthew@everclearinsurance.com.au</div>
+        <div class="fine">Authorised Representative of McLardy McShane Partners (AFSL 232987). Member, NIBA.</div>
+      </div>
+      <div id="bookingEmbed"><!-- Matt booking iframe goes here --></div>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="foot">
@@ -781,6 +853,69 @@
   }
 
   slider.addEventListener('input',render);
+
+  // difficulty band from the recovery multiple m = L/(W−L)
+  function currentBand(){
+    var L=currentL();
+    if(L>=W)return 'Band 4';
+    var m=L/(W-L);
+    if(m<0.5)return 'Band 1';
+    if(m<4)return 'Band 2';
+    return 'Band 3';
+  }
+  window.GeoTool={
+    currentL:currentL,
+    currentBand:currentBand,
+    state:function(){return {R:R,M:M,W:W};}
+  };
+})();
+</script>
+
+<script>
+/* ---------------- REFERRAL: floating button + panel ---------------- */
+(function(){
+  "use strict";
+  var ENDPOINT='https://script.google.com/macros/s/AKfycbyZByJrSkRb7O-rrhN0aChsKSPoI8-nGWyeWcvnIBMvpt_2_4c3aMG2kMX4Vu4pEwK7/exec';
+  var overlay=document.getElementById('advOverlay'),
+      formState=document.getElementById('advFormState'),
+      doneState=document.getElementById('advDoneState'),
+      form=document.getElementById('refForm'),
+      submitBtn=document.getElementById('refSubmit');
+
+  function open(){overlay.classList.add('open');document.body.style.overflow='hidden';}
+  function close(){overlay.classList.remove('open');document.body.style.overflow='';}
+  document.getElementById('fabAdvisor').addEventListener('click',open);
+  document.getElementById('resultCta').addEventListener('click',open);
+  document.getElementById('advClose').addEventListener('click',close);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('open'))close();});
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var t=window.GeoTool,s=t.state();
+    var fd=new FormData();
+    fd.append('name',document.getElementById('refName').value.trim());
+    fd.append('email',document.getElementById('refEmail').value.trim());
+    fd.append('phone',document.getElementById('refPhone').value.trim());
+    fd.append('message',document.getElementById('refMsg').value.trim());
+    fd.append('revenue',s.R);
+    fd.append('margin',(s.M*100).toFixed(0));
+    fd.append('surplus',s.W);
+    fd.append('loss',Math.round(t.currentL()));
+    fd.append('band',t.currentBand());
+    var consentEl=document.getElementById('consent');
+    fd.append('consent',consentEl&&consentEl.checked?'yes':'no');
+
+    submitBtn.disabled=true;
+    submitBtn.textContent='Sending…';
+    // FormData only, no custom headers — avoids a CORS preflight
+    fetch(ENDPOINT,{method:'POST',body:fd})
+      .catch(function(){})
+      .then(function(){
+        formState.style.display='none';
+        doneState.style.display='block';
+      });
+  });
 })();
 </script>
 
