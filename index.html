@@ -233,6 +233,17 @@
   .chips{margin-top:18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.4px;color:var(--muted)}
   .panel.adv .chips{color:rgba(241,232,214,.5)}
 
+  /* broker waitlist form (dark panel) */
+  .bform label{display:block;font-weight:600;font-size:14.5px;color:var(--cream-hi);margin:14px 0 4px}
+  .bform label .opt{font-weight:400;color:rgba(241,232,214,.55)}
+  .bform input{width:100%;font-family:var(--body);font-size:15.5px;color:var(--cream-hi);
+    background:rgba(241,232,214,.08);border:1px solid var(--line-light);border-radius:3px;
+    padding:10px 12px;outline:none}
+  .bform input:focus{border-color:var(--gold-soft);box-shadow:0 0 0 3px rgba(201,168,95,.15)}
+  .bform .cta{margin-top:24px;border:none}
+  .bform .cta[disabled]{opacity:.45;cursor:default;pointer-events:none}
+  .bdone{display:none;font-family:var(--serif);font-size:20px;color:var(--cream-hi);margin:10px 0 6px}
+
   /* ---------- referral: floating button + panel ---------- */
   .fab{position:fixed;right:24px;bottom:24px;z-index:60;background:var(--gold);color:var(--deep);
        border:none;border-radius:2px;padding:14px 22px;font-family:var(--body);font-weight:600;
@@ -512,9 +523,22 @@
         <span>Where you write business, and how far you travel.</span></span></li>
       <li class="step"><span class="num">03</span><span class="txt">
         <strong>Grow your risk business</strong>
-        <span>Get matched with clients who already know their numbers.</span></span></li>
+        <span>Get introduced to businesses that already know their numbers.</span></span></li>
     </ol>
-    <a class="cta gold" href="#">Register your interest <span class="arw">&rarr;</span></a>
+    <form class="bform" id="brokerForm">
+      <label for="bName">Name</label>
+      <input type="text" id="bName" name="name" required autocomplete="name">
+      <label for="bEmail">Email</label>
+      <input type="email" id="bEmail" name="email" required autocomplete="email">
+      <label for="bPhone">Phone <span class="opt">(optional)</span></label>
+      <input type="tel" id="bPhone" name="phone" autocomplete="tel">
+      <label for="bSpec">Specialisation <span class="opt">(optional &mdash; e.g. trades, hospitality, professional services)</span></label>
+      <input type="text" id="bSpec" name="specialisation">
+      <label for="bBiz">Business name</label>
+      <input type="text" id="bBiz" name="business" required autocomplete="organization">
+      <button class="cta gold" id="brokerSubmit" type="submit">Join the waitlist <span class="arw">&rarr;</span></button>
+    </form>
+    <p class="bdone" id="brokerDone">Thanks &mdash; you're on the list.</p>
     <div class="chips">No cost to join · Pilot partners onboarding now</div>
   </section>
 </main>
@@ -914,6 +938,26 @@
       .then(function(){
         formState.style.display='none';
         doneState.style.display='block';
+      });
+  });
+
+  /* broker waitlist */
+  var bForm=document.getElementById('brokerForm'),bBtn=document.getElementById('brokerSubmit');
+  bForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    var fd=new FormData();
+    fd.append('type','broker');
+    fd.append('name',document.getElementById('bName').value.trim());
+    fd.append('email',document.getElementById('bEmail').value.trim());
+    fd.append('phone',document.getElementById('bPhone').value.trim());
+    fd.append('specialisation',document.getElementById('bSpec').value.trim());
+    fd.append('business',document.getElementById('bBiz').value.trim());
+    bBtn.disabled=true;bBtn.textContent='Sending…';
+    fetch(ENDPOINT,{method:'POST',body:fd})
+      .catch(function(){})
+      .then(function(){
+        bForm.style.display='none';
+        document.getElementById('brokerDone').style.display='block';
       });
   });
 })();
