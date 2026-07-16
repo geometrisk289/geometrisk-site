@@ -27,8 +27,13 @@
 
   nav{position:relative;z-index:5;display:flex;align-items:center;
       justify-content:space-between;padding:26px 32px;max-width:1180px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand .divider{width:2px;align-self:stretch;background:var(--line)}
+  .brand .tagline{font-family:var(--body);font-weight:700;font-size:13px;letter-spacing:.2px;
+                  text-transform:lowercase;line-height:1.25;color:var(--navy)}
+  .brand .tagline .g{color:var(--gold)}
   .wordmark{text-decoration:none;display:flex;align-items:center}
-  .wordmark .logoimg{height:52px;width:auto;display:block}
+  .wordmark .logoimg{height:64px;width:auto;display:block}
   .navlinks{display:flex;align-items:center;gap:30px}
   .navlinks a{font-family:var(--mono);font-size:12px;letter-spacing:.6px;text-transform:uppercase;
               color:var(--muted);text-decoration:none;transition:color .2s}
@@ -87,9 +92,13 @@
 <body>
 
 <nav>
-  <a class="wordmark" href="index.html">
-    <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
-  </a>
+  <div class="brand">
+    <a class="wordmark" href="index.html">
+      <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
+    </a>
+    <div class="divider"></div>
+    <div class="tagline">risks<br><span class="g">that</span><br>matter</div>
+  </div>
   <div class="navlinks">
     <a href="index.html#businesses">For businesses</a>
     <a href="for-brokers.html">For brokers</a>
