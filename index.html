@@ -167,34 +167,27 @@
   .plab::before{content:"";width:22px;height:1px;background:currentColor;opacity:.7}
 
   /* ---------- panels ---------- */
-  .split{display:grid;grid-template-columns:1fr 1fr}
-  .panel{padding:64px 56px 60px}
+  .split{display:block}
+  .panel{padding:64px 32px 60px;max-width:844px;margin:0 auto}
   .panel.biz{background:var(--cream-hi)}
-  .panel.adv{background:var(--deep);color:var(--cream)}
   .panel .plabel{font-family:var(--mono);font-size:12px;letter-spacing:1.8px;text-transform:uppercase;
                  margin-bottom:16px;display:flex;align-items:center;gap:10px}
   .panel.biz .plabel{color:var(--gold)}
-  .panel.adv .plabel{color:var(--gold-soft)}
   .plabel::before{content:"";width:22px;height:1px;background:currentColor;opacity:.7}
   .panel h2{font-family:var(--serif);font-weight:600;font-size:clamp(25px,2.9vw,33px);
             line-height:1.1;letter-spacing:-.3px;margin-bottom:32px}
   .panel.biz h2{color:var(--navy)}
-  .panel.adv h2{color:var(--cream-hi)}
   .panel h2 .ital{font-style:italic;color:var(--gold)}
   .steps{list-style:none;margin-bottom:36px}
   .step{display:flex;gap:18px;padding:18px 0;border-top:1px solid var(--line)}
-  .panel.adv .step{border-top:1px solid var(--line-light)}
   .step:first-child{border-top:none;padding-top:0}
   .step .num{font-family:var(--mono);font-size:13px;font-weight:500;padding-top:3px;min-width:26px}
   .panel.biz .num{color:var(--gold)}
-  .panel.adv .num{color:var(--gold-soft)}
   .step .txt strong{display:block;font-family:var(--serif);font-weight:600;font-size:19px;
                     letter-spacing:-.2px;margin-bottom:3px}
   .panel.biz .txt strong{color:var(--navy)}
-  .panel.adv .txt strong{color:var(--cream-hi)}
   .step .txt span{font-size:15px;line-height:1.5}
   .panel.biz .txt span{color:var(--muted)}
-  .panel.adv .txt span{color:rgba(241,232,214,.66)}
   .cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:600;
        font-size:16px;padding:15px 30px;border-radius:2px;text-decoration:none;cursor:pointer;
        border:1px solid transparent;transition:all .22s ease}
@@ -205,18 +198,7 @@
   .cta.gold{background:var(--gold);color:var(--deep)}
   .cta.gold:hover{background:var(--gold-soft)}
   .chips{margin-top:18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.4px;color:var(--muted)}
-  .panel.adv .chips{color:rgba(241,232,214,.5)}
 
-  /* broker waitlist form (dark panel) */
-  .bform label{display:block;font-weight:600;font-size:14.5px;color:var(--cream-hi);margin:14px 0 4px}
-  .bform label .opt{font-weight:400;color:rgba(241,232,214,.55)}
-  .bform input{width:100%;font-family:var(--body);font-size:15.5px;color:var(--cream-hi);
-    background:rgba(241,232,214,.08);border:1px solid var(--line-light);border-radius:3px;
-    padding:10px 12px;outline:none}
-  .bform input:focus{border-color:var(--gold-soft);box-shadow:0 0 0 3px rgba(201,168,95,.15)}
-  .bform .cta{margin-top:24px;border:none}
-  .bform .cta[disabled]{opacity:.45;cursor:default;pointer-events:none}
-  .bdone{display:none;font-family:var(--serif);font-size:20px;color:var(--cream-hi);margin:10px 0 6px}
 
   /* ---------- positioning band ---------- */
   .whatis{background:var(--cream);padding:72px 32px}
@@ -273,7 +255,6 @@
   .advcard .contact{font-family:var(--mono);font-size:13px;margin-top:12px;color:var(--navy);word-break:break-word}
   .advcard .fine{font-size:12px;color:var(--muted);margin-top:12px}
   .privnote{font-size:12.5px;color:var(--muted);margin-top:12px}
-  .bform .privnote{color:rgba(241,232,214,.55)}
 
   footer{background:var(--navy);color:rgba(241,232,214,.6);padding:40px 32px}
   .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;
@@ -288,7 +269,6 @@
     html{scroll-behavior:auto}
   }
   @media (max-width:860px){
-    .split{grid-template-columns:1fr}
     .panel{padding:48px 30px}
     .navlinks{display:none}
     .hero{padding:28px 24px 64px}
@@ -440,56 +420,24 @@
   </div>
 </section>
 
-<!-- ============ PANELS ============ -->
+<!-- ============ FOR BUSINESSES ============ -->
 <main class="split">
   <section class="panel biz" id="businesses">
     <div class="plabel">For businesses</div>
     <h2>Find your line before the loss <span class="ital">lands</span>.</h2>
     <ol class="steps">
       <li class="step"><span class="num">01</span><span class="txt">
-        <strong>Find your risk tolerance</strong>
-        <span>The loss your business can take before it is in real trouble.</span></span></li>
+        <strong>Find your line</strong>
+        <span>Roughly the biggest loss the business could take and keep trading. Two numbers you already know.</span></span></li>
       <li class="step"><span class="num">02</span><span class="txt">
-        <strong>Map your risk exposures</strong>
-        <span>See what sits on the wrong side of your line.</span></span></li>
+        <strong>See what could go wrong</strong>
+        <span>The losses that tend to matter in your world, and where each one sits against your line.</span></span></li>
       <li class="step"><span class="num">03</span><span class="txt">
-        <strong>Get introduced to a broker</strong>
-        <span>When you're ready to transfer risk, we refer you to an independent insurance advisor. Geometrisk doesn't sell or advise on insurance.</span></span></li>
+        <strong>Say the big one lands</strong>
+        <span>A loss past your line leaves a hole, and only three ways to fill it. See how far they stretch &mdash; and what is left.</span></span></li>
     </ol>
     <a class="cta solid" href="find-your-line.html">Start your review <span class="arw">&rarr;</span></a>
     <div class="chips">Free to start · About 2 minutes · General info, not advice</div>
-  </section>
-
-  <section class="panel adv" id="brokers">
-    <div class="plabel">For brokers</div>
-    <h2>Clients who arrive knowing <span class="ital">their</span> line.</h2>
-    <ol class="steps">
-      <li class="step"><span class="num">01</span><span class="txt">
-        <strong>Select your risk specialisation</strong>
-        <span>The industries and covers you know best.</span></span></li>
-      <li class="step"><span class="num">02</span><span class="txt">
-        <strong>Map your operating radius</strong>
-        <span>Where you write business, and how far you travel.</span></span></li>
-      <li class="step"><span class="num">03</span><span class="txt">
-        <strong>Grow your risk business</strong>
-        <span>Get introduced to businesses that already know their numbers.</span></span></li>
-    </ol>
-    <form class="bform" id="brokerForm">
-      <label for="bName">Name</label>
-      <input type="text" id="bName" name="name" required autocomplete="name">
-      <label for="bEmail">Email</label>
-      <input type="email" id="bEmail" name="email" required autocomplete="email">
-      <label for="bPhone">Phone <span class="opt">(optional)</span></label>
-      <input type="tel" id="bPhone" name="phone" autocomplete="tel">
-      <label for="bSpec">Specialisation <span class="opt">(optional &mdash; e.g. trades, hospitality, professional services)</span></label>
-      <input type="text" id="bSpec" name="specialisation">
-      <label for="bBiz">Business name</label>
-      <input type="text" id="bBiz" name="business" required autocomplete="organization">
-      <button class="cta gold" id="brokerSubmit" type="submit">Join the waitlist <span class="arw">&rarr;</span></button>
-      <p class="privnote">We use your details only to contact you about the network.</p>
-    </form>
-    <p class="bdone" id="brokerDone">Thanks &mdash; you're on the list.</p>
-    <div class="chips">No cost to join · Pilot partners onboarding now</div>
   </section>
 </main>
 
@@ -832,25 +780,6 @@
       });
   });
 
-  /* broker waitlist */
-  var bForm=document.getElementById('brokerForm'),bBtn=document.getElementById('brokerSubmit');
-  bForm.addEventListener('submit',function(e){
-    e.preventDefault();
-    var fd=new FormData();
-    fd.append('type','broker');
-    fd.append('name',document.getElementById('bName').value.trim());
-    fd.append('email',document.getElementById('bEmail').value.trim());
-    fd.append('phone',document.getElementById('bPhone').value.trim());
-    fd.append('specialisation',document.getElementById('bSpec').value.trim());
-    fd.append('business',document.getElementById('bBiz').value.trim());
-    bBtn.disabled=true;bBtn.textContent='Sending…';
-    fetch(ENDPOINT,{method:'POST',body:fd})
-      .catch(function(){})
-      .then(function(){
-        bForm.style.display='none';
-        document.getElementById('brokerDone').style.display='block';
-      });
-  });
 })();
 </script>
 
