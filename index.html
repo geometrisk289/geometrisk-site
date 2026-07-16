@@ -162,40 +162,9 @@
              display:flex;align-items:center;gap:20px;flex-wrap:wrap}
   .toolclose .small{font-size:14px;color:var(--muted);max-width:46ch}
 
-  /* ---------- proof section ---------- */
-  .proof{background:var(--cream);padding:86px 32px 78px}
-  .proofin{max-width:1020px;margin:0 auto}
   .plab{font-family:var(--mono);font-size:12px;letter-spacing:1.8px;text-transform:uppercase;
         color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px}
   .plab::before{content:"";width:22px;height:1px;background:currentColor;opacity:.7}
-  .proof h2{font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.4vw,42px);
-            line-height:1.08;letter-spacing:-.4px;color:var(--navy);margin-bottom:14px}
-  .proof .lede{font-size:17px;color:var(--muted);max-width:520px}
-
-  .chart{display:block;width:100%;height:auto;overflow:visible;margin-top:44px}
-  .ylab,.xlab{font-family:var(--mono);font-size:11px;letter-spacing:.6px;fill:var(--muted);opacity:.7}
-  .axtitle{font-family:var(--mono);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;
-           fill:var(--muted);opacity:.6}
-  .rlab2{font-family:var(--mono);font-size:11px;letter-spacing:1.6px;text-transform:uppercase}
-  .evlab{font-family:var(--mono);font-size:12.5px;letter-spacing:.4px;font-weight:500;fill:var(--navy)}
-  .bizlab{font-family:var(--mono);font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase}
-  .goldlab{font-family:var(--mono);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;fill:var(--gold)}
-  .gridline{stroke:rgba(22,41,74,.16);stroke-width:1;opacity:.5}
-  .axisline{stroke:rgba(22,41,74,.2);stroke-width:1}
-  .bizline{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-  .bizline.a{stroke:var(--navy)}
-  .bizline.b{stroke:var(--navy-2)}
-  .recover{fill:none;stroke:var(--gold);stroke-width:2.6;stroke-linecap:round}
-  .reveal{opacity:0}
-  .reveal.show{animation:drop .55s cubic-bezier(.3,1.35,.5,1) forwards}
-  @keyframes drop{from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)}}
-
-  .key{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);
-       font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
-  .key i{display:inline-block;width:18px;height:2px;margin-right:8px;vertical-align:middle;border-radius:2px}
-  .key .ka i{background:var(--navy)}
-  .key .kb i{background:var(--navy-2)}
-  .key .kc i{background:var(--gold)}
 
   /* ---------- panels ---------- */
   .split{display:grid;grid-template-columns:1fr 1fr}
@@ -315,7 +284,6 @@
   a:focus-visible,.cta:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
   @media (prefers-reduced-motion:reduce){
     .region,.theline,.who,.herofade{transition:none}
-    .reveal.show{animation:none;opacity:1}
     #results.show{animation:none}
     html{scroll-behavior:auto}
   }
@@ -329,10 +297,6 @@
     .theline .val{font-size:22px;top:-42px}
     .axislabels{font-size:9.5px;letter-spacing:1px}
     .readout{flex-direction:column;gap:14px}
-    .proof{padding:58px 24px 56px}
-    .rlab2,.bizlab,.goldlab,.axtitle{font-size:9.5px;letter-spacing:1px}
-    .evlab{font-size:11px}
-    .key{gap:14px;font-size:11px}
     .tool{padding:0 24px 64px}
   }
   @media (max-width:560px){
@@ -476,50 +440,6 @@
   </div>
 </section>
 
-<!-- ============ PROOF ============ -->
-<section class="proof">
-  <div class="proofin">
-    <div class="plab">The same dollars, different outcomes</div>
-    <h2>Two businesses. Three losses.</h2>
-    <p class="lede">Same chart. Same money. Watch where each loss lands.</p>
-
-    <svg class="chart" id="chart" viewBox="0 0 1020 400" role="img"
-         aria-label="A chart of loss size over time. Two businesses each have a line showing the loss they can carry. A thirty-five thousand dollar loss lands above the cafe's line but below the timber manufacturer's line. The same loss lands again later, after the cafe has recovered, and this time sits below the cafe's line.">
-      <defs><clipPath id="plotclip"><rect x="86" y="6" width="866" height="308"/></clipPath></defs>
-
-      <g id="grid"></g>
-
-      <g clip-path="url(#plotclip)">
-        <path id="fillB" fill="#16294A" fill-opacity=".045"></path>
-        <path id="fillA" fill="#16294A" fill-opacity=".055"></path>
-      </g>
-
-      <text class="rlab2" x="104" y="300" fill="#16294A" opacity=".55">Losses they can carry</text>
-      <text class="rlab2" x="934" y="30" text-anchor="end" fill="#A8843E" opacity=".9">Losses they cannot</text>
-
-      <path class="bizline b" id="lineB" clip-path="url(#plotclip)"></path>
-      <path class="bizline a" id="lineA" clip-path="url(#plotclip)"></path>
-
-      <text class="bizlab" id="labB" x="960" y="0" fill="#5A7099">Timber</text>
-      <text class="bizlab" id="labA" x="960" y="0" fill="#16294A">Café</text>
-
-      <g id="recovery" class="reveal"></g>
-
-      <line class="axisline" x1="86" y1="314" x2="952" y2="314"/>
-      <text class="axtitle" x="952" y="342" text-anchor="end">Time</text>
-      <text class="axtitle" x="0" y="0" transform="translate(26,160) rotate(-90)" text-anchor="middle">Size of loss</text>
-
-      <g id="events"></g>
-    </svg>
-
-    <div class="key">
-      <span class="ka"><i></i>Café · $900k revenue</span>
-      <span class="kb"><i></i>Timber manufacturer · $2.4m revenue</span>
-      <span class="kc"><i></i>Insurance</span>
-    </div>
-  </div>
-</section>
-
 <!-- ============ PANELS ============ -->
 <main class="split">
   <section class="panel biz" id="businesses">
@@ -643,10 +563,7 @@
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var NS='http://www.w3.org/2000/svg';
-  var YMAX=120000;                       // shared ceiling across both charts
   var fmtFull=function(n){ return '$'+n.toLocaleString('en-AU'); };
-  var fmtK=function(n){ return '$'+Math.round(n/1000)+'k'; };
 
   /* ---------------- HERO: the partition ---------------- */
   // Each business appears in a good year, then slides to its lean year.
@@ -730,132 +647,6 @@
   }
   showBiz(0);
 
-  /* ---------------- PROOF: two lines over time ---------------- */
-  var X0=86, X1=952, Y0=314, Y1=6;
-  // the café's line here passes through the hero's three numbers: 28k trough, 62k recovered
-  var A={ pts:[[0,58],[.18,64],[.36,46],[.52,28],[.70,44],[.86,58],[1,62]] };
-  var B={ pts:[[0,72],[.18,86],[.36,95],[.52,78],[.70,88],[.86,102],[1,96]] };
-  var events=[
-    {t:.12, v:20000},   // under both lines
-    {t:.52, v:35000},   // over the café's line, under the timber line
-    {t:.88, v:35000}    // same loss, after the café recovers
-  ];
-
-  var sx=function(t){ return X0+t*(X1-X0); };
-  var sy=function(v){ return Y0-(v/YMAX)*(Y0-Y1); };
-
-  function lineAt(pts,t){
-    for(var i=0;i<pts.length-1;i++){
-      var a=pts[i],b=pts[i+1];
-      if(t>=a[0]&&t<=b[0]){ var f=(t-a[0])/(b[0]-a[0]); return (a[1]+(b[1]-a[1])*f)*1000; }
-    }
-    return pts[pts.length-1][1]*1000;
-  }
-  function smooth(pts){
-    var P=pts.map(function(p){ return [sx(p[0]), sy(p[1]*1000)]; });
-    var d='M'+P[0][0]+','+P[0][1];
-    for(var i=0;i<P.length-1;i++){
-      var p0=P[i-1]||P[i],p1=P[i],p2=P[i+1],p3=P[i+2]||P[i+1];
-      d+=' C'+(p1[0]+(p2[0]-p0[0])/6)+','+(p1[1]+(p2[1]-p0[1])/6)+
-         ' '+(p2[0]-(p3[0]-p1[0])/6)+','+(p2[1]-(p3[1]-p1[1])/6)+
-         ' '+p2[0]+','+p2[1];
-    }
-    return d;
-  }
-
-  var grid=document.getElementById('grid');
-  [0,40000,80000,120000].forEach(function(v){
-    var y=sy(v);
-    var l=document.createElementNS(NS,'line');
-    l.setAttribute('x1',X0); l.setAttribute('x2',X1);
-    l.setAttribute('y1',y);  l.setAttribute('y2',y);
-    l.setAttribute('class','gridline'); grid.appendChild(l);
-    var t=document.createElementNS(NS,'text');
-    t.setAttribute('x',X0-14); t.setAttribute('y',y+4);
-    t.setAttribute('text-anchor','end'); t.setAttribute('class','ylab');
-    t.textContent = v===0?'$0':fmtK(v);
-    grid.appendChild(t);
-  });
-
-  var dA=smooth(A.pts), dB=smooth(B.pts);
-  var elA=document.getElementById('lineA'), elB=document.getElementById('lineB');
-  elA.setAttribute('d',dA); elB.setAttribute('d',dB);
-  document.getElementById('fillA').setAttribute('d', dA+' L'+X1+','+Y0+' L'+X0+','+Y0+' Z');
-  document.getElementById('fillB').setAttribute('d', dB+' L'+X1+','+Y0+' L'+X0+','+Y0+' Z');
-  document.getElementById('labA').setAttribute('y', sy(62000)+4);
-  document.getElementById('labB').setAttribute('y', sy(96000)+4);
-
-  var elEv=document.getElementById('events'), breach=null, played=false;
-
-  function buildEvents(){
-    events.forEach(function(e,i){
-      var over = e.v > lineAt(A.pts, e.t);   // above the café's line?
-      if(over) breach=e;
-      var g=document.createElementNS(NS,'g');
-      g.setAttribute('class','reveal');
-      if(over){
-        var ring=document.createElementNS(NS,'circle');
-        ring.setAttribute('cx',sx(e.t)); ring.setAttribute('cy',sy(e.v));
-        ring.setAttribute('r',13); ring.setAttribute('fill','none');
-        ring.setAttribute('stroke','#16294A'); ring.setAttribute('stroke-width','1.4');
-        ring.setAttribute('stroke-opacity','.35');
-        g.appendChild(ring);
-      }
-      var c=document.createElementNS(NS,'circle');
-      c.setAttribute('cx',sx(e.t)); c.setAttribute('cy',sy(e.v));
-      c.setAttribute('r',over?7:5.5); c.setAttribute('fill','#16294A');
-      g.appendChild(c);
-      var t=document.createElementNS(NS,'text');
-      t.setAttribute('x',sx(e.t)); t.setAttribute('y',sy(e.v)+(over?-22:24));
-      t.setAttribute('text-anchor','middle'); t.setAttribute('class','evlab');
-      t.textContent=fmtK(e.v);
-      g.appendChild(t);
-      elEv.appendChild(g);
-      g.dataset.delay = 1900 + i*850;
-    });
-
-    if(breach){
-      var rg=document.getElementById('recovery');
-      var bx=sx(breach.t), by=sy(breach.v);
-      var p=document.createElementNS(NS,'path');
-      p.setAttribute('class','recover');
-      p.setAttribute('d','M'+(bx-16)+','+(by+8)+' C'+(bx+34)+','+(by+2)+' '+(bx+72)+','+(by-40)+' '+(bx+86)+','+(by-118));
-      rg.appendChild(p);
-      var lt=document.createElementNS(NS,'text');
-      lt.setAttribute('x',bx+94); lt.setAttribute('y',by-118);
-      lt.setAttribute('class','goldlab'); lt.textContent='Insurance';
-      rg.appendChild(lt);
-    }
-  }
-  buildEvents();
-
-  function play(){
-    if(played) return; played=true;
-    if(!reduce){
-      [elB,elA].forEach(function(el,i){
-        var len=el.getTotalLength();
-        el.style.strokeDasharray=len; el.style.strokeDashoffset=len;
-        el.getBoundingClientRect();
-        el.style.transition='stroke-dashoffset 1.7s cubic-bezier(.5,.05,.2,1) '+(i*0.18)+'s';
-        el.style.strokeDashoffset=0;
-      });
-    }
-    Array.prototype.forEach.call(elEv.children, function(g){
-      if(reduce) g.classList.add('show');
-      else setTimeout(function(){ g.classList.add('show'); }, +g.dataset.delay);
-    });
-    var rg=document.getElementById('recovery');
-    if(reduce) rg.classList.add('show');
-    else setTimeout(function(){ rg.classList.add('show'); }, 3400);
-  }
-
-  // play the proof chart when it scrolls into view
-  if('IntersectionObserver' in window && !reduce){
-    var io=new IntersectionObserver(function(en){
-      en.forEach(function(x){ if(x.isIntersecting){ play(); io.disconnect(); } });
-    },{threshold:.35});
-    io.observe(document.getElementById('chart'));
-  } else { play(); }
 })();
 </script>
 
