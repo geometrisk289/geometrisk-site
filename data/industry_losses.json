@@ -1,0 +1,1005 @@
+[
+  {
+    "id": "electrician",
+    "label": "Electrician",
+    "anzsic": "E3232",
+    "division": "Construction",
+    "keywords": "sparky, electrical contractor, wiring",
+    "small": [
+      ["Tools stolen from the van overnight", 7000, "THEFT"],
+      ["Drop a client's switchboard, have to replace it", 4500, "PL"],
+      ["A fault you wired trips and damages a client's appliances", 9000, "PROD"]
+    ],
+    "large": [
+      ["A fire is traced back to your work, and you're sued", 350000, "PROD"],
+      ["A client is badly shocked on a job you signed off", 500000, "PL"],
+      ["Van and full tool kit written off in a crash", 90000, "MOTOR"]
+    ]
+  },
+  {
+    "id": "plumber",
+    "label": "Plumber / Gasfitter",
+    "anzsic": "E3231",
+    "division": "Construction",
+    "keywords": "plumbing, gas, drainage",
+    "small": [
+      ["A fitting fails and floods a client's kitchen", 12000, "PL"],
+      ["Tools and fittings stolen from the ute", 6000, "THEFT"],
+      ["You crack a tile floor getting to a pipe", 5000, "PL"]
+    ],
+    "large": [
+      ["A burst you installed floods a whole apartment block", 400000, "PL"],
+      ["A gas job is blamed for an explosion, and a lawsuit follows", 600000, "PROD"],
+      ["Water damage across a new build you're liable for", 250000, "PL"]
+    ]
+  },
+  {
+    "id": "carpenter",
+    "label": "Carpenter / Joiner",
+    "anzsic": "E3241",
+    "division": "Construction",
+    "keywords": "chippy, joinery, framing, formwork",
+    "small": [
+      ["A power tool packs it in mid-job", 4000, "MOTOR"],
+      ["Timber and materials stolen from site", 8000, "THEFT"],
+      ["You damage a client's finished floor", 6000, "PL"]
+    ],
+    "large": [
+      ["A structure you framed fails and someone is hurt", 450000, "PL"],
+      ["A site fire destroys your gear and a half-built home", 300000, "PROP"],
+      ["A deck you built collapses at a party", 550000, "PL"]
+    ]
+  },
+  {
+    "id": "builder",
+    "label": "Builder (residential)",
+    "anzsic": "E3011",
+    "division": "Construction",
+    "keywords": "building contractor, home builder, renovation",
+    "small": [
+      ["Materials pilfered from an open site", 12000, "THEFT"],
+      ["A subcontractor damages the neighbour's fence", 7000, "PL"],
+      ["Storm undoes a week of unfinished work", 20000, "PROP"]
+    ],
+    "large": [
+      ["A build defect surfaces years later and you're sued", 750000, "PI"],
+      ["A site fire levels a near-complete home", 900000, "PROP"],
+      ["A wall collapse injures a passer-by", 600000, "PL"]
+    ]
+  },
+  {
+    "id": "painter",
+    "label": "Painter / Decorator",
+    "anzsic": "E3242",
+    "division": "Construction",
+    "keywords": "painting, decorating, spray",
+    "small": [
+      ["Overspray ruins a client's car in the driveway", 6000, "PL"],
+      ["Ladders and gear stolen from the trailer", 4500, "THEFT"],
+      ["A paint spill wrecks a client's carpet", 5000, "PL"]
+    ],
+    "large": [
+      ["Solvents ignite and a house fire follows", 300000, "PROD"],
+      ["A fall from your scaffold badly injures someone", 450000, "PL"],
+      ["Vehicle and full kit lost in a crash", 70000, "MOTOR"]
+    ]
+  },
+  {
+    "id": "landscaper",
+    "label": "Landscaper / Gardener",
+    "anzsic": "E3221",
+    "division": "Construction",
+    "keywords": "landscaping, gardening, paving, arborist",
+    "small": [
+      ["A mower throws a rock through a window", 4000, "PL"],
+      ["Equipment stolen from the trailer", 7000, "THEFT"],
+      ["You cut through a client's irrigation or cabling", 5000, "PL"]
+    ],
+    "large": [
+      ["A retaining wall you built collapses onto a car", 250000, "PL"],
+      ["A felled tree hits a house and a person", 400000, "PL"],
+      ["Machinery and truck destroyed by fire", 120000, "PROP"]
+    ]
+  },
+  {
+    "id": "roofer",
+    "label": "Roofer",
+    "anzsic": "E3242b",
+    "division": "Construction",
+    "keywords": "roofing, guttering, tiling roof",
+    "small": [
+      ["Rain gets in through an unfinished section", 9000, "PL"],
+      ["Tools blown off and gear stolen from site", 5000, "THEFT"],
+      ["A dropped tile cracks a client's driveway", 4000, "PL"]
+    ],
+    "large": [
+      ["A roof you laid leaks and rots a whole ceiling", 250000, "PL"],
+      ["A fall injures a worker or passer-by badly", 500000, "PL"],
+      ["Fire during hot works destroys the building", 600000, "PROP"]
+    ]
+  },
+  {
+    "id": "hvac",
+    "label": "Air-conditioning / Refrigeration",
+    "anzsic": "E3233",
+    "division": "Construction",
+    "keywords": "HVAC, aircon, refrigeration, mechanical",
+    "small": [
+      ["A unit you fit leaks and stains a ceiling", 6000, "PL"],
+      ["Refrigerant and tools stolen from the van", 8000, "THEFT"],
+      ["A miswired unit trips a client's board", 5000, "PROD"]
+    ],
+    "large": [
+      ["A system fault causes a fire, and you're sued", 400000, "PROD"],
+      ["A cool room fails and a client loses all stock", 300000, "PROD"],
+      ["Van and plant written off in a crash", 85000, "MOTOR"]
+    ]
+  },
+  {
+    "id": "restaurant",
+    "label": "Restaurant",
+    "anzsic": "H4511",
+    "division": "Accommodation & Food",
+    "keywords": "dining, eatery, bistro, chef",
+    "small": [
+      ["The freezer dies over a long weekend", 6000, "BI"],
+      ["A customer slips on a wet floor", 15000, "PL"],
+      ["An oven or cool room breaks down", 9000, "MOTOR"]
+    ],
+    "large": [
+      ["A kitchen fire guts the premises, months to rebuild", 250000, "PROP"],
+      ["Food poisoning outbreak traced to your kitchen", 300000, "PROD"],
+      ["Storm or flood wrecks the fit-out and stock", 180000, "PROP"]
+    ]
+  },
+  {
+    "id": "cafe",
+    "label": "Café / Coffee shop",
+    "anzsic": "H4512",
+    "division": "Accommodation & Food",
+    "keywords": "coffee, brunch, espresso, barista",
+    "small": [
+      ["Milk and stock spoil when the fridge fails", 4000, "BI"],
+      ["A customer trips on the step and is hurt", 12000, "PL"],
+      ["The espresso machine breaks down", 7000, "MOTOR"]
+    ],
+    "large": [
+      ["A fire shuts you for months", 200000, "PROP"],
+      ["A serious burn or injury claim from a customer", 250000, "PL"],
+      ["Flood damages the fit-out and forces a rebuild", 150000, "PROP"]
+    ]
+  },
+  {
+    "id": "takeaway",
+    "label": "Takeaway / Fast food",
+    "anzsic": "H4513",
+    "division": "Accommodation & Food",
+    "keywords": "fish and chips, kebab, pizza, burger",
+    "small": [
+      ["Fryer or grill breaks down", 5000, "MOTOR"],
+      ["Stock lost to a power outage", 4000, "BI"],
+      ["A customer slips at the counter", 10000, "PL"]
+    ],
+    "large": [
+      ["A cooking fire destroys the shop", 200000, "PROP"],
+      ["Food poisoning claim and shutdown", 250000, "PROD"],
+      ["Extended closure after a storm floods the site", 130000, "PROP"]
+    ]
+  },
+  {
+    "id": "pub",
+    "label": "Pub / Bar",
+    "anzsic": "H4520",
+    "division": "Accommodation & Food",
+    "keywords": "bar, tavern, hotel, licensed venue",
+    "small": [
+      ["A patron slips on a spill", 15000, "PL"],
+      ["Glasswashers or cool room fail", 8000, "MOTOR"],
+      ["Minor kitchen fire, quick clean-up", 18000, "PROP"]
+    ],
+    "large": [
+      ["A fight or fall leads to a serious liability claim", 500000, "PL"],
+      ["A fire closes the venue for months", 600000, "PROP"],
+      ["Flood ruins the cellar, kitchen and trade", 350000, "PROP"]
+    ]
+  },
+  {
+    "id": "catering",
+    "label": "Catering",
+    "anzsic": "H4513c",
+    "division": "Accommodation & Food",
+    "keywords": "caterer, functions, events food",
+    "small": [
+      ["Food spoils when transport refrigeration fails", 6000, "BI"],
+      ["Equipment damaged or stolen at a venue", 7000, "THEFT"],
+      ["A guest slips at an event you're running", 12000, "PL"]
+    ],
+    "large": [
+      ["Mass food poisoning at a large function", 400000, "PROD"],
+      ["A vehicle fire destroys van and full kit", 90000, "MOTOR"],
+      ["A cancelled contract after a serious incident", 150000, "BI"]
+    ]
+  },
+  {
+    "id": "motel",
+    "label": "Motel / B&B / Small hotel",
+    "anzsic": "H4400",
+    "division": "Accommodation & Food",
+    "keywords": "accommodation, guesthouse, hotel, lodge",
+    "small": [
+      ["A guest trips on a stair and claims", 15000, "PL"],
+      ["Water damage from a burst pipe in a room", 12000, "PROP"],
+      ["Theft of linen, TVs and appliances", 8000, "THEFT"]
+    ],
+    "large": [
+      ["A fire closes the property for a year", 800000, "PROP"],
+      ["A balcony or pool incident injures a guest", 500000, "PL"],
+      ["Storm damage and long loss of bookings", 400000, "BI"]
+    ]
+  },
+  {
+    "id": "clothing",
+    "label": "Clothing / Fashion retailer",
+    "anzsic": "G4251",
+    "division": "Retail",
+    "keywords": "boutique, apparel, fashion, shoes",
+    "small": [
+      ["Shoplifting over a busy month", 5000, "THEFT"],
+      ["A customer trips on a display", 10000, "PL"],
+      ["Water damage to stock from the roof", 8000, "PROP"]
+    ],
+    "large": [
+      ["A fire destroys the shop and all stock", 300000, "PROP"],
+      ["Flood ruins a full season's inventory", 200000, "PROP"],
+      ["A break-in cleans out high-value stock", 120000, "THEFT"]
+    ]
+  },
+  {
+    "id": "grocer",
+    "label": "Convenience store / Grocer",
+    "anzsic": "G4110",
+    "division": "Retail",
+    "keywords": "corner store, supermarket, deli, grocery",
+    "small": [
+      ["Stock spoils in a fridge failure", 6000, "BI"],
+      ["Shoplifting and till shortfalls", 5000, "THEFT"],
+      ["A customer slips in an aisle", 12000, "PL"]
+    ],
+    "large": [
+      ["A fire or ram-raid destroys the store", 250000, "PROP"],
+      ["Flood wipes out stock and forces closure", 180000, "PROP"],
+      ["A serious product or hygiene claim", 200000, "PROD"]
+    ]
+  },
+  {
+    "id": "butcher",
+    "label": "Butcher",
+    "anzsic": "G4121",
+    "division": "Retail",
+    "keywords": "meat, smallgoods, deli",
+    "small": [
+      ["Cool room fails and meat spoils", 8000, "BI"],
+      ["A slip on the shop floor", 10000, "PL"],
+      ["A saw or grinder breaks down", 5000, "MOTOR"]
+    ],
+    "large": [
+      ["Contaminated product makes customers sick", 300000, "PROD"],
+      ["A fire shuts the shop for months", 250000, "PROP"],
+      ["Refrigeration failure destroys all stock over a break", 120000, "BI"]
+    ]
+  },
+  {
+    "id": "bakery",
+    "label": "Bakery",
+    "anzsic": "G4121b",
+    "division": "Retail",
+    "keywords": "baker, patisserie, cakes, bread",
+    "small": [
+      ["An oven breaks down mid-week", 7000, "MOTOR"],
+      ["Stock spoils in a power cut", 4000, "BI"],
+      ["A customer slips at the counter", 10000, "PL"]
+    ],
+    "large": [
+      ["An allergen slips into product and someone is harmed", 300000, "PROD"],
+      ["A fire destroys the bakery", 250000, "PROP"],
+      ["Flood forces a lengthy closure", 150000, "PROP"]
+    ]
+  },
+  {
+    "id": "pharmacy",
+    "label": "Pharmacy",
+    "anzsic": "G4271",
+    "division": "Retail",
+    "keywords": "chemist, dispensary",
+    "small": [
+      ["Shoplifting of high-value goods", 6000, "THEFT"],
+      ["A fridge failure spoils medicines", 9000, "BI"],
+      ["A customer slips in-store", 12000, "PL"]
+    ],
+    "large": [
+      ["A dispensing error harms a customer, and a claim follows", 500000, "PI"],
+      ["A break-in targets drugs and stock", 150000, "THEFT"],
+      ["A fire closes the pharmacy for months", 300000, "PROP"]
+    ]
+  },
+  {
+    "id": "hardware",
+    "label": "Hardware / Trade supplies",
+    "anzsic": "G3921",
+    "division": "Retail",
+    "keywords": "hardware store, timber, supplies",
+    "small": [
+      ["A customer is hurt by falling stock", 12000, "PL"],
+      ["Tools and stock shoplifted", 7000, "THEFT"],
+      ["Forklift or plant breakdown", 6000, "MOTOR"]
+    ],
+    "large": [
+      ["A fire destroys a large stockholding", 400000, "PROP"],
+      ["A faulty product you sold injures someone", 300000, "PROD"],
+      ["Flood ruins stock and yard", 200000, "PROP"]
+    ]
+  },
+  {
+    "id": "florist",
+    "label": "Florist",
+    "anzsic": "G4272",
+    "division": "Retail",
+    "keywords": "flowers, nursery, gifts",
+    "small": [
+      ["Stock wilts when the cool room fails", 4000, "BI"],
+      ["A slip near a wet display", 8000, "PL"],
+      ["A delivery van breaks down at peak", 3500, "MOTOR"]
+    ],
+    "large": [
+      ["A fire destroys the shop", 150000, "PROP"],
+      ["Flood ruins stock and fit-out", 90000, "PROP"],
+      ["A break-in over a holiday period", 40000, "THEFT"]
+    ]
+  },
+  {
+    "id": "jeweller",
+    "label": "Jeweller",
+    "anzsic": "G4253",
+    "division": "Retail",
+    "keywords": "jewellery, watches, gold",
+    "small": [
+      ["A display item is damaged in handling", 6000, "PROP"],
+      ["A customer slips in-store", 10000, "PL"],
+      ["A small theft from the counter", 9000, "THEFT"]
+    ],
+    "large": [
+      ["An armed robbery or smash-and-grab", 400000, "THEFT"],
+      ["A fire destroys premises and stock", 300000, "PROP"],
+      ["Stock stolen in transit to a valuer", 150000, "THEFT"]
+    ]
+  },
+  {
+    "id": "accountant",
+    "label": "Accountant / Bookkeeper",
+    "anzsic": "M6932",
+    "division": "Professional Services",
+    "keywords": "accounting, tax, bookkeeping, BAS",
+    "small": [
+      ["A client's records are lost in a system crash", 5000, "CYBER"],
+      ["A small filing error you fix at your own cost", 4000, "PI"],
+      ["A laptop with client data is stolen", 6000, "THEFT"]
+    ],
+    "large": [
+      ["A tax or advice error costs a client dearly, and they sue", 400000, "PI"],
+      ["A data breach exposes client financials", 250000, "CYBER"],
+      ["A fire destroys the office and records", 200000, "PROP"]
+    ]
+  },
+  {
+    "id": "lawyer",
+    "label": "Solicitor / Law firm",
+    "anzsic": "M6931",
+    "division": "Professional Services",
+    "keywords": "legal, solicitor, conveyancer, law",
+    "small": [
+      ["A missed minor deadline you rectify", 6000, "PI"],
+      ["A laptop or file is lost", 5000, "THEFT"],
+      ["A short system outage disrupts work", 4000, "CYBER"]
+    ],
+    "large": [
+      ["A negligence claim over missed advice or a deadline", 600000, "PI"],
+      ["A trust account cyber fraud", 400000, "CYBER"],
+      ["A breach of confidence claim", 300000, "PI"]
+    ]
+  },
+  {
+    "id": "architect",
+    "label": "Architect",
+    "anzsic": "M6921",
+    "division": "Professional Services",
+    "keywords": "architecture, building design, drafting",
+    "small": [
+      ["A drawing error caught and fixed on site", 8000, "PI"],
+      ["A laptop with project files is stolen", 6000, "THEFT"],
+      ["A short delay you absorb the cost of", 5000, "PI"]
+    ],
+    "large": [
+      ["A design fault leads to a costly rebuild, and a claim", 750000, "PI"],
+      ["A structure issue traced to your plans injures someone", 500000, "PL"],
+      ["A cyber breach of project and client data", 200000, "CYBER"]
+    ]
+  },
+  {
+    "id": "engineer",
+    "label": "Consulting Engineer",
+    "anzsic": "M6923",
+    "division": "Professional Services",
+    "keywords": "engineering, structural, civil, geotech",
+    "small": [
+      ["A calculation error caught in review", 9000, "PI"],
+      ["Site equipment or laptop stolen", 6000, "THEFT"],
+      ["A minor report reissue at your cost", 5000, "PI"]
+    ],
+    "large": [
+      ["A design failure causes major property damage", 900000, "PI"],
+      ["A structural collapse injures people", 700000, "PL"],
+      ["A breach exposes sensitive project data", 250000, "CYBER"]
+    ]
+  },
+  {
+    "id": "consultant",
+    "label": "Management Consultant",
+    "anzsic": "M6962",
+    "division": "Professional Services",
+    "keywords": "consulting, advisory, strategy",
+    "small": [
+      ["A report reworked after an error", 5000, "PI"],
+      ["A laptop lost while travelling", 5000, "THEFT"],
+      ["A short outage delays a deliverable", 3500, "CYBER"]
+    ],
+    "large": [
+      ["Advice that costs a client money leads to a claim", 400000, "PI"],
+      ["A data breach of confidential client material", 250000, "CYBER"],
+      ["A defamation or IP dispute", 200000, "ML"]
+    ]
+  },
+  {
+    "id": "agency",
+    "label": "Marketing / Design agency",
+    "anzsic": "M6940",
+    "division": "Professional Services",
+    "keywords": "marketing, advertising, creative, design, web",
+    "small": [
+      ["A campaign reprinted after an error", 6000, "PI"],
+      ["Equipment stolen from the studio", 7000, "THEFT"],
+      ["A short website or system outage", 4000, "CYBER"]
+    ],
+    "large": [
+      ["An IP or defamation claim over published work", 300000, "ML"],
+      ["A data breach of client and customer data", 250000, "CYBER"],
+      ["A fire destroys studio and gear", 150000, "PROP"]
+    ]
+  },
+  {
+    "id": "itservices",
+    "label": "IT services / MSP",
+    "anzsic": "M7000",
+    "division": "Professional Services",
+    "keywords": "IT support, managed services, software, developer",
+    "small": [
+      ["A client outage you spend the weekend fixing", 6000, "PI"],
+      ["A laptop or server component stolen", 7000, "THEFT"],
+      ["A minor bug fixed at your cost", 5000, "PI"]
+    ],
+    "large": [
+      ["A system you built fails and costs a client dearly", 500000, "PI"],
+      ["A breach on your watch exposes client data", 400000, "CYBER"],
+      ["A ransomware event takes you and clients down", 300000, "CYBER"]
+    ]
+  },
+  {
+    "id": "realestate",
+    "label": "Real estate agency",
+    "anzsic": "L6720",
+    "division": "Professional Services",
+    "keywords": "real estate, property, sales, leasing",
+    "small": [
+      ["A deposit dispute you settle", 6000, "PI"],
+      ["Office break-in, laptops taken", 7000, "THEFT"],
+      ["A minor misstatement corrected", 5000, "PI"]
+    ],
+    "large": [
+      ["A misrepresentation claim on a sale", 400000, "PI"],
+      ["Trust account cyber fraud", 350000, "CYBER"],
+      ["A property manager negligence claim", 250000, "PI"]
+    ]
+  },
+  {
+    "id": "financialplanner",
+    "label": "Financial planner / Mortgage broker",
+    "anzsic": "K6419",
+    "division": "Professional Services",
+    "keywords": "financial adviser, mortgage broker, finance",
+    "small": [
+      ["A minor advice slip corrected", 6000, "PI"],
+      ["A laptop with client data stolen", 6000, "THEFT"],
+      ["A short system outage", 4000, "CYBER"]
+    ],
+    "large": [
+      ["Poor advice costs a client, and they claim", 500000, "PI"],
+      ["A data breach of client financials", 300000, "CYBER"],
+      ["A compliance failure and penalty", 200000, "ML"]
+    ]
+  },
+  {
+    "id": "gp",
+    "label": "Medical / GP practice",
+    "anzsic": "Q8511",
+    "division": "Health & Care",
+    "keywords": "doctor, GP, medical centre, clinic",
+    "small": [
+      ["A short clinical system outage", 6000, "CYBER"],
+      ["A patient slips in the waiting room", 12000, "PL"],
+      ["Vaccines spoil in a fridge failure", 7000, "BI"]
+    ],
+    "large": [
+      ["A treatment error leads to a malpractice claim", 600000, "PI"],
+      ["A breach exposes patient records", 350000, "CYBER"],
+      ["A fire closes the practice for months", 250000, "PROP"]
+    ]
+  },
+  {
+    "id": "dentist",
+    "label": "Dentist",
+    "anzsic": "Q8531",
+    "division": "Health & Care",
+    "keywords": "dental, orthodontist, dentistry",
+    "small": [
+      ["A chair or steriliser breaks down", 8000, "MOTOR"],
+      ["A patient trips in reception", 12000, "PL"],
+      ["A short records outage", 5000, "CYBER"]
+    ],
+    "large": [
+      ["A treatment claim from a patient", 500000, "PI"],
+      ["A fire or flood shuts the surgery", 300000, "PROP"],
+      ["A breach of patient records", 250000, "CYBER"]
+    ]
+  },
+  {
+    "id": "physio",
+    "label": "Physiotherapist / Allied health",
+    "anzsic": "Q8539",
+    "division": "Health & Care",
+    "keywords": "physio, chiro, osteo, podiatry, allied health",
+    "small": [
+      ["A client aggravates an injury, minor claim", 9000, "PI"],
+      ["Equipment stolen from the clinic", 5000, "THEFT"],
+      ["A slip in the treatment room", 10000, "PL"]
+    ],
+    "large": [
+      ["A treatment injury leads to a claim", 400000, "PI"],
+      ["A fire closes the clinic", 200000, "PROP"],
+      ["A breach of client health records", 180000, "CYBER"]
+    ]
+  },
+  {
+    "id": "psych",
+    "label": "Psychologist / Counsellor",
+    "anzsic": "Q8532",
+    "division": "Health & Care",
+    "keywords": "psychology, counselling, therapy, mental health",
+    "small": [
+      ["A short records system outage", 4000, "CYBER"],
+      ["A laptop with notes is stolen", 5000, "THEFT"],
+      ["A minor complaint handled", 6000, "PI"]
+    ],
+    "large": [
+      ["A professional conduct or duty-of-care claim", 350000, "PI"],
+      ["A breach exposes sensitive client notes", 300000, "CYBER"],
+      ["A fire or flood closes the practice", 150000, "PROP"]
+    ]
+  },
+  {
+    "id": "vet",
+    "label": "Veterinarian",
+    "anzsic": "M6970",
+    "division": "Health & Care",
+    "keywords": "vet, veterinary, animal clinic",
+    "small": [
+      ["A kennel or equipment breakdown", 7000, "MOTOR"],
+      ["An owner slips in the clinic", 10000, "PL"],
+      ["Medicines spoil in a fridge failure", 5000, "BI"]
+    ],
+    "large": [
+      ["A treatment error and claim from an owner", 300000, "PI"],
+      ["A fire closes the clinic and harms animals in care", 350000, "PROP"],
+      ["A breach or serious animal-welfare incident", 180000, "ML"]
+    ]
+  },
+  {
+    "id": "childcare",
+    "label": "Childcare / Early learning",
+    "anzsic": "Q8710",
+    "division": "Health & Care",
+    "keywords": "childcare, daycare, early learning, kindergarten",
+    "small": [
+      ["A child is hurt in the playground, minor claim", 15000, "PL"],
+      ["Equipment or toys damaged by water", 6000, "PROP"],
+      ["A short closure for a safety fix", 8000, "BI"]
+    ],
+    "large": [
+      ["A serious injury to a child in your care", 750000, "PL"],
+      ["An abuse or duty-of-care allegation", 500000, "ML"],
+      ["A fire forces a long closure", 300000, "PROP"]
+    ]
+  },
+  {
+    "id": "hairdresser",
+    "label": "Hairdresser / Barber",
+    "anzsic": "S9511",
+    "division": "Other Services",
+    "keywords": "salon, barber, hair, stylist",
+    "small": [
+      ["A chemical treatment burns a client's scalp", 8000, "PL"],
+      ["A slip on a wet floor", 10000, "PL"],
+      ["Styling equipment breaks down", 4000, "MOTOR"]
+    ],
+    "large": [
+      ["A serious reaction or injury claim", 250000, "PL"],
+      ["A fire destroys the salon", 180000, "PROP"],
+      ["Flood forces a lengthy closure", 90000, "PROP"]
+    ]
+  },
+  {
+    "id": "beauty",
+    "label": "Beauty / Cosmetic salon",
+    "anzsic": "S9520",
+    "division": "Other Services",
+    "keywords": "beauty, cosmetic, laser, skin, nails, spa",
+    "small": [
+      ["A treatment causes a minor burn or reaction", 10000, "PL"],
+      ["Equipment stolen from the salon", 6000, "THEFT"],
+      ["A client slips near a treatment bed", 9000, "PL"]
+    ],
+    "large": [
+      ["A laser or cosmetic injury and claim", 350000, "PL"],
+      ["A fire closes the salon for months", 200000, "PROP"],
+      ["A product reaction affects many clients", 250000, "PROD"]
+    ]
+  },
+  {
+    "id": "mechanic",
+    "label": "Auto mechanic / Repair",
+    "anzsic": "S9411",
+    "division": "Other Services",
+    "keywords": "mechanic, workshop, car repair, service",
+    "small": [
+      ["A customer's car is damaged in your care", 9000, "PL"],
+      ["Tools and diagnostic gear stolen", 8000, "THEFT"],
+      ["A hoist or compressor breakdown", 6000, "MOTOR"]
+    ],
+    "large": [
+      ["A repair fault causes a crash, and a claim", 400000, "PROD"],
+      ["A fire destroys the workshop and cars in care", 350000, "PROP"],
+      ["Fuel or chemical spill and clean-up", 200000, "PL"]
+    ]
+  },
+  {
+    "id": "panelbeater",
+    "label": "Panel beater / Smash repair",
+    "anzsic": "S9412",
+    "division": "Other Services",
+    "keywords": "panel beating, smash repair, spray painting cars",
+    "small": [
+      ["A customer's car dented further in the yard", 8000, "PL"],
+      ["Spray gear or stock stolen", 6000, "THEFT"],
+      ["A booth or compressor breaks down", 7000, "MOTOR"]
+    ],
+    "large": [
+      ["A spray-booth fire destroys the shop", 400000, "PROP"],
+      ["A repair fault leads to a crash claim", 350000, "PROD"],
+      ["Multiple customer cars lost to fire or flood", 250000, "PROP"]
+    ]
+  },
+  {
+    "id": "cleaner",
+    "label": "Commercial cleaning",
+    "anzsic": "N7311",
+    "division": "Other Services",
+    "keywords": "cleaning, janitorial, commercial clean",
+    "small": [
+      ["A client's item damaged during a clean", 4000, "PL"],
+      ["Equipment stolen from a site or van", 5000, "THEFT"],
+      ["A wet-floor slip claim", 10000, "PL"]
+    ],
+    "large": [
+      ["A chemical or water incident damages a client's premises", 250000, "PL"],
+      ["A fire linked to your equipment", 180000, "PROD"],
+      ["A key contract lost after an incident", 120000, "BI"]
+    ]
+  },
+  {
+    "id": "drycleaner",
+    "label": "Dry cleaner / Laundry",
+    "anzsic": "S9531",
+    "division": "Other Services",
+    "keywords": "dry cleaning, laundry, laundromat",
+    "small": [
+      ["A customer's garment ruined", 3000, "PL"],
+      ["A machine breaks down at peak", 6000, "MOTOR"],
+      ["Stock or takings stolen", 4000, "THEFT"]
+    ],
+    "large": [
+      ["A solvent or dryer fire destroys the shop", 250000, "PROP"],
+      ["Flood or machine flood ruins the fit-out", 120000, "PROP"],
+      ["A batch of customer goods destroyed", 90000, "PL"]
+    ]
+  },
+  {
+    "id": "gym",
+    "label": "Gym / Fitness studio",
+    "anzsic": "R9111",
+    "division": "Other Services",
+    "keywords": "gym, fitness, PT studio, pilates, yoga",
+    "small": [
+      ["A member is hurt on a machine, minor claim", 12000, "PL"],
+      ["Equipment damaged or stolen", 7000, "THEFT"],
+      ["A short closure for a repair", 6000, "BI"]
+    ],
+    "large": [
+      ["A serious injury claim from a member", 400000, "PL"],
+      ["A fire closes the studio for months", 250000, "PROP"],
+      ["Flood destroys equipment and fit-out", 150000, "PROP"]
+    ]
+  },
+  {
+    "id": "photographer",
+    "label": "Photographer / Videographer",
+    "anzsic": "J5620",
+    "division": "Other Services",
+    "keywords": "photography, video, film, studio",
+    "small": [
+      ["A lens or camera is dropped and broken", 5000, "MOTOR"],
+      ["Gear stolen from the car or a shoot", 8000, "THEFT"],
+      ["Files lost before delivery, a reshoot", 4000, "PI"]
+    ],
+    "large": [
+      ["A wedding or event's images are lost entirely", 120000, "PI"],
+      ["A fire destroys studio and equipment", 150000, "PROP"],
+      ["An injury on a shoot you're running", 250000, "PL"]
+    ]
+  },
+  {
+    "id": "cabinetmaker",
+    "label": "Cabinet maker / Joinery shop",
+    "anzsic": "C1494",
+    "division": "Manufacturing",
+    "keywords": "joinery, cabinets, furniture, kitchens",
+    "small": [
+      ["A machine breaks down mid-order", 7000, "MOTOR"],
+      ["Timber and stock stolen from the workshop", 8000, "THEFT"],
+      ["A finished piece damaged in delivery", 5000, "PL"]
+    ],
+    "large": [
+      ["A workshop fire destroys plant and stock", 400000, "PROP"],
+      ["A product fault injures a customer", 250000, "PROD"],
+      ["A large order lost, and the contract with it", 150000, "BI"]
+    ]
+  },
+  {
+    "id": "foodmfr",
+    "label": "Food producer / manufacturer",
+    "anzsic": "C1199",
+    "division": "Manufacturing",
+    "keywords": "food manufacturing, packaged food, small producer",
+    "small": [
+      ["A batch spoils in a fridge failure", 8000, "BI"],
+      ["A machine breakdown halts a run", 9000, "MOTOR"],
+      ["Stock damaged in storage", 6000, "PROP"]
+    ],
+    "large": [
+      ["A contamination and product recall", 500000, "PROD"],
+      ["A fire destroys the plant", 600000, "PROP"],
+      ["A major customer lost after an incident", 250000, "BI"]
+    ]
+  },
+  {
+    "id": "fabricator",
+    "label": "Metal fabricator / Engineering workshop",
+    "anzsic": "C2229",
+    "division": "Manufacturing",
+    "keywords": "metal fabrication, welding, engineering workshop",
+    "small": [
+      ["A machine or tool breakdown", 8000, "MOTOR"],
+      ["Materials or tools stolen", 7000, "THEFT"],
+      ["A part reworked after a fault", 6000, "PROD"]
+    ],
+    "large": [
+      ["A hot-works fire destroys the workshop", 450000, "PROP"],
+      ["A failed part causes damage or injury, and a claim", 350000, "PROD"],
+      ["A key contract lost after a defect", 180000, "BI"]
+    ]
+  },
+  {
+    "id": "printer",
+    "label": "Printer / Signage",
+    "anzsic": "C1611",
+    "division": "Manufacturing",
+    "keywords": "printing, signage, print shop",
+    "small": [
+      ["A press breaks down on a deadline", 8000, "MOTOR"],
+      ["A job reprinted after an error", 5000, "PI"],
+      ["Stock or gear stolen", 6000, "THEFT"]
+    ],
+    "large": [
+      ["A fire destroys presses and stock", 400000, "PROP"],
+      ["A sign you installed falls and injures someone", 300000, "PL"],
+      ["A large recurring contract lost", 150000, "BI"]
+    ]
+  },
+  {
+    "id": "brewery",
+    "label": "Brewery / Distillery (small)",
+    "anzsic": "C1212",
+    "division": "Manufacturing",
+    "keywords": "brewery, distillery, craft beer, spirits",
+    "small": [
+      ["A batch is lost to a process fault", 9000, "BI"],
+      ["Equipment breakdown halts production", 10000, "MOTOR"],
+      ["Stock damaged in storage", 7000, "PROP"]
+    ],
+    "large": [
+      ["A fire or still explosion destroys the plant", 600000, "PROP"],
+      ["A contaminated batch and recall", 350000, "PROD"],
+      ["A flood ruins stock and equipment", 250000, "PROP"]
+    ]
+  },
+  {
+    "id": "courier",
+    "label": "Courier / Delivery",
+    "anzsic": "I5101",
+    "division": "Transport & Logistics",
+    "keywords": "courier, delivery, parcels, rideshare delivery",
+    "small": [
+      ["A parcel is lost or damaged", 3000, "PL"],
+      ["The van breaks down at peak", 5000, "MOTOR"],
+      ["Goods stolen from the vehicle", 6000, "THEFT"]
+    ],
+    "large": [
+      ["The van is written off in a crash", 80000, "MOTOR"],
+      ["A high-value consignment lost or destroyed", 150000, "PL"],
+      ["A serious accident injures a third party", 400000, "PL"]
+    ]
+  },
+  {
+    "id": "removalist",
+    "label": "Removalist",
+    "anzsic": "I5102",
+    "division": "Transport & Logistics",
+    "keywords": "removals, moving, furniture transport",
+    "small": [
+      ["A customer's furniture damaged in transit", 6000, "PL"],
+      ["A dolly or equipment breakdown", 4000, "MOTOR"],
+      ["Goods stolen from the truck", 7000, "THEFT"]
+    ],
+    "large": [
+      ["A truck fire destroys a full load and vehicle", 200000, "MOTOR"],
+      ["A whole household's goods lost or ruined", 150000, "PL"],
+      ["A serious road accident and injury claim", 400000, "PL"]
+    ]
+  },
+  {
+    "id": "truck",
+    "label": "Truck / Freight owner-driver",
+    "anzsic": "I4610",
+    "division": "Transport & Logistics",
+    "keywords": "truck, freight, transport, owner driver, haulage",
+    "small": [
+      ["A load shifts and is damaged", 7000, "PL"],
+      ["A breakdown and towing", 6000, "MOTOR"],
+      ["Fuel or parts stolen", 4000, "THEFT"]
+    ],
+    "large": [
+      ["The rig is written off in a crash", 250000, "MOTOR"],
+      ["A serious multi-vehicle accident and claim", 600000, "PL"],
+      ["A full high-value load lost", 200000, "PL"]
+    ]
+  },
+  {
+    "id": "warehousing",
+    "label": "Warehousing / Storage",
+    "anzsic": "I5301",
+    "division": "Transport & Logistics",
+    "keywords": "warehouse, storage, distribution, 3PL",
+    "small": [
+      ["Stock damaged by a leak", 8000, "PROP"],
+      ["Forklift or plant breakdown", 6000, "MOTOR"],
+      ["Pilfering from the floor", 7000, "THEFT"]
+    ],
+    "large": [
+      ["A fire destroys the warehouse and stored goods", 700000, "PROP"],
+      ["Flood ruins stored client stock", 400000, "PROP"],
+      ["A large customer's goods lost, and a claim", 300000, "PL"]
+    ]
+  },
+  {
+    "id": "wholesaler",
+    "label": "Wholesaler / Distributor",
+    "anzsic": "F3600",
+    "division": "Wholesale & Trade",
+    "keywords": "wholesale, distribution, import, supply",
+    "small": [
+      ["Stock damaged in the warehouse", 8000, "PROP"],
+      ["Pilfering and short deliveries", 7000, "THEFT"],
+      ["A forklift or racking issue", 6000, "MOTOR"]
+    ],
+    "large": [
+      ["A fire destroys a large stockholding", 600000, "PROP"],
+      ["A faulty product you distributed injures someone", 400000, "PROD"],
+      ["Flood ruins stock and forces closure", 300000, "PROP"]
+    ]
+  },
+  {
+    "id": "equipmenthire",
+    "label": "Equipment hire",
+    "anzsic": "L6631",
+    "division": "Wholesale & Trade",
+    "keywords": "hire, rental, plant hire, equipment rental",
+    "small": [
+      ["A hire item is returned damaged", 6000, "PROP"],
+      ["Gear stolen from the yard", 8000, "THEFT"],
+      ["A breakdown loses a hire booking", 5000, "BI"]
+    ],
+    "large": [
+      ["A hired machine fails and injures the hirer", 400000, "PROD"],
+      ["A fire destroys the hire fleet", 500000, "PROP"],
+      ["Multiple items stolen or lost", 200000, "THEFT"]
+    ]
+  },
+  {
+    "id": "farm",
+    "label": "Farm (mixed / crop)",
+    "anzsic": "A0146",
+    "division": "Agriculture",
+    "keywords": "farm, crop, grain, cattle, agriculture, grazing",
+    "small": [
+      ["A pump or piece of plant breaks down", 8000, "MOTOR"],
+      ["Stock or tools stolen from the shed", 7000, "THEFT"],
+      ["Storm damages fencing and yards", 12000, "PROP"]
+    ],
+    "large": [
+      ["A fire destroys sheds, plant and stored crop", 500000, "PROP"],
+      ["A flood or drought wipes out a season", 400000, "BI"],
+      ["A visitor or contractor is badly hurt on-farm", 350000, "PL"]
+    ]
+  },
+  {
+    "id": "winery",
+    "label": "Winery / Vineyard",
+    "anzsic": "C1214",
+    "division": "Agriculture",
+    "keywords": "winery, vineyard, wine, cellar door",
+    "small": [
+      ["A tank or press breaks down at vintage", 10000, "MOTOR"],
+      ["Cellar-door visitor slips", 10000, "PL"],
+      ["Stock damaged in storage", 8000, "PROP"]
+    ],
+    "large": [
+      ["A fire or smoke taint destroys a vintage", 700000, "PROP"],
+      ["Frost or storm wipes out the crop", 400000, "BI"],
+      ["A contaminated batch and recall", 300000, "PROD"]
+    ]
+  },
+  {
+    "id": "other",
+    "label": "Other / not listed",
+    "anzsic": "",
+    "division": "General",
+    "keywords": "general business, not listed",
+    "small": [
+      ["A key piece of equipment breaks down", 7000, "MOTOR"],
+      ["Stock, tools or takings stolen", 6000, "THEFT"],
+      ["A customer or visitor is hurt on your premises", 12000, "PL"]
+    ],
+    "large": [
+      ["A fire guts the premises, months to rebuild", 250000, "PROP"],
+      ["A serious liability claim from a customer", 300000, "PL"],
+      ["Storm or flood wrecks the fit-out and stock", 180000, "PROP"]
+    ]
+  }
+]

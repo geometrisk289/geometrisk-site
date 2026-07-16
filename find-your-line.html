@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find your line — Geometrisk</title>
+<meta name="description" content="How big a loss could your business take and keep trading? Three short steps, plain questions, about two minutes. General information only, not advice.">
+<link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  body{min-height:100vh;display:flex;flex-direction:column}
+
+  main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 24px 60px}
+  .stage{width:100%;max-width:820px}
+  .screen{display:none;animation:fade .5s ease}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:22px}
+  h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(34px,6vw,60px);line-height:1.06;text-align:center;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--gold)}
+  .sub{text-align:center;color:var(--muted);font-size:17px;line-height:1.6;margin-top:20px;max-width:560px;margin-left:auto;margin-right:auto}
+
+  .linkbtn{background:none;border:none;color:var(--muted);font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;padding:10px}
+  .linkbtn:hover{color:var(--navy)}
+  .actions{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:40px}
+
+  /* step 1 inputs + sliders */
+  .field{margin:34px 0}
+  .field label{display:block;font-size:16px;color:var(--navy);margin-bottom:14px;line-height:1.5}
+  .money{display:flex;align-items:center;border-bottom:2px solid var(--line-grey);max-width:340px;transition:border-color .2s}
+  .money:focus-within{border-color:var(--gold)}
+  .money span{font-family:'Playfair Display',serif;font-size:30px;color:var(--muted);padding-right:6px}
+  .money input{border:none;background:none;outline:none;font-family:'Playfair Display',serif;font-size:30px;color:var(--navy);width:100%;padding:6px 0}
+  .money input::placeholder{color:var(--line-grey)}
+  .slider{-webkit-appearance:none;appearance:none;width:100%;max-width:420px;height:3px;background:var(--line-grey);outline:none;margin-top:20px;border-radius:2px}
+  .slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold);cursor:pointer;border:3px solid var(--cream);box-shadow:0 0 0 1px var(--gold)}
+  .slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--gold);cursor:pointer;border:3px solid var(--cream);box-shadow:0 0 0 1px var(--gold)}
+  .scale{display:flex;justify-content:space-between;max-width:420px;font-size:11px;color:var(--muted);margin-top:8px;letter-spacing:.02em}
+  .hint{font-size:13px;color:var(--muted);margin-top:12px}
+
+  /* live line panel */
+  .linepanel{border:1px solid var(--line-grey);background:#fff;padding:26px 26px;margin-top:8px;opacity:.5;transition:opacity .3s}
+  .linepanel.live{opacity:1;border-color:var(--gold-soft)}
+  .bignum{font-family:'Playfair Display',serif;font-size:46px;text-align:center;margin:2px 0 2px;color:var(--line-grey);transition:color .3s}
+  .linepanel.live .bignum{color:var(--navy)}
+  .numcap{text-align:center;color:var(--muted);font-size:13.5px;letter-spacing:.02em}
+  .barwrap{margin:22px 0 6px}
+  .barlabels{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px}
+  .barlabels .l{color:var(--navy)}
+  .barlabels .r{color:var(--gold)}
+  .bar{position:relative;height:76px;display:flex;background:var(--cream-2);border:1px solid var(--line-grey)}
+  .bar .absorb{background:var(--navy);height:100%;width:0;transition:width .3s}
+  .bar .cannot{flex:1;height:100%;background-image:repeating-linear-gradient(45deg,transparent,transparent 7px,rgba(176,141,79,.16) 7px,rgba(176,141,79,.16) 8px)}
+  .linecap{text-align:center;color:var(--navy);font-size:15px;line-height:1.55;margin-top:16px}
+
+  /* occupation autocomplete */
+  .ac{position:relative;max-width:480px;margin:32px auto 0}
+  .ac input{width:100%;border:none;border-bottom:2px solid var(--line-grey);background:none;outline:none;font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);padding:8px 0;transition:border-color .2s}
+  .ac input:focus{border-color:var(--gold)}
+  .ac input::placeholder{color:var(--line-grey)}
+  .aclist{position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--line-grey);border-top:none;max-height:280px;overflow-y:auto;z-index:20;display:none}
+  .aclist.show{display:block}
+  .acitem{padding:13px 16px;cursor:pointer;font-size:15px;color:var(--navy);border-bottom:1px solid var(--cream-2);display:flex;justify-content:space-between;gap:12px}
+  .acitem:last-child{border-bottom:none}
+  .acitem:hover,.acitem.sel{background:var(--cream-2)}
+  .acitem .code{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);white-space:nowrap}
+  .chosen{max-width:480px;margin:26px auto 0;text-align:center}
+  .chosen .clabel{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy)}
+  .chosen .cdiv{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:6px}
+
+  /* two-column exposures */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:26px 0 8px}
+  .colhead .ctag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+  .col-small .ctag{color:var(--navy)}
+  .col-large .ctag{color:var(--amber)}
+  .colhead .cdesc{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.45}
+  .colcards{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+  .card{border:1px solid var(--line-grey);background:#fff;padding:15px 16px;cursor:pointer;transition:all .18s;position:relative}
+  .card:hover{border-color:var(--gold-soft)}
+  .card.on{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+  .col-large .card.on{border-color:var(--amber);box-shadow:inset 0 0 0 1px var(--amber)}
+  .card .tick{position:absolute;top:13px;right:13px;width:18px;height:18px;border:1px solid var(--line-grey);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
+  .card.on .tick{background:var(--navy);border-color:var(--navy)}
+  .col-large .card.on .tick{background:var(--amber);border-color:var(--amber)}
+  .card h3{font-weight:600;font-size:14px;color:var(--navy);margin-bottom:6px;padding-right:24px;line-height:1.35}
+  .card .cost{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold)}
+  .col-large .card .cost{color:var(--amber)}
+  .disc{max-width:640px;margin:26px auto 0;font-size:12.5px;line-height:1.55;color:var(--muted);text-align:center;border-top:1px solid var(--line-grey);padding-top:16px}
+
+  /* plot */
+  .plot{margin:30px 0}
+  .prow{margin-bottom:18px}
+  .prow .top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:7px}
+  .prow .top .amt{font-family:'JetBrains Mono',monospace;color:var(--muted)}
+  .track{position:relative;height:26px;background:var(--cream-2);border:1px solid var(--line-grey)}
+  .track .seg-in{position:absolute;left:0;top:0;bottom:0;background:var(--navy)}
+  .track .seg-out{position:absolute;top:0;bottom:0;background-image:repeating-linear-gradient(45deg,rgba(201,128,58,.85),rgba(201,128,58,.85) 7px,rgba(201,128,58,.6) 7px,rgba(201,128,58,.6) 8px)}
+  .lineMark{position:absolute;top:-8px;bottom:-8px;width:0;border-left:2px dashed var(--gold);z-index:3}
+  .lineMark span{position:absolute;top:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .legend{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:22px;font-size:12px;color:var(--muted)}
+  .legend i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+  .legend .n{background:var(--navy)}
+  .legend .a{background:var(--amber)}
+
+  /* step 3 hole + levers */
+  .holecard{border:1px solid var(--line-grey);background:#fff;padding:24px 26px;margin:8px 0 6px;text-align:center}
+  .holecard .hlabel{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+  .holecard .hev{font-size:15px;color:var(--navy);margin-bottom:12px}
+  .holecard .hnum{font-family:'Playfair Display',serif;font-size:44px;color:var(--amber)}
+  .holecard .hcap{color:var(--muted);font-size:13.5px;margin-top:6px}
+  .lever{border:1px solid var(--line-grey);background:#fff;padding:20px 22px;margin:14px 0}
+  .lever .lh{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+  .lever .lname{font-weight:600;font-size:16px;color:var(--navy)}
+  .lever .lcatch{font-size:13.5px;color:var(--muted);line-height:1.55;margin-top:7px;max-width:440px}
+  .lever .linput{display:flex;align-items:center;border-bottom:2px solid var(--line-grey);transition:border-color .2s;min-width:150px}
+  .lever .linput:focus-within{border-color:var(--gold)}
+  .lever .linput span{font-family:'Playfair Display',serif;font-size:24px;color:var(--muted);padding-right:4px}
+  .lever .linput input{border:none;background:none;outline:none;font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);width:100%;padding:4px 0;text-align:right}
+  .tally{margin:26px 0 6px}
+  .tally .tbar{position:relative;height:40px;background:var(--cream-2);border:1px solid var(--line-grey);display:flex;overflow:hidden}
+  .tally .tfill{height:100%;background:var(--navy);transition:width .25s}
+  .tally .tgap{flex:1;height:100%;background-image:repeating-linear-gradient(45deg,rgba(201,128,58,.85),rgba(201,128,58,.85) 7px,rgba(201,128,58,.6) 7px,rgba(201,128,58,.6) 8px)}
+  .tally .trow{display:flex;justify-content:space-between;font-size:12.5px;margin-top:10px}
+  .tally .trow .navy{color:var(--navy);font-weight:600}
+  .tally .trow .amb{color:var(--amber);font-weight:600}
+  .verdict{border-left:3px solid var(--gold);background:#fff;padding:18px 22px;margin:22px 0 0;font-size:15.5px;line-height:1.6;color:var(--navy)}
+
+  .dots{display:flex;gap:9px;justify-content:center;margin-top:44px}
+  .dots i{width:7px;height:7px;border-radius:50%;background:var(--line-grey)}
+  .dots i.on{background:var(--navy)}
+  .backrow{text-align:center;margin-top:18px}
+  @media(max-width:640px){
+    .twocol{grid-template-columns:1fr;gap:26px}
+    .lever .lh{flex-direction:column}
+    .lever .linput{align-self:flex-start}
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <a class="brand" href="index.html">
+    <svg class="mark" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 26 C16 10, 30 10, 42 22" stroke="#1B2A4A" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <path d="M20 30 C32 16, 44 16, 56 8" stroke="#B08D4F" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="brand-name">GEOMETRISK</div>
+    <div class="tagline">risks<br>that<br>matter</div>
+  </a>
+  <nav>
+    <a href="index.html#businesses">For Businesses</a>
+    <a href="for-brokers.html">For Brokers</a>
+    <a href="methodology.html">Risk Library</a>
+  </nav>
+</header>
+
+<main>
+<div class="stage">
+
+  <!-- s0 intro -->
+  <section class="screen active" id="s0">
+    <div class="eyebrow">Find your line</div>
+    <h1>How much can your business take <em>on the chin?</em></h1>
+    <p class="sub">Most owners have never worked it out. Three short steps, plain questions, about two minutes. Then you will know.</p>
+    <div class="actions">
+      <button class="btn" onclick="go(1)">Start &nbsp;→</button>
+      <button class="linkbtn" onclick="loadExample()">Try it with an example</button>
+    </div>
+  </section>
+
+  <!-- s1 capacity -->
+  <section class="screen" id="s1">
+    <div class="eyebrow">Step one · what the business can absorb</div>
+    <h1>First, your <em>line.</em></h1>
+
+    <div class="field">
+      <label>Roughly, what does the business bring in over a year?</label>
+      <div class="money"><span>$</span><input id="revenue" inputmode="numeric" placeholder="0" oninput="typeRev(this)"></div>
+      <input type="range" class="slider" id="revSlider" min="50000" max="50000000" step="25000" value="50000" oninput="dragRev(this)">
+      <div class="scale"><span>$50k</span><span>$50m</span></div>
+    </div>
+
+    <div class="field">
+      <label>If a bad week hit, how much could you reach fast?</label>
+      <div class="money"><span>$</span><input id="buffer" inputmode="numeric" placeholder="0" oninput="typeBuf(this)"></div>
+      <input type="range" class="slider" id="bufSlider" min="0" max="2000000" step="10000" value="0" oninput="dragBuf(this)">
+      <div class="scale"><span>$0</span><span>$2m</span></div>
+      <div class="hint">Cash at bank, plus any line of credit. A rough number is fine.</div>
+    </div>
+
+    <div class="linepanel" id="linepanel">
+      <div class="bignum" id="lineNum">$—</div>
+      <div class="numcap">roughly the biggest loss the business could take and keep trading</div>
+      <div class="barwrap">
+        <div class="barlabels"><span class="l">The business absorbs</span><span class="r">The business cannot</span></div>
+        <div class="bar"><div class="absorb" id="absorbBlock"></div><div class="cannot"></div></div>
+      </div>
+      <div class="linecap" id="lineCap">Add your numbers and your line appears here.</div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="s1btn" onclick="go(2)" disabled>Next: what could go wrong &nbsp;→</button>
+      <button class="linkbtn" onclick="clearNums()">Clear numbers</button>
+    </div>
+    <div class="backrow"><button class="linkbtn" onclick="go(0)">← Back</button></div>
+    <div class="dots"><i class="on"></i><i></i><i></i></div>
+  </section>
+
+  <!-- s2 occupation select -->
+  <section class="screen" id="s2">
+    <div class="eyebrow">Step two · what could go wrong</div>
+    <h1>What does the business <em>do?</em></h1>
+    <p class="sub">Start typing your trade or industry. We use it to line up the losses that tend to matter in your world.</p>
+    <div class="ac">
+      <input id="occ" placeholder="e.g. electrician, café, physio…" autocomplete="off"
+             oninput="acFilter()" onkeydown="acKey(event)" onfocus="acFilter()">
+      <div class="aclist" id="aclist"></div>
+    </div>
+    <div class="chosen" id="occChosen" style="display:none">
+      <div class="clabel" id="occLabel"></div>
+      <div class="cdiv" id="occDiv"></div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="s2btn" onclick="buildCards()" disabled>See what could go wrong &nbsp;→</button>
+    </div>
+    <div class="backrow"><button class="linkbtn" onclick="go(1)">← Back</button></div>
+    <div class="dots"><i class="on"></i><i class="on"></i><i></i></div>
+  </section>
+
+  <!-- s3 exposures two columns -->
+  <section class="screen" id="s3">
+    <div class="eyebrow">Step two · what could go wrong</div>
+    <h1>For a <em id="occH1">business</em>, this is what could <em>go wrong.</em></h1>
+    <p class="sub">Two kinds of trouble. Tap the ones that could really happen to you.</p>
+    <div class="twocol">
+      <div class="col-small">
+        <div class="colhead">
+          <div class="ctag">Small losses</div>
+          <div class="cdesc">Happen often. They sting, but the business survives them.</div>
+        </div>
+        <div class="colcards" id="cardsSmall"></div>
+      </div>
+      <div class="col-large">
+        <div class="colhead">
+          <div class="ctag">Large losses</div>
+          <div class="cdesc">Rare. But any one of them could end the business.</div>
+        </div>
+        <div class="colcards" id="cardsLarge"></div>
+      </div>
+    </div>
+    <div class="disc">
+      Loss sizes are indicative only, not tailored to your business. Worker injuries are left out here — that cover is required by law, so most businesses hold it regardless.
+    </div>
+    <div class="actions">
+      <button class="btn" id="s3btn" onclick="showPlot()" disabled>See where they sit &nbsp;→</button>
+    </div>
+    <div class="backrow"><button class="linkbtn" onclick="go(2)">← Change my trade</button></div>
+    <div class="dots"><i class="on"></i><i class="on"></i><i></i></div>
+  </section>
+
+  <!-- s4 plot -->
+  <section class="screen" id="s4">
+    <div class="eyebrow">Against your line</div>
+    <h1>Here is where they <em>sit.</em></h1>
+    <div class="plot" id="plot"></div>
+    <div class="legend">
+      <span><i class="n"></i>The business can absorb this part</span>
+      <span><i class="a"></i>Past your line</span>
+    </div>
+    <p class="sub" id="plotMsg"></p>
+    <div class="actions">
+      <button class="btn" onclick="showLevers()">Next: what it would take &nbsp;→</button>
+      <button class="linkbtn" onclick="go(3)">← Change my picks</button>
+    </div>
+    <div class="dots"><i class="on"></i><i class="on"></i><i></i></div>
+  </section>
+
+  <!-- s5 levers -->
+  <section class="screen" id="s5">
+    <div class="eyebrow">Step three · before it lands</div>
+    <h1>Say the <em>big one</em> lands.</h1>
+    <p class="sub">A loss past your line leaves a hole. After the fact, there are only three ways to fill it. Put in what you could realistically pull together — then see what is left.</p>
+
+    <div class="holecard">
+      <div class="hlabel">The hole to fill</div>
+      <div class="hev" id="holeEvent">A fire guts the premises</div>
+      <div class="hnum" id="holeNum">$237,400</div>
+      <div class="hcap">what this loss costs past the line the business can already take</div>
+    </div>
+
+    <div class="lever">
+      <div class="lh">
+        <div>
+          <div class="lname">Raise prices, or sell more</div>
+          <div class="lcatch">Customers notice a price rise. And a business still finding its feet is the least able to serve more of them.</div>
+        </div>
+        <div class="linput"><span>$</span><input id="lev1" inputmode="numeric" oninput="fmt3(this)"></div>
+      </div>
+    </div>
+    <div class="lever">
+      <div class="lh">
+        <div>
+          <div class="lname">Cut costs, or delay them</div>
+          <div class="lcatch">You can only trim what will not cripple you further. The easy cuts are often the ones keeping customers coming back.</div>
+        </div>
+        <div class="linput"><span>$</span><input id="lev2" inputmode="numeric" oninput="fmt3(this)"></div>
+      </div>
+    </div>
+    <div class="lever">
+      <div class="lh">
+        <div>
+          <div class="lname">Borrow the difference</div>
+          <div class="lcatch">Credit is dearest exactly when you are weakest. And a loan is a second hole, dug to fill the first.</div>
+        </div>
+        <div class="linput"><span>$</span><input id="lev3" inputmode="numeric" oninput="fmt3(this)"></div>
+      </div>
+    </div>
+
+    <div class="tally">
+      <div class="tbar"><div class="tfill" id="tfill" style="width:38%"></div><div class="tgap"></div></div>
+      <div class="trow">
+        <span class="navy" id="tCovered">The three levers pull together $91,000</span>
+        <span class="amb" id="tShort">$146,400 still missing</span>
+      </div>
+    </div>
+    <div class="verdict" id="verdict"></div>
+
+    <div class="actions">
+      <button class="btn" onclick="go(6)">One last thing &nbsp;→</button>
+      <button class="linkbtn" onclick="go(4)">← Back</button>
+    </div>
+    <div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+  </section>
+
+  <!-- s6 close -->
+  <section class="screen" id="s6">
+    <div class="eyebrow">One last thing</div>
+    <h1>Know your plan <em>before</em> the day comes.</h1>
+    <p class="sub">Most of that hole you can shrink long before it lands — how you work, what you hold back, what you shift onto a contract. That is the part I like helping with. A 30-minute chat, a look at your line and your list, and a couple of moves you can actually make. No pitch.</p>
+    <div class="actions">
+      <button class="btn gold" onclick="book()">Book an appointment &nbsp;→</button>
+      <div class="numcap" style="margin-top:6px">See how to lower your worst case, well before it happens.</div>
+    </div>
+    <div class="backrow"><button class="linkbtn" onclick="restart()">Start again</button></div>
+    <div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+  </section>
+
+</div>
+</main>
+
+<footer class="site">
+  General information only, not advice. &nbsp;·&nbsp; <a href="about.html">About Akash</a> &nbsp;·&nbsp; Geometrisk
+</footer>
+
+<script id="fallback-data" type="application/json">[{"id": "electrician", "label": "Electrician", "anzsic": "E3232", "division": "Construction", "keywords": "sparky, electrical contractor, wiring", "small": [["Tools stolen from the van overnight", 7000, "THEFT"], ["Drop a client's switchboard, have to replace it", 4500, "PL"], ["A fault you wired trips and damages a client's appliances", 9000, "PROD"]], "large": [["A fire is traced back to your work, and you're sued", 350000, "PROD"], ["A client is badly shocked on a job you signed off", 500000, "PL"], ["Van and full tool kit written off in a crash", 90000, "MOTOR"]]}, {"id": "plumber", "label": "Plumber / Gasfitter", "anzsic": "E3231", "division": "Construction", "keywords": "plumbing, gas, drainage", "small": [["A fitting fails and floods a client's kitchen", 12000, "PL"], ["Tools and fittings stolen from the ute", 6000, "THEFT"], ["You crack a tile floor getting to a pipe", 5000, "PL"]], "large": [["A burst you installed floods a whole apartment block", 400000, "PL"], ["A gas job is blamed for an explosion, and a lawsuit follows", 600000, "PROD"], ["Water damage across a new build you're liable for", 250000, "PL"]]}, {"id": "carpenter", "label": "Carpenter / Joiner", "anzsic": "E3241", "division": "Construction", "keywords": "chippy, joinery, framing, formwork", "small": [["A power tool packs it in mid-job", 4000, "MOTOR"], ["Timber and materials stolen from site", 8000, "THEFT"], ["You damage a client's finished floor", 6000, "PL"]], "large": [["A structure you framed fails and someone is hurt", 450000, "PL"], ["A site fire destroys your gear and a half-built home", 300000, "PROP"], ["A deck you built collapses at a party", 550000, "PL"]]}, {"id": "builder", "label": "Builder (residential)", "anzsic": "E3011", "division": "Construction", "keywords": "building contractor, home builder, renovation", "small": [["Materials pilfered from an open site", 12000, "THEFT"], ["A subcontractor damages the neighbour's fence", 7000, "PL"], ["Storm undoes a week of unfinished work", 20000, "PROP"]], "large": [["A build defect surfaces years later and you're sued", 750000, "PI"], ["A site fire levels a near-complete home", 900000, "PROP"], ["A wall collapse injures a passer-by", 600000, "PL"]]}, {"id": "painter", "label": "Painter / Decorator", "anzsic": "E3242", "division": "Construction", "keywords": "painting, decorating, spray", "small": [["Overspray ruins a client's car in the driveway", 6000, "PL"], ["Ladders and gear stolen from the trailer", 4500, "THEFT"], ["A paint spill wrecks a client's carpet", 5000, "PL"]], "large": [["Solvents ignite and a house fire follows", 300000, "PROD"], ["A fall from your scaffold badly injures someone", 450000, "PL"], ["Vehicle and full kit lost in a crash", 70000, "MOTOR"]]}, {"id": "landscaper", "label": "Landscaper / Gardener", "anzsic": "E3221", "division": "Construction", "keywords": "landscaping, gardening, paving, arborist", "small": [["A mower throws a rock through a window", 4000, "PL"], ["Equipment stolen from the trailer", 7000, "THEFT"], ["You cut through a client's irrigation or cabling", 5000, "PL"]], "large": [["A retaining wall you built collapses onto a car", 250000, "PL"], ["A felled tree hits a house and a person", 400000, "PL"], ["Machinery and truck destroyed by fire", 120000, "PROP"]]}, {"id": "roofer", "label": "Roofer", "anzsic": "E3242b", "division": "Construction", "keywords": "roofing, guttering, tiling roof", "small": [["Rain gets in through an unfinished section", 9000, "PL"], ["Tools blown off and gear stolen from site", 5000, "THEFT"], ["A dropped tile cracks a client's driveway", 4000, "PL"]], "large": [["A roof you laid leaks and rots a whole ceiling", 250000, "PL"], ["A fall injures a worker or passer-by badly", 500000, "PL"], ["Fire during hot works destroys the building", 600000, "PROP"]]}, {"id": "hvac", "label": "Air-conditioning / Refrigeration", "anzsic": "E3233", "division": "Construction", "keywords": "HVAC, aircon, refrigeration, mechanical", "small": [["A unit you fit leaks and stains a ceiling", 6000, "PL"], ["Refrigerant and tools stolen from the van", 8000, "THEFT"], ["A miswired unit trips a client's board", 5000, "PROD"]], "large": [["A system fault causes a fire, and you're sued", 400000, "PROD"], ["A cool room fails and a client loses all stock", 300000, "PROD"], ["Van and plant written off in a crash", 85000, "MOTOR"]]}, {"id": "restaurant", "label": "Restaurant", "anzsic": "H4511", "division": "Accommodation & Food", "keywords": "dining, eatery, bistro, chef", "small": [["The freezer dies over a long weekend", 6000, "BI"], ["A customer slips on a wet floor", 15000, "PL"], ["An oven or cool room breaks down", 9000, "MOTOR"]], "large": [["A kitchen fire guts the premises, months to rebuild", 250000, "PROP"], ["Food poisoning outbreak traced to your kitchen", 300000, "PROD"], ["Storm or flood wrecks the fit-out and stock", 180000, "PROP"]]}, {"id": "cafe", "label": "Café / Coffee shop", "anzsic": "H4512", "division": "Accommodation & Food", "keywords": "coffee, brunch, espresso, barista", "small": [["Milk and stock spoil when the fridge fails", 4000, "BI"], ["A customer trips on the step and is hurt", 12000, "PL"], ["The espresso machine breaks down", 7000, "MOTOR"]], "large": [["A fire shuts you for months", 200000, "PROP"], ["A serious burn or injury claim from a customer", 250000, "PL"], ["Flood damages the fit-out and forces a rebuild", 150000, "PROP"]]}, {"id": "takeaway", "label": "Takeaway / Fast food", "anzsic": "H4513", "division": "Accommodation & Food", "keywords": "fish and chips, kebab, pizza, burger", "small": [["Fryer or grill breaks down", 5000, "MOTOR"], ["Stock lost to a power outage", 4000, "BI"], ["A customer slips at the counter", 10000, "PL"]], "large": [["A cooking fire destroys the shop", 200000, "PROP"], ["Food poisoning claim and shutdown", 250000, "PROD"], ["Extended closure after a storm floods the site", 130000, "PROP"]]}, {"id": "pub", "label": "Pub / Bar", "anzsic": "H4520", "division": "Accommodation & Food", "keywords": "bar, tavern, hotel, licensed venue", "small": [["A patron slips on a spill", 15000, "PL"], ["Glasswashers or cool room fail", 8000, "MOTOR"], ["Minor kitchen fire, quick clean-up", 18000, "PROP"]], "large": [["A fight or fall leads to a serious liability claim", 500000, "PL"], ["A fire closes the venue for months", 600000, "PROP"], ["Flood ruins the cellar, kitchen and trade", 350000, "PROP"]]}, {"id": "catering", "label": "Catering", "anzsic": "H4513c", "division": "Accommodation & Food", "keywords": "caterer, functions, events food", "small": [["Food spoils when transport refrigeration fails", 6000, "BI"], ["Equipment damaged or stolen at a venue", 7000, "THEFT"], ["A guest slips at an event you're running", 12000, "PL"]], "large": [["Mass food poisoning at a large function", 400000, "PROD"], ["A vehicle fire destroys van and full kit", 90000, "MOTOR"], ["A cancelled contract after a serious incident", 150000, "BI"]]}, {"id": "motel", "label": "Motel / B&B / Small hotel", "anzsic": "H4400", "division": "Accommodation & Food", "keywords": "accommodation, guesthouse, hotel, lodge", "small": [["A guest trips on a stair and claims", 15000, "PL"], ["Water damage from a burst pipe in a room", 12000, "PROP"], ["Theft of linen, TVs and appliances", 8000, "THEFT"]], "large": [["A fire closes the property for a year", 800000, "PROP"], ["A balcony or pool incident injures a guest", 500000, "PL"], ["Storm damage and long loss of bookings", 400000, "BI"]]}, {"id": "clothing", "label": "Clothing / Fashion retailer", "anzsic": "G4251", "division": "Retail", "keywords": "boutique, apparel, fashion, shoes", "small": [["Shoplifting over a busy month", 5000, "THEFT"], ["A customer trips on a display", 10000, "PL"], ["Water damage to stock from the roof", 8000, "PROP"]], "large": [["A fire destroys the shop and all stock", 300000, "PROP"], ["Flood ruins a full season's inventory", 200000, "PROP"], ["A break-in cleans out high-value stock", 120000, "THEFT"]]}, {"id": "grocer", "label": "Convenience store / Grocer", "anzsic": "G4110", "division": "Retail", "keywords": "corner store, supermarket, deli, grocery", "small": [["Stock spoils in a fridge failure", 6000, "BI"], ["Shoplifting and till shortfalls", 5000, "THEFT"], ["A customer slips in an aisle", 12000, "PL"]], "large": [["A fire or ram-raid destroys the store", 250000, "PROP"], ["Flood wipes out stock and forces closure", 180000, "PROP"], ["A serious product or hygiene claim", 200000, "PROD"]]}, {"id": "butcher", "label": "Butcher", "anzsic": "G4121", "division": "Retail", "keywords": "meat, smallgoods, deli", "small": [["Cool room fails and meat spoils", 8000, "BI"], ["A slip on the shop floor", 10000, "PL"], ["A saw or grinder breaks down", 5000, "MOTOR"]], "large": [["Contaminated product makes customers sick", 300000, "PROD"], ["A fire shuts the shop for months", 250000, "PROP"], ["Refrigeration failure destroys all stock over a break", 120000, "BI"]]}, {"id": "bakery", "label": "Bakery", "anzsic": "G4121b", "division": "Retail", "keywords": "baker, patisserie, cakes, bread", "small": [["An oven breaks down mid-week", 7000, "MOTOR"], ["Stock spoils in a power cut", 4000, "BI"], ["A customer slips at the counter", 10000, "PL"]], "large": [["An allergen slips into product and someone is harmed", 300000, "PROD"], ["A fire destroys the bakery", 250000, "PROP"], ["Flood forces a lengthy closure", 150000, "PROP"]]}, {"id": "pharmacy", "label": "Pharmacy", "anzsic": "G4271", "division": "Retail", "keywords": "chemist, dispensary", "small": [["Shoplifting of high-value goods", 6000, "THEFT"], ["A fridge failure spoils medicines", 9000, "BI"], ["A customer slips in-store", 12000, "PL"]], "large": [["A dispensing error harms a customer, and a claim follows", 500000, "PI"], ["A break-in targets drugs and stock", 150000, "THEFT"], ["A fire closes the pharmacy for months", 300000, "PROP"]]}, {"id": "hardware", "label": "Hardware / Trade supplies", "anzsic": "G3921", "division": "Retail", "keywords": "hardware store, timber, supplies", "small": [["A customer is hurt by falling stock", 12000, "PL"], ["Tools and stock shoplifted", 7000, "THEFT"], ["Forklift or plant breakdown", 6000, "MOTOR"]], "large": [["A fire destroys a large stockholding", 400000, "PROP"], ["A faulty product you sold injures someone", 300000, "PROD"], ["Flood ruins stock and yard", 200000, "PROP"]]}, {"id": "florist", "label": "Florist", "anzsic": "G4272", "division": "Retail", "keywords": "flowers, nursery, gifts", "small": [["Stock wilts when the cool room fails", 4000, "BI"], ["A slip near a wet display", 8000, "PL"], ["A delivery van breaks down at peak", 3500, "MOTOR"]], "large": [["A fire destroys the shop", 150000, "PROP"], ["Flood ruins stock and fit-out", 90000, "PROP"], ["A break-in over a holiday period", 40000, "THEFT"]]}, {"id": "jeweller", "label": "Jeweller", "anzsic": "G4253", "division": "Retail", "keywords": "jewellery, watches, gold", "small": [["A display item is damaged in handling", 6000, "PROP"], ["A customer slips in-store", 10000, "PL"], ["A small theft from the counter", 9000, "THEFT"]], "large": [["An armed robbery or smash-and-grab", 400000, "THEFT"], ["A fire destroys premises and stock", 300000, "PROP"], ["Stock stolen in transit to a valuer", 150000, "THEFT"]]}, {"id": "accountant", "label": "Accountant / Bookkeeper", "anzsic": "M6932", "division": "Professional Services", "keywords": "accounting, tax, bookkeeping, BAS", "small": [["A client's records are lost in a system crash", 5000, "CYBER"], ["A small filing error you fix at your own cost", 4000, "PI"], ["A laptop with client data is stolen", 6000, "THEFT"]], "large": [["A tax or advice error costs a client dearly, and they sue", 400000, "PI"], ["A data breach exposes client financials", 250000, "CYBER"], ["A fire destroys the office and records", 200000, "PROP"]]}, {"id": "lawyer", "label": "Solicitor / Law firm", "anzsic": "M6931", "division": "Professional Services", "keywords": "legal, solicitor, conveyancer, law", "small": [["A missed minor deadline you rectify", 6000, "PI"], ["A laptop or file is lost", 5000, "THEFT"], ["A short system outage disrupts work", 4000, "CYBER"]], "large": [["A negligence claim over missed advice or a deadline", 600000, "PI"], ["A trust account cyber fraud", 400000, "CYBER"], ["A breach of confidence claim", 300000, "PI"]]}, {"id": "architect", "label": "Architect", "anzsic": "M6921", "division": "Professional Services", "keywords": "architecture, building design, drafting", "small": [["A drawing error caught and fixed on site", 8000, "PI"], ["A laptop with project files is stolen", 6000, "THEFT"], ["A short delay you absorb the cost of", 5000, "PI"]], "large": [["A design fault leads to a costly rebuild, and a claim", 750000, "PI"], ["A structure issue traced to your plans injures someone", 500000, "PL"], ["A cyber breach of project and client data", 200000, "CYBER"]]}, {"id": "engineer", "label": "Consulting Engineer", "anzsic": "M6923", "division": "Professional Services", "keywords": "engineering, structural, civil, geotech", "small": [["A calculation error caught in review", 9000, "PI"], ["Site equipment or laptop stolen", 6000, "THEFT"], ["A minor report reissue at your cost", 5000, "PI"]], "large": [["A design failure causes major property damage", 900000, "PI"], ["A structural collapse injures people", 700000, "PL"], ["A breach exposes sensitive project data", 250000, "CYBER"]]}, {"id": "consultant", "label": "Management Consultant", "anzsic": "M6962", "division": "Professional Services", "keywords": "consulting, advisory, strategy", "small": [["A report reworked after an error", 5000, "PI"], ["A laptop lost while travelling", 5000, "THEFT"], ["A short outage delays a deliverable", 3500, "CYBER"]], "large": [["Advice that costs a client money leads to a claim", 400000, "PI"], ["A data breach of confidential client material", 250000, "CYBER"], ["A defamation or IP dispute", 200000, "ML"]]}, {"id": "agency", "label": "Marketing / Design agency", "anzsic": "M6940", "division": "Professional Services", "keywords": "marketing, advertising, creative, design, web", "small": [["A campaign reprinted after an error", 6000, "PI"], ["Equipment stolen from the studio", 7000, "THEFT"], ["A short website or system outage", 4000, "CYBER"]], "large": [["An IP or defamation claim over published work", 300000, "ML"], ["A data breach of client and customer data", 250000, "CYBER"], ["A fire destroys studio and gear", 150000, "PROP"]]}, {"id": "itservices", "label": "IT services / MSP", "anzsic": "M7000", "division": "Professional Services", "keywords": "IT support, managed services, software, developer", "small": [["A client outage you spend the weekend fixing", 6000, "PI"], ["A laptop or server component stolen", 7000, "THEFT"], ["A minor bug fixed at your cost", 5000, "PI"]], "large": [["A system you built fails and costs a client dearly", 500000, "PI"], ["A breach on your watch exposes client data", 400000, "CYBER"], ["A ransomware event takes you and clients down", 300000, "CYBER"]]}, {"id": "realestate", "label": "Real estate agency", "anzsic": "L6720", "division": "Professional Services", "keywords": "real estate, property, sales, leasing", "small": [["A deposit dispute you settle", 6000, "PI"], ["Office break-in, laptops taken", 7000, "THEFT"], ["A minor misstatement corrected", 5000, "PI"]], "large": [["A misrepresentation claim on a sale", 400000, "PI"], ["Trust account cyber fraud", 350000, "CYBER"], ["A property manager negligence claim", 250000, "PI"]]}, {"id": "financialplanner", "label": "Financial planner / Mortgage broker", "anzsic": "K6419", "division": "Professional Services", "keywords": "financial adviser, mortgage broker, finance", "small": [["A minor advice slip corrected", 6000, "PI"], ["A laptop with client data stolen", 6000, "THEFT"], ["A short system outage", 4000, "CYBER"]], "large": [["Poor advice costs a client, and they claim", 500000, "PI"], ["A data breach of client financials", 300000, "CYBER"], ["A compliance failure and penalty", 200000, "ML"]]}, {"id": "gp", "label": "Medical / GP practice", "anzsic": "Q8511", "division": "Health & Care", "keywords": "doctor, GP, medical centre, clinic", "small": [["A short clinical system outage", 6000, "CYBER"], ["A patient slips in the waiting room", 12000, "PL"], ["Vaccines spoil in a fridge failure", 7000, "BI"]], "large": [["A treatment error leads to a malpractice claim", 600000, "PI"], ["A breach exposes patient records", 350000, "CYBER"], ["A fire closes the practice for months", 250000, "PROP"]]}, {"id": "dentist", "label": "Dentist", "anzsic": "Q8531", "division": "Health & Care", "keywords": "dental, orthodontist, dentistry", "small": [["A chair or steriliser breaks down", 8000, "MOTOR"], ["A patient trips in reception", 12000, "PL"], ["A short records outage", 5000, "CYBER"]], "large": [["A treatment claim from a patient", 500000, "PI"], ["A fire or flood shuts the surgery", 300000, "PROP"], ["A breach of patient records", 250000, "CYBER"]]}, {"id": "physio", "label": "Physiotherapist / Allied health", "anzsic": "Q8539", "division": "Health & Care", "keywords": "physio, chiro, osteo, podiatry, allied health", "small": [["A client aggravates an injury, minor claim", 9000, "PI"], ["Equipment stolen from the clinic", 5000, "THEFT"], ["A slip in the treatment room", 10000, "PL"]], "large": [["A treatment injury leads to a claim", 400000, "PI"], ["A fire closes the clinic", 200000, "PROP"], ["A breach of client health records", 180000, "CYBER"]]}, {"id": "psych", "label": "Psychologist / Counsellor", "anzsic": "Q8532", "division": "Health & Care", "keywords": "psychology, counselling, therapy, mental health", "small": [["A short records system outage", 4000, "CYBER"], ["A laptop with notes is stolen", 5000, "THEFT"], ["A minor complaint handled", 6000, "PI"]], "large": [["A professional conduct or duty-of-care claim", 350000, "PI"], ["A breach exposes sensitive client notes", 300000, "CYBER"], ["A fire or flood closes the practice", 150000, "PROP"]]}, {"id": "vet", "label": "Veterinarian", "anzsic": "M6970", "division": "Health & Care", "keywords": "vet, veterinary, animal clinic", "small": [["A kennel or equipment breakdown", 7000, "MOTOR"], ["An owner slips in the clinic", 10000, "PL"], ["Medicines spoil in a fridge failure", 5000, "BI"]], "large": [["A treatment error and claim from an owner", 300000, "PI"], ["A fire closes the clinic and harms animals in care", 350000, "PROP"], ["A breach or serious animal-welfare incident", 180000, "ML"]]}, {"id": "childcare", "label": "Childcare / Early learning", "anzsic": "Q8710", "division": "Health & Care", "keywords": "childcare, daycare, early learning, kindergarten", "small": [["A child is hurt in the playground, minor claim", 15000, "PL"], ["Equipment or toys damaged by water", 6000, "PROP"], ["A short closure for a safety fix", 8000, "BI"]], "large": [["A serious injury to a child in your care", 750000, "PL"], ["An abuse or duty-of-care allegation", 500000, "ML"], ["A fire forces a long closure", 300000, "PROP"]]}, {"id": "hairdresser", "label": "Hairdresser / Barber", "anzsic": "S9511", "division": "Other Services", "keywords": "salon, barber, hair, stylist", "small": [["A chemical treatment burns a client's scalp", 8000, "PL"], ["A slip on a wet floor", 10000, "PL"], ["Styling equipment breaks down", 4000, "MOTOR"]], "large": [["A serious reaction or injury claim", 250000, "PL"], ["A fire destroys the salon", 180000, "PROP"], ["Flood forces a lengthy closure", 90000, "PROP"]]}, {"id": "beauty", "label": "Beauty / Cosmetic salon", "anzsic": "S9520", "division": "Other Services", "keywords": "beauty, cosmetic, laser, skin, nails, spa", "small": [["A treatment causes a minor burn or reaction", 10000, "PL"], ["Equipment stolen from the salon", 6000, "THEFT"], ["A client slips near a treatment bed", 9000, "PL"]], "large": [["A laser or cosmetic injury and claim", 350000, "PL"], ["A fire closes the salon for months", 200000, "PROP"], ["A product reaction affects many clients", 250000, "PROD"]]}, {"id": "mechanic", "label": "Auto mechanic / Repair", "anzsic": "S9411", "division": "Other Services", "keywords": "mechanic, workshop, car repair, service", "small": [["A customer's car is damaged in your care", 9000, "PL"], ["Tools and diagnostic gear stolen", 8000, "THEFT"], ["A hoist or compressor breakdown", 6000, "MOTOR"]], "large": [["A repair fault causes a crash, and a claim", 400000, "PROD"], ["A fire destroys the workshop and cars in care", 350000, "PROP"], ["Fuel or chemical spill and clean-up", 200000, "PL"]]}, {"id": "panelbeater", "label": "Panel beater / Smash repair", "anzsic": "S9412", "division": "Other Services", "keywords": "panel beating, smash repair, spray painting cars", "small": [["A customer's car dented further in the yard", 8000, "PL"], ["Spray gear or stock stolen", 6000, "THEFT"], ["A booth or compressor breaks down", 7000, "MOTOR"]], "large": [["A spray-booth fire destroys the shop", 400000, "PROP"], ["A repair fault leads to a crash claim", 350000, "PROD"], ["Multiple customer cars lost to fire or flood", 250000, "PROP"]]}, {"id": "cleaner", "label": "Commercial cleaning", "anzsic": "N7311", "division": "Other Services", "keywords": "cleaning, janitorial, commercial clean", "small": [["A client's item damaged during a clean", 4000, "PL"], ["Equipment stolen from a site or van", 5000, "THEFT"], ["A wet-floor slip claim", 10000, "PL"]], "large": [["A chemical or water incident damages a client's premises", 250000, "PL"], ["A fire linked to your equipment", 180000, "PROD"], ["A key contract lost after an incident", 120000, "BI"]]}, {"id": "drycleaner", "label": "Dry cleaner / Laundry", "anzsic": "S9531", "division": "Other Services", "keywords": "dry cleaning, laundry, laundromat", "small": [["A customer's garment ruined", 3000, "PL"], ["A machine breaks down at peak", 6000, "MOTOR"], ["Stock or takings stolen", 4000, "THEFT"]], "large": [["A solvent or dryer fire destroys the shop", 250000, "PROP"], ["Flood or machine flood ruins the fit-out", 120000, "PROP"], ["A batch of customer goods destroyed", 90000, "PL"]]}, {"id": "gym", "label": "Gym / Fitness studio", "anzsic": "R9111", "division": "Other Services", "keywords": "gym, fitness, PT studio, pilates, yoga", "small": [["A member is hurt on a machine, minor claim", 12000, "PL"], ["Equipment damaged or stolen", 7000, "THEFT"], ["A short closure for a repair", 6000, "BI"]], "large": [["A serious injury claim from a member", 400000, "PL"], ["A fire closes the studio for months", 250000, "PROP"], ["Flood destroys equipment and fit-out", 150000, "PROP"]]}, {"id": "photographer", "label": "Photographer / Videographer", "anzsic": "J5620", "division": "Other Services", "keywords": "photography, video, film, studio", "small": [["A lens or camera is dropped and broken", 5000, "MOTOR"], ["Gear stolen from the car or a shoot", 8000, "THEFT"], ["Files lost before delivery, a reshoot", 4000, "PI"]], "large": [["A wedding or event's images are lost entirely", 120000, "PI"], ["A fire destroys studio and equipment", 150000, "PROP"], ["An injury on a shoot you're running", 250000, "PL"]]}, {"id": "cabinetmaker", "label": "Cabinet maker / Joinery shop", "anzsic": "C1494", "division": "Manufacturing", "keywords": "joinery, cabinets, furniture, kitchens", "small": [["A machine breaks down mid-order", 7000, "MOTOR"], ["Timber and stock stolen from the workshop", 8000, "THEFT"], ["A finished piece damaged in delivery", 5000, "PL"]], "large": [["A workshop fire destroys plant and stock", 400000, "PROP"], ["A product fault injures a customer", 250000, "PROD"], ["A large order lost, and the contract with it", 150000, "BI"]]}, {"id": "foodmfr", "label": "Food producer / manufacturer", "anzsic": "C1199", "division": "Manufacturing", "keywords": "food manufacturing, packaged food, small producer", "small": [["A batch spoils in a fridge failure", 8000, "BI"], ["A machine breakdown halts a run", 9000, "MOTOR"], ["Stock damaged in storage", 6000, "PROP"]], "large": [["A contamination and product recall", 500000, "PROD"], ["A fire destroys the plant", 600000, "PROP"], ["A major customer lost after an incident", 250000, "BI"]]}, {"id": "fabricator", "label": "Metal fabricator / Engineering workshop", "anzsic": "C2229", "division": "Manufacturing", "keywords": "metal fabrication, welding, engineering workshop", "small": [["A machine or tool breakdown", 8000, "MOTOR"], ["Materials or tools stolen", 7000, "THEFT"], ["A part reworked after a fault", 6000, "PROD"]], "large": [["A hot-works fire destroys the workshop", 450000, "PROP"], ["A failed part causes damage or injury, and a claim", 350000, "PROD"], ["A key contract lost after a defect", 180000, "BI"]]}, {"id": "printer", "label": "Printer / Signage", "anzsic": "C1611", "division": "Manufacturing", "keywords": "printing, signage, print shop", "small": [["A press breaks down on a deadline", 8000, "MOTOR"], ["A job reprinted after an error", 5000, "PI"], ["Stock or gear stolen", 6000, "THEFT"]], "large": [["A fire destroys presses and stock", 400000, "PROP"], ["A sign you installed falls and injures someone", 300000, "PL"], ["A large recurring contract lost", 150000, "BI"]]}, {"id": "brewery", "label": "Brewery / Distillery (small)", "anzsic": "C1212", "division": "Manufacturing", "keywords": "brewery, distillery, craft beer, spirits", "small": [["A batch is lost to a process fault", 9000, "BI"], ["Equipment breakdown halts production", 10000, "MOTOR"], ["Stock damaged in storage", 7000, "PROP"]], "large": [["A fire or still explosion destroys the plant", 600000, "PROP"], ["A contaminated batch and recall", 350000, "PROD"], ["A flood ruins stock and equipment", 250000, "PROP"]]}, {"id": "courier", "label": "Courier / Delivery", "anzsic": "I5101", "division": "Transport & Logistics", "keywords": "courier, delivery, parcels, rideshare delivery", "small": [["A parcel is lost or damaged", 3000, "PL"], ["The van breaks down at peak", 5000, "MOTOR"], ["Goods stolen from the vehicle", 6000, "THEFT"]], "large": [["The van is written off in a crash", 80000, "MOTOR"], ["A high-value consignment lost or destroyed", 150000, "PL"], ["A serious accident injures a third party", 400000, "PL"]]}, {"id": "removalist", "label": "Removalist", "anzsic": "I5102", "division": "Transport & Logistics", "keywords": "removals, moving, furniture transport", "small": [["A customer's furniture damaged in transit", 6000, "PL"], ["A dolly or equipment breakdown", 4000, "MOTOR"], ["Goods stolen from the truck", 7000, "THEFT"]], "large": [["A truck fire destroys a full load and vehicle", 200000, "MOTOR"], ["A whole household's goods lost or ruined", 150000, "PL"], ["A serious road accident and injury claim", 400000, "PL"]]}, {"id": "truck", "label": "Truck / Freight owner-driver", "anzsic": "I4610", "division": "Transport & Logistics", "keywords": "truck, freight, transport, owner driver, haulage", "small": [["A load shifts and is damaged", 7000, "PL"], ["A breakdown and towing", 6000, "MOTOR"], ["Fuel or parts stolen", 4000, "THEFT"]], "large": [["The rig is written off in a crash", 250000, "MOTOR"], ["A serious multi-vehicle accident and claim", 600000, "PL"], ["A full high-value load lost", 200000, "PL"]]}, {"id": "warehousing", "label": "Warehousing / Storage", "anzsic": "I5301", "division": "Transport & Logistics", "keywords": "warehouse, storage, distribution, 3PL", "small": [["Stock damaged by a leak", 8000, "PROP"], ["Forklift or plant breakdown", 6000, "MOTOR"], ["Pilfering from the floor", 7000, "THEFT"]], "large": [["A fire destroys the warehouse and stored goods", 700000, "PROP"], ["Flood ruins stored client stock", 400000, "PROP"], ["A large customer's goods lost, and a claim", 300000, "PL"]]}, {"id": "wholesaler", "label": "Wholesaler / Distributor", "anzsic": "F3600", "division": "Wholesale & Trade", "keywords": "wholesale, distribution, import, supply", "small": [["Stock damaged in the warehouse", 8000, "PROP"], ["Pilfering and short deliveries", 7000, "THEFT"], ["A forklift or racking issue", 6000, "MOTOR"]], "large": [["A fire destroys a large stockholding", 600000, "PROP"], ["A faulty product you distributed injures someone", 400000, "PROD"], ["Flood ruins stock and forces closure", 300000, "PROP"]]}, {"id": "equipmenthire", "label": "Equipment hire", "anzsic": "L6631", "division": "Wholesale & Trade", "keywords": "hire, rental, plant hire, equipment rental", "small": [["A hire item is returned damaged", 6000, "PROP"], ["Gear stolen from the yard", 8000, "THEFT"], ["A breakdown loses a hire booking", 5000, "BI"]], "large": [["A hired machine fails and injures the hirer", 400000, "PROD"], ["A fire destroys the hire fleet", 500000, "PROP"], ["Multiple items stolen or lost", 200000, "THEFT"]]}, {"id": "farm", "label": "Farm (mixed / crop)", "anzsic": "A0146", "division": "Agriculture", "keywords": "farm, crop, grain, cattle, agriculture, grazing", "small": [["A pump or piece of plant breaks down", 8000, "MOTOR"], ["Stock or tools stolen from the shed", 7000, "THEFT"], ["Storm damages fencing and yards", 12000, "PROP"]], "large": [["A fire destroys sheds, plant and stored crop", 500000, "PROP"], ["A flood or drought wipes out a season", 400000, "BI"], ["A visitor or contractor is badly hurt on-farm", 350000, "PL"]]}, {"id": "winery", "label": "Winery / Vineyard", "anzsic": "C1214", "division": "Agriculture", "keywords": "winery, vineyard, wine, cellar door", "small": [["A tank or press breaks down at vintage", 10000, "MOTOR"], ["Cellar-door visitor slips", 10000, "PL"], ["Stock damaged in storage", 8000, "PROP"]], "large": [["A fire or smoke taint destroys a vintage", 700000, "PROP"], ["Frost or storm wipes out the crop", 400000, "BI"], ["A contaminated batch and recall", 300000, "PROD"]]}, {"id": "other", "label": "Other / not listed", "anzsic": "", "division": "General", "keywords": "general business, not listed", "small": [["A key piece of equipment breaks down", 7000, "MOTOR"], ["Stock, tools or takings stolen", 6000, "THEFT"], ["A customer or visitor is hurt on your premises", 12000, "PL"]], "large": [["A fire guts the premises, months to rebuild", 250000, "PROP"], ["A serious liability claim from a customer", 300000, "PL"], ["Storm or flood wrecks the fit-out and stock", 180000, "PROP"]]}]</script>
+<script>
+  // ============================================================
+  // BOOKING_URL — paste Matt's booking link here when it arrives
+  // (Google Calendar Appointment Schedule or Calendly). Until then
+  // the button shows a friendly "coming soon" note.
+  // ============================================================
+  var BOOKING_URL = '';
+
+  var DATA = JSON.parse(document.getElementById('fallback-data').textContent);
+  // live data: fetched from the repo on load. Edit data/industry_losses.json and it flows through here.
+  fetch('data/industry_losses.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(d&&d.length)DATA=d;}).catch(function(){});
+  function fold(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
+  var state = { revenue:0, buffer:0, revSet:false, bufSet:false, line:0, industry:null, picks:[], hole:0 };
+
+  function money(n){ return '$' + Math.round(n).toLocaleString('en-AU'); }
+  function rawNum(el){ return parseFloat((el.value||'').replace(/[^0-9.]/g,'')) || 0; }
+  function commas(n){ return n ? n.toLocaleString('en-AU') : ''; }
+
+  /* ---------- Step 1: numbers, sliders, live line ---------- */
+  function typeRev(el){
+    var v = parseInt(el.value.replace(/[^0-9]/g,''),10) || 0;
+    el.value = commas(v);
+    state.revenue = v; state.revSet = v>0;
+    document.getElementById('revSlider').value = Math.min(50000000, Math.max(50000, v||50000));
+    updateLine();
+  }
+  function typeBuf(el){
+    var v = parseInt(el.value.replace(/[^0-9]/g,''),10) || 0;
+    el.value = commas(v);
+    state.buffer = v; state.bufSet = v>0;
+    document.getElementById('bufSlider').value = Math.min(2000000, Math.max(0, v));
+    updateLine();
+  }
+  function dragRev(el){
+    var v = parseInt(el.value,10);
+    state.revenue = v; state.revSet = true;
+    document.getElementById('revenue').value = commas(v);
+    updateLine();
+  }
+  function dragBuf(el){
+    var v = parseInt(el.value,10);
+    state.buffer = v; state.bufSet = true;
+    document.getElementById('buffer').value = commas(v);
+    updateLine();
+  }
+  function clearNums(){
+    state.revenue=0; state.buffer=0; state.revSet=false; state.bufSet=false; state.line=0;
+    document.getElementById('revenue').value='';
+    document.getElementById('buffer').value='';
+    document.getElementById('revSlider').value=50000;
+    document.getElementById('bufSlider').value=0;
+    updateLine();
+  }
+
+  function computeLine(rev, buf){
+    var line = 0.5*buf + (rev/12)*0.09;   // about half the cash you can reach, plus a slice of a month's takings
+    return Math.round(line/100)*100;
+  }
+  function updateLine(){
+    var panel = document.getElementById('linepanel');
+    var ready = state.revSet && state.bufSet && state.revenue>0;
+    document.getElementById('s1btn').disabled = !ready;
+    if(!ready){
+      panel.classList.remove('live');
+      document.getElementById('lineNum').textContent='$—';
+      document.getElementById('absorbBlock').style.width='0';
+      document.getElementById('lineCap').textContent='Add your numbers and your line appears here.';
+      return;
+    }
+    state.line = computeLine(state.revenue, state.buffer);
+    panel.classList.add('live');
+    document.getElementById('lineNum').textContent = money(state.line);
+    var horizon = Math.max(state.line*4, 80000);
+    var pct = Math.max(8, Math.min(60, state.line/horizon*100));
+    document.getElementById('absorbBlock').style.width = pct+'%';
+    document.getElementById('lineCap').textContent =
+      'Under the line, the business copes. Over it, the big ones can end it.';
+  }
+
+  /* ---------- Step 2: occupation autocomplete ---------- */
+  var acMatches=[], acIdx=-1;
+  function acFilter(){
+    var q = fold(document.getElementById('occ').value.trim());
+    var list = document.getElementById('aclist');
+    if(!q){ list.classList.remove('show'); list.innerHTML=''; return; }
+    var starts=[], incl=[];
+    DATA.forEach(function(d){
+      if(d.id==='other') return;
+      var hay = fold(d.label+' '+d.keywords);
+      if(fold(d.label).indexOf(q)===0) starts.push(d);
+      else if(hay.indexOf(q)>-1) incl.push(d);
+    });
+    acMatches = starts.concat(incl).slice(0,8);
+    acMatches.push(DATA.find(function(d){return d.id==='other';}));
+    acIdx=-1;
+    list.innerHTML='';
+    acMatches.forEach(function(d,i){
+      var el=document.createElement('div');
+      el.className='acitem';
+      el.innerHTML='<span>'+d.label+'</span>'+(d.anzsic?'<span class="code">'+d.anzsic+'</span>':'');
+      el.onclick=function(){ acPick(i); };
+      list.appendChild(el);
+    });
+    list.classList.add('show');
+  }
+  function acKey(e){
+    var list=document.getElementById('aclist');
+    if(!list.classList.contains('show')) return;
+    var items=list.querySelectorAll('.acitem');
+    if(e.key==='ArrowDown'){ acIdx=Math.min(acMatches.length-1,acIdx+1); e.preventDefault(); }
+    else if(e.key==='ArrowUp'){ acIdx=Math.max(0,acIdx-1); e.preventDefault(); }
+    else if(e.key==='Enter'){ if(acIdx>-1){ acPick(acIdx); e.preventDefault(); } return; }
+    else return;
+    items.forEach(function(it,i){ it.classList.toggle('sel',i===acIdx); });
+  }
+  function acPick(i){
+    var d=acMatches[i]; if(!d) return;
+    state.industry=d;
+    document.getElementById('occ').value=d.label;
+    document.getElementById('aclist').classList.remove('show');
+    var ch=document.getElementById('occChosen');
+    document.getElementById('occLabel').textContent=d.label;
+    document.getElementById('occDiv').textContent=d.anzsic ? (d.division+' · ANZSIC '+d.anzsic) : d.division;
+    ch.style.display='block';
+    document.getElementById('s2btn').disabled=false;
+  }
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.ac')) document.getElementById('aclist').classList.remove('show');
+  });
+
+  /* ---------- Step 2b: build cards ---------- */
+  function buildCards(){
+    if(!state.industry) return;
+    state.picks=[];
+    document.getElementById('occH1').textContent = state.industry.label.toLowerCase();
+    var cs=document.getElementById('cardsSmall'), cl=document.getElementById('cardsLarge');
+    cs.innerHTML=''; cl.innerHTML='';
+    state.industry.small.forEach(function(l,i){ addCard(cs,'s'+i,l,'small'); });
+    state.industry.large.forEach(function(l,i){ addCard(cl,'l'+i,l,'large'); });
+    document.getElementById('s3btn').disabled=true;
+    go(3);
+  }
+  function addCard(parent,id,loss,band){
+    var d=document.createElement('div');
+    d.className='card'; d.dataset.id=id;
+    d.innerHTML='<div class="tick">✓</div><h3>'+loss[0]+'</h3><div class="cost">'+money(loss[1])+'</div>';
+    d.onclick=function(){ toggle(id,loss[1],d); };
+    parent.appendChild(d);
+  }
+  function toggle(id,cost,el){
+    var f=state.picks.filter(function(p){return p.id===id;});
+    if(f.length){ state.picks=state.picks.filter(function(p){return p.id!==id;}); el.classList.remove('on'); }
+    else { state.picks.push({id:id,cost:cost,name:el.querySelector('h3').textContent}); el.classList.add('on'); }
+    document.getElementById('s3btn').disabled = state.picks.length===0;
+  }
+
+  /* ---------- Step 2c: plot ---------- */
+  function showPlot(){
+    var items=state.picks.slice();
+    var maxCost=Math.max.apply(null,items.map(function(e){return e.cost;}).concat([state.line]));
+    var scaleMax=maxCost*1.12;
+    var linePct=state.line/scaleMax*100;
+    var plot=document.getElementById('plot'); plot.innerHTML='';
+    items.sort(function(a,b){return b.cost-a.cost;});
+    items.forEach(function(e){
+      var inPct=Math.min(e.cost,state.line)/scaleMax*100;
+      var outPct=Math.max(0,e.cost-state.line)/scaleMax*100;
+      var row=document.createElement('div'); row.className='prow';
+      row.innerHTML='<div class="top"><span>'+e.name+'</span><span class="amt">'+money(e.cost)+'</span></div>'+
+        '<div class="track"><div class="seg-in" style="width:'+inPct+'%"></div>'+
+        '<div class="seg-out" style="left:'+inPct+'%;width:'+outPct+'%"></div>'+
+        '<div class="lineMark" style="left:'+linePct+'%"><span>your line</span></div></div>';
+      plot.appendChild(row);
+    });
+    var beyond=items.filter(function(e){return e.cost>state.line;});
+    var msg;
+    if(beyond.length===0) msg='Good news. On these, the business could take the hit and keep going.';
+    else if(beyond.length===items.length) msg='Every one of these lands past your line. On its own, each could put the business under real strain.';
+    else msg=beyond.length+' of these land past your line. Those are the ones worth your attention.';
+    document.getElementById('plotMsg').textContent=msg;
+    go(4);
+  }
+
+  /* ---------- Step 3: levers ---------- */
+  function worstLoss(){
+    var beyond=state.picks.filter(function(e){return e.cost>state.line;});
+    if(!beyond.length) return null;
+    beyond.sort(function(a,b){return b.cost-a.cost;});
+    return beyond[0];
+  }
+  function fmt3(el){
+    var v=parseInt(el.value.replace(/[^0-9]/g,''),10)||0;
+    el.value=commas(v); updateTally();
+  }
+  function showLevers(){
+    var worst=worstLoss(), rev=state.revenue||0;
+    if(!worst){ var it=state.picks.slice().sort(function(a,b){return b.cost-a.cost;}); worst=it[0]||{name:'a loss',cost:state.line}; }
+    state.hole=Math.max(0,worst.cost-state.line);
+    document.getElementById('holeEvent').textContent=worst.name;
+    document.getElementById('holeNum').textContent=money(state.hole);
+    document.getElementById('lev1').value=commas(Math.round(rev*0.06/100)*100);
+    document.getElementById('lev2').value=commas(Math.round(rev*0.05/100)*100);
+    document.getElementById('lev3').value=commas(Math.round(rev*0.15/100)*100);
+    updateTally(); go(5);
+  }
+  function updateTally(){
+    var sum=rawNum(document.getElementById('lev1'))+rawNum(document.getElementById('lev2'))+rawNum(document.getElementById('lev3'));
+    var hole=state.hole||0;
+    var shortfall=Math.max(0,hole-sum);
+    var pct=hole>0?Math.min(100,sum/hole*100):100;
+    document.getElementById('tfill').style.width=pct+'%';
+    document.getElementById('tCovered').textContent='The three levers pull together '+money(sum);
+    var s=document.getElementById('tShort');
+    s.textContent = shortfall>0 ? money(shortfall)+' still missing' : 'the hole is filled';
+    var v=document.getElementById('verdict');
+    if(hole<=0){
+      v.innerHTML='This one the business could take. It is the losses past your line that these three levers are for.';
+    } else if(shortfall>0){
+      v.innerHTML='Even stretched to their limits, the three levers reach '+money(sum)+'. The hole is '+money(hole)+
+        '. That leaves <strong>'+money(shortfall)+'</strong> with nowhere to come from — and every one of these levers gets harder the moment the loss lands. '+
+        'This is why the move is to shrink the loss before it happens, not scramble to fill the hole after.';
+    } else {
+      v.innerHTML='Stretched to their limits, the three levers just about close it. But every one is a stretch, and each gets harder the moment the loss lands. '+
+        'Far easier to shrink the loss before it happens than to claw it back after.';
+    }
+  }
+
+  /* ---------- nav + example ---------- */
+  function go(id){
+    document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+    document.getElementById('s'+id).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function loadExample(){
+    clearNums();
+    document.getElementById('revenue').value='350,000'; state.revenue=350000; state.revSet=true;
+    document.getElementById('buffer').value='20,000'; state.buffer=20000; state.bufSet=true;
+    document.getElementById('revSlider').value=350000;
+    document.getElementById('bufSlider').value=20000;
+    updateLine();
+    state.industry=DATA.find(function(d){return d.id==='restaurant';});
+    document.getElementById('occ').value=state.industry.label;
+    document.getElementById('occLabel').textContent=state.industry.label;
+    document.getElementById('occDiv').textContent=state.industry.division+' · ANZSIC '+state.industry.anzsic;
+    document.getElementById('occChosen').style.display='block';
+    document.getElementById('s2btn').disabled=false;
+    buildCards();
+    // pre-tick a couple
+    ['s0','l0'].forEach(function(pid){
+      var el=document.querySelector('#s3 .card[data-id="'+pid+'"]'); if(el) el.click();
+    });
+    go(1);
+  }
+  function book(){
+    if(BOOKING_URL){ window.open(BOOKING_URL,'_blank','noopener'); }
+    else { alert('Booking is nearly ready. In the meantime, email akashkdeokar@gmail.com and we will set up a time.'); }
+  }
+  function restart(){
+    clearNums();
+    state.industry=null; state.picks=[];
+    document.getElementById('occ').value='';
+    document.getElementById('occChosen').style.display='none';
+    document.getElementById('s2btn').disabled=true;
+    go(0);
+  }
+</script>
+</body>
+</html>

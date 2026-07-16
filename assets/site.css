@@ -1,0 +1,47 @@
+/* ============================================================
+   GEOMETRISK — shared design system
+   Tokens, header, nav, buttons, footer. Used by find-your-line.html
+   and for-brokers.html so the system is defined once.
+   ============================================================ */
+:root{
+  --navy:#1B2A4A;
+  --navy-soft:#2A3D63;
+  --gold:#B08D4F;
+  --gold-soft:#C9A96A;
+  --cream:#FBF9F4;
+  --cream-2:#F3EEE3;
+  --ink:#1B2A4A;
+  --muted:#8A8778;
+  --line-grey:#DCD7C9;
+  --amber:#C9803A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+
+/* ---------- header ---------- */
+header.site{display:flex;align-items:center;justify-content:space-between;padding:26px 40px;max-width:1200px;margin:0 auto;width:100%}
+.brand{display:flex;align-items:center;gap:16px;text-decoration:none}
+.mark{width:52px;height:34px}
+.brand-name{font-family:'Inter',sans-serif;font-weight:600;letter-spacing:.18em;font-size:15px;color:var(--navy)}
+.tagline{border-left:1px solid var(--line-grey);padding-left:14px;font-size:11px;line-height:1.35;letter-spacing:.14em;text-transform:lowercase;color:var(--muted)}
+header.site nav{display:flex;gap:34px}
+header.site nav a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;opacity:.8}
+header.site nav a:hover{opacity:1}
+header.site nav a.on{opacity:1;color:var(--gold)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--navy);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:500;font-size:15px;letter-spacing:.02em;padding:17px 30px;cursor:pointer;transition:background .2s;text-decoration:none}
+.btn:hover{background:var(--navy-soft)}
+.btn.gold{background:var(--gold)}
+.btn.gold:hover{background:var(--gold-soft)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* ---------- footer ---------- */
+footer.site{padding:40px;text-align:center;color:var(--muted);font-size:12px}
+footer.site a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-grey)}
+
+@media(max-width:760px){
+  header.site{padding:20px;flex-wrap:wrap;gap:14px}
+  header.site nav{display:none}
+}
