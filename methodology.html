@@ -67,7 +67,9 @@
   footer{background:var(--navy);color:rgba(241,232,214,.6);padding:40px 32px}
   .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;
         justify-content:space-between;gap:24px;flex-wrap:wrap}
-  .foot .fmark{font-family:var(--serif);font-weight:600;font-size:17px;color:var(--cream-hi)}
+  .foot .fmark{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .foot .fmark svg{width:46px;height:30px;display:block}
+  .foot .fmark span{font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:.18em;color:var(--cream-hi)}
   .foot .fright{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
   .foot .fabout{font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase;
                 color:rgba(241,232,214,.7);text-decoration:none;transition:color .2s}
@@ -153,7 +155,13 @@
 
 <footer>
   <div class="foot">
-    <div class="fmark">geometrisk</div>
+    <a class="fmark" href="index.html" aria-label="Geometrisk">
+      <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4 26 C16 10, 30 10, 42 22" stroke="#F1E8D6" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M20 30 C32 16, 44 16, 56 8" stroke="#C9A85F" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span>GEOMETRISK</span>
+    </a>
     <div class="fright">
     <a class="fabout" href="about.html">About</a>
     <div class="disc">Illustrative figures only. General information, not financial product advice. Your insurance needs depend on your specific financial situation. Geometrisk is not an insurance broker or insurer and does not provide financial product advice. We refer clients to independent brokers and may receive a fee for doing so.</div>
