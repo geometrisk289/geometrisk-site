@@ -93,79 +93,6 @@
   .herodisc{margin-top:28px;text-align:center;font-family:var(--mono);font-size:11px;
             letter-spacing:.4px;color:var(--muted);opacity:.75}
 
-  /* ---------- tool: find your line ---------- */
-  .tool{padding:0 32px 96px}
-  .toolin{max-width:780px;margin:0 auto}
-  .tool h2{font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.4vw,42px);
-           line-height:1.08;letter-spacing:-.4px;color:var(--navy);margin-bottom:14px}
-  .tool .lede{font-size:17px;color:var(--muted);max-width:58ch;margin-bottom:34px}
-  .tool .card{background:var(--cream);border:1px solid var(--line);border-radius:4px;padding:28px 26px}
-  .tool .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 22px}
-  .tool .field.full{grid-column:1 / -1}
-  .tool label{display:block;font-weight:600;font-size:15.5px;margin-bottom:5px;color:var(--navy)}
-  .tool .help{font-size:13.5px;color:var(--muted);margin:0 0 9px}
-  .tool .input-money{position:relative;display:flex;align-items:center}
-  .tool .input-money .sym{position:absolute;left:14px;font-family:var(--mono);color:var(--muted);font-size:17px}
-  .tool input[type=text]{width:100%;font-family:var(--mono);font-size:19px;font-weight:500;color:var(--navy);
-    background:#fff;border:1px solid var(--line);border-radius:3px;padding:12px 14px 12px 32px;outline:none}
-  .tool input[type=text]:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(168,132,62,.18)}
-  .tool .margin-derived{grid-column:1 / -1;font-family:var(--mono);font-size:12.5px;color:var(--muted);
-    letter-spacing:.03em;margin-top:-4px}
-  .tool .margin-derived b{color:var(--gold)}
-  .tool .err{color:#8a3535;font-size:14px;margin-top:12px;min-height:1px}
-  .tool .runrow{margin-top:24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-  .tool button.cta{font-family:var(--body)}
-  .tool .cta[disabled]{opacity:.45;cursor:default;pointer-events:none}
-  .tool .stage{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--gold);min-height:20px}
-
-  #results{display:none;margin-top:44px}
-  #results.show{display:block;animation:rise .45s ease both}
-  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  .tolblock{margin-bottom:8px}
-  .tolblock .cap{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
-                 color:var(--muted);margin-bottom:6px}
-  .tolblock .fig{font-family:var(--serif);font-weight:600;font-size:clamp(38px,8vw,56px);
-                 line-height:1;letter-spacing:-.02em;color:var(--navy)}
-  .chartwrap{margin:26px 0 0}
-  .tool .chart{width:100%;height:220px;display:block;overflow:visible;margin:0}
-  .sliderrow{margin-top:2px}
-  .tool input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:4px;
-    background:var(--navy);outline:none;margin:0;cursor:pointer}
-  .tool input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;
-    border-radius:50%;background:var(--cream-hi);border:3px solid var(--navy);cursor:grab;
-    box-shadow:0 2px 6px rgba(22,41,74,.35)}
-  .tool input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
-  .tool input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--cream-hi);
-    border:3px solid var(--navy);cursor:grab;box-shadow:0 2px 6px rgba(22,41,74,.35)}
-  .scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;
-         color:var(--muted);margin-top:10px;letter-spacing:.03em}
-  .howto{font-size:13px;color:var(--muted);margin:14px 0 0;text-align:center;
-         font-family:var(--mono);letter-spacing:.03em}
-  .primary{margin-top:30px;padding:24px;background:var(--navy);color:var(--cream-hi);border-radius:4px}
-  .primary .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-              color:var(--gold-soft);margin-bottom:10px}
-  .primary .big{font-family:var(--serif);font-weight:600;font-size:clamp(26px,6.5vw,38px);line-height:1.08}
-  .primary .cd{font-size:14.5px;color:#c7d2e0;margin-top:10px}
-  .primary.ruinbox{background:#8a3535}
-  .primary.ruinbox .k{color:#f0d2d2}.primary.ruinbox .cd{color:#f3dede}
-  .support{margin-top:22px}
-  .sr{display:flex;align-items:baseline;gap:14px;padding:18px 0;border-top:1px solid var(--line)}
-  .sr .num{font-family:var(--mono);font-weight:600;font-size:clamp(20px,5vw,26px);color:var(--navy);
-           white-space:nowrap;min-width:6ch}
-  .sr .num.ruin{color:#8a3535}
-  .sr .txt{font-size:14.5px;color:var(--muted)}
-  .consent{margin-top:28px;display:flex;gap:12px;align-items:flex-start;background:var(--cream);
-           border:1px solid var(--line);border-radius:4px;padding:16px 18px}
-  .consent input{margin-top:3px;width:17px;height:17px;accent-color:var(--navy);flex-shrink:0}
-  .consent label{font-weight:400;font-size:14.5px;color:var(--muted);margin:0}
-  .toolclose{margin-top:30px;padding-top:26px;border-top:1px solid var(--line);
-             display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-  .toolclose .small{font-size:14px;color:var(--muted);max-width:46ch}
-
-  .plab{font-family:var(--mono);font-size:12px;letter-spacing:1.8px;text-transform:uppercase;
-        color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px}
-  .plab::before{content:"";width:22px;height:1px;background:currentColor;opacity:.7}
-
   /* ---------- panels ---------- */
   .split{display:block}
   .panel{padding:64px 32px 60px;max-width:844px;margin:0 auto}
@@ -267,7 +194,6 @@
   a:focus-visible,.cta:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
   @media (prefers-reduced-motion:reduce){
     .region,.theline,.who,.herofade{transition:none}
-    #results.show{animation:none}
     html{scroll-behavior:auto}
   }
   @media (max-width:860px){
@@ -279,14 +205,6 @@
     .theline .val{font-size:22px;top:-42px}
     .axislabels{font-size:9.5px;letter-spacing:1px}
     .readout{flex-direction:column;gap:14px}
-    .tool{padding:0 24px 64px}
-  }
-  @media (max-width:560px){
-    .tool{padding:0 18px 56px}
-    .tool .card{padding:22px 18px}
-    .tool .grid{grid-template-columns:1fr}
-    .sr{flex-direction:column;gap:3px}
-    .sr .num{min-width:0}
   }
 </style>
 </head>
@@ -341,86 +259,6 @@
     <div class="herodisc">General information only, not advice.</div>
   </div>
 </header>
-
-<!-- ============ TOOL: FIND YOUR LINE ============ -->
-<section class="tool" id="tool">
-  <div class="toolin">
-    <div class="plab">Find your line</div>
-    <h2>Three numbers you already know.</h2>
-    <p class="lede">Enter them, then move the marker to see how the difficulty of recovering from a loss changes as it grows against your cash.</p>
-
-    <div class="card">
-      <div class="grid">
-        <div class="field">
-          <label for="rev">Estimated annual revenue</label>
-          <p class="help">Roughly what the business turns over in a year.</p>
-          <div class="input-money"><span class="sym">$</span><input type="text" id="rev" inputmode="numeric" placeholder="1,000,000" autocomplete="off"></div>
-        </div>
-        <div class="field">
-          <label for="gp">Estimated gross profit</label>
-          <p class="help">Revenue minus the cost of what you sell.</p>
-          <div class="input-money"><span class="sym">$</span><input type="text" id="gp" inputmode="numeric" placeholder="400,000" autocomplete="off"></div>
-        </div>
-        <div class="field full">
-          <label for="wc">Surplus cash</label>
-          <p class="help">Spare cash beyond day-to-day needs &mdash; the buffer a loss hits first. Not property, not equipment.</p>
-          <div class="input-money" style="max-width:340px"><span class="sym">$</span><input type="text" id="wc" inputmode="numeric" placeholder="500,000" autocomplete="off"></div>
-        </div>
-        <div class="margin-derived" id="marginDerived" style="display:none"></div>
-      </div>
-      <div class="err" id="err"></div>
-      <div class="runrow">
-        <button class="cta solid" id="runBtn" type="button" disabled>Find your line <span class="arw">&rarr;</span></button>
-        <div class="stage" id="stageMsg" aria-live="polite"></div>
-      </div>
-    </div>
-
-    <div id="results">
-
-      <div class="tolblock">
-        <div class="cap">Your risk tolerance</div>
-        <div class="fig" id="tolFig">$0</div>
-      </div>
-
-      <div class="chartwrap">
-        <svg class="chart" id="toolChart" viewBox="0 0 720 220" preserveAspectRatio="none"></svg>
-        <div class="sliderrow">
-          <input type="range" id="lossSlider" min="0" max="100" step="0.2" value="8.33">
-          <div class="scale"><span>No loss</span><span>Surplus cash</span><span></span></div>
-        </div>
-        <p class="howto">Drag the marker to model any loss</p>
-      </div>
-
-      <div class="primary" id="primaryBox">
-        <div class="k">Extra sales to earn it back</div>
-        <div class="big" id="primBig">$0</div>
-        <div class="cd" id="primCd"></div>
-      </div>
-
-      <div class="support">
-        <div class="sr">
-          <div class="num" id="climbMult">+20%</div>
-          <div class="txt">the amount your remaining surplus cash would have to grow by to return to today's level.</div>
-        </div>
-        <div class="sr">
-          <div class="num" id="yardNum">0.17&times;</div>
-          <div class="txt">this loss measured against your annual revenue.</div>
-        </div>
-      </div>
-
-      <div class="consent">
-        <input type="checkbox" id="consent">
-        <label for="consent">These figures reflect what I could absorb before insurance kicks in. I understand they're indicative only, not personal advice.</label>
-      </div>
-
-      <div class="toolclose">
-        <p class="small">These figures are general information for you to explore. To turn them into a decision, speak with an independent insurance advisor.</p>
-        <button class="cta gold" id="resultCta" type="button">Find your insurance advisor <span class="arw">&rarr;</span></button>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- ============ FOR BUSINESSES ============ -->
 <main class="split">
@@ -606,141 +444,7 @@
 })();
 </script>
 
-<script>
-/* ---------------- TOOL: risk-tolerance calculator ----------------
-   Engine and curve chart carried over from risk-tolerance.html unchanged;
-   only the reveal is staged and the copy tightened. */
-(function(){
-  "use strict";
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fmtAUD=new Intl.NumberFormat('en-AU',{style:'currency',currency:'AUD',maximumFractionDigits:0});
-  var fmtNum=new Intl.NumberFormat('en-AU',{maximumFractionDigits:0});
-  var $=function(id){return document.getElementById(id)};
-  var revEl=$('rev'),gpEl=$('gp'),wcEl=$('wc'),errEl=$('err'),results=$('results'),slider=$('lossSlider');
-  var runBtn=$('runBtn'),stageMsg=$('stageMsg');
-  var W=0,R=0,GP=0,M=0,chartDrawn=false,wOfChart=null,started=false,revealed=false,staging=false;
 
-  function groom(el){el.addEventListener('input',function(){
-    var end=el.selectionStart===el.value.length;var d=el.value.replace(/[^\d]/g,'');
-    el.value=d?fmtNum.format(parseInt(d,10)):'';
-    if(end){el.selectionStart=el.selectionEnd=el.value.length;}
-    update();
-  });}
-  groom(revEl);groom(gpEl);groom(wcEl);
-  function val(el){var d=el.value.replace(/[^\d]/g,'');return d?parseInt(d,10):0;}
-
-  // chart geometry — x spans full width so it aligns with the slider
-  var VB_W=720,VB_H=220,padT=14,padB=10,innerH=VB_H-padT-padB,MAXF=0.985;
-  function xOfL(L){return (L/(2*W))*VB_W;}
-  function felt(L){return Math.log(W/(W-L));}
-
-  function drawCurve(){
-    var maxL=MAXF*W,maxC=felt(maxL),b=padT+innerH,pts=[],N=150;
-    for(var i=0;i<=N;i++){var L=(i/N)*maxL;var y=b-Math.min(felt(L)/maxC,1)*innerH;pts.push([xOfL(L),y]);}
-    var d='M '+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
-    for(var j=1;j<pts.length;j++)d+=' L '+pts[j][0].toFixed(1)+' '+pts[j][1].toFixed(1);
-    var z1=xOfL(W/3),z2=xOfL(4*W/5),wall=xOfL(W); // difficulty bands
-    function band(x0,x1,c){return '<rect x="'+x0.toFixed(1)+'" y="'+padT+'" width="'+(x1-x0).toFixed(1)+'" height="'+innerH+'" fill="'+c+'" fill-opacity="0.22"/>';}
-    $('toolChart').innerHTML=
-      band(0,z1,'#3d6fa0')+band(z1,z2,'#C9A84C')+band(z2,wall,'#c07a2b')+band(wall,VB_W,'#8a3535')+
-      '<line x1="0" y1="'+b+'" x2="'+VB_W+'" y2="'+b+'" stroke="#0B1F3A" stroke-opacity="0.35"/>'+
-      '<path d="'+d+'" fill="none" stroke="#0B1F3A" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>'+
-      '<g id="live"><line id="mLine" x1="0" y1="'+padT+'" x2="0" y2="'+b+'" stroke="#0B1F3A" stroke-width="1.25" opacity="0.5"/>'+
-      '<circle id="mDot" cx="0" cy="0" r="6.5" fill="#FBF8F0" stroke="#0B1F3A" stroke-width="2.5"/></g>';
-    chartDrawn=true;
-  }
-  function moveMarker(L){
-    if(!chartDrawn)return;
-    var maxL=MAXF*W,maxC=felt(maxL),b=padT+innerH,x=xOfL(Math.min(L,2*W));
-    var ln=$('mLine'),dot=$('mDot');ln.setAttribute('x1',x.toFixed(1));ln.setAttribute('x2',x.toFixed(1));
-    if(L<maxL){var y=b-Math.min(felt(L)/maxC,1)*innerH;dot.setAttribute('cx',x.toFixed(1));dot.setAttribute('cy',y.toFixed(1));}
-    else{dot.setAttribute('cx',x.toFixed(1));dot.setAttribute('cy',(padT+2).toFixed(1));}
-  }
-  function currentL(){return (parseFloat(slider.value)/100)*(2*W);}
-
-  function validate(){
-    R=val(revEl);GP=val(gpEl);W=val(wcEl);errEl.textContent='';
-    var md=$('marginDerived');
-    if(R>0&&GP>0){M=GP/R;md.style.display='block';md.innerHTML='Your gross margin: <b>'+(M*100).toFixed(0)+'%</b>. Taken from your figures, not assumed.';}
-    else md.style.display='none';
-    if(!(R>0&&GP>0&&W>0))return false;
-    if(GP>R){errEl.textContent='Gross profit can’t be larger than revenue — check those two figures.';return false;}
-    return true;
-  }
-
-  function reveal(){
-    if(!started){slider.value=8.33;started=true;} // open at middle of the first (blue) zone
-    if(!chartDrawn||wOfChart!==W){drawCurve();wOfChart=W;}
-    render();results.classList.add('show');
-    revealed=true;runBtn.style.display='none';
-  }
-
-  function update(){
-    if(!validate()){
-      results.classList.remove('show');started=false;revealed=false;
-      runBtn.style.display='';runBtn.disabled=true;stageMsg.textContent='';
-      return;
-    }
-    if(revealed){
-      if(!chartDrawn||wOfChart!==W){drawCurve();wOfChart=W;}
-      render();results.classList.add('show');
-    }else{
-      runBtn.disabled=false;
-    }
-  }
-
-  runBtn.addEventListener('click',function(){
-    if(staging||revealed||!validate())return;
-    if(reduce){reveal();return;}   // real calculation, just paced — skip the pacing
-    staging=true;runBtn.disabled=true;
-    stageMsg.textContent='Reading your numbers…';
-    setTimeout(function(){stageMsg.textContent='Mapping your line…';},700);
-    setTimeout(function(){
-      stageMsg.textContent='';staging=false;reveal();
-      results.scrollIntoView({behavior:'smooth',block:'nearest'});
-    },1500);
-  });
-
-  function render(){
-    var L=currentL();
-    $('tolFig').textContent=fmtAUD.format(Math.round(L));
-    var climbMult=$('climbMult'),yardNum=$('yardNum'),box=$('primaryBox'),big=$('primBig'),cd=$('primCd');
-    yardNum.textContent=(L/R<1?(L/R).toFixed(2):(L/R).toFixed(1))+'×';
-
-    if(L>=W){
-      $('tolFig').style.color='#8a3535';
-      climbMult.textContent='—';climbMult.classList.add('ruin');
-      box.className='primary ruinbox';big.textContent='Exceeds surplus cash';
-      cd.textContent='This loss is larger than your surplus cash. There’s no base left to grow from.';
-    }else{
-      $('tolFig').style.color='';climbMult.classList.remove('ruin');box.className='primary';
-      var mult=L/(W-L);
-      climbMult.textContent='+'+(mult*100>=1000?fmtNum.format(Math.round(mult*100/10)*10):Math.round(mult*100))+'%';
-      var extraRev=L/M,lift=L/GP*100;
-      big.textContent=fmtAUD.format(Math.round(extraRev));
-      cd.innerHTML='About <b>+'+(lift>=1000?fmtNum.format(Math.round(lift/10)*10):Math.round(lift))+'%</b> of a year’s revenue — before tax and fixed costs.';
-    }
-    moveMarker(L);
-  }
-
-  slider.addEventListener('input',render);
-
-  // difficulty band from the recovery multiple m = L/(W−L)
-  function currentBand(){
-    var L=currentL();
-    if(L>=W)return 'Band 4';
-    var m=L/(W-L);
-    if(m<0.5)return 'Band 1';
-    if(m<4)return 'Band 2';
-    return 'Band 3';
-  }
-  window.GeoTool={
-    currentL:currentL,
-    currentBand:currentBand,
-    state:function(){return {R:R,M:M,W:W};}
-  };
-})();
-</script>
 
 <script>
 /* ---------------- REFERRAL: floating button + panel ---------------- */
@@ -756,27 +460,17 @@
   function open(){overlay.classList.add('open');document.body.style.overflow='hidden';}
   function close(){overlay.classList.remove('open');document.body.style.overflow='';}
   document.getElementById('fabAdvisor').addEventListener('click',open);
-  document.getElementById('resultCta').addEventListener('click',open);
   document.getElementById('advClose').addEventListener('click',close);
   overlay.addEventListener('click',function(e){if(e.target===overlay)close();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('open'))close();});
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    var t=window.GeoTool,s=t.state();
     var fd=new FormData();
     fd.append('name',document.getElementById('refName').value.trim());
     fd.append('email',document.getElementById('refEmail').value.trim());
     fd.append('phone',document.getElementById('refPhone').value.trim());
     fd.append('message',document.getElementById('refMsg').value.trim());
-    fd.append('revenue',s.R);
-    fd.append('margin',(s.M*100).toFixed(0));
-    fd.append('surplus',s.W);
-    fd.append('loss',Math.round(t.currentL()));
-    fd.append('band',t.currentBand());
-    var consentEl=document.getElementById('consent');
-    fd.append('consent',consentEl&&consentEl.checked?'yes':'no');
-
     submitBtn.disabled=true;
     submitBtn.textContent='Sending…';
     // FormData only, no custom headers — avoids a CORS preflight
