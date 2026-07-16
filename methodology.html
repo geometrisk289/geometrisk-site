@@ -68,6 +68,10 @@
   .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;
         justify-content:space-between;gap:24px;flex-wrap:wrap}
   .foot .fmark{font-family:var(--serif);font-weight:600;font-size:17px;color:var(--cream-hi)}
+  .foot .fright{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .foot .fabout{font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase;
+                color:rgba(241,232,214,.7);text-decoration:none;transition:color .2s}
+  .foot .fabout:hover{color:#fff}
   .foot .disc{font-family:var(--mono);font-size:11px;letter-spacing:.5px;max-width:560px}
 
   a:focus-visible,.cta:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
@@ -150,7 +154,10 @@
 <footer>
   <div class="foot">
     <div class="fmark">geometrisk</div>
+    <div class="fright">
+    <a class="fabout" href="about.html">About</a>
     <div class="disc">Illustrative figures only. General information, not financial product advice. Your insurance needs depend on your specific financial situation. Geometrisk is not an insurance broker or insurer and does not provide financial product advice. We refer clients to independent brokers and may receive a fee for doing so.</div>
+    </div>
   </div>
 </footer>
 

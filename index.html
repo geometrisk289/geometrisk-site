@@ -29,8 +29,13 @@
   /* ---------- nav ---------- */
   nav{position:relative;z-index:5;display:flex;align-items:center;
       justify-content:space-between;padding:26px 32px;max-width:1180px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand .divider{width:2px;align-self:stretch;background:var(--line)}
+  .brand .tagline{font-family:var(--body);font-weight:700;font-size:13px;letter-spacing:.2px;
+                  text-transform:lowercase;line-height:1.25;color:var(--navy)}
+  .brand .tagline .g{color:var(--gold)}
   .wordmark{text-decoration:none;display:flex;align-items:center}
-  .wordmark .logoimg{height:52px;width:auto;display:block}
+  .wordmark .logoimg{height:64px;width:auto;display:block}
   .navlinks{display:flex;align-items:center;gap:30px}
   .navlinks a{font-family:var(--mono);font-size:12px;letter-spacing:.6px;text-transform:uppercase;
               color:var(--muted);text-decoration:none;transition:color .2s}
@@ -87,6 +92,8 @@
   .herocta{margin-top:48px;text-align:center}
   .herocta .sub{margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:1.4px;
                 text-transform:uppercase;color:var(--muted)}
+  .herodisc{margin-top:28px;text-align:center;font-family:var(--mono);font-size:11px;
+            letter-spacing:.4px;color:var(--muted);opacity:.75}
 
   /* ---------- tool: find your line ---------- */
   .tool{padding:0 32px 96px}
@@ -256,6 +263,22 @@
        border:none;border-radius:2px;padding:14px 22px;font-family:var(--body);font-weight:600;
        font-size:15px;cursor:pointer;box-shadow:0 6px 18px rgba(14,29,56,.28);transition:background .22s ease}
   .fab:hover{background:var(--gold-soft)}
+  .fabline{position:fixed;left:24px;bottom:24px;z-index:60;background:var(--navy);color:var(--cream-hi);
+           border-radius:2px;padding:14px 22px;font-family:var(--body);font-weight:600;font-size:15px;
+           text-decoration:none;box-shadow:0 6px 18px rgba(14,29,56,.28);transition:background .22s ease}
+  .fabline:hover{background:var(--deep)}
+  @media (max-width:700px){ .fabline{display:none} }
+  .whygeo{padding:112px 32px;text-align:center}
+  .whygeo .wgline{font-family:var(--serif);font-weight:600;font-size:clamp(23px,3vw,30px);
+                  line-height:1.12;letter-spacing:-.3px;color:var(--navy);margin-bottom:26px}
+  .whygeo .wgline .ital{font-style:italic;color:var(--gold)}
+  .wglink{font-family:var(--mono);font-size:12px;letter-spacing:.6px;text-transform:uppercase;
+          color:var(--muted);text-decoration:none;transition:color .2s}
+  .wglink:hover{color:var(--gold)}
+  .foot .fright{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .fabout{font-family:var(--mono);font-size:11px;letter-spacing:.6px;text-transform:uppercase;
+          color:rgba(241,232,214,.7);text-decoration:none;transition:color .2s}
+  .fabout:hover{color:#fff}
   .overlay{position:fixed;inset:0;z-index:70;background:rgba(14,29,56,.55);display:none;
            align-items:flex-start;justify-content:center;padding:6vh 20px 40px;overflow-y:auto}
   .overlay.open{display:flex}
@@ -329,9 +352,13 @@
 <body>
 
 <nav>
-  <a class="wordmark" href="#">
-    <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
-  </a>
+  <div class="brand">
+    <a class="wordmark" href="#">
+      <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
+    </a>
+    <div class="divider"></div>
+    <div class="tagline">risks<br><span class="g">that</span><br>matter</div>
+  </div>
   <div class="navlinks">
     <a href="#businesses">For businesses</a>
     <a href="#brokers">For brokers</a>
@@ -341,7 +368,7 @@
 
 <!-- ============ HERO: THE PARTITION ============ -->
 <header class="hero">
-  <div class="eyebrow">Risk &amp; capital advisory</div>
+  <div class="eyebrow">Self-insured a risk?</div>
   <h1>Every business has a <span class="ital">line</span>.</h1>
 
   <div class="lineblock">
@@ -369,6 +396,7 @@
       <a class="cta solid" href="#tool">Find your line <span class="arw">&rarr;</span></a>
       <div class="sub">Most businesses never do.</div>
     </div>
+    <div class="herodisc">General information only, not advice.</div>
   </div>
 </header>
 
@@ -559,6 +587,8 @@
 
 <button class="fab" id="fabAdvisor" type="button">Find your insurance advisor</button>
 
+<a class="fabline" href="#tool">Find your line</a>
+
 <div class="overlay" id="advOverlay" role="dialog" aria-modal="true" aria-labelledby="advTitle">
   <div class="modal">
     <button class="mclose" id="advClose" type="button" aria-label="Close">&times;</button>
@@ -597,10 +627,20 @@
   </div>
 </div>
 
+<!-- ============ WHY GEOMETRISK ============ -->
+<section class="whygeo">
+  <div class="eyebrow">Why Geometrisk</div>
+  <div class="wgline">Profit is finite. <span class="ital">Risk</span> is uncapped.</div>
+  <a class="wglink" href="about.html">Why that matters &rarr;</a>
+</section>
+
 <footer>
   <div class="foot">
     <div class="fmark">geometrisk</div>
-    <div class="disc">Illustrative figures only. General information, not financial product advice. Your insurance needs depend on your specific financial situation. Geometrisk is not an insurance broker or insurer and does not provide financial product advice. We refer clients to independent brokers and may receive a fee for doing so.</div>
+    <div class="fright">
+      <a class="fabout" href="about.html">About</a>
+      <div class="disc">Illustrative figures only. General information, not financial product advice. Your insurance needs depend on your specific financial situation. Geometrisk is not an insurance broker or insurer and does not provide financial product advice. We refer clients to independent brokers and may receive a fee for doing so.</div>
+    </div>
   </div>
 </footer>
 
