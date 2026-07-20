@@ -60,6 +60,7 @@
   .why h2{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,4vw,44px);line-height:1.1;letter-spacing:-.01em;color:#fff;margin-bottom:22px}
   .why h2 em{font-style:italic;color:var(--gold-soft)}
   .why .body{font-size:17px;line-height:1.7;color:#C7CEDA;max-width:640px}
+  .why .body + .body{margin-top:18px}
   .whygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:48px}
   .wcard h4{font-family:'Inter';font-weight:600;font-size:16px;color:#fff;margin-bottom:8px}
   .wcard p{font-size:14.5px;line-height:1.55;color:#A9B2C2}
@@ -147,11 +148,12 @@
   <div class="win">
     <div class="seyebrow">Why partner with Geometrisk</div>
     <h2>Our risk expertise. Your <em>unfair edge.</em></h2>
-    <p class="body">Anyone can compare policies. The future of insurance isn't comparison — it's risk optimisation, and that starts with clearly understanding the risk tolerance of your client, not just the insurer's. We help you do that. Think of us as a risk lab supporting you, much the way a doctor relies on pathology: you own the delivery of advice and judgement, and we run the tests no one else bothers to order.</p>
+    <p class="body">Anyone can compare policies. The future of insurance isn't comparison — it's risk optimisation, and that starts with clearly understanding the risk tolerance of your client, not just the insurer's. We help you do that.</p>
+    <p class="body">Think of us as a risk lab supporting you, much the way a doctor relies on pathology: you own the delivery of advice and judgement, and we run the tests no one else bothers to order.</p>
     <div class="whygrid">
       <div class="wcard"><h4>Start with risk, not quotes</h4><p>Open the renewal on what the client can carry, not the number the insurer put in front of them.</p></div>
-      <div class="wcard"><h4>Benchmark against the client</h4><p>Weigh every cover against the client's own risk appetite, not the insurer's appetite for their premium.</p></div>
-      <div class="wcard"><h4>Fees for retention advice</h4><p>Earn on the risk a client keeps, not only on distributing insurer products.</p></div>
+      <div class="wcard"><h4>Benchmark to the client, not the insurer</h4><p>Weigh every cover against the client's own risk appetite, not the insurer's appetite for their premium.</p></div>
+      <div class="wcard"><h4>Earn on advice, not distribution</h4><p>Get paid for optimising what a client retains, not only for placing insurer products.</p></div>
     </div>
     <a class="cta" href="#partner">Partner with us &nbsp;&rarr;</a>
   </div>
@@ -259,7 +261,7 @@
       svg.appendChild(bar(lx,X1,'url(#hatch)')); svg.appendChild(bar(lx,X1,'#B08D4F',.05));
       if(t>0.02) ghost(x(s.A.threshold));
       marker(lx);
-      zonelabels('They retain','They transfer');
+      zonelabels('Losses they can absorb','Losses they cannot');
       optnum.textContent=kfmt(s.risk-thr);
     }
     else if(s.kind==='retention'){
@@ -271,7 +273,7 @@
       var dl=el('text',{x:dx,y:100,'text-anchor':'middle','class':'zonelab',fill:'#8A8778'}); dl.textContent='Insurer default'; svg.appendChild(dl);
       if(t>0.02) ghost(x(s.A.retention));
       marker(rx);
-      zonelabels('They retain','They transfer');
+      zonelabels('Risks they retain',"Risks they don't");
       optnum.textContent=kfmt(ret);
     }
     else if(s.kind==='spend'){
@@ -280,7 +282,7 @@
       svg.appendChild(bar(lx2,X1,'url(#hatch)')); svg.appendChild(bar(lx2,X1,'#B08D4F',.05));
       if(t>0.02) ghost(x(s.A.threshold));
       marker(lx2);
-      zonelabels('They carry','They transfer');
+      zonelabels('Cheaper to carry','Cheaper to transfer');
       optnum.textContent=pfmt(spend);
     }
 
