@@ -211,7 +211,7 @@
       A:{ detail:'$1.2m revenue · $180k surplus cash', threshold:280000 },
       B:{ detail:'$1.2m revenue · $180k net debt',     threshold:70000 } },
     // 2) Optimal risk retention — varies with the risk capacity
-    { title:'Optimal risk retention', kind:'retention', client:'Freight operator', defaultExcess:50000, zoom:200000,
+    { title:'Optimal risk retention', kind:'retention', client:'Freight operator', zoom:200000,
       A:{ detail:'$4.2m revenue · $260k surplus cash', retention:150000 },
       B:{ detail:'$4.2m revenue · $40k surplus cash',  retention:30000 } },
     // 3) Optimal risk spend — varies with revenue, good year to lean
@@ -265,12 +265,9 @@
       optnum.textContent=kfmt(s.risk-thr);
     }
     else if(s.kind==='retention'){
-      var ret=lerp(s.A.retention,s.B.retention,t), rx=x(ret), dx=x(s.defaultExcess);
+      var ret=lerp(s.A.retention,s.B.retention,t), rx=x(ret);
       svg.appendChild(bar(X0,rx,'#1B2A4A'));
       svg.appendChild(bar(rx,X1,'url(#hatch)')); svg.appendChild(bar(rx,X1,'#B08D4F',.05));
-      // insurer default — fixed reference
-      svg.appendChild(el('line',{x1:dx,y1:16,x2:dx,y2:yB,stroke:'#8A8778','stroke-width':1.5,'stroke-dasharray':'4 4'}));
-      var dl=el('text',{x:dx,y:100,'text-anchor':'middle','class':'zonelab',fill:'#8A8778'}); dl.textContent='Insurer default'; svg.appendChild(dl);
       if(t>0.02) ghost(x(s.A.retention));
       marker(rx);
       zonelabels('Risks they retain',"Risks they don't");
