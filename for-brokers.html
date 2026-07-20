@@ -204,12 +204,12 @@
   var STATES=[
     // 1) Optimal risk transfer — varies with the risk of ruin
     { title:'Optimal risk transfer', kind:'transfer', client:'Retail fit-out', risk:700000,
-      A:{ detail:'$1.2m revenue · $180k net debt',     threshold:70000 },
-      B:{ detail:'$1.2m revenue · $180k surplus cash', threshold:280000 } },
+      A:{ detail:'$1.2m revenue · $180k surplus cash', threshold:280000 },
+      B:{ detail:'$1.2m revenue · $180k net debt',     threshold:70000 } },
     // 2) Optimal risk retention — varies with the risk capacity
     { title:'Optimal risk retention', kind:'retention', client:'Freight operator', defaultExcess:50000, zoom:200000,
-      A:{ detail:'$4.2m revenue · $40k surplus cash',  retention:30000 },
-      B:{ detail:'$4.2m revenue · $260k surplus cash', retention:150000 } },
+      A:{ detail:'$4.2m revenue · $260k surplus cash', retention:150000 },
+      B:{ detail:'$4.2m revenue · $40k surplus cash',  retention:30000 } },
     // 3) Optimal risk spend — varies with revenue, good year to lean
     { title:'Optimal risk spend', kind:'spend', client:'Café', risk:500000,
       A:{ detail:'$920k revenue · good year', threshold:72000, spend:4600 },
