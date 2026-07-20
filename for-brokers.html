@@ -18,7 +18,8 @@
   h1 em{font-style:italic;color:var(--gold)}
 
   .opt{margin:52px auto 0;max-width:860px;transition:opacity .3s ease}
-  .statetitle{text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .statetitle{text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+  .optnum{text-align:center;font-family:'Playfair Display',serif;font-weight:500;font-size:38px;line-height:1;color:var(--navy);margin-bottom:14px}
   .cmp{width:100%;height:auto;display:block}
   .bizline{margin-top:16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.04em;color:var(--navy)}
   .note{margin-top:6px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:var(--muted)}
@@ -116,14 +117,15 @@
 
   <div class="opt" id="opt">
     <div class="statetitle" id="statetitle"></div>
-    <svg class="cmp" id="cmp" viewBox="0 0 1000 150" role="img" aria-label="A client's three risk lines."></svg>
+    <div class="optnum" id="optnum"></div>
+    <svg class="cmp" id="cmp" viewBox="0 0 1000 108" role="img" aria-label="A client's three risk lines."></svg>
     <div class="bizline" id="bizline"></div>
     <div class="dots" id="dots"></div>
   </div>
 
   <div class="herocta">
-    <a class="cta" href="#partner">Partner with us &nbsp;&rarr;</a>
-    <div class="angleline">Gain unfair competitive edge.</div>
+    <a class="cta" href="#partner">Find client's risk lines &nbsp;&rarr;</a>
+    <div class="angleline">Most brokers never do.</div>
     <div class="illus">Illustrative model. Figures are not tailored to any business.</div>
   </div>
 </div>
@@ -135,7 +137,7 @@
     <div class="steps">
       <div class="step"><div class="sn">01</div><div><h3>Register to partner</h3><p>A short application. We work with a limited number of brokers, so every one comes past us first.</p></div></div>
       <div class="step"><div class="sn">02</div><div><h3>Set up referral agreements</h3><p>We agree how referrals flow, both ways, and how fees work. Clear, and documented.</p></div></div>
-      <div class="step"><div class="sn">03</div><div><h3>Receive risk profiles</h3><p>Your clients arrive with their risk capacity worked out: what they can carry, and what they need to move.</p></div></div>
+      <div class="step"><div class="sn">03</div><div><h3>Receive risk profiles</h3><p>Refer a client for us to work out their risk lines, or run your own. Either way you get what they can carry, transfer, and retain, ready for the conversation.</p></div></div>
     </div>
   </div>
 </section>
@@ -144,12 +146,12 @@
 <section class="pad why" id="why">
   <div class="win">
     <div class="seyebrow">Why partner with Geometrisk</div>
-    <h2>Our risk edge. Your <em>expert judgement.</em></h2>
-    <p class="body">Anyone can compare policies. We do the harder part: the loss the client can carry, the transfer that keeps them clear of ruin, and the retention that earns its keep. We don't recommend a policy, and we don't touch your client. You bring the market and the judgement. We make sure the numbers behind every call are sharper than anything across the table.</p>
+    <h2>Our risk expertise. Your <em>unfair edge.</em></h2>
+    <p class="body">Anyone can compare policies. The future of insurance isn't comparison — it's risk optimisation, and that starts with clearly understanding the risk tolerance of your client, not just the insurer's. We help you do that. Think of us as a risk lab supporting you, much the way a doctor relies on pathology: you own the delivery of advice and judgement, and we run the tests no one else bothers to order.</p>
     <div class="whygrid">
-      <div class="wcard"><h4>Capacity, worked out</h4><p>Clients arrive knowing what they can carry, and what they need to move.</p></div>
-      <div class="wcard"><h4>Numbers no one else has</h4><p>Benchmark premiums, optimal retention, and the transfer that moves the most risk for the least.</p></div>
-      <div class="wcard"><h4>Your book, your fee</h4><p>The client never leaves you. You set what you charge for the advice.</p></div>
+      <div class="wcard"><h4>Start with risk, not quotes</h4><p>Open the renewal on what the client can carry, not the number the insurer put in front of them.</p></div>
+      <div class="wcard"><h4>Benchmark against the client</h4><p>Weigh every cover against the client's own risk appetite, not the insurer's appetite for their premium.</p></div>
+      <div class="wcard"><h4>Fees for retention advice</h4><p>Earn on the risk a client keeps, not only on distributing insurer products.</p></div>
     </div>
     <a class="cta" href="#partner">Partner with us &nbsp;&rarr;</a>
   </div>
@@ -215,9 +217,9 @@
       A:{ detail:'$920k revenue · good year', threshold:72000, spend:4600 },
       B:{ detail:'$680k revenue · lean year', threshold:36000, spend:8600 } }
   ];
-  var X0=70, X1=930, yT=54, yB=112;
+  var X0=70, X1=930, yT=22, yB=80;
   var svg=document.getElementById('cmp'), stEl=document.getElementById('statetitle'),
-      bizline=document.getElementById('bizline'),
+      bizline=document.getElementById('bizline'), optnum=document.getElementById('optnum'),
       opt=document.getElementById('opt'), dotsEl=document.getElementById('dots');
 
   function el(t,a){ var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); return e; }
@@ -228,18 +230,18 @@
 
   function bar(x0,x1,fill,op){ return el('rect',{x:x0,y:yT,width:x1-x0,height:yB-yT,fill:fill,'fill-opacity':op==null?1:op}); }
   function marker(mx){
-    svg.appendChild(el('line',{x1:mx,y1:48,x2:mx,y2:yB,stroke:'#1B2A4A','stroke-width':2.5}));
-    svg.appendChild(el('circle',{cx:mx,cy:48,r:6,fill:'#B08D4F','stroke':'#FBF9F4','stroke-width':2.5}));
+    svg.appendChild(el('line',{x1:mx,y1:16,x2:mx,y2:yB,stroke:'#1B2A4A','stroke-width':2.5}));
+    svg.appendChild(el('circle',{cx:mx,cy:16,r:6,fill:'#B08D4F','stroke':'#FBF9F4','stroke-width':2.5}));
   }
-  function ghost(mx){ svg.appendChild(el('line',{x1:mx,y1:48,x2:mx,y2:yB,stroke:'#1B2A4A','stroke-width':2,'stroke-opacity':.22})); svg.appendChild(el('circle',{cx:mx,cy:48,r:4,fill:'#1B2A4A','fill-opacity':.22})); }
+  function ghost(mx){ svg.appendChild(el('line',{x1:mx,y1:16,x2:mx,y2:yB,stroke:'#1B2A4A','stroke-width':2,'stroke-opacity':.22})); svg.appendChild(el('circle',{cx:mx,cy:16,r:4,fill:'#1B2A4A','fill-opacity':.22})); }
   function bignum(mx,val,cap){
     var a=anchorFor(mx);
     var bn=el('text',{x:mx,y:32,'text-anchor':a,'class':'bignum'}); bn.textContent=kfmt(val); svg.appendChild(bn);
     var cl=el('text',{x:mx,y:44,'text-anchor':a,'class':'caplab'}); cl.textContent=cap; svg.appendChild(cl);
   }
   function zonelabels(l,r,rcol){
-    var zl=el('text',{x:X0,y:132,'class':'zonelab',fill:'#5f6b7f'}); zl.textContent=l; svg.appendChild(zl);
-    var zr=el('text',{x:X1,y:132,'text-anchor':'end','class':'zonelab',fill:rcol||'#B08D4F'}); zr.textContent=r; svg.appendChild(zr);
+    var zl=el('text',{x:X0,y:100,'class':'zonelab',fill:'#5f6b7f'}); zl.textContent=l; svg.appendChild(zl);
+    var zr=el('text',{x:X1,y:100,'text-anchor':'end','class':'zonelab',fill:rcol||'#B08D4F'}); zr.textContent=r; svg.appendChild(zr);
   }
 
   function render(i,t){
@@ -252,26 +254,25 @@
     h.appendChild(el('line',{x1:0,y1:0,x2:0,y2:8,stroke:'#B08D4F','stroke-width':1.4,'stroke-opacity':.5})); defs.appendChild(h); svg.appendChild(defs);
 
     if(s.kind==='transfer'){
-      var thr=lerp(s.A.threshold,s.B.threshold,t), lx=x(thr), transfer=s.risk-thr;
+      var thr=lerp(s.A.threshold,s.B.threshold,t), lx=x(thr);
       svg.appendChild(bar(X0,lx,'#1B2A4A'));
       svg.appendChild(bar(lx,X1,'url(#hatch)')); svg.appendChild(bar(lx,X1,'#B08D4F',.05));
       if(t>0.02) ghost(x(s.A.threshold));
       marker(lx);
-      var mid=(lx+X1)/2;
-      var tn=el('text',{x:mid,y:85,'text-anchor':'middle','class':'spendnum'}); tn.textContent=kfmt(transfer); svg.appendChild(tn);
-      var tc=el('text',{x:mid,y:101,'text-anchor':'middle','class':'spendcap'}); tc.textContent='optimal risk transfer'; svg.appendChild(tc);
       zonelabels('They retain','They transfer');
+      optnum.textContent=kfmt(s.risk-thr);
     }
     else if(s.kind==='retention'){
       var ret=lerp(s.A.retention,s.B.retention,t), rx=x(ret), dx=x(s.defaultExcess);
       svg.appendChild(bar(X0,rx,'#1B2A4A'));
       svg.appendChild(bar(rx,X1,'url(#hatch)')); svg.appendChild(bar(rx,X1,'#B08D4F',.05));
       // insurer default — fixed reference
-      svg.appendChild(el('line',{x1:dx,y1:48,x2:dx,y2:yB,stroke:'#8A8778','stroke-width':1.5,'stroke-dasharray':'4 4'}));
-      var dl=el('text',{x:dx,y:132,'text-anchor':'middle','class':'zonelab',fill:'#8A8778'}); dl.textContent='Insurer default'; svg.appendChild(dl);
+      svg.appendChild(el('line',{x1:dx,y1:16,x2:dx,y2:yB,stroke:'#8A8778','stroke-width':1.5,'stroke-dasharray':'4 4'}));
+      var dl=el('text',{x:dx,y:100,'text-anchor':'middle','class':'zonelab',fill:'#8A8778'}); dl.textContent='Insurer default'; svg.appendChild(dl);
       if(t>0.02) ghost(x(s.A.retention));
-      marker(rx); bignum(rx,ret,'optimal risk retention');
+      marker(rx);
       zonelabels('They retain','They transfer');
+      optnum.textContent=kfmt(ret);
     }
     else if(s.kind==='spend'){
       var thr2=lerp(s.A.threshold,s.B.threshold,t), lx2=x(thr2), spend=lerp(s.A.spend,s.B.spend,t);
@@ -279,10 +280,8 @@
       svg.appendChild(bar(lx2,X1,'url(#hatch)')); svg.appendChild(bar(lx2,X1,'#B08D4F',.05));
       if(t>0.02) ghost(x(s.A.threshold));
       marker(lx2);
-      var mid2=(lx2+X1)/2;
-      var sn=el('text',{x:mid2,y:85,'text-anchor':'middle','class':'spendnum'}); sn.textContent=pfmt(spend); svg.appendChild(sn);
-      var sc=el('text',{x:mid2,y:101,'text-anchor':'middle','class':'spendcap'}); sc.textContent='optimal risk spend'; svg.appendChild(sc);
       zonelabels('They carry','They transfer');
+      optnum.textContent=pfmt(spend);
     }
 
     stEl.textContent=s.title;
