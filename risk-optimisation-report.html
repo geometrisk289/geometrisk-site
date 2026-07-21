@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk Optimisation Report (specimen) · Geometrisk</title>
+<meta name="description" content="Specimen risk optimisation report. Shows a client's risk profile before and after optimisation, and the three lines calculated with the broker: risk retention, optimal risk transfer, and risk spend. Illustrative figures only, not financial product advice.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16294A; --deep:#0E1D38; --navy-2:#5A7099;
+    --gold:#A8843E; --gold-soft:#C9A85F;
+    --cream:#F5F5F2; --cream-hi:#FFFFFF;
+    --ink:#1A2438; --muted:#5C6577;
+    --line:rgba(22,41,74,.14);
+    --z-abs:#3d6fa0;      /* absorbable / retained */
+    --z-good:#A8843E;     /* optimised */
+    --z-ruin:#8a3535;     /* ruinous tail */
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Sans 3',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--cream-hi);
+       -webkit-font-smoothing:antialiased;line-height:1.55}
+
+  /* specimen watermark */
+  .stamp{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .stamp span{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);
+       font-family:var(--mono);font-size:15vw;letter-spacing:.12em;color:rgba(22,41,74,.035);
+       white-space:nowrap;font-weight:600;text-transform:uppercase}
+
+  nav{position:relative;z-index:5;display:flex;align-items:center;
+      justify-content:space-between;padding:26px 32px;max-width:1180px;margin:0 auto}
+  .wordmark{text-decoration:none;display:flex;align-items:center}
+  .wordmark .logoimg{height:52px;width:auto;display:block}
+  .navlinks{display:flex;align-items:center;gap:30px}
+  .navlinks a{font-family:var(--mono);font-size:12px;letter-spacing:.6px;text-transform:uppercase;
+              color:var(--muted);text-decoration:none;transition:color .2s}
+  .navlinks a:hover{color:var(--navy)}
+
+  .page{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:20px 24px 96px}
+
+  .specband{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+       font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+       color:var(--gold);border:1px solid var(--line);border-radius:3px;
+       padding:11px 16px;margin:8px 0 40px;background:var(--cream)}
+  .specband b{color:var(--navy)}
+  .specband .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:2.4px;text-transform:uppercase;
+           color:var(--gold);margin-bottom:18px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,5vw,50px);
+     line-height:1.06;letter-spacing:-.5px;color:var(--navy);margin-bottom:16px}
+  h1 .em{font-style:italic}
+  .lede{font-size:18px;color:var(--muted);max-width:60ch;margin-bottom:8px}
+
+  .metastrip{display:flex;flex-wrap:wrap;gap:26px 42px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+  .metastrip div{min-width:120px}
+  .metastrip .ml{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .metastrip .mv{font-family:var(--serif);font-size:19px;color:var(--navy);font-weight:600}
+
+  .sec{margin-top:56px;padding-top:36px;border-top:1px solid var(--line)}
+  .sec .num{font-family:var(--mono);font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  .sec h2{font-family:var(--serif);font-weight:600;font-size:clamp(23px,3vw,31px);line-height:1.12;letter-spacing:-.3px;color:var(--navy);margin-bottom:12px}
+  .sec p{font-size:16.5px;color:var(--ink);max-width:64ch;margin-bottom:12px}
+  .sec p.soft{color:var(--muted)}
+
+  /* client-line figure row */
+  .figrow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+          border:1px solid var(--line);border-radius:4px;overflow:hidden;margin:24px 0 8px}
+  .figrow .cell{background:var(--cream-hi);padding:20px 18px}
+  .figrow .cell .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .figrow .cell .v{font-family:var(--serif);font-size:clamp(20px,3vw,26px);font-weight:600;color:var(--navy);line-height:1}
+  .figrow .cell.hero{background:var(--navy)}
+  .figrow .cell.hero .k{color:var(--gold-soft)}
+  .figrow .cell.hero .v{color:var(--cream-hi)}
+
+  /* three-line before/after table */
+  .lines{margin:26px 0 6px;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .lines .lrow{display:grid;grid-template-columns:1.5fr 1fr 1fr;align-items:stretch;border-top:1px solid var(--line)}
+  .lines .lrow:first-child{border-top:none}
+  .lines .lhead{background:var(--cream);font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .lines .lhead > div{padding:12px 18px}
+  .lines .lhead .ba{text-align:right}
+  .lines .lcell{padding:18px}
+  .lines .lname{border-right:1px solid var(--line)}
+  .lines .lname .t{font-weight:600;font-size:16px;color:var(--navy)}
+  .lines .lname .d{font-size:13.5px;color:var(--muted);margin-top:4px;max-width:34ch}
+  .lines .val{border-right:1px solid var(--line);text-align:right}
+  .lines .val:last-child{border-right:none}
+  .lines .val .n{font-family:var(--mono);font-size:19px;font-weight:600;color:var(--navy)}
+  .lines .val .n.was{color:var(--muted)}
+  .lines .val .n.ruin{color:var(--z-ruin)}
+  .lines .val .n.good{color:var(--gold)}
+  .lines .val .sub{font-size:12.5px;color:var(--muted);margin-top:4px}
+  .lines .colhead{text-align:right;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;padding:12px 18px}
+  .lines .colhead.after{color:var(--gold)}
+
+  /* before/after profile charts */
+  .profiles{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:26px 0 6px}
+  .pcard{border:1px solid var(--line);border-radius:4px;padding:20px 20px 22px;background:var(--cream-hi)}
+  .pcard.after{border-color:var(--gold-soft);box-shadow:0 0 0 1px var(--gold-soft) inset}
+  .pcard .ph{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+  .pcard .pt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .pcard.after .pt{color:var(--gold)}
+  .pcard .pw{font-family:var(--serif);font-size:15px;color:var(--navy);font-weight:600}
+  .pcard svg{width:100%;height:150px;display:block;margin-top:6px;overflow:visible}
+  .plegend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--muted)}
+  .plegend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+  .pstat{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+  .pstat b{color:var(--navy)}
+  .pstat b.ruin{color:var(--z-ruin)}
+  .pstat b.good{color:var(--gold)}
+
+  /* outcome band */
+  .outcome{margin:30px 0 6px;background:var(--navy);border-radius:5px;padding:34px 32px;color:var(--cream-hi)}
+  .outcome .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:14px}
+  .outcome .big{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.6vw,34px);line-height:1.16}
+  .outcome .big .g{color:var(--gold-soft);font-style:italic}
+  .outcome .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14)}
+  .outcome .grid3 .k2{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(241,232,214,.6);margin-bottom:7px}
+  .outcome .grid3 .v2{font-family:var(--serif);font-size:23px;font-weight:600}
+  .outcome .grid3 .v2 .arw{color:var(--gold-soft)}
+
+  .assume{margin-top:40px;background:var(--cream);border:1px solid var(--line);border-radius:4px;padding:22px 24px}
+  .assume .h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .assume ul{list-style:none;margin:0;padding:0}
+  .assume li{position:relative;padding-left:20px;font-size:14.5px;color:var(--muted);margin-bottom:9px;max-width:70ch}
+  .assume li:last-child{margin-bottom:0}
+  .assume li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .assume li b{color:var(--navy);font-weight:600}
+
+  footer{background:var(--navy);color:rgba(241,232,214,.6);padding:40px 32px;margin-top:70px;position:relative;z-index:1}
+  .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .foot .fmark{font-family:var(--serif);font-weight:600;font-size:17px;color:var(--cream-hi)}
+  .foot .disc{font-family:var(--mono);font-size:11px;letter-spacing:.5px;max-width:600px}
+
+  @media (max-width:760px){
+    .navlinks{display:none}
+    .page{padding:16px 18px 72px}
+    .figrow{grid-template-columns:1fr 1fr}
+    .profiles{grid-template-columns:1fr}
+    .lines .lrow{grid-template-columns:1fr}
+    .lines .lname,.lines .val{border-right:none;text-align:left}
+    .lines .val{border-top:1px solid var(--line)}
+    .lines .lhead{display:none}
+    .outcome .grid3{grid-template-columns:1fr}
+  }
+  @media print{
+    .stamp span{color:rgba(22,41,74,.06)}
+    nav .navlinks{display:none}
+    .outcome{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+
+<div class="stamp" aria-hidden="true"><span>Specimen</span></div>
+
+<nav>
+  <a class="wordmark" href="index.html">
+    <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
+  </a>
+  <div class="navlinks">
+    <a href="index.html#businesses">For businesses</a>
+    <a href="index.html#brokers">For brokers</a>
+    <a href="methodology.html">Risk Library</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <div class="specband">
+    <span class="dot"></span>
+    <span><b>Specimen report</b> — illustrative figures for a fictional business</span>
+    <span class="dot"></span>
+    <span>Not a real client · Not financial product advice</span>
+  </div>
+
+  <div class="eyebrow">Risk Optimisation Report</div>
+  <h1>The same balance sheet, <span class="em">before</span> and <span class="em">after</span> optimisation.</h1>
+  <p class="lede">What the client sees in their own report, and how the three lines we work through with the broker &mdash; retention, transfer, and spend &mdash; move it.</p>
+
+  <div class="metastrip">
+    <div><div class="ml">Prepared for</div><div class="mv">Northbridge Joinery Pty Ltd</div></div>
+    <div><div class="ml">With broker</div><div class="mv">Everclear Insurance Solutions</div></div>
+    <div><div class="ml">Renewal</div><div class="mv">1 September</div></div>
+    <div><div class="ml">Basis</div><div class="mv">Surplus cash</div></div>
+  </div>
+
+  <!-- 01 -->
+  <section class="sec">
+    <div class="num">01 · What the client sees</div>
+    <h2>Their line, from three numbers they already know.</h2>
+    <p>The client's report starts where the calculator does: surplus cash is the base a loss lands on, and margin is what rebuilds it. From those, one line &mdash; the loss this business can absorb before recovery turns steep.</p>
+    <div class="figrow">
+      <div class="cell"><div class="k">Annual revenue</div><div class="v">$4.20m</div></div>
+      <div class="cell"><div class="k">Gross profit</div><div class="v">$1.47m</div></div>
+      <div class="cell"><div class="k">Surplus cash · W</div><div class="v">$650k</div></div>
+      <div class="cell hero"><div class="k">Absorbable line</div><div class="v">$95k</div></div>
+    </div>
+    <p class="soft">A $95k loss climbs back at +17% of what's left &mdash; felt, but survivable. A loss near the full $650k has no base left to grow from. Everything below sets where retention should sit; everything approaching the base is what transfer is for.</p>
+  </section>
+
+  <!-- 02 -->
+  <section class="sec">
+    <div class="num">02 · The three lines we set with the broker</div>
+    <h2>Retention, transfer, spend.</h2>
+    <p>The client's report gives the line. These three decisions &mdash; worked through with the broker against that line &mdash; are what actually change the risk carried and the money spent.</p>
+
+    <div class="lines">
+      <div class="lrow lhead">
+        <div>Line</div>
+        <div class="ba">Before</div>
+        <div class="ba">After optimisation</div>
+      </div>
+
+      <div class="lrow">
+        <div class="lcell lname">
+          <div class="t">Risk retention</div>
+          <div class="d">The loss kept on the balance sheet &mdash; set at, not below, the absorbable line.</div>
+        </div>
+        <div class="lcell val">
+          <div class="n was">$25k</div>
+          <div class="sub">insurers carry losses the business wouldn't feel</div>
+        </div>
+        <div class="lcell val">
+          <div class="n good">$95k</div>
+          <div class="sub">retain what's absorbable; stop paying to transfer it</div>
+        </div>
+      </div>
+
+      <div class="lrow">
+        <div class="lcell lname">
+          <div class="t">Optimal risk transfer</div>
+          <div class="d">The layer above retention through the ruinous tail &mdash; the part that would reset the base.</div>
+        </div>
+        <div class="lcell val">
+          <div class="n ruin">$2.0m limit</div>
+          <div class="sub">tail under-covered · a severe event exceeds cover</div>
+        </div>
+        <div class="lcell val">
+          <div class="n good">$5.0m limit</div>
+          <div class="sub">BI 12&rarr;18 mths · tail closed to full reinstatement</div>
+        </div>
+      </div>
+
+      <div class="lrow">
+        <div class="lcell lname">
+          <div class="t">Risk spend</div>
+          <div class="d">Total annual premium &mdash; judged against what it removes, not against last year.</div>
+        </div>
+        <div class="lcell val">
+          <div class="n was">$86k</div>
+          <div class="sub">weighted to the cheap-to-absorb bottom layer</div>
+        </div>
+        <div class="lcell val">
+          <div class="n good">$61k</div>
+          <div class="sub">&minus;29% · reallocated toward the tail</div>
+        </div>
+      </div>
+    </div>
+    <p class="soft">Two independent moves, one direction: retain more of the high-frequency layer the business can shrug off, and transfer more of the low-frequency tail that would ruin it. Cheaper and safer are not a trade-off here &mdash; they're the same move.</p>
+  </section>
+
+  <!-- 03 -->
+  <section class="sec">
+    <div class="num">03 · Before and after, on one base</div>
+    <h2>Where a loss lands on surplus cash.</h2>
+    <p>The curve is the felt cost of a loss against the $650k base &mdash; gentle near the origin, vertical near the wall. The shaded band is what the business keeps; everything to the right of it is transferred. The marker is the worst realistic loss the balance sheet is left holding.</p>
+
+    <div class="profiles">
+      <div class="pcard before">
+        <div class="ph"><span class="pt">Before</span><span class="pw">Retained tail: ruin</span></div>
+        <svg id="chartBefore" viewBox="0 0 320 150" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="plegend"><span><i style="background:#3d6fa0"></i>Retained</span><span><i style="background:#A8843E"></i>Transferred</span><span><i style="background:#8a3535"></i>Exposed tail</span></div>
+        <div class="pstat">Worst realistic loss left on the base: <b class="ruin">exceeds $650k</b> &mdash; the limit falls short, and surplus cash is gone.</div>
+      </div>
+      <div class="pcard after">
+        <div class="ph"><span class="pt">After</span><span class="pw">Retained tail: $95k</span></div>
+        <svg id="chartAfter" viewBox="0 0 320 150" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="plegend"><span><i style="background:#3d6fa0"></i>Retained</span><span><i style="background:#A8843E"></i>Transferred</span></div>
+        <div class="pstat">Worst realistic loss left on the base: <b class="good">$95k</b> &mdash; inside the absorbable line, base intact.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- outcome -->
+  <div class="outcome">
+    <div class="k">The optimisation, in one line</div>
+    <div class="big">Risk spend falls <span class="g">29%</span>, and the loss that used to wipe out surplus cash now lands <span class="g">inside</span> what the business can absorb.</div>
+    <div class="grid3">
+      <div><div class="k2">Risk spend</div><div class="v2">$86k <span class="arw">&rarr;</span> $61k</div></div>
+      <div><div class="k2">Worst retained loss</div><div class="v2">Ruin <span class="arw">&rarr;</span> $95k</div></div>
+      <div><div class="k2">Tail cover</div><div class="v2">$2.0m <span class="arw">&rarr;</span> $5.0m</div></div>
+    </div>
+  </div>
+
+  <!-- assumptions -->
+  <div class="assume">
+    <div class="h">How to read this</div>
+    <ul>
+      <li><b>Illustrative only.</b> Northbridge Joinery is a fictional business. The figures show the shape of the method, not a quote or a recommendation.</li>
+      <li><b>Surplus cash is the base.</b> Property and equipment are excluded &mdash; the event that destroys them is often the one you'd need them to absorb.</li>
+      <li><b>Retention is set at the absorbable line, not below it.</b> The line comes from the client's own numbers; the placement may land at or under it, never above.</li>
+      <li><b>The spend figure is a total, judged against what it removes.</b> A lower number that leaves the tail exposed is not a saving.</li>
+      <li><b>The full derivation</b> &mdash; the base, the climb, the felt cost &mdash; is in the <a href="methodology.html" style="color:var(--navy)">Risk Library</a>.</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="fmark">geometrisk</div>
+    <div class="disc">Specimen document · illustrative figures for a fictional business. General information, not financial product advice. Insurance needs depend on a business's specific financial situation. Geometrisk is not an insurance broker or insurer and does not provide financial product advice. We refer clients to independent brokers and may receive a fee for doing so.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var W=650000, VB_W=320, VB_H=150, padT=12, padB=14, innerH=VB_H-padT-padB, MAXF=0.985;
+  function felt(L){return Math.log(W/(W-L));}
+  function xOf(L){return (L/W)*VB_W;}            // x spans 0..W across the panel
+  function pathFor(){
+    var maxL=MAXF*W, maxC=felt(maxL), b=padT+innerH, N=140, d='';
+    for(var i=0;i<=N;i++){
+      var L=(i/N)*maxL, y=b-Math.min(felt(L)/maxC,1)*innerH, x=xOf(L);
+      d+=(i?' L ':'M ')+x.toFixed(1)+' '+y.toFixed(1);
+    }
+    return {d:d,b:b,maxL:maxL,maxC:maxC};
+  }
+  // draw one panel. retention = kept band end; limit = transfer end (as loss $); exposed=true shows red tail
+  function draw(id,retention,limit,exposed){
+    var el=document.getElementById(id); if(!el)return;
+    var P=pathFor(), b=P.b;
+    var xRet=xOf(Math.min(retention,W)), xLim=xOf(Math.min(limit,W));
+    function band(x0,x1,c,op){return '<rect x="'+x0.toFixed(1)+'" y="'+padT+'" width="'+Math.max(0,(x1-x0)).toFixed(1)+'" height="'+innerH+'" fill="'+c+'" fill-opacity="'+op+'"/>';}
+    var svg='';
+    svg+=band(0,xRet,'#3d6fa0',0.20);                 // retained
+    svg+=band(xRet,xLim,'#A8843E',0.20);              // transferred
+    if(exposed) svg+=band(xLim,VB_W,'#8a3535',0.20);  // exposed tail
+    // ruin wall at W
+    svg+='<line x1="'+(VB_W-0.6)+'" y1="'+padT+'" x2="'+(VB_W-0.6)+'" y2="'+b+'" stroke="#8a3535" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.7"/>';
+    // baseline + curve
+    svg+='<line x1="0" y1="'+b+'" x2="'+VB_W+'" y2="'+b+'" stroke="#16294A" stroke-opacity="0.30"/>';
+    svg+='<path d="'+P.d+'" fill="none" stroke="#16294A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>';
+    // retention divider
+    svg+='<line x1="'+xRet.toFixed(1)+'" y1="'+padT+'" x2="'+xRet.toFixed(1)+'" y2="'+b+'" stroke="#3d6fa0" stroke-width="1.2" opacity="0.8"/>';
+    // marker: worst retained loss
+    var mL = exposed ? MAXF*W : retention;
+    var mx = xOf(Math.min(mL,W));
+    var my = b-Math.min(felt(Math.min(mL,MAXF*W))/P.maxC,1)*innerH;
+    var mc = exposed ? '#8a3535' : '#A8843E';
+    svg+='<line x1="'+mx.toFixed(1)+'" y1="'+padT+'" x2="'+mx.toFixed(1)+'" y2="'+b+'" stroke="'+mc+'" stroke-width="1.1" opacity="0.55"/>';
+    svg+='<circle cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="5.2" fill="#FFFFFF" stroke="'+mc+'" stroke-width="2.4"/>';
+    el.innerHTML=svg;
+  }
+  // Before: retain $25k, transfer to $2.0m (but chart base is W=$650k, so a >W tail is exposed) -> tail exposed
+  draw('chartBefore', 25000, 650000*0.62, true);
+  // After: retain $95k, transfer covers the whole tail through the wall -> not exposed
+  draw('chartAfter', 95000, 650000, false);
+})();
+</script>
+</body>
+</html>
