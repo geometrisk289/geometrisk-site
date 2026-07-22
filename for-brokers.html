@@ -64,6 +64,34 @@
   .whygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:48px}
   .wcard h4{font-family:'Inter';font-weight:600;font-size:16px;color:#fff;margin-bottom:8px}
   .wcard p{font-size:14.5px;line-height:1.55;color:#A9B2C2}
+  .deliver h2{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(27px,4vw,42px);line-height:1.12;letter-spacing:-.01em;color:var(--navy);margin-bottom:6px}
+  .deliver .win{max-width:900px}
+  .dgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:38px}
+  .dcard{background:#fff;border:1px solid var(--line-grey);border-radius:12px;padding:26px 28px}
+  .dcard .dtag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  .dcard h3{font-family:'Playfair Display',serif;font-weight:600;font-size:22px;color:var(--navy);margin-bottom:12px;line-height:1.15}
+  .dcard p{font-size:15px;line-height:1.6;color:var(--navy);opacity:.85}
+  .dcard ul{list-style:none;margin:14px 0 0;padding:0}
+  .dcard li{position:relative;padding-left:20px;font-size:14.5px;line-height:1.5;color:var(--navy);margin-bottom:8px}
+  .dcard li:last-child{margin-bottom:0}
+  .dcard li:before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .reqform{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;align-items:center}
+  .reqform input{flex:1 1 180px;font-family:'Inter';font-size:14px;color:var(--navy);
+                 background:#fff;border:1px solid var(--line-grey);border-radius:6px;padding:12px 14px}
+  .reqform input:focus{outline:none;border-color:var(--gold)}
+  .reqform .cta{white-space:nowrap}
+  .reqthanks{margin-top:18px;font-size:14px;color:var(--navy);font-weight:600}
+  @media(max-width:760px){ .dgrid{grid-template-columns:1fr;gap:18px} }
+  .whyteaser{padding:72px 32px;text-align:center;background:var(--cream-2);
+             border-top:1px solid var(--line-grey);border-bottom:1px solid var(--line-grey)}
+  .whyteaser .te{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;
+                 text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+  .whyteaser .tline{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(26px,4vw,40px);
+                    line-height:1.12;letter-spacing:-.01em;color:var(--navy);margin-bottom:22px}
+  .whyteaser .tline em{font-style:italic;color:var(--gold)}
+  .whyteaser .tlink{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;
+                    text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+  .whyteaser .tlink:hover{color:var(--gold)}
   .why .cta{background:var(--gold);margin-top:48px}
   .why .cta:hover{background:var(--gold-soft)}
 
@@ -113,7 +141,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="eyebrow">Best brokers start with the client's risk appetite</div>
+  <div class="eyebrow">The best brokers are trusted risk advisors</div>
   <h1>Every client has three unique <em>lines</em>.</h1>
 
   <div class="opt" id="opt">
@@ -125,11 +153,53 @@
   </div>
 
   <div class="herocta">
-    <a class="cta" href="#partner">Find client's risk lines &nbsp;&rarr;</a>
+    <a class="cta" href="broker-report.html">Find client's risk lines &nbsp;&rarr;</a>
     <div class="angleline">Most brokers never do.</div>
     <div class="illus">Illustrative model. Figures are not tailored to any business.</div>
   </div>
 </div>
+
+<!-- WHY PARTNER TEASER -->
+<section class="whyteaser">
+  <div class="te">Why partner with Geometrisk</div>
+  <div class="tline">Our risk expertise. Your <em>unfair edge.</em></div>
+  <a class="tlink" href="#why">Why that matters &rarr;</a>
+</section>
+
+<!-- THREE LINES FOR YOU / TWO FOR THEM -->
+<section class="pad deliver">
+  <div class="win">
+    <div class="seyebrow">The lines, and who sees them</div>
+    <h2>Three lines for you. Two that matter to them.</h2>
+    <div class="dgrid">
+      <div class="dcard">
+        <div class="dtag">For you</div>
+        <h3>Three lines, calculated together</h3>
+        <p>Optimal risk retention, transfer and spend. We work the three out together for each business &mdash; from its factual financial information and a stated set of loss assumptions.</p>
+        <ul>
+          <li>Factual financials: the balance sheet and cash flows</li>
+          <li>Our stated loss assumptions &mdash; loss ratio, and the annual chance of a loss crossing the line</li>
+        </ul>
+        <a class="cta" href="#" id="reqBtn" style="margin-top:18px;display:inline-flex">Request a sample report &nbsp;&rarr;</a>
+        <form class="reqform" id="reqForm" style="display:none">
+          <input type="email" id="reqEmail" required placeholder="you@brokerage.com.au" aria-label="Your email for the sample report">
+          <button type="submit" class="cta" id="reqSend">Send &nbsp;&rarr;</button>
+        </form>
+        <p class="reqthanks" id="reqThanks" style="display:none">Thanks &mdash; we&rsquo;ll send a sample your way.</p>
+      </div>
+      <div class="dcard">
+        <div class="dtag">For your client</div>
+        <h3>The two lines that matter</h3>
+        <p>The sample report shows a client the risks that matter: the loss their balance sheet can absorb, and the steep climb in revenue required to recover from one.</p>
+        <ul>
+          <li>The line: the loss they can carry without risking the business</li>
+          <li>The recovery: the sales growth a loss demands to earn it back</li>
+        </ul>
+        <a class="cta" href="broker-report.html" style="margin-top:18px;display:inline-flex">See the client sample &nbsp;&rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- HOW IT WORKS -->
 <section class="pad howit">
@@ -146,14 +216,14 @@
 <!-- WHY PARTNER -->
 <section class="pad why" id="why">
   <div class="win">
-    <div class="seyebrow">Why partner with Geometrisk</div>
-    <h2>Our risk expertise. Your <em>unfair edge.</em></h2>
-    <p class="body">Anyone can compare policies. The future of insurance isn't comparison — it's risk optimisation, and that starts with clearly understanding the risk tolerance of your client, not just the insurer's. We help you do that.</p>
+    <div class="seyebrow">Why that matters</div>
+    <h2>Where your <em>edge</em> comes from.</h2>
+    <p class="body">The future of broking isn't comparison — it's risk optimisation, and that starts with clearly understanding the risk tolerance of your client, not just the insurer's. We help you do that.</p>
     <p class="body">Think of us as a risk lab supporting you, much the way a doctor relies on pathology: you own the delivery of advice and judgement, and we run the tests no one else bothers to order.</p>
     <div class="whygrid">
-      <div class="wcard"><h4>Start with risk, not quotes</h4><p>Open the renewal on what the client can carry, not the number the insurer put in front of them.</p></div>
-      <div class="wcard"><h4>Benchmark to the client, not the insurer</h4><p>Weigh every cover against the client's own risk appetite, not the insurer's appetite for their premium.</p></div>
-      <div class="wcard"><h4>Earn on advice, not distribution</h4><p>Get paid for optimising what a client retains, not only for placing insurer products.</p></div>
+      <div class="wcard"><h4>Win on risk, not price</h4><p>Know your client's risk profile — their appetite, risk of ruin, source of losses and buffers, and optimal risk spend.</p></div>
+      <div class="wcard"><h4>Benchmark solutions, not policies</h4><p>Weigh every solution (not just insurance) against the client's risk appetite and budget.</p></div>
+      <div class="wcard"><h4>Monetise judgement, not placement</h4><p>Earn fees for delivering trusted advice and judgement on optimising risk that clients keep, not just transfer.</p></div>
     </div>
     <a class="cta" href="#partner">Partner with us &nbsp;&rarr;</a>
   </div>
@@ -163,7 +233,7 @@
 <div class="formband" id="partner">
   <div class="win">
     <div class="seyebrow">Become a partner</div>
-    <h2>Clients who arrive knowing <em>their lines.</em></h2>
+    <h2>Your risk conversations. With our <em>lines.</em></h2>
     <p class="fintro">Tell us where you write business and what you know best. If it's a fit, we'll set up a short call and run a client through the process together, on us.</p>
     <form id="brokerForm">
       <div class="fgrid">
@@ -188,7 +258,7 @@
         <div class="frow full"><label>Anything you want us to know? <span class="opt">(optional)</span></label><textarea name="notes" placeholder="How you work today, the clients you have in mind, or a question."></textarea></div>
       </div>
       <button type="submit" class="fbtn" id="fbtn">Start the conversation &nbsp;&rarr;</button>
-      <p class="fnote">No cost, no lock-in. We work with a handful of brokers at a time, so we read every one of these ourselves.</p>
+      <p class="fnote">We are looking to partner with a handful of brokers at a time across Australia.</p>
     </form>
     <div class="thanks" id="thanks">
       <h3>Thanks – that's with us.</h3>
@@ -204,20 +274,18 @@
 <script>
 (function(){
   var NS='http://www.w3.org/2000/svg';
-  // Each state = one of the client's three risk lines, animating between two scenarios to show it is calculated.
+  // One client — a freight operator (revenue $28m, surplus cash $2.1m, line ~$1.33m) — each line shown BEFORE
+  // (risk on its balance sheet) and AFTER (optimised by the broker). Navy amount shrinks; gold value grows.
   var STATES=[
-    // 1) Optimal risk transfer — varies with the risk of ruin
-    { title:'Optimal risk transfer', kind:'transfer', client:'Retail fit-out', risk:700000,
-      A:{ detail:'$1.2m revenue · $180k surplus cash', threshold:280000 },
-      B:{ detail:'$1.2m revenue · $180k net debt',     threshold:70000 } },
-    // 2) Optimal risk retention — varies with the risk capacity
-    { title:'Optimal risk retention', kind:'retention', client:'Freight operator', zoom:200000,
-      A:{ detail:'$4.2m revenue · $260k surplus cash', retention:150000 },
-      B:{ detail:'$4.2m revenue · $40k surplus cash',  retention:30000 } },
-    // 3) Optimal risk spend — varies with revenue, good year to lean
-    { title:'Optimal risk spend', kind:'spend', client:'Café', risk:500000,
-      A:{ detail:'$920k revenue · good year', threshold:72000, spend:4600 },
-      B:{ detail:'$680k revenue · lean year', threshold:36000, spend:8600 } }
+    // 1) Transfer — before: the full risk exposure sits on the balance sheet; after: it's transferred, only the line (~$1.33m) retained
+    { title:'Risk transfer', kind:'ba', show:'gold', axmax:21327200, left:'On the balance sheet', right:'Risk Exposure',
+      A:{ val:21327200 }, B:{ val:1327200 } },
+    // 2) Retention — before: exposed up to the full cash buffer; after: retention sits well within it
+    { title:'Risk retention', kind:'ba', axmax:2100000, left:'Retained', right:'Cash headroom',
+      A:{ val:2100000 }, B:{ val:1327200 } },
+    // 3) Spend — before: the geometric optimal spend; after: actual spend comes in under it
+    { title:'Risk spend', kind:'ba', axmax:120000, left:'Optimal', right:'Rational',
+      A:{ val:120000 }, B:{ val:80000 } }
   ];
   var X0=70, X1=930, yT=22, yB=80;
   var svg=document.getElementById('cmp'), stEl=document.getElementById('statetitle'),
@@ -225,7 +293,7 @@
       opt=document.getElementById('opt'), dotsEl=document.getElementById('dots');
 
   function el(t,a){ var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); return e; }
-  function kfmt(n){ return n>=1e6 ? '$'+(''+(n/1e6).toFixed(1)).replace('.0','')+'m' : '$'+Math.round(n/1000)+'k'; }
+  function kfmt(n){ if(n>=1e6) return '$'+(''+(n/1e6).toFixed(1)).replace('.0','')+'m'; var k=Math.round(n/1000); return k===0?'$0':'$'+k+'k'; }
   function pfmt(n){ return '$'+Math.round(n).toLocaleString('en-AU'); }
   function lerp(a,b,t){ return a+(b-a)*t; }
   function anchorFor(x){ return x<140?'start':(x>860?'end':'middle'); }
@@ -248,43 +316,25 @@
 
   function render(i,t){
     var s=STATES[i];
-    var axmax = s.zoom || s.risk;
+    var axmax = s.axmax;
     var x=function(v){ return X0+v/axmax*(X1-X0); };
     while(svg.firstChild) svg.removeChild(svg.firstChild);
     var defs=el('defs',{});
     var h=el('pattern',{id:'hatch',width:8,height:8,patternTransform:'rotate(-45)',patternUnits:'userSpaceOnUse'});
     h.appendChild(el('line',{x1:0,y1:0,x2:0,y2:8,stroke:'#B08D4F','stroke-width':1.4,'stroke-opacity':.5})); defs.appendChild(h); svg.appendChild(defs);
 
-    if(s.kind==='transfer'){
-      var thr=lerp(s.A.threshold,s.B.threshold,t), lx=x(thr);
-      svg.appendChild(bar(X0,lx,'#1B2A4A'));
-      svg.appendChild(bar(lx,X1,'url(#hatch)')); svg.appendChild(bar(lx,X1,'#B08D4F',.05));
-      if(t>0.02) ghost(x(s.A.threshold));
-      marker(lx);
-      zonelabels('Losses they can absorb','Losses they cannot');
-      optnum.textContent=kfmt(s.risk-thr);
-    }
-    else if(s.kind==='retention'){
-      var ret=lerp(s.A.retention,s.B.retention,t), rx=x(ret);
-      svg.appendChild(bar(X0,rx,'#1B2A4A'));
-      svg.appendChild(bar(rx,X1,'url(#hatch)')); svg.appendChild(bar(rx,X1,'#B08D4F',.05));
-      if(t>0.02) ghost(x(s.A.retention));
-      marker(rx);
-      zonelabels('Risks they retain',"Risks they don't");
-      optnum.textContent=kfmt(ret);
-    }
-    else if(s.kind==='spend'){
-      var thr2=lerp(s.A.threshold,s.B.threshold,t), lx2=x(thr2), spend=lerp(s.A.spend,s.B.spend,t);
-      svg.appendChild(bar(X0,lx2,'#1B2A4A'));
-      svg.appendChild(bar(lx2,X1,'url(#hatch)')); svg.appendChild(bar(lx2,X1,'#B08D4F',.05));
-      if(t>0.02) ghost(x(s.A.threshold));
-      marker(lx2);
-      zonelabels('Cheaper to carry','Cheaper to transfer');
-      optnum.textContent=pfmt(spend);
+    if(s.kind==='ba'){
+      var v=lerp(s.A.val,s.B.val,t), mx=x(v);
+      svg.appendChild(bar(X0,mx,'#1B2A4A'));                                   // the amount that remains (the number)
+      svg.appendChild(bar(mx,X1,'url(#hatch)')); svg.appendChild(bar(mx,X1,'#B08D4F',.05));  // optimised away by the broker
+      if(t>0.02) ghost(x(s.A.val));                                           // ghost of the "before" position
+      marker(mx);
+      zonelabels(s.left,s.right);
+      optnum.textContent=kfmt(s.show==='gold' ? axmax-v : v);   // transfer shows what's moved; others what remains
     }
 
     stEl.textContent=s.title;
-    bizline.textContent=s.client+'  ·  '+(t<0.5?s.A.detail:s.B.detail);
+    bizline.textContent='Freight operator  ·  revenue $28m  ·  surplus cash $2.1m';
     for(var k=0;k<dots.length;k++) dots[k].className=(k===i?'on':'');
   }
 
@@ -315,7 +365,7 @@
 
 <script>
   // Broker enquiries post to the Geometrisk Apps Script (Brokers tab, type=broker).
-  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyZByJrSkRb7O-rrhN0aChsKSPoI8-nGWyeWcvnIBMvpt_2_4c3aMG2kMX4Vu4pEwK7/exec';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwOXYyrRiR0sVkZjKutfUT8mt9oBs6tpYObOSnmNkwVJpLbWihj2q7dHFdd6WgxJnUq/exec';
   document.getElementById('brokerForm').addEventListener('submit', function(e){
     e.preventDefault();
     var form = e.target, fd = new FormData();
@@ -334,6 +384,20 @@
         t.scrollIntoView({behavior:'smooth',block:'center'});
       });
   });
+
+  // Sample-report request — posts silently to the same endpoint (type=sample_report).
+  var reqBtn=document.getElementById('reqBtn'), reqForm=document.getElementById('reqForm');
+  if(reqBtn && reqForm){
+    reqBtn.addEventListener('click',function(e){ e.preventDefault(); reqBtn.style.display='none'; reqForm.style.display='flex'; document.getElementById('reqEmail').focus(); });
+    reqForm.addEventListener('submit',function(e){
+      e.preventDefault();
+      var send=document.getElementById('reqSend'); send.disabled=true; send.textContent='Sending…';
+      var fd=new FormData(); fd.append('type','sample_report'); fd.append('email',document.getElementById('reqEmail').value.trim());
+      fetch(ENDPOINT,{method:'POST',body:fd}).catch(function(){}).then(function(){
+        reqForm.style.display='none'; document.getElementById('reqThanks').style.display='block';
+      });
+    });
+  }
 </script>
 </body>
 </html>

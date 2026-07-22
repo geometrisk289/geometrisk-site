@@ -11,8 +11,8 @@
       ["A fault you wired trips and damages a client's appliances", 9000, "PROD"]
     ],
     "large": [
-      ["A fire is traced back to your work, and you're sued", 350000, "PROD"],
-      ["A client is badly shocked on a job you signed off", 500000, "PL"],
+      ["A fire is traced back to your work, and you're liable for the damages", 350000, "PROD"],
+      ["A third party is injured on a job you completed", 500000, "PL"],
       ["Van and full tool kit written off in a crash", 90000, "MOTOR"]
     ]
   },
@@ -29,7 +29,7 @@
     ],
     "large": [
       ["A burst you installed floods a whole apartment block", 400000, "PL"],
-      ["A gas job is blamed for an explosion, and a lawsuit follows", 600000, "PROD"],
+      ["A gas job is blamed for an explosion, and a liability claim follows", 600000, "PROD"],
       ["Water damage across a new build you're liable for", 250000, "PL"]
     ]
   },
@@ -62,7 +62,7 @@
       ["Storm undoes a week of unfinished work", 20000, "PROP"]
     ],
     "large": [
-      ["A build defect surfaces years later and you're sued", 750000, "PI"],
+      ["A build defect surfaces years later, and a claim follows", 750000, "PI"],
       ["A site fire levels a near-complete home", 900000, "PROP"],
       ["A wall collapse injures a passer-by", 600000, "PL"]
     ]
@@ -130,7 +130,7 @@
       ["A miswired unit trips a client's board", 5000, "PROD"]
     ],
     "large": [
-      ["A system fault causes a fire, and you're sued", 400000, "PROD"],
+      ["A system fault causes a fire, and you're liable for the damages", 400000, "PROD"],
       ["A cool room fails and a client loses all stock", 300000, "PROD"],
       ["Van and plant written off in a crash", 85000, "MOTOR"]
     ]
@@ -385,7 +385,7 @@
       ["A laptop with client data is stolen", 6000, "THEFT"]
     ],
     "large": [
-      ["A tax or advice error costs a client dearly, and they sue", 400000, "PI"],
+      ["A tax or advice error costs a client dearly, and a claim follows", 400000, "PI"],
       ["A data breach exposes client financials", 250000, "CYBER"],
       ["A fire destroys the office and records", 200000, "PROP"]
     ]
@@ -538,7 +538,7 @@
       ["Vaccines spoil in a fridge failure", 7000, "BI"]
     ],
     "large": [
-      ["A treatment error leads to a malpractice claim", 600000, "PI"],
+      ["A treatment error leads to a negligence claim", 600000, "PI"],
       ["A breach exposes patient records", 350000, "CYBER"],
       ["A fire closes the practice for months", 250000, "PROP"]
     ]

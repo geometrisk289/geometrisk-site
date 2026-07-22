@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About · Geometrisk</title>
-<meta name="description" content="The person behind Geometrisk. Fifteen years across insurance, banking and regulation, now helping small and medium businesses see the losses they can absorb and the ones they cannot. General information only, not financial product advice.">
+<meta name="description" content="The person behind Geometrisk. Fifteen years at the big end of risk, now bringing it to small businesses and the brokers who serve them — the risk lab that works out what you can carry, what you can't, and what to move. General information only, not advice.">
 <link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,7 @@
   h1 .ital{font-style:italic;color:var(--gold)}
   .lede{font-size:18px;line-height:1.6;color:var(--muted);max-width:620px;margin:0 auto}
 
-  main{padding:0 32px 96px}
+  main{padding:0 0 88px}
   .page{max-width:680px;margin:0 auto}
   .sec{margin-bottom:52px}
   .sec .cap{font-family:var(--mono);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;
@@ -72,7 +72,9 @@
   .photo{border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:28px}
   .photo img{display:block;width:100%;height:460px;object-fit:cover;object-position:50% 30%}
 
-  .ctarow{margin-top:72px;text-align:center}
+  .photocap{font-size:15px;line-height:1.6;font-style:italic;color:var(--muted);
+            max-width:560px;margin:18px auto 0;text-align:center}
+  .ctarow{margin-top:60px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
   .cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:600;
        font-size:16px;padding:15px 30px;border-radius:2px;text-decoration:none;cursor:pointer;
        border:1px solid transparent;transition:all .22s ease}
@@ -80,9 +82,27 @@
   .cta:hover .arw{transform:translateX(4px)}
   .cta.solid{background:var(--navy);color:var(--cream-hi)}
   .cta.solid:hover{background:var(--deep)}
-  .bookrow{margin-top:20px}
-  .bookrow a{font-family:var(--body);font-size:15px;color:var(--muted);text-decoration:underline}
-  .bookrow a:hover{color:var(--navy)}
+  .cta.ghost{border:1px solid var(--line);color:var(--navy)}
+  .cta.ghost:hover{border-color:var(--navy);background:var(--navy);color:var(--cream-hi)}
+
+  .intro{max-width:1080px;margin:0 auto;padding:8px 32px 0;text-align:center}
+  .split{max-width:1080px;margin:0 auto;padding:22px 32px 40px;display:grid;
+         grid-template-columns:.92fr 1.08fr;gap:56px;align-items:start}
+  .split .photo{margin:0}
+  .split .photo img{height:520px}
+  .skicap{margin:14px 2px 0;font-size:14px;line-height:1.55;font-style:italic;color:#949BA8}
+  .bio h1{font-size:clamp(27px,3.3vw,42px);line-height:1.08;letter-spacing:-.4px;margin:0 0 26px}
+  .bio ul{list-style:none;margin:0;padding:0}
+  .bio li{position:relative;padding-left:24px;margin-bottom:16px;font-size:16.5px;
+          line-height:1.62;color:var(--navy)}
+  .bio li:last-child{margin-bottom:0}
+  .bio li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;
+                  background:var(--gold);border-radius:50%}
+  .bio li strong{font-weight:600}
+  .bio li a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold-soft);
+            text-underline-offset:2px;font-weight:600}
+  .bio li a:hover{text-decoration-color:var(--navy)}
+  .bio .ctarow{justify-content:flex-start;margin-top:34px}
 
   footer{background:var(--navy);color:rgba(241,232,214,.6);padding:40px 32px}
   .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;
@@ -95,9 +115,12 @@
   @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
   @media (max-width:860px){
     .navlinks{display:none}
-    main{padding:0 20px 72px}
-    header.hero{padding:36px 20px 56px}
-    .photo img{height:340px}
+    main{padding:0 0 72px}
+    .intro{padding:22px 20px 0}
+    .split{grid-template-columns:1fr;gap:26px;padding:16px 20px 40px}
+    .split .photo img{height:340px}
+    .bio h1{margin-bottom:22px}
+    .bio .ctarow{justify-content:center}
   }
 </style>
 </head>
@@ -118,73 +141,30 @@
   </div>
 </nav>
 
-<header class="hero">
-  <div class="eyebrow">The person behind the line</div>
-  <h1>I have spent my career learning where the <span class="ital">line</span> sits.</h1>
-  <p class="lede">Now I help small and medium businesses find theirs, before a bad day finds it for them.</p>
-</header>
-
 <main>
-  <div class="page">
+  <div class="intro">
+    <div class="eyebrow">The person behind the line</div>
+  </div>
 
-    <section class="sec">
-      <div class="cap">Opening</div>
-      <p>I am Akash. I started Geometrisk because most businesses carry more risk than they realise, and never get to see the shape of it.</p>
-      <p>Every business has a line. On one side sit the losses you can absorb and keep trading. On the other sit the ones that can take the whole thing down. Insurance is one way to deal with what sits on the wrong side. The way you run the business is another. My job is to help you see your line clearly, then lower what sits past it, so you keep more of what you earn and sleep a little better.</p>
-      <p>I am not a broker and I do not sell policies. That means I have no reason to point you at a product. I only point you at what actually reduces your risk.</p>
-    </section>
-
-    <section class="sec">
-      <div class="cap">Why I do this</div>
-      <p>I have been fascinated by risk for as long as I can remember. Not the reckless kind. The quiet, everyday kind that decides whether a business is still standing in five years.</p>
-      <p>For fifteen years I worked on the big end of that question. I built risk teams from scratch at a general insurer as it grew from A$700 million to A$3.5 billion. Before that I advised banks, insurers and their regulators when large things went wrong and someone had to work out why, and what to do next.</p>
-      <p>Along the way I noticed something. The tools the big end uses to think clearly about risk, the plain logic of what you can absorb and what you cannot, almost never reach the businesses that need them most. A caf&#233;, a workshop, a small manufacturer. These owners carry real risk every day, mostly on gut feel, and usually alone. Geometrisk is my attempt to close that gap.</p>
-    </section>
-
-    <section class="sec" style="margin-bottom:44px">
-      <div class="cap">How I think about risk</div>
-      <p>A loss is not just a number you subtract. It resets the base you build from. Lose a year of savings and you are not down one year. You are behind on every year that follows, because you are compounding from a smaller number.</p>
-      <p>That is why the size of a loss matters more than how likely it is. A small, common loss is a cost of doing business. A large, rare one can end the business. Most owners spend their worry on the first kind and leave the second kind unmeasured. Getting that the right way round is most of the work.</p>
-    </section>
-
-    <div class="lineblock" aria-hidden="true">
-      <div class="axis">
-        <div class="carry"></div>
-        <div class="cannot"></div>
-      </div>
-      <div class="axislabels">
-        <span class="l">Losses it absorbs</span>
-        <span class="r">Losses it cannot</span>
-      </div>
-    </div>
-
-    <section class="sec">
-      <div class="cap">What I bring</div>
-      <p>Fifteen years across insurance, banking and regulation. Time spent inside the room where capital, reinsurance and hard trade-offs get decided. And a habit, learned the slow way, of turning a tangled problem into a clear picture a business owner can act on.</p>
-      <p>I care about getting it right, and I care about the people on the other side of the desk. Competence without warmth is just a lecture. I try not to give those.</p>
-    </section>
-
-    <section class="sec">
-      <div class="cap">Away from work</div>
-      <p style="margin-bottom:28px">I am a husband and a dad to two boys, which is its own daily lesson in managing risk with incomplete information. I read widely, collect mental models the way some people collect tools, and get to the snow whenever I can. I am drawn to the same thing in business that I am on a slope: reading the terrain, taking the line you can handle, and leaving the one you cannot.</p>
+  <section class="split">
+    <div class="photocol">
       <div class="photo">
         <img src="assets/akash-ski.jpeg" alt="Akash skiing, mountains in the background">
       </div>
-    </section>
-
-    <section class="sec" style="margin-bottom:0">
-      <div class="cap">An invitation</div>
-      <p>If you have ever wondered how much your business could take on the chin before it hurt, that is exactly the question I like to sit with.</p>
-    </section>
-
-    <div class="ctarow">
-      <a class="cta solid" href="find-your-line.html">Find your line <span class="arw">&rarr;</span></a>
-      <div class="bookrow">
-        <a id="bookChat" href="https://calendar.app.google/oPBbKhGHU44FATAGA" target="_blank" rel="noopener">Book a chat</a>
+      <p class="skicap">Practice what I preach off the clock. On a slope: read the terrain, take the line you can handle, leave the one you can&rsquo;t.</p>
+    </div>
+    <div class="bio">
+      <h1>I help businesses and their brokers get <span class="ital">clarity</span> on risk &mdash; before it lands.</h1>
+      <ul>
+        <li><strong>Clarity, not guesswork.</strong> Geometrisk&rsquo;s models put a number on the risk you keep: what the business can absorb, what a loss would really cost to recover, and where it sits against the line. The kind of clarity most owners only get after a bad day.</li>
+        <li><strong>Fifteen years at the big end of risk.</strong> I spent them answering these questions inside large insurers and banks. I want mid-market businesses, and the brokers who look after them, to have that same clarity &mdash; on their own terms, not the insurer&rsquo;s.</li>
+        <li><strong>Genuinely here to help.</strong> Whether you run a business or advise one as its broker, I&rsquo;d like to understand your risk and where I can help. Feel free to <a class="book" href="https://calendar.app.google/oPBbKhGHU44FATAGA" target="_blank" rel="noopener">book a time that suits you</a>.</li>
+      </ul>
+      <div class="ctarow">
+        <a class="cta solid" href="https://calendar.app.google/oPBbKhGHU44FATAGA" target="_blank" rel="noopener">Schedule a call <span class="arw">&rarr;</span></a>
       </div>
     </div>
-
-  </div>
+  </section>
 </main>
 
 <footer>
@@ -192,7 +172,7 @@
     <a class="fmark" href="index.html" aria-label="Geometrisk">
       <img src="assets/geometrisk-logo-light.png" alt="Geometrisk">
     </a>
-    <div class="disc">Illustrative figures only. General information, not financial product advice. Your insurance needs depend on your specific financial situation. Geometrisk is not an insurance broker or insurer and does not provide financial product advice. Where we introduce a client to an independent broker, we may receive a referral fee, which we disclose.</div>
+    <div class="disc">Illustrative figures only. General information, not financial product advice. Geometrisk helps businesses understand the risk they retain; it is not an insurance broker or insurer and does not arrange or advise on insurance products.</div>
   </div>
 </footer>
 
