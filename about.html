@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About · Geometrisk</title>
-<meta name="description" content="The person behind Geometrisk. Fifteen years at the big end of risk, now bringing it to small businesses and the brokers who serve them — the risk lab that works out what you can carry, what you can't, and what to move. General information only, not advice.">
+<meta name="description" content="Geometrisk exists to flip the order of the risk conversation: a risk decision should start with your appetite — what you can carry, and what you can't — not with a product an insurer has to sell. General information only, not advice.">
 <link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,23 +40,24 @@
   .navlinks a:hover{color:var(--navy)}
   .navlinks a.here{color:var(--navy)}
 
-  header.hero{padding:48px 32px 72px;max-width:820px;margin:0 auto;text-align:center}
+  header.hero{padding:48px 32px 60px;max-width:820px;margin:0 auto;text-align:center}
   .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:1.8px;text-transform:uppercase;
            color:var(--gold);margin-bottom:22px}
-  h1{font-family:var(--serif);font-weight:600;font-size:clamp(40px,6.4vw,76px);
-     line-height:1.03;letter-spacing:-.6px;color:var(--navy);margin:0 auto 24px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(36px,5.6vw,66px);
+     line-height:1.04;letter-spacing:-.6px;color:var(--navy);margin:0 auto 24px;max-width:15ch}
   h1 .ital{font-style:italic;color:var(--gold)}
   .lede{font-size:18px;line-height:1.6;color:var(--muted);max-width:620px;margin:0 auto}
 
   main{padding:0 0 88px}
-  .page{max-width:680px;margin:0 auto}
-  .sec{margin-bottom:52px}
+  .page{max-width:680px;margin:0 auto;padding:0 32px}
+  .sec{margin-bottom:48px}
   .sec .cap{font-family:var(--mono);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;
-            color:var(--gold);margin-bottom:16px}
+            color:var(--gold);margin-bottom:14px}
   .sec p{font-size:17px;line-height:1.75;color:var(--navy);margin:0 0 18px}
   .sec p:last-child{margin-bottom:0}
+  .sec p .g{color:var(--gold);font-weight:600}
 
-  .lineblock{margin:0 0 56px}
+  .lineblock{margin:34px 0 6px}
   .axis{position:relative;height:56px;border-bottom:1px solid var(--line)}
   .axis .carry{position:absolute;top:0;bottom:0;left:0;right:32%;background:var(--navy);
                border-left:1px solid var(--line)}
@@ -69,12 +70,23 @@
   .axislabels .l{color:var(--muted)}
   .axislabels .r{color:var(--gold)}
 
-  .photo{border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:28px}
-  .photo img{display:block;width:100%;height:460px;object-fit:cover;object-position:50% 30%}
-
-  .photocap{font-size:15px;line-height:1.6;font-style:italic;color:var(--muted);
-            max-width:560px;margin:18px auto 0;text-align:center}
-  .ctarow{margin-top:60px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+  /* ---------- contact ---------- */
+  .contactband{background:var(--cream);border-top:1px solid var(--line);padding:64px 32px}
+  .contact{max-width:560px;margin:0 auto}
+  .contact .cap{font-family:var(--mono);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;
+                color:var(--gold);margin-bottom:12px;text-align:center}
+  .contact h2{font-family:var(--serif);font-weight:600;font-size:clamp(25px,3.2vw,34px);
+              line-height:1.12;letter-spacing:-.3px;color:var(--navy);text-align:center;margin-bottom:10px}
+  .contact .clead{font-size:16px;line-height:1.6;color:var(--muted);text-align:center;
+                  max-width:460px;margin:0 auto 30px}
+  .field{margin-bottom:16px}
+  .field label{font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;
+               color:var(--muted);display:block;margin-bottom:7px}
+  .field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:4px;background:#fff;
+    font-family:var(--body);font-size:16px;color:var(--navy);padding:13px 14px;outline:none;transition:border-color .2s}
+  .field input:focus,.field textarea:focus{border-color:var(--gold)}
+  .field input::placeholder,.field textarea::placeholder{color:#aeb4bf}
+  .field textarea{resize:vertical;min-height:120px}
   .cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:600;
        font-size:16px;padding:15px 30px;border-radius:2px;text-decoration:none;cursor:pointer;
        border:1px solid transparent;transition:all .22s ease}
@@ -82,27 +94,10 @@
   .cta:hover .arw{transform:translateX(4px)}
   .cta.solid{background:var(--navy);color:var(--cream-hi)}
   .cta.solid:hover{background:var(--deep)}
-  .cta.ghost{border:1px solid var(--line);color:var(--navy)}
-  .cta.ghost:hover{border-color:var(--navy);background:var(--navy);color:var(--cream-hi)}
-
-  .intro{max-width:1080px;margin:0 auto;padding:8px 32px 0;text-align:center}
-  .split{max-width:1080px;margin:0 auto;padding:22px 32px 40px;display:grid;
-         grid-template-columns:.92fr 1.08fr;gap:56px;align-items:start}
-  .split .photo{margin:0}
-  .split .photo img{height:520px}
-  .skicap{margin:14px 2px 0;font-size:14px;line-height:1.55;font-style:italic;color:#949BA8}
-  .bio h1{font-size:clamp(27px,3.3vw,42px);line-height:1.08;letter-spacing:-.4px;margin:0 0 26px}
-  .bio ul{list-style:none;margin:0;padding:0}
-  .bio li{position:relative;padding-left:24px;margin-bottom:16px;font-size:16.5px;
-          line-height:1.62;color:var(--navy)}
-  .bio li:last-child{margin-bottom:0}
-  .bio li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;
-                  background:var(--gold);border-radius:50%}
-  .bio li strong{font-weight:600}
-  .bio li a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold-soft);
-            text-underline-offset:2px;font-weight:600}
-  .bio li a:hover{text-decoration-color:var(--navy)}
-  .bio .ctarow{justify-content:flex-start;margin-top:34px}
+  .contact .send{text-align:center;margin-top:8px}
+  .contact .alt{margin-top:18px;font-size:14px;color:var(--muted);text-align:center}
+  .contact .alt a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold-soft);text-underline-offset:2px}
+  .contact .alt a:hover{text-decoration-color:var(--navy)}
 
   footer{background:var(--navy);color:rgba(241,232,214,.6);padding:40px 32px}
   .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;
@@ -115,12 +110,9 @@
   @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
   @media (max-width:860px){
     .navlinks{display:none}
-    main{padding:0 0 72px}
-    .intro{padding:22px 20px 0}
-    .split{grid-template-columns:1fr;gap:26px;padding:16px 20px 40px}
-    .split .photo img{height:340px}
-    .bio h1{margin-bottom:22px}
-    .bio .ctarow{justify-content:center}
+    main{padding:0 0 8px}
+    header.hero{padding:36px 24px 44px}
+    .page{padding:0 24px}
   }
 </style>
 </head>
@@ -142,31 +134,54 @@
   </div>
 </nav>
 
-<main>
-  <div class="intro">
-    <div class="eyebrow">The person behind the line</div>
-  </div>
+<header class="hero">
+  <div class="eyebrow">What we believe</div>
+  <h1>A risk decision should start with your <span class="ital">appetite</span> — not a product.</h1>
+  <p class="lede">Geometrisk exists to flip the order of the risk conversation.</p>
+</header>
 
-  <section class="split">
-    <div class="photocol">
-      <div class="photo">
-        <img src="assets/akash-ski.jpeg" alt="Akash skiing, mountains in the background">
+<main>
+  <div class="page">
+    <section class="sec">
+      <div class="cap">The usual order</div>
+      <p>Most risk conversations start with a product. <em>Here&rsquo;s a policy &mdash; do you want it?</em> They begin with what an insurer has to sell, not with what the business can actually carry. The most important question gets skipped.</p>
+    </section>
+
+    <section class="sec">
+      <div class="cap">The right order</div>
+      <p>Start instead with your risk appetite: the loss your business can absorb, the loss it can&rsquo;t, and what a loss would really cost to recover. Answer that first, and everything after it &mdash; what to retain, what to transfer, what to spend &mdash; gets clearer.</p>
+      <div class="lineblock">
+        <div class="axis"><div class="carry"></div><div class="cannot"></div></div>
+        <div class="axislabels"><span class="l">Losses it can absorb</span><span class="r">Losses it cannot</span></div>
       </div>
-      <p class="skicap">Practice what I preach off the clock. On a slope: read the terrain, take the line you can handle, leave the one you can&rsquo;t.</p>
-    </div>
-    <div class="bio">
-      <h1>I help businesses and their brokers get <span class="ital">clarity</span> on risk &mdash; before it lands.</h1>
-      <ul>
-        <li><strong>Clarity, not guesswork.</strong> Geometrisk&rsquo;s models put a number on the risk you keep: what the business can absorb, what a loss would really cost to recover, and where it sits against the line. The kind of clarity most owners only get after a bad day.</li>
-        <li><strong>Fifteen years at the big end of risk.</strong> I spent them answering these questions inside large insurers and banks. I want mid-market businesses, and the brokers who look after them, to have that same clarity &mdash; on their own terms, not the insurer&rsquo;s.</li>
-        <li><strong>Genuinely here to help.</strong> Whether you run a business or advise one as its broker, I&rsquo;d like to understand your risk and where I can help. Feel free to <a class="book" href="https://calendar.app.google/oPBbKhGHU44FATAGA" target="_blank" rel="noopener">book a time that suits you</a>.</li>
-      </ul>
-      <div class="ctarow">
-        <a class="cta solid" href="https://calendar.app.google/oPBbKhGHU44FATAGA" target="_blank" rel="noopener">Schedule a call <span class="arw">&rarr;</span></a>
-      </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="sec">
+      <div class="cap">What Geometrisk does</div>
+      <p>We put appetite first. We help businesses see the risk they carry, and connect them with independent risk advisors who start there too &mdash; not with a product to sell. <span class="g">Your risk is our business.</span></p>
+    </section>
+  </div>
 </main>
+
+<section class="contactband">
+  <div class="contact">
+    <div class="cap">Get in touch</div>
+    <h2>Tell us about your risk.</h2>
+    <p class="clead">Whether you run a business or advise one, we&rsquo;d like to understand your risk and where we can help.</p>
+    <form id="contactForm">
+      <div class="field"><label for="c_name">Name</label>
+        <input id="c_name" type="text" placeholder="Your name"></div>
+      <div class="field"><label for="c_email">Your email</label>
+        <input id="c_email" type="email" placeholder="you@example.com.au"></div>
+      <div class="field"><label for="c_msg">Message</label>
+        <textarea id="c_msg" placeholder="A little about your business and your risk."></textarea></div>
+      <div class="send">
+        <button type="submit" class="cta solid">Send email <span class="arw">&rarr;</span></button>
+      </div>
+    </form>
+    <p class="alt">Or email us directly at <a href="mailto:info@geometrisk.com.au">info@geometrisk.com.au</a></p>
+  </div>
+</section>
 
 <footer>
   <div class="foot">
@@ -176,6 +191,25 @@
     <div class="disc">Illustrative figures only. General information, not financial product advice. Geometrisk helps businesses understand the risk they retain; it is not an insurance broker or insurer and does not arrange or advise on insurance products.</div>
   </div>
 </footer>
+
+<script>
+  // Opens the visitor's mail app pre-addressed to info@geometrisk.com.au with their details filled in.
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = (document.getElementById('c_name').value || '').trim();
+    var email = (document.getElementById('c_email').value || '').trim();
+    var msg = (document.getElementById('c_msg').value || '').trim();
+    var subject = 'Enquiry via geometrisk.com.au' + (name ? ' — ' + name : '');
+    var lines = [];
+    if(name) lines.push('Name: ' + name);
+    if(email) lines.push('Email: ' + email);
+    if(lines.length) lines.push('');
+    lines.push(msg);
+    var href = 'mailto:info@geometrisk.com.au?subject=' + encodeURIComponent(subject) +
+               '&body=' + encodeURIComponent(lines.join('\n'));
+    window.location.href = href;
+  });
+</script>
 
 </body>
 </html>
