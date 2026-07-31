@@ -98,6 +98,9 @@
   .contact .alt{margin-top:18px;font-size:14px;color:var(--muted);text-align:center}
   .contact .alt a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold-soft);text-underline-offset:2px}
   .contact .alt a:hover{text-decoration-color:var(--navy)}
+  .cthanks{display:none;text-align:center;background:#fff;border:1px solid var(--line);border-radius:4px;padding:26px 24px;margin-top:4px}
+  .cthanks.show{display:block}
+  .cthanks p{font-size:16px;line-height:1.6;color:var(--navy)}
 
   footer{background:var(--navy);color:rgba(241,232,214,.6);padding:40px 32px}
   .foot{max-width:1180px;margin:0 auto;display:flex;align-items:center;
@@ -129,8 +132,7 @@
   <div class="navlinks">
     <a href="index.html#businesses">For businesses</a>
     <a href="for-brokers.html">For brokers</a>
-    <a href="methodology.html">Risk Library</a>
-    <a href="find-your-line.html">Risk Tools</a>
+    <a class="here" href="about.html">About</a>
   </div>
 </nav>
 
@@ -176,9 +178,10 @@
       <div class="field"><label for="c_msg">Message</label>
         <textarea id="c_msg" placeholder="A little about your business and your risk."></textarea></div>
       <div class="send">
-        <button type="submit" class="cta solid">Send email <span class="arw">&rarr;</span></button>
+        <button type="submit" class="cta solid" id="cSend">Send email <span class="arw">&rarr;</span></button>
       </div>
     </form>
+    <div class="cthanks" id="cthanks"><p>Thanks &mdash; that&rsquo;s with us. We&rsquo;ll get back to you at the email you gave.</p></div>
     <p class="alt">Or email us directly at <a href="mailto:info@geometrisk.com.au">info@geometrisk.com.au</a></p>
   </div>
 </section>
@@ -193,21 +196,31 @@
 </footer>
 
 <script>
-  // Opens the visitor's mail app pre-addressed to info@geometrisk.com.au with their details filled in.
+  // Contact form posts silently to the Geometrisk Apps Script (type=contact), which forwards
+  // the message to info@geometrisk.com.au. No mail client is opened.
+  var CONTACT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwOXYyrRiR0sVkZjKutfUT8mt9oBs6tpYObOSnmNkwVJpLbWihj2q7dHFdd6WgxJnUq/exec';
   document.getElementById('contactForm').addEventListener('submit', function(e){
     e.preventDefault();
+    var form = e.target;
     var name = (document.getElementById('c_name').value || '').trim();
     var email = (document.getElementById('c_email').value || '').trim();
     var msg = (document.getElementById('c_msg').value || '').trim();
-    var subject = 'Enquiry via geometrisk.com.au' + (name ? ' — ' + name : '');
-    var lines = [];
-    if(name) lines.push('Name: ' + name);
-    if(email) lines.push('Email: ' + email);
-    if(lines.length) lines.push('');
-    lines.push(msg);
-    var href = 'mailto:info@geometrisk.com.au?subject=' + encodeURIComponent(subject) +
-               '&body=' + encodeURIComponent(lines.join('\n'));
-    window.location.href = href;
+    var btn = document.getElementById('cSend');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    var fd = new FormData();
+    fd.append('type','contact');
+    fd.append('to','info@geometrisk.com.au');
+    fd.append('name',name);
+    fd.append('email',email);
+    fd.append('message',msg);
+    fd.append('page',location.pathname);
+    fd.append('ts',new Date().toISOString());
+    fetch(CONTACT_ENDPOINT,{method:'POST',body:fd})
+      .catch(function(){})
+      .then(function(){
+        form.style.display = 'none';
+        document.getElementById('cthanks').classList.add('show');
+      });
   });
 </script>
 
