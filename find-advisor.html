@@ -239,6 +239,19 @@
   // Client postcode → state, by leading digit (good enough to rank coverage).
   var STATE_BY_DIGIT={ '0':'NT','2':'NSW','3':'VIC','4':'QLD','5':'SA','6':'WA','7':'TAS' };
   function clientState(){ return state.pc ? (STATE_BY_DIGIT[state.pc.charAt(0)]||'') : ''; }
+
+  // Postcode → [lat,lng] centroids (bundled) for real distance between client and advisor.
+  var PC = {};
+  fetch('data/postcodes.json',{cache:'force-cache'}).then(function(r){ return r.ok?r.json():null; })
+    .then(function(d){ if(d){ PC=d; render(); } }).catch(function(){});
+  function latlng(pc){ return (pc && PC[pc]) || null; }
+  function haversine(a,b){
+    var R=6371, dLat=(b[0]-a[0])*Math.PI/180, dLng=(b[1]-a[1])*Math.PI/180;
+    var s=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a[0]*Math.PI/180)*Math.cos(b[0]*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2);
+    return 2*R*Math.asin(Math.sqrt(s));
+  }
+  function advisorDist(a){ var c=latlng(state.pc), p=latlng(a.postcode); return (c&&p)?haversine(c,p):Infinity; }
+  function fmtKm(d){ if(d<1) return '<1 km'; if(d<10) return (Math.round(d*10)/10)+' km'; return Math.round(d)+' km'; }
   function initials(name){ var p=(name||'').trim().split(/\s+/).filter(Boolean);
     return p.length ? (p[0][0]+(p.length>1?p[p.length-1][0]:'')).toUpperCase() : '—'; }
 
@@ -286,10 +299,12 @@
   // Rank: industry, then location, then availability, then name (deterministic tiebreak).
   // Never hard-filters, so results stay populated. Paid placement will layer on top once brokers subscribe.
   function ranked(){
-    return ADVISORS.map(function(a){ return { a:a, m:servesDivision(a)?1:0, c:coversState(a)?1:0 }; })
+    return ADVISORS.map(function(a){ return { a:a, m:servesDivision(a)?1:0, c:coversState(a)?1:0, d:advisorDist(a) }; })
       .sort(function(x,y){
+        var dd = (x.d===y.d) ? 0 : (x.d - y.d);   // nearest first; unknown (Infinity) sorts last
         return (y.m-x.m)                          // 1. serves the client's industry
-            || (y.c-x.c)                          // 2. covers the client's location
+            || dd                                 // 2. location: distance
+            || (y.c-x.c)                          //    coverage fallback when distance unknown
             || (availScore(y.a)-availScore(x.a))  // 3. availability
             || x.a.firm.localeCompare(y.a.firm);
       })
@@ -322,6 +337,8 @@
         ? '<div class="avatar" style="background-image:url('+a.photo+')"></div>'
         : '<div class="avatar">'+initials(a.name)+'</div>';
       var cover = (a.states||[]).indexOf('AU')>-1 ? 'Australia-wide' : (a.states||[]).join(', ');
+      var dkm = advisorDist(a);
+      var distStr = isFinite(dkm) ? ' · ~'+fmtKm(dkm) : '';
       var role = (a.role||'Risk Advisor') + (a.afsl ? ' · '+a.afsl : '');
 
       var el = document.createElement('div');
@@ -333,7 +350,7 @@
           '<div class="role">'+role+'</div>'+
           '<div class="chips">'+chips+'</div>'+
           '<div class="meta">'+
-            '<span class="loc"><b>'+a.suburb+', '+a.state+'</b></span>'+
+            '<span class="loc"><b>'+a.suburb+', '+a.state+'</b>'+distStr+'</span>'+
             (cover?'<span>Covers '+cover+'</span>':'')+
           '</div>'+
           remLine(a.remuneration)+

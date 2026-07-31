@@ -76,7 +76,8 @@ function advisorsFeed_(callback) {
         role: r[col.role] || 'Risk Advisor', afsl: r[col.afsl], photo: '',
         blurb: r[col.blurb],
         industries: parseJson_(r[col.industries], []),
-        suburb: r[col.suburb], state: states[0] || '', states: states,
+        suburb: r[col.suburb], postcode: r[col.postcode],
+        state: states[0] || '', states: states,
         bookingUrl: r[col.bookingUrl],
         remuneration: parseJson_(r[col.remuneration], {}),
         status: 'live'
