@@ -81,6 +81,8 @@
   .rhead .rt{font-family:var(--serif);font-size:22px;color:var(--navy)}
   .rhead .rt b{color:var(--gold)}
   .rhead .rsort{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .empty{background:#fff;border:1px dashed var(--line-grey);border-radius:12px;padding:36px 26px;text-align:center;color:var(--muted);font-size:15px;line-height:1.65}
+  .empty a{color:var(--gold);font-weight:600;text-decoration:none;border-bottom:1px solid var(--gold-soft)}
 
   .acard{display:flex;gap:18px;background:#fff;border:1px solid var(--line-grey);border-radius:12px;
          padding:20px 22px;margin-bottom:14px;align-items:flex-start}
@@ -132,6 +134,7 @@
     <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
     <span class="divider"></span>
     <span class="tagline">risks<br><span class="g">that</span><br>matter</span>
+    <span class="beta" style="font-family:var(--mono),ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:100px;padding:3px 9px;line-height:1;white-space:nowrap;align-self:center">Beta</span>
   </a>
   <nav>
     <a href="index.html#businesses">For Businesses</a>
@@ -296,6 +299,12 @@
   function render(){
     var list = $('rlist'); list.innerHTML='';
     var rows = ranked();
+    if(!rows.length){
+      list.innerHTML = '<div class="empty">No advisors are listed yet &mdash; Geometrisk is in beta and onboarding risk advisors now. Please check back soon.<br>Are you an advisor? <a href="broker-onboarding.html">Join the directory</a>.</div>';
+      $('rcount').textContent = '0';
+      $('rnear').textContent = '';
+      return;
+    }
     rows.forEach(function(a){
       // broad industry categories, matched one first so the highlighted chip is always visible
       var cats = categories(a).sort(function(x,y){
