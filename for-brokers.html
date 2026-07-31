@@ -53,6 +53,13 @@
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 10px}
   .chip{font-size:12px;color:var(--navy);background:var(--cream-2);border-radius:100px;padding:4px 11px;line-height:1.3}
   .chip.match{background:#FBF6EC;color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-soft)}
+  .acard .rem{font-size:13px;color:var(--muted);margin-top:9px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .acard .rem .rlab{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+  .acard .rem b{color:var(--navy);font-weight:600}
+  .itip{position:relative;display:inline-flex;width:15px;height:15px;border-radius:50%;border:1px solid var(--line-grey);color:var(--muted);font-size:10px;font-style:italic;align-items:center;justify-content:center;cursor:help}
+  .itip .tip{position:absolute;bottom:150%;left:0;width:264px;max-width:72vw;background:var(--navy);color:#fff;padding:12px 14px;border-radius:8px;font-family:'Inter',sans-serif;font-size:12px;line-height:1.5;font-style:normal;letter-spacing:0;text-transform:none;box-shadow:0 10px 24px rgba(27,42,74,.28);opacity:0;visibility:hidden;transition:opacity .15s;z-index:40}
+  .itip .tip b{color:var(--gold-soft)}
+  .itip:hover .tip,.itip:focus .tip{opacity:1;visibility:visible}
   .pmeta{font-size:13px;color:var(--muted)} .pmeta b{color:var(--navy);font-weight:600}
   .acard .act{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:8px;padding-left:6px}
   .acard .act .book{background:var(--gold);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:11px 20px;border-radius:7px;white-space:nowrap}
@@ -116,14 +123,14 @@
         <div class="avatar">SW</div>
         <div class="info">
           <div class="nm">Sarah Whitfield · Whitfield Risk Partners</div>
-          <div class="role">Risk Advisor</div>
+          <div class="role">Risk Advisor · AR 001234</div>
           <div class="chips">
-            <span class="chip match">Electrician</span>
-            <span class="chip">Plumber / Gasfitter</span>
-            <span class="chip">Builder (residential)</span>
-            <span class="chip">+2 more</span>
+            <span class="chip match">Construction &amp; Trade</span>
+            <span class="chip">Manufacturing</span>
+            <span class="chip">Wholesale</span>
           </div>
           <div class="pmeta"><b>Sydney CBD, NSW</b> · Covers NSW, ACT</div>
+          <div class="rem"><span class="rlab">Remuneration</span> <span class="itip" tabindex="0">i<span class="tip"><b>Risk spend</b> &mdash; what you pay to transfer risk, including insurance premiums and other risk mitigation expenses incurred from implementing advice.<br><br><b>Risk managed</b> &mdash; your total exposure, including risk retained and transferred to insurers.</span></span> · <b>~15% of risk spend</b></div>
         </div>
         <div class="act">
           <button class="book" type="button" tabindex="-1">Book &rarr;</button>

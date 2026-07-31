@@ -93,6 +93,14 @@
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 10px}
   .chip{font-size:12px;color:var(--navy);background:var(--cream-2);border-radius:100px;padding:4px 11px;line-height:1.3}
   .chip.match{background:#FBF6EC;color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-soft)}
+  .acard .rem{font-size:13px;color:var(--muted);margin-top:9px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .acard .rem .rlab{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+  .acard .rem b{color:var(--navy);font-weight:600}
+  .acard .rem b.nd{color:var(--muted);font-weight:500;font-style:italic}
+  .itip{position:relative;display:inline-flex;width:15px;height:15px;border-radius:50%;border:1px solid var(--line-grey);color:var(--muted);font-size:10px;font-style:italic;align-items:center;justify-content:center;cursor:help}
+  .itip .tip{position:absolute;bottom:150%;left:0;width:264px;max-width:72vw;background:var(--navy);color:#fff;padding:12px 14px;border-radius:8px;font-family:'Inter',sans-serif;font-size:12px;line-height:1.5;font-style:normal;letter-spacing:0;text-transform:none;box-shadow:0 10px 24px rgba(27,42,74,.28);opacity:0;visibility:hidden;transition:opacity .15s;z-index:40}
+  .itip .tip b{color:var(--gold-soft)}
+  .itip:hover .tip,.itip:focus .tip{opacity:1;visibility:visible}
   .meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
   .meta .loc b{color:var(--navy);font-weight:600}
   .avail{color:var(--navy)}
@@ -213,6 +221,38 @@
   function initials(name){ var p=(name||'').trim().split(/\s+/).filter(Boolean);
     return p.length ? (p[0][0]+(p.length>1?p[p.length-1][0]:'')).toUpperCase() : '—'; }
 
+  // Broad industry categories shown on the card, rolled up from the advisors' ANZSIC divisions.
+  var CATLABEL = {
+    'Construction':'Construction & Trade',
+    'Manufacturing':'Manufacturing',
+    'Accommodation & Food':'Hospitality',
+    'Retail':'Retail & Fashion',
+    'Professional Services':'Professional Services',
+    'Transport & Logistics':'Transport & Logistics',
+    'Health & Care':'Health & Care',
+    'Agriculture':'Agriculture',
+    'Wholesale & Trade':'Wholesale',
+    'Other Services':'Trades & Services'
+  };
+  function categories(a){
+    var seen={}, out=[];
+    (a.industries||[]).forEach(function(i){
+      var lab = CATLABEL[i.division] || i.division;
+      if(lab && !seen[lab]){ seen[lab]=1; out.push({label:lab, division:i.division}); }
+    });
+    return out;
+  }
+  var REM_TIP = '<span class="tip"><b>Risk spend</b> — what you pay to transfer risk, including insurance premiums and other risk mitigation expenses incurred from implementing advice.<br><br><b>Risk managed</b> — your total exposure, including risk retained and transferred to insurers.</span>';
+  function remLine(r){
+    r = r || {};
+    var disclosed = r.disclosed!==false && (r.riskSpendPct!=null || r.riskManagedPct!=null);
+    if(!disclosed) return '<div class="rem"><span class="rlab">Remuneration</span> · <b class="nd">Not disclosed</b></div>';
+    var parts=[];
+    if(r.riskSpendPct!=null) parts.push('~'+r.riskSpendPct+'% of risk spend');
+    if(r.riskManagedPct!=null) parts.push('~'+r.riskManagedPct+'% of risk managed');
+    return '<div class="rem"><span class="rlab">Remuneration</span> <span class="itip" tabindex="0">i'+REM_TIP+'</span> · <b>'+parts.join(' + ')+'</b></div>';
+  }
+
   // Advisor matches the client's occupation when they serve its ANZSIC division.
   function servesDivision(a){ return !!state.division && (a.industries||[]).some(function(i){ return i.division===state.division; }); }
   function coversState(a){ var cs=clientState(); if(!cs) return false;
@@ -239,22 +279,23 @@
     var list = $('rlist'); list.innerHTML='';
     var rows = ranked();
     rows.forEach(function(a){
-      // matched-division industries first, so the highlighted chip is always visible
-      var inds = (a.industries||[]).slice().sort(function(i,j){
-        var im=(state.division && i.division===state.division)?0:1;
-        var jm=(state.division && j.division===state.division)?0:1;
-        return im-jm;
+      // broad industry categories, matched one first so the highlighted chip is always visible
+      var cats = categories(a).sort(function(x,y){
+        var xm=(state.division && x.division===state.division)?0:1;
+        var ym=(state.division && y.division===state.division)?0:1;
+        return xm-ym;
       });
-      var chips = inds.slice(0,4).map(function(i){
-        var match = state.division && i.division===state.division;
-        return '<span class="chip'+(match?' match':'')+'">'+i.label+'</span>';
+      var chips = cats.slice(0,4).map(function(c){
+        var match = state.division && c.division===state.division;
+        return '<span class="chip'+(match?' match':'')+'">'+c.label+'</span>';
       }).join('');
-      if(inds.length>4) chips += '<span class="chip">+'+(inds.length-4)+' more</span>';
+      if(cats.length>4) chips += '<span class="chip">+'+(cats.length-4)+' more</span>';
 
       var avatar = a.photo
         ? '<div class="avatar" style="background-image:url('+a.photo+')"></div>'
         : '<div class="avatar">'+initials(a.name)+'</div>';
       var cover = (a.states||[]).indexOf('AU')>-1 ? 'Australia-wide' : (a.states||[]).join(', ');
+      var role = (a.role||'Risk Advisor') + (a.afsl ? ' · '+a.afsl : '');
 
       var el = document.createElement('div');
       el.className='acard';
@@ -262,12 +303,13 @@
         avatar +
         '<div class="info">'+
           '<div class="nm">'+a.name+' · '+a.firm+'</div>'+
-          '<div class="role">'+(a.role||'Risk Advisor')+'</div>'+
+          '<div class="role">'+role+'</div>'+
           '<div class="chips">'+chips+'</div>'+
           '<div class="meta">'+
             '<span class="loc"><b>'+a.suburb+', '+a.state+'</b></span>'+
             (cover?'<span>Covers '+cover+'</span>':'')+
           '</div>'+
+          remLine(a.remuneration)+
         '</div>'+
         '<div class="act">'+
           '<button class="book" type="button" data-url="'+(a.bookingUrl||'')+'">Book &rarr;</button>'+

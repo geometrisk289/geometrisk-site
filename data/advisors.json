@@ -22,6 +22,7 @@
     "bookingUrl": "https://calendly.com/whitfield-risk/risk-consultation",
     "email": "sarah@whitfieldrisk.com.au",
     "phone": "",
+    "remuneration": { "disclosed": true, "riskSpendPct": 15, "riskManagedPct": null },
     "status": "live"
   },
   {
@@ -47,6 +48,7 @@
     "bookingUrl": "https://calendly.com/nair-co-risk/consult",
     "email": "priya@nairco.com.au",
     "phone": "",
+    "remuneration": { "disclosed": true, "riskSpendPct": null, "riskManagedPct": 0.05 },
     "status": "live"
   },
   {
@@ -72,6 +74,7 @@
     "bookingUrl": "https://calendly.com/meridian-risk/30min",
     "email": "james@meridianrisk.com.au",
     "phone": "",
+    "remuneration": { "disclosed": true, "riskSpendPct": 18, "riskManagedPct": null },
     "status": "live"
   },
   {
@@ -97,6 +100,7 @@
     "bookingUrl": "https://calendly.com/coastline-risk/intro",
     "email": "daniel@coastlinerisk.com.au",
     "phone": "",
+    "remuneration": { "disclosed": false, "riskSpendPct": null, "riskManagedPct": null },
     "status": "live"
   },
   {
@@ -122,6 +126,7 @@
     "bookingUrl": "https://calendly.com/lachlan-reed/risk-chat",
     "email": "emma@lachlanreed.com.au",
     "phone": "",
+    "remuneration": { "disclosed": true, "riskSpendPct": 12, "riskManagedPct": 0.08 },
     "status": "live"
   }
 ]

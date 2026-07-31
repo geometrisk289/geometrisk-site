@@ -104,6 +104,30 @@
   .acard .role{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 10px}
   .chip{font-size:12px;color:var(--navy);background:var(--cream-2);border-radius:100px;padding:4px 11px;line-height:1.3}
+  .acard .rem{font-size:13px;color:var(--muted);margin-top:9px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .acard .rem .rlab{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+  .acard .rem b{color:var(--navy);font-weight:600}
+  .acard .rem b.nd{color:var(--muted);font-weight:500;font-style:italic}
+  .acard .rem .phm{font-style:italic}
+  /* remuneration inputs */
+  .remhelp{font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:16px;max-width:60ch}
+  .remrows{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px;max-width:620px}
+  .remrow label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+  .remrow label .o{color:var(--line-grey)}
+  .pct{display:flex;align-items:center;border-bottom:2px solid var(--line-grey);transition:border-color .2s;max-width:180px}
+  .pct:focus-within{border-color:var(--gold)}
+  .pct input{border:none;background:none;outline:none;font-family:var(--serif);font-size:22px;color:var(--navy);width:100%;padding:6px 0}
+  .pct input::placeholder{color:var(--line-grey)}
+  .pct span{font-family:var(--serif);font-size:20px;color:var(--muted);padding-left:4px}
+  .pct.dim{opacity:.4}
+  .ndrow{display:inline-flex;align-items:center;gap:9px;margin-top:18px;font-size:14px;color:var(--navy);cursor:pointer}
+  .ndrow input{width:16px;height:16px;accent-color:var(--gold)}
+  @media(max-width:560px){ .remrows{grid-template-columns:1fr;gap:16px} }
+  /* info tooltip */
+  .itip{position:relative;display:inline-flex;width:15px;height:15px;border-radius:50%;border:1px solid var(--line-grey);color:var(--muted);font-size:10px;font-style:italic;align-items:center;justify-content:center;cursor:help;vertical-align:middle}
+  .itip .tip{position:absolute;bottom:150%;left:0;width:264px;max-width:72vw;background:var(--navy);color:#fff;padding:12px 14px;border-radius:8px;font-family:'Inter',sans-serif;font-weight:400;font-size:12px;line-height:1.5;font-style:normal;letter-spacing:0;text-transform:none;box-shadow:0 10px 24px rgba(27,42,74,.28);opacity:0;visibility:hidden;transition:opacity .15s;z-index:40}
+  .itip .tip b{color:var(--gold-soft)}
+  .itip:hover .tip,.itip:focus .tip{opacity:1;visibility:visible}
   .pmeta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
   .pmeta .loc b{color:var(--navy);font-weight:600}
   .acard .act{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:8px;padding-left:6px}
@@ -247,6 +271,20 @@
       </details>
     </div>
 
+    <!-- remuneration -->
+    <div class="bsec">
+      <div class="bhead">05 · How you&rsquo;re remunerated</div>
+      <div class="btitle">Your remuneration <span class="itip" tabindex="0">i<span class="tip"><b>Risk spend</b> &mdash; what your client pays to transfer risk, including insurance premiums and other risk mitigation expenses incurred from implementing advice.<br><br><b>Risk managed</b> &mdash; the client&rsquo;s total exposure, including risk retained and transferred to insurers.</span></span></div>
+      <p class="remhelp">Shown on your card so clients can see how you&rsquo;re paid &mdash; it builds trust. Disclose either or both, or choose not to.</p>
+      <div class="remrows">
+        <div class="remrow"><label>% of risk spend <span class="o">(typically 10&ndash;25%)</span></label>
+          <div class="pct"><input id="r_spend" inputmode="decimal" placeholder="15"><span>%</span></div></div>
+        <div class="remrow"><label>% of risk managed <span class="o">(typically under 0.10%)</span></label>
+          <div class="pct"><input id="r_managed" inputmode="decimal" placeholder="0.05"><span>%</span></div></div>
+      </div>
+      <label class="ndrow"><input type="checkbox" id="r_nd"> Prefer not to disclose</label>
+    </div>
+
     <!-- live preview -->
     <div class="bsec">
       <div class="bhead">Preview</div>
@@ -261,6 +299,7 @@
             <div class="pmeta">
               <span class="loc" id="p_loc">Add your location</span>
             </div>
+            <div class="rem" id="p_rem"></div>
           </div>
           <div class="act">
             <button class="book" type="button" tabindex="-1">Book &rarr;</button>
@@ -376,16 +415,36 @@
   });
   $('removePhoto').addEventListener('click',function(){ photoData=''; $('f_photo').value=''; this.hidden=true; updatePreview(); });
 
+  // broad industry categories (rolled up from selected ANZSIC occupations' divisions)
+  var CATLABEL = {
+    'Construction':'Construction & Trade','Manufacturing':'Manufacturing','Accommodation & Food':'Hospitality',
+    'Retail':'Retail & Fashion','Professional Services':'Professional Services','Transport & Logistics':'Transport & Logistics',
+    'Health & Care':'Health & Care','Agriculture':'Agriculture','Wholesale & Trade':'Wholesale','Other Services':'Trades & Services'
+  };
+  function catsFromSelected(){
+    var seen={}, out=[];
+    selected.forEach(function(d){ var lab=CATLABEL[d.division]||d.division; if(lab&&!seen[lab]){seen[lab]=1;out.push(lab);} });
+    return out;
+  }
+  var REM_TIP = '<span class="tip"><b>Risk spend</b> — what your client pays to transfer risk, including insurance premiums and other risk mitigation expenses incurred from implementing advice.<br><br><b>Risk managed</b> — the client\'s total exposure, including risk retained and transferred to insurers.</span>';
+  function remPreviewHtml(){
+    if($('r_nd').checked) return '<span class="rlab">Remuneration</span> · <b class="nd">Not disclosed</b>';
+    var s=parseFloat($('r_spend').value), m=parseFloat($('r_managed').value), parts=[];
+    if(!isNaN(s)&&s>0) parts.push('~'+s+'% of risk spend');
+    if(!isNaN(m)&&m>0) parts.push('~'+m+'% of risk managed');
+    if(!parts.length) return '<span class="rlab">Remuneration</span> · <span class="phm">add above</span>';
+    return '<span class="rlab">Remuneration</span> <span class="itip" tabindex="0">i'+REM_TIP+'</span> · <b>'+parts.join(' + ')+'</b>';
+  }
+
   function updatePreview(){
-    var name=$('f_name').value.trim(), firm=$('f_firm').value.trim();
+    var name=$('f_name').value.trim(), firm=$('f_firm').value.trim(), afsl=$('f_afsl').value.trim();
     applyAvatar($('p_avatar')); applyAvatar($('uthumb'));
     $('p_nm').textContent=(name||'Your name')+(firm?' · '+firm:'');
-    $('p_role').textContent=$('f_role').value.trim()||'Risk Advisor';
+    $('p_role').textContent=($('f_role').value.trim()||'Risk Advisor')+(afsl?' · '+afsl:'');
 
-    var chips=$('p_chips'); chips.innerHTML='';
-    var show=selected.slice(0,4);
-    show.forEach(function(d){ var c=document.createElement('span'); c.className='chip'; c.textContent=d.label; chips.appendChild(c); });
-    if(selected.length>4){ var m=document.createElement('span'); m.className='chip'; m.textContent='+'+(selected.length-4)+' more'; chips.appendChild(m); }
+    var cats=catsFromSelected(), chips=$('p_chips'); chips.innerHTML='';
+    cats.slice(0,4).forEach(function(lab){ var c=document.createElement('span'); c.className='chip'; c.textContent=lab; chips.appendChild(c); });
+    if(cats.length>4){ var m=document.createElement('span'); m.className='chip'; m.textContent='+'+(cats.length-4)+' more'; chips.appendChild(m); }
 
     var pc=$('f_pc').value.trim(), sub=$('f_suburb').value.trim();
     var cover = states.indexOf('AU')>-1 ? 'Australia-wide' : states.filter(function(s){return s!=='AU';}).join(', ');
@@ -399,8 +458,15 @@
     } else {
       loc.textContent='Add your location';
     }
+
+    $('p_rem').innerHTML = remPreviewHtml();
   }
-  ['f_name','f_firm','f_role','f_pc','f_suburb'].forEach(function(id){ $(id).addEventListener('input',updatePreview); });
+  ['f_name','f_firm','f_role','f_afsl','f_pc','f_suburb','r_spend','r_managed'].forEach(function(id){ $(id).addEventListener('input',updatePreview); });
+  $('r_nd').addEventListener('change',function(){
+    var off=this.checked;
+    ['r_spend','r_managed'].forEach(function(id){ $(id).disabled=off; if(off) $(id).value=''; $(id).parentNode.classList.toggle('dim',off); });
+    updatePreview();
+  });
 
   // ---- submit (mockup: local thanks, no endpoint) ----
   $('profileForm').addEventListener('submit',function(e){
