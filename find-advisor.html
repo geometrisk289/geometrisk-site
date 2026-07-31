@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find your risk advisor — Geometrisk</title>
+<meta name="description" content="Tell us what you do and where you are. See the risk advisors who fit your industry and your area — with live availability, ready to book. General information only.">
+<link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root{ --serif:'Playfair Display',Georgia,serif; --mono:'JetBrains Mono',ui-monospace,monospace; }
+  body{min-height:100vh;display:flex;flex-direction:column}
+  main{flex:1;width:100%;max-width:920px;margin:0 auto;padding:6px 24px 40px}
+
+  .intro{text-align:center;margin:24px 0 22px}
+  .intro .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .intro h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4.6vw,50px);line-height:1.05;letter-spacing:-.01em;color:var(--navy)}
+  .intro h1 em{font-style:italic;color:var(--gold)}
+  .intro .sub{color:var(--muted);font-size:16px;line-height:1.6;max-width:56ch;margin:14px auto 0}
+
+  /* ---------- booking panel ---------- */
+  .panel{background:#fff;border:1px solid var(--line-grey);border-radius:14px;overflow:hidden;
+         box-shadow:0 12px 40px rgba(27,42,74,.06)}
+  .bsec{padding:22px 26px;border-top:1px solid var(--line-grey)}
+  .bsec:first-child{border-top:none}
+  .blabel{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .blabel .k{font-size:15.5px;color:var(--navy);font-weight:600}
+  .blabel .v{font-size:15.5px;color:var(--muted)}
+  .blabel .v.set{color:var(--gold);font-weight:600}
+
+  .opts{display:grid;gap:12px}
+  .opts.two{grid-template-columns:1fr 1fr}
+  .opts.four{grid-template-columns:repeat(4,1fr)}
+  .opts.wrap{grid-template-columns:repeat(auto-fill,minmax(158px,1fr))}
+  .opt{border:1.5px solid var(--line-grey);border-radius:9px;background:#fff;padding:14px 16px;cursor:pointer;
+       text-align:left;font-family:'Inter',sans-serif;transition:border-color .15s,background .15s;display:flex;flex-direction:column;gap:3px}
+  .opt:hover{border-color:var(--navy-soft)}
+  .opt.sel{border-color:var(--gold);background:#FBF6EC}
+  .opt .t{font-size:15px;color:var(--navy);font-weight:600;line-height:1.2}
+  .opt .d{font-size:13px;color:var(--muted);line-height:1.4}
+  .opt.showall{align-items:center;justify-content:center;text-align:center;color:var(--amber);font-weight:600;border-style:dashed}
+  .opt.showall:hover{border-color:var(--amber)}
+
+  .pcode{display:flex;align-items:center;gap:12px;max-width:260px;border-bottom:2px solid var(--line-grey);transition:border-color .2s}
+  .pcode:focus-within{border-color:var(--gold)}
+  .pcode input{border:none;background:none;outline:none;font-family:var(--serif);font-size:24px;color:var(--navy);width:100%;padding:6px 0;letter-spacing:.08em}
+  .pcode input::placeholder{color:var(--line-grey);letter-spacing:0}
+
+  /* ---------- occupation typeahead ---------- */
+  .ac{position:relative;max-width:520px}
+  .ac input{width:100%;border:none;border-bottom:2px solid var(--line-grey);background:none;outline:none;
+            font-family:var(--serif);font-size:22px;color:var(--navy);padding:8px 0;transition:border-color .2s}
+  .ac input:focus{border-color:var(--gold)}
+  .ac input::placeholder{color:var(--line-grey)}
+  .aclist{position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--line-grey);border-top:none;
+          max-height:288px;overflow-y:auto;z-index:20;display:none;box-shadow:0 14px 30px rgba(27,42,74,.14)}
+  .aclist.show{display:block}
+  .acitem{padding:11px 14px;cursor:pointer;font-size:14px;color:var(--navy);border-bottom:1px solid var(--cream-2);
+          display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .acitem:last-child{border-bottom:none}
+  .acitem:hover,.acitem.sel{background:var(--cream-2)}
+  .acitem .code{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+
+  /* ---------- scale money fields ---------- */
+  .srow{display:grid;grid-template-columns:1fr 1fr;gap:20px 30px;max-width:620px}
+  .fld{display:flex;flex-direction:column;gap:6px}
+  .fld label{font-size:13px;color:var(--muted)}
+  .money{display:flex;align-items:center;border-bottom:2px solid var(--line-grey);transition:border-color .2s}
+  .money:focus-within{border-color:var(--gold)}
+  .money span{font-family:var(--serif);font-size:22px;color:var(--muted);padding-right:4px}
+  .money input{border:none;background:none;outline:none;font-family:var(--serif);font-size:22px;color:var(--navy);width:100%;padding:6px 0}
+  .money input::placeholder{color:var(--line-grey)}
+  @media(max-width:560px){ .srow{grid-template-columns:1fr;gap:16px} }
+
+  /* ---------- results ---------- */
+  .results{margin-top:34px}
+  .rhead{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+  .rhead .rt{font-family:var(--serif);font-size:22px;color:var(--navy)}
+  .rhead .rt b{color:var(--gold)}
+  .rhead .rsort{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  .acard{display:flex;gap:18px;background:#fff;border:1px solid var(--line-grey);border-radius:12px;
+         padding:20px 22px;margin-bottom:14px;align-items:flex-start}
+  .acard .avatar{flex:none;width:56px;height:56px;border-radius:50%;background:var(--navy);color:var(--gold-soft);
+                 display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;font-weight:600;
+                 overflow:hidden;background-size:cover;background-position:center}
+  .acard .info{flex:1;min-width:0}
+  .acard .nm{font-size:17px;color:var(--navy);font-weight:600;line-height:1.2}
+  .acard .role{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 10px}
+  .chip{font-size:12px;color:var(--navy);background:var(--cream-2);border-radius:100px;padding:4px 11px;line-height:1.3}
+  .chip.match{background:#FBF6EC;color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-soft)}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
+  .meta .loc b{color:var(--navy);font-weight:600}
+  .avail{color:var(--navy)}
+  .avail b{color:var(--amber);font-weight:600}
+  .acard .act{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:10px;padding-left:6px}
+  .acard .act .book{background:var(--gold);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;
+                    padding:11px 20px;border-radius:7px;cursor:pointer;white-space:nowrap;transition:background .2s}
+  .acard .act .book:hover{background:var(--gold-soft)}
+  .acard .act .bookcap{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .acard .act .prof{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+                    text-decoration:none;border-bottom:1px solid var(--line-grey);padding-bottom:2px}
+  .acard .act .prof:hover{color:var(--navy)}
+
+  .disc{max-width:680px;margin:26px auto 0;font-size:12px;line-height:1.55;color:var(--muted);text-align:center}
+  .preview-note{max-width:680px;margin:16px auto 0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+                text-transform:uppercase;color:var(--amber);text-align:center;opacity:.8}
+
+  @media(max-width:680px){
+    .opts.four{grid-template-columns:1fr 1fr}
+    .acard{flex-wrap:wrap}
+    .acard .act{flex-direction:row;align-items:center;width:100%;justify-content:space-between;padding-left:0;margin-top:6px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="index.html">
+    <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
+    <span class="divider"></span>
+    <span class="tagline">risks<br><span class="g">that</span><br>matter</span>
+  </a>
+  <nav>
+    <a href="index.html#businesses">For Businesses</a>
+    <a href="for-brokers.html">For Brokers</a>
+    <a href="methodology.html">Risk Library</a>
+    <a href="find-your-line.html">Risk Tools</a>
+  </nav>
+</header>
+
+<main>
+  <div class="intro">
+    <div class="eyebrow">Find your risk advisor</div>
+    <h1>Advisors who start with your <em>risk</em> — not a product.</h1>
+    <p class="sub">Tell us what you do and where you are. We&rsquo;ll show the risk advisors who fit your industry and your area, with their live availability — ready to book.</p>
+  </div>
+
+  <div class="panel">
+    <!-- meeting -->
+    <div class="bsec">
+      <div class="blabel"><span class="k">How you&rsquo;d like to meet:</span><span class="v" id="v_meet">In person</span></div>
+      <div class="opts two" data-group="meet" data-single="1">
+        <button class="opt sel" data-val="In person"><span class="t">In person</span><span class="d">Meet at the advisor&rsquo;s office or your site.</span></button>
+        <button class="opt" data-val="Call"><span class="t">Call</span><span class="d">A phone or video consult — the advisor&rsquo;s call.</span></button>
+      </div>
+    </div>
+
+    <!-- occupation -->
+    <div class="bsec">
+      <div class="blabel"><span class="k">Your occupation:</span><span class="v" id="v_occ">Not selected</span></div>
+      <div class="ac">
+        <input id="i_occ" autocomplete="off" placeholder="Start typing — e.g. electrician, cafe, freight, accountant">
+        <div class="aclist" id="aclist"></div>
+      </div>
+    </div>
+
+    <!-- scale -->
+    <div class="bsec">
+      <div class="blabel"><span class="k">Your scale:</span><span class="v" id="v_scale">Not set</span></div>
+      <div class="srow">
+        <div class="fld"><label>Annual revenue</label>
+          <div class="money"><span>$</span><input id="i_rev" inputmode="numeric" placeholder="0"></div></div>
+        <div class="fld"><label>Working capital / surplus cash</label>
+          <div class="money"><span>$</span><input id="i_cash" inputmode="numeric" placeholder="0"></div></div>
+      </div>
+    </div>
+
+    <!-- postcode -->
+    <div class="bsec">
+      <div class="blabel"><span class="k">Your postcode:</span><span class="v" id="v_pc">Not set</span></div>
+      <div class="pcode"><input id="i_pc" inputmode="numeric" maxlength="4" placeholder="2000" autocomplete="postal-code"></div>
+    </div>
+  </div>
+
+  <!-- results -->
+  <div class="results">
+    <div class="rhead">
+      <div class="rt"><b id="rcount">5</b> risk advisors <span id="rnear"></span></div>
+      <div class="rsort">Best match first</div>
+    </div>
+    <div id="rlist"></div>
+  </div>
+
+  <p class="preview-note">Preview — placeholder advisors and illustrative availability</p>
+  <p class="disc">Geometrisk introduces businesses to independent risk advisors; it is not an insurance broker or insurer and does not arrange or advise on insurance products. General information only, not financial product advice.</p>
+</main>
+
+<footer class="site">
+  General information only, not advice. &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; Geometrisk
+</footer>
+
+<script>
+  var $ = function(id){ return document.getElementById(id); };
+  var state = { meet:'In person', occ:'', anzsic:'', division:'', rev:0, cash:0, pc:'' };
+  var kfmt = function(n){ if(n>=1e6) return '$'+(''+(n/1e6).toFixed(1)).replace('.0','')+'m'; if(n>=1000) return '$'+Math.round(n/1000)+'k'; return '$'+Math.round(n); };
+  var num = function(v){ return parseInt((v||'').replace(/[^0-9]/g,''),10)||0; };
+  var commas = function(n){ return n?n.toLocaleString('en-AU'):''; };
+
+  // ---- advisor directory (data/advisors.json) ----
+  var ADVISORS = [];
+  fetch('data/advisors.json',{cache:'no-store'})
+    .then(function(r){ return r.ok?r.json():null; })
+    .then(function(d){ if(d&&d.length){ ADVISORS = d.filter(function(a){ return a.status!=='hidden'; }); } render(); })
+    .catch(function(){ render(); });
+
+  // Client postcode → state, by leading digit (good enough to rank coverage).
+  var STATE_BY_DIGIT={ '0':'NT','2':'NSW','3':'VIC','4':'QLD','5':'SA','6':'WA','7':'TAS' };
+  function clientState(){ return state.pc ? (STATE_BY_DIGIT[state.pc.charAt(0)]||'') : ''; }
+  function initials(name){ var p=(name||'').trim().split(/\s+/).filter(Boolean);
+    return p.length ? (p[0][0]+(p.length>1?p[p.length-1][0]:'')).toUpperCase() : '—'; }
+
+  // Advisor matches the client's occupation when they serve its ANZSIC division.
+  function servesDivision(a){ return !!state.division && (a.industries||[]).some(function(i){ return i.division===state.division; }); }
+  function coversState(a){ var cs=clientState(); if(!cs) return false;
+    var s=a.states||[]; return s.indexOf(cs)>-1 || s.indexOf('AU')>-1; }
+
+  // Availability rank — placeholder until we track advisors' live availability
+  // (Option 1 only deep-links today, so there's no slot data yet).
+  function availScore(a){ return a.availabilityScore || 0; }
+
+  // Rank: industry, then location, then availability, then name (deterministic tiebreak).
+  // Never hard-filters, so results stay populated. Paid placement will layer on top once brokers subscribe.
+  function ranked(){
+    return ADVISORS.map(function(a){ return { a:a, m:servesDivision(a)?1:0, c:coversState(a)?1:0 }; })
+      .sort(function(x,y){
+        return (y.m-x.m)                          // 1. serves the client's industry
+            || (y.c-x.c)                          // 2. covers the client's location
+            || (availScore(y.a)-availScore(x.a))  // 3. availability
+            || x.a.firm.localeCompare(y.a.firm);
+      })
+      .map(function(o){ return o.a; });
+  }
+
+  function render(){
+    var list = $('rlist'); list.innerHTML='';
+    var rows = ranked();
+    rows.forEach(function(a){
+      // matched-division industries first, so the highlighted chip is always visible
+      var inds = (a.industries||[]).slice().sort(function(i,j){
+        var im=(state.division && i.division===state.division)?0:1;
+        var jm=(state.division && j.division===state.division)?0:1;
+        return im-jm;
+      });
+      var chips = inds.slice(0,4).map(function(i){
+        var match = state.division && i.division===state.division;
+        return '<span class="chip'+(match?' match':'')+'">'+i.label+'</span>';
+      }).join('');
+      if(inds.length>4) chips += '<span class="chip">+'+(inds.length-4)+' more</span>';
+
+      var avatar = a.photo
+        ? '<div class="avatar" style="background-image:url('+a.photo+')"></div>'
+        : '<div class="avatar">'+initials(a.name)+'</div>';
+      var cover = (a.states||[]).indexOf('AU')>-1 ? 'Australia-wide' : (a.states||[]).join(', ');
+
+      var el = document.createElement('div');
+      el.className='acard';
+      el.innerHTML =
+        avatar +
+        '<div class="info">'+
+          '<div class="nm">'+a.name+' · '+a.firm+'</div>'+
+          '<div class="role">'+(a.role||'Risk Advisor')+'</div>'+
+          '<div class="chips">'+chips+'</div>'+
+          '<div class="meta">'+
+            '<span class="loc"><b>'+a.suburb+', '+a.state+'</b></span>'+
+            (cover?'<span>Covers '+cover+'</span>':'')+
+          '</div>'+
+        '</div>'+
+        '<div class="act">'+
+          '<button class="book" type="button" data-url="'+(a.bookingUrl||'')+'">Book &rarr;</button>'+
+          '<span class="bookcap">View availability</span>'+
+          '<a class="prof" href="#">View profile</a>'+
+        '</div>';
+      list.appendChild(el);
+    });
+    $('rcount').textContent = rows.length;
+    $('rnear').textContent = state.occ ? '· best match first' : (state.pc ? 'near '+state.pc : '');
+    // "Book" opens the advisor's own calendar (Option 1: deep-link)
+    list.querySelectorAll('.book').forEach(function(b){
+      b.addEventListener('click',function(){ var u=b.dataset.url; if(u) window.open(u,'_blank','noopener'); });
+    });
+  }
+
+  // ---- meeting toggle ----
+  var meetGrp = document.querySelector('[data-group="meet"]');
+  meetGrp.addEventListener('click', function(e){
+    var btn = e.target.closest('.opt'); if(!btn) return;
+    meetGrp.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('sel'); });
+    btn.classList.add('sel'); state.meet = btn.dataset.val; $('v_meet').textContent = state.meet;
+  });
+
+  // ---- occupation typeahead (ANZSIC list) ----
+  var DATA=[], picked=null, acMatches=[], acIdx=-1;
+  fetch('data/industry_losses.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(d&&d.length)DATA=d;}).catch(function(){});
+  var fold = function(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase(); };
+  function acReset(){ picked=null; state.occ=''; state.anzsic=''; state.division='';
+    $('v_occ').textContent='Not selected'; $('v_occ').classList.remove('set'); }
+  function acFilter(){
+    var q=fold($('i_occ').value.trim()), listEl=$('aclist'); acReset(); render();
+    if(!q||!DATA.length){ listEl.classList.remove('show'); listEl.innerHTML=''; return; }
+    var starts=[], incl=[];
+    DATA.forEach(function(d){ if(d.id==='other')return; var hay=fold(d.label+' '+(d.keywords||'')); if(fold(d.label).indexOf(q)===0) starts.push(d); else if(hay.indexOf(q)>-1) incl.push(d); });
+    acMatches=starts.concat(incl).slice(0,8); acIdx=-1; listEl.innerHTML='';
+    if(!acMatches.length){ listEl.classList.remove('show'); return; }
+    acMatches.forEach(function(d,i){ var el=document.createElement('div'); el.className='acitem'; el.innerHTML='<span>'+d.label+'</span>'+(d.anzsic?'<span class="code">'+d.anzsic+'</span>':''); el.onclick=function(){acPick(i);}; listEl.appendChild(el); });
+    listEl.classList.add('show');
+  }
+  function acPick(i){ var d=acMatches[i]; if(!d)return; picked=d; state.occ=d.label; state.anzsic=d.anzsic||''; state.division=d.division||'';
+    $('i_occ').value=d.label; $('v_occ').textContent=d.label; $('v_occ').classList.add('set'); $('aclist').classList.remove('show'); render(); }
+  function acKey(e){ var listEl=$('aclist'); if(!listEl.classList.contains('show'))return; var items=listEl.querySelectorAll('.acitem');
+    if(e.key==='ArrowDown'){acIdx=Math.min(acMatches.length-1,acIdx+1);e.preventDefault();}
+    else if(e.key==='ArrowUp'){acIdx=Math.max(0,acIdx-1);e.preventDefault();}
+    else if(e.key==='Enter'){ if(acIdx>-1){acPick(acIdx);e.preventDefault();} return; } else return;
+    items.forEach(function(it,i){ it.classList.toggle('sel',i===acIdx); }); }
+  $('i_occ').addEventListener('input',acFilter);
+  $('i_occ').addEventListener('keydown',acKey);
+  document.addEventListener('click',function(e){ if(!e.target.closest('.ac')) $('aclist').classList.remove('show'); });
+
+  // ---- scale money fields ----
+  function scaleSummary(){
+    var parts=[];
+    if(state.rev>0) parts.push(kfmt(state.rev)+' revenue');
+    if(state.cash>0) parts.push(kfmt(state.cash)+' working capital');
+    var v=$('v_scale');
+    if(parts.length){ v.textContent=parts.join(' · '); v.classList.add('set'); }
+    else { v.textContent='Not set'; v.classList.remove('set'); }
+  }
+  $('i_rev').addEventListener('input',function(){ var n=num(this.value); this.value=commas(n); state.rev=n; scaleSummary(); });
+  $('i_cash').addEventListener('input',function(){ var n=num(this.value); this.value=commas(n); state.cash=n; scaleSummary(); });
+
+  // ---- postcode ----
+  $('i_pc').addEventListener('input', function(){
+    this.value = this.value.replace(/[^0-9]/g,'');
+    state.pc = this.value;
+    $('v_pc').textContent = this.value || 'Not set';
+    $('v_pc').classList.toggle('set', this.value.length===4);
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>

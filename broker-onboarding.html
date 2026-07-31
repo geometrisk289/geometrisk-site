@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the directory — Geometrisk for Brokers</title>
+<meta name="description" content="Create your Geometrisk advisor profile: the industries you serve, where you are, and your booking link. Clients find you in the risk-advisor finder and book you directly.">
+<link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root{ --serif:'Playfair Display',Georgia,serif; --mono:'JetBrains Mono',ui-monospace,monospace; }
+  body{min-height:100vh;display:flex;flex-direction:column}
+  main{flex:1;width:100%;max-width:900px;margin:0 auto;padding:6px 24px 44px}
+
+  .intro{text-align:center;margin:24px 0 22px}
+  .intro .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .intro h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4.6vw,50px);line-height:1.05;letter-spacing:-.01em;color:var(--navy)}
+  .intro h1 em{font-style:italic;color:var(--gold)}
+  .intro .sub{color:var(--muted);font-size:16px;line-height:1.6;max-width:58ch;margin:14px auto 0}
+
+  .panel{background:#fff;border:1px solid var(--line-grey);border-radius:14px;overflow:hidden;box-shadow:0 12px 40px rgba(27,42,74,.06)}
+  .bsec{padding:24px 26px;border-top:1px solid var(--line-grey)}
+  .bsec:first-child{border-top:none}
+  .bhead{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+  .btitle{font-family:var(--serif);font-size:20px;color:var(--navy);margin-bottom:18px}
+
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field.full{grid-column:1 / -1}
+  .field label{font-size:13px;color:var(--muted)}
+  .field label .o{color:var(--line-grey)}
+  .field input,.field textarea{width:100%;border:1px solid var(--line-grey);border-radius:8px;background:#fff;
+    font-family:'Inter',sans-serif;font-size:15px;color:var(--navy);padding:12px 14px;outline:none;transition:border-color .2s}
+  .field input:focus,.field textarea:focus{border-color:var(--gold)}
+  .field input::placeholder,.field textarea::placeholder{color:#b9b3a3}
+  .field textarea{resize:vertical;min-height:74px}
+
+  /* headshot / logo upload */
+  .upload{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .uthumb{flex:none;width:64px;height:64px;border-radius:50%;background:var(--navy);color:var(--gold-soft);
+          display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:22px;font-weight:600;
+          overflow:hidden;background-size:cover;background-position:center}
+  .uctl{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .ulink{border:none;background:none;color:var(--amber);font-family:'Inter',sans-serif;font-size:13px;cursor:pointer;text-decoration:underline;padding:0}
+  .uhint{font-size:12px;color:var(--muted)}
+
+  /* industries multi-select */
+  .msel{position:relative}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+  .tags:empty{display:none}
+  .tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--navy);background:#FBF6EC;
+       box-shadow:inset 0 0 0 1px var(--gold-soft);border-radius:100px;padding:5px 6px 5px 12px}
+  .tag button{border:none;background:rgba(27,42,74,.08);color:var(--navy);width:18px;height:18px;border-radius:50%;
+              cursor:pointer;font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center}
+  .tag button:hover{background:rgba(27,42,74,.18)}
+  .aclist{position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--line-grey);
+          max-height:260px;overflow-y:auto;z-index:20;display:none;box-shadow:0 14px 30px rgba(27,42,74,.14);border-radius:0 0 8px 8px}
+  .aclist.show{display:block}
+  .acitem{padding:11px 14px;cursor:pointer;font-size:14px;color:var(--navy);border-bottom:1px solid var(--cream-2);
+          display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .acitem:last-child{border-bottom:none}
+  .acitem:hover,.acitem.sel{background:var(--cream-2)}
+  .acitem .code{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+
+  /* states */
+  .states{display:flex;flex-wrap:wrap;gap:9px}
+  .stbtn{border:1.5px solid var(--line-grey);border-radius:100px;background:#fff;padding:8px 16px;cursor:pointer;
+         font-family:'Inter',sans-serif;font-size:14px;color:var(--navy);transition:border-color .15s,background .15s}
+  .stbtn:hover{border-color:var(--navy-soft)}
+  .stbtn.on{border-color:var(--gold);background:#FBF6EC;color:var(--gold);font-weight:600}
+
+  /* booking link */
+  .linkrow{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+  .linkrow input{flex:1 1 320px}
+  .testbtn{border:1px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:0 20px;cursor:pointer;
+           font-family:'Inter',sans-serif;font-weight:600;font-size:14px;white-space:nowrap;transition:background .2s}
+  .testbtn:hover{background:var(--cream-2)}
+  .linknote{font-size:13px;margin-top:10px;line-height:1.5}
+  .linknote.ok{color:#2f7d4f} .linknote.bad{color:var(--amber)}
+
+  .help{margin-top:18px;border:1px dashed var(--line-grey);border-radius:10px;background:var(--cream);padding:0}
+  .help summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;gap:10px;
+                font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;color:var(--navy)}
+  .help summary::-webkit-details-marker{display:none}
+  .help summary .chev{margin-left:auto;transition:transform .2s;color:var(--gold)}
+  .help[open] summary .chev{transform:rotate(90deg)}
+  .help .hb{padding:0 18px 18px}
+  .help ol{margin:0;padding-left:20px}
+  .help li{font-size:14px;line-height:1.65;color:var(--navy);margin-bottom:9px}
+  .help li b{font-weight:600}
+  .help .tip{font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px}
+  .help a{color:var(--gold)}
+
+  /* live preview card */
+  .previewwrap{background:var(--cream);border:1px solid var(--line-grey);border-radius:12px;padding:18px}
+  .acard{display:flex;gap:18px;background:#fff;border:1px solid var(--line-grey);border-radius:12px;padding:20px 22px;align-items:flex-start}
+  .acard .avatar{flex:none;width:56px;height:56px;border-radius:50%;background:var(--navy);color:var(--gold-soft);
+                 display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;font-weight:600}
+  .acard .info{flex:1;min-width:0}
+  .acard .nm{font-size:17px;color:var(--navy);font-weight:600;line-height:1.2}
+  .acard .role{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 10px}
+  .chip{font-size:12px;color:var(--navy);background:var(--cream-2);border-radius:100px;padding:4px 11px;line-height:1.3}
+  .pmeta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
+  .pmeta .loc b{color:var(--navy);font-weight:600}
+  .acard .act{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:8px;padding-left:6px}
+  .acard .act .book{background:var(--gold);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;
+                    padding:11px 20px;border-radius:7px;white-space:nowrap}
+  .acard .act .bookcap{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .acard .act .prof{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+                    border-bottom:1px solid var(--line-grey);padding-bottom:2px;text-decoration:none}
+
+  .submitrow{padding:24px 26px}
+  .fbtn{background:var(--gold);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:600;font-size:15.5px;
+        letter-spacing:.02em;padding:16px 32px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .fbtn:hover{background:var(--gold-soft)}
+  .fnote{font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.5;max-width:560px}
+
+  .thanks{display:none;text-align:center;padding:40px 26px}
+  .thanks.show{display:block}
+  .thanks h3{font-family:var(--serif);font-weight:500;font-size:28px;color:var(--navy);margin-bottom:12px}
+  .thanks p{font-size:15.5px;line-height:1.65;color:var(--muted);max-width:52ch;margin:0 auto}
+
+  .preview-note{max-width:680px;margin:16px auto 0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+                text-transform:uppercase;color:var(--amber);text-align:center;opacity:.8}
+  .disc{max-width:680px;margin:16px auto 0;font-size:12px;line-height:1.55;color:var(--muted);text-align:center}
+
+  @media(max-width:680px){ .fgrid{grid-template-columns:1fr} .acard{flex-wrap:wrap} .acard .act{flex-direction:row;align-items:center;width:100%;justify-content:space-between;padding-left:0;margin-top:6px} }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="index.html">
+    <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
+    <span class="divider"></span>
+    <span class="tagline">risks<br><span class="g">that</span><br>matter</span>
+  </a>
+  <nav>
+    <a href="index.html#businesses">For Businesses</a>
+    <a href="for-brokers.html" class="on">For Brokers</a>
+    <a href="methodology.html">Risk Library</a>
+    <a href="find-your-line.html">Risk Tools</a>
+  </nav>
+</header>
+
+<main>
+  <div class="intro">
+    <div class="eyebrow">Join the directory</div>
+    <h1>Create your advisor <em>profile</em>.</h1>
+    <p class="sub">The industries you serve, where you are, and how clients book you. You&rsquo;ll appear in the risk-advisor finder, and clients book you straight from your own calendar.</p>
+  </div>
+
+  <form id="profileForm">
+  <div class="panel" id="formPanel">
+
+    <!-- about you -->
+    <div class="bsec">
+      <div class="bhead">01 · About you</div>
+      <div class="btitle">Who clients will see</div>
+      <div class="fgrid">
+        <div class="field"><label>Your name</label><input id="f_name" placeholder="e.g. Sarah Whitfield"></div>
+        <div class="field"><label>Firm / brokerage</label><input id="f_firm" placeholder="e.g. Whitfield Risk Partners"></div>
+        <div class="field"><label>Title / role</label><input id="f_role" value="Risk Advisor" placeholder="Risk Advisor"></div>
+        <div class="field"><label>Authorisation <span class="o">(AFSL or AR no.)</span></label><input id="f_afsl" placeholder="e.g. AR 123456"></div>
+        <div class="field"><label>Email</label><input id="f_email" type="email" placeholder="you@brokerage.com.au"></div>
+        <div class="field"><label>Phone <span class="o">(optional)</span></label><input id="f_phone" placeholder="04xx xxx xxx"></div>
+        <div class="field full"><label>Headshot or logo</label>
+          <div class="upload">
+            <div class="uthumb" id="uthumb">—</div>
+            <div class="uctl">
+              <input type="file" id="f_photo" accept="image/png,image/jpeg,image/webp" hidden>
+              <button type="button" class="testbtn" id="uploadBtn">Upload image</button>
+              <button type="button" class="ulink" id="removePhoto" hidden>Remove</button>
+              <span class="uhint">Square works best · JPG, PNG or WebP</span>
+            </div>
+          </div>
+        </div>
+        <div class="field full"><label>Short blurb <span class="o">(one line clients see on your profile)</span></label>
+          <textarea id="f_blurb" placeholder="How you work and who you help best."></textarea></div>
+      </div>
+    </div>
+
+    <!-- who you help -->
+    <div class="bsec">
+      <div class="bhead">02 · Who you help</div>
+      <div class="btitle">Industries you serve</div>
+      <div class="field full msel">
+        <label>Add the occupations and industries you know best &mdash; clients are matched to you on these.</label>
+        <div class="tags" id="indtags"></div>
+        <input id="i_ind" autocomplete="off" placeholder="Start typing — e.g. electrician, hospitality, freight, medical">
+        <div class="aclist" id="indlist"></div>
+      </div>
+    </div>
+
+    <!-- where you are -->
+    <div class="bsec">
+      <div class="bhead">03 · Where you are</div>
+      <div class="btitle">Your location and coverage</div>
+      <div class="fgrid">
+        <div class="field"><label>Office postcode</label><input id="f_pc" inputmode="numeric" maxlength="4" placeholder="2000"></div>
+        <div class="field"><label>Suburb / city <span class="o">(optional)</span></label><input id="f_suburb" placeholder="e.g. Sydney CBD"></div>
+      </div>
+      <div class="field full" style="margin-top:18px">
+        <label>States &amp; territories you cover</label>
+        <div class="states" id="states">
+          <button type="button" class="stbtn" data-st="NSW">NSW</button>
+          <button type="button" class="stbtn" data-st="VIC">VIC</button>
+          <button type="button" class="stbtn" data-st="QLD">QLD</button>
+          <button type="button" class="stbtn" data-st="WA">WA</button>
+          <button type="button" class="stbtn" data-st="SA">SA</button>
+          <button type="button" class="stbtn" data-st="TAS">TAS</button>
+          <button type="button" class="stbtn" data-st="ACT">ACT</button>
+          <button type="button" class="stbtn" data-st="NT">NT</button>
+          <button type="button" class="stbtn" data-st="AU">Australia-wide</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- booking link -->
+    <div class="bsec">
+      <div class="bhead">04 · How clients book you</div>
+      <div class="btitle">Your booking link</div>
+      <div class="field full">
+        <label>Paste your Calendly link. Clients click <b>Book</b> on your card and land here to pick a time.</label>
+        <div class="linkrow">
+          <input id="f_link" type="url" placeholder="https://calendly.com/your-name/risk-consultation">
+          <button type="button" class="testbtn" id="testBtn">Test link</button>
+        </div>
+        <div class="linknote" id="linkNote"></div>
+      </div>
+
+      <details class="help">
+        <summary>Don&rsquo;t have a link yet? Set one up on Calendly &nbsp;<span class="chev">&rsaquo;</span></summary>
+        <div class="hb">
+          <ol>
+            <li><b>Create a free account</b> at <a href="https://calendly.com" target="_blank" rel="noopener">calendly.com</a> using your work email.</li>
+            <li><b>Add an event type</b> — call it something like &ldquo;Risk consultation — 30 min&rdquo;. Set the length and the hours you&rsquo;re available.</li>
+            <li><b>Choose how you meet</b> under <i>Location</i> — pick <i>In-person meeting</i> (add your address) or <i>Phone call</i>. That&rsquo;s the modality clients see.</li>
+            <li><b>Copy your event link</b> — it looks like <code>calendly.com/your-name/risk-consultation</code>.</li>
+            <li><b>Paste it above</b> and hit <b>Test link</b> to confirm it opens your booking page.</li>
+          </ol>
+          <p class="tip">Already use Google Appointment Schedule or Microsoft Bookings? Paste that link instead &mdash; any public booking URL works. We recommend Calendly because it&rsquo;s free and quickest to set up.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- live preview -->
+    <div class="bsec">
+      <div class="bhead">Preview</div>
+      <div class="btitle">How you&rsquo;ll appear in the finder</div>
+      <div class="previewwrap">
+        <div class="acard">
+          <div class="avatar" id="p_avatar">—</div>
+          <div class="info">
+            <div class="nm" id="p_nm">Your name · Your firm</div>
+            <div class="role" id="p_role">Risk Advisor</div>
+            <div class="chips" id="p_chips"></div>
+            <div class="pmeta">
+              <span class="loc" id="p_loc">Add your location</span>
+            </div>
+          </div>
+          <div class="act">
+            <button class="book" type="button" tabindex="-1">Book &rarr;</button>
+            <span class="bookcap">View availability</span>
+            <a class="prof" href="#" tabindex="-1" onclick="return false">View profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submitrow">
+      <button type="submit" class="fbtn" id="submitBtn">Add me to the directory &rarr;</button>
+      <p class="fnote">We review each profile before it goes live. General information only — Geometrisk introduces clients to independent risk advisors and does not arrange or advise on insurance.</p>
+    </div>
+  </div>
+
+  <div class="thanks" id="thanks">
+    <h3>Thanks — your profile is with us.</h3>
+    <p>We&rsquo;ll review it and let you know when you&rsquo;re live in the finder. If we need anything else, we&rsquo;ll email you.</p>
+  </div>
+  </form>
+
+  <p class="preview-note">Preview — this form is a mockup and doesn&rsquo;t submit anywhere yet</p>
+  <p class="disc">Geometrisk introduces businesses to independent risk advisors; it is not an insurance broker or insurer and does not arrange or advise on insurance products.</p>
+</main>
+
+<footer class="site">
+  General information only, not advice. &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; Geometrisk
+</footer>
+
+<script>
+  var $ = function(id){ return document.getElementById(id); };
+  var selected = [];          // [{label, anzsic, division}]
+  var states = [];
+  var photoData = '';         // data URL of uploaded headshot/logo
+
+  // ---- ANZSIC industry list (same data as the finder) ----
+  var DATA=[], acMatches=[], acIdx=-1;
+  fetch('data/industry_losses.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(d&&d.length)DATA=d;}).catch(function(){});
+  var fold = function(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase(); };
+
+  function renderTags(){
+    var wrap=$('indtags'); wrap.innerHTML='';
+    selected.forEach(function(d,i){
+      var t=document.createElement('span'); t.className='tag';
+      t.innerHTML='<span>'+d.label+'</span>';
+      var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Remove '+d.label); b.textContent='×';
+      b.onclick=function(){ selected.splice(i,1); renderTags(); updatePreview(); };
+      t.appendChild(b); wrap.appendChild(t);
+    });
+  }
+  function acFilter(){
+    var q=fold($('i_ind').value.trim()), listEl=$('indlist');
+    if(!q||!DATA.length){ listEl.classList.remove('show'); listEl.innerHTML=''; return; }
+    var chosen={}; selected.forEach(function(d){ chosen[d.label]=1; });
+    var starts=[], incl=[];
+    DATA.forEach(function(d){ if(d.id==='other'||chosen[d.label])return; var hay=fold(d.label+' '+(d.keywords||'')); if(fold(d.label).indexOf(q)===0) starts.push(d); else if(hay.indexOf(q)>-1) incl.push(d); });
+    acMatches=starts.concat(incl).slice(0,8); acIdx=-1; listEl.innerHTML='';
+    if(!acMatches.length){ listEl.classList.remove('show'); return; }
+    acMatches.forEach(function(d,i){ var el=document.createElement('div'); el.className='acitem'; el.innerHTML='<span>'+d.label+'</span>'+(d.anzsic?'<span class="code">'+d.anzsic+'</span>':''); el.onclick=function(){acAdd(i);}; listEl.appendChild(el); });
+    listEl.classList.add('show');
+  }
+  function acAdd(i){ var d=acMatches[i]; if(!d)return;
+    selected.push({label:d.label, anzsic:d.anzsic||'', division:d.division||''});
+    $('i_ind').value=''; $('indlist').classList.remove('show'); renderTags(); updatePreview(); $('i_ind').focus();
+  }
+  function acKey(e){ var listEl=$('indlist'); if(!listEl.classList.contains('show'))return; var items=listEl.querySelectorAll('.acitem');
+    if(e.key==='ArrowDown'){acIdx=Math.min(acMatches.length-1,acIdx+1);e.preventDefault();}
+    else if(e.key==='ArrowUp'){acIdx=Math.max(0,acIdx-1);e.preventDefault();}
+    else if(e.key==='Enter'){ if(acIdx>-1){acAdd(acIdx);e.preventDefault();} return; } else return;
+    items.forEach(function(it,i){ it.classList.toggle('sel',i===acIdx); }); }
+  $('i_ind').addEventListener('input',acFilter);
+  $('i_ind').addEventListener('keydown',acKey);
+  document.addEventListener('click',function(e){ if(!e.target.closest('.msel')) $('indlist').classList.remove('show'); });
+
+  // ---- states ----
+  $('states').addEventListener('click',function(e){
+    var b=e.target.closest('.stbtn'); if(!b)return;
+    b.classList.toggle('on');
+    var st=b.dataset.st;
+    if(b.classList.contains('on')) states.push(st); else states=states.filter(function(s){return s!==st;});
+    updatePreview();
+  });
+
+  // ---- booking link test ----
+  $('testBtn').addEventListener('click',function(){
+    var v=$('f_link').value.trim(), note=$('linkNote');
+    if(!v){ note.className='linknote bad'; note.textContent='Paste your booking link first.'; return; }
+    var ok=/^https?:\/\/.+\..+/.test(v);
+    if(!ok){ note.className='linknote bad'; note.textContent='That doesn’t look like a full link — it should start with https://'; return; }
+    note.className='linknote ok'; note.textContent='Looks good — opening it in a new tab to check…';
+    window.open(v,'_blank','noopener');
+  });
+
+  // ---- live preview ----
+  function initials(name){
+    var p=(name||'').trim().split(/\s+/).filter(Boolean);
+    if(!p.length) return '—';
+    return (p[0][0]+(p.length>1?p[p.length-1][0]:'')).toUpperCase();
+  }
+  function applyAvatar(el){
+    if(photoData){ el.style.backgroundImage='url('+photoData+')'; el.textContent=''; }
+    else { el.style.backgroundImage=''; el.textContent=initials($('f_name').value); }
+  }
+
+  // ---- headshot / logo upload ----
+  $('uploadBtn').addEventListener('click',function(){ $('f_photo').click(); });
+  $('f_photo').addEventListener('change',function(){
+    var file=this.files&&this.files[0]; if(!file) return;
+    var reader=new FileReader();
+    reader.onload=function(e){ photoData=e.target.result; $('removePhoto').hidden=false; updatePreview(); };
+    reader.readAsDataURL(file);
+  });
+  $('removePhoto').addEventListener('click',function(){ photoData=''; $('f_photo').value=''; this.hidden=true; updatePreview(); });
+
+  function updatePreview(){
+    var name=$('f_name').value.trim(), firm=$('f_firm').value.trim();
+    applyAvatar($('p_avatar')); applyAvatar($('uthumb'));
+    $('p_nm').textContent=(name||'Your name')+(firm?' · '+firm:'');
+    $('p_role').textContent=$('f_role').value.trim()||'Risk Advisor';
+
+    var chips=$('p_chips'); chips.innerHTML='';
+    var show=selected.slice(0,4);
+    show.forEach(function(d){ var c=document.createElement('span'); c.className='chip'; c.textContent=d.label; chips.appendChild(c); });
+    if(selected.length>4){ var m=document.createElement('span'); m.className='chip'; m.textContent='+'+(selected.length-4)+' more'; chips.appendChild(m); }
+
+    var pc=$('f_pc').value.trim(), sub=$('f_suburb').value.trim();
+    var cover = states.indexOf('AU')>-1 ? 'Australia-wide' : states.filter(function(s){return s!=='AU';}).join(', ');
+    var locbits=[];
+    if(sub) locbits.push(sub);
+    if(pc) locbits.push(pc);
+    var locText = locbits.join(' ');
+    var loc=$('p_loc');
+    if(locText || cover){
+      loc.innerHTML = (locText?'<b>'+locText+'</b>':'') + (locText&&cover?' · ':'') + (cover||'');
+    } else {
+      loc.textContent='Add your location';
+    }
+  }
+  ['f_name','f_firm','f_role','f_pc','f_suburb'].forEach(function(id){ $(id).addEventListener('input',updatePreview); });
+
+  // ---- submit (mockup: local thanks, no endpoint) ----
+  $('profileForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    $('formPanel').style.display='none';
+    var t=$('thanks'); t.classList.add('show'); t.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+
+  updatePreview();
+</script>
+</body>
+</html>

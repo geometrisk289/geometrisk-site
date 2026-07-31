@@ -68,9 +68,7 @@
   .theline .stroke{position:absolute;top:0;bottom:0;left:-1.25px;width:2.5px;background:var(--navy)}
   .theline .knob{position:absolute;top:-5px;left:-5.5px;width:11px;height:11px;border-radius:50%;
                  background:var(--gold);box-shadow:0 0 0 4px var(--cream-hi)}
-  .theline .val{position:absolute;top:-48px;left:50%;transform:translateX(-50%);
-                font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:-.3px;
-                color:var(--navy);white-space:nowrap}
+  .theline .val{display:none}
 
   .axislabels{margin-top:12px;display:flex;align-items:center;justify-content:space-between;
               font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
@@ -78,16 +76,19 @@
   .axislabels .r{color:var(--gold)}
 
   .herofade{transition:opacity .33s ease}
-  .readout{margin-top:20px;display:flex;align-items:center;justify-content:space-between;
+  .readout{margin-top:20px;display:flex;align-items:center;justify-content:center;
            gap:24px;flex-wrap:wrap}
   .who{font-family:var(--mono);font-size:12.5px;letter-spacing:1px;text-transform:uppercase;
-       color:var(--navy);transition:color .3s ease}
+       color:var(--navy);text-align:center;transition:color .3s ease}
   .dots{margin-top:22px;display:flex;justify-content:center;gap:10px}
   .dots button{width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;
                background:rgba(22,41,74,.2);transition:background .25s ease}
   .dots button.on{background:var(--navy)}
 
-  .herocta{margin-top:48px;text-align:center}
+  .heroline{margin-top:34px;text-align:center;font-family:var(--serif);font-weight:600;
+            font-size:clamp(20px,2.5vw,26px);line-height:1.22;letter-spacing:-.3px;color:var(--navy)}
+  .heroline .ital{font-style:italic;color:var(--gold)}
+  .herocta{margin-top:26px;text-align:center}
   .herocta .sub{margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:1.4px;
                 text-transform:uppercase;color:var(--muted)}
   .herodisc{margin-top:28px;text-align:center;font-family:var(--mono);font-size:11px;
@@ -273,12 +274,13 @@
     <a href="#businesses">For businesses</a>
     <a href="for-brokers.html">For brokers</a>
     <a href="methodology.html">Risk Library</a>
+    <a href="find-your-line.html">Risk Tools</a>
   </div>
 </nav>
 
 <!-- ============ HERO: THE PARTITION ============ -->
 <header class="hero">
-  <div class="eyebrow">Clarity on the risk you retain or can't insure</div>
+  <div class="eyebrow">Clarity on your risks</div>
   <h1>Every business has a <span class="ital">line</span>.</h1>
 
   <div class="lineblock">
@@ -303,9 +305,10 @@
     </div>
     <div class="dots" id="heroDots"></div>
 
+    <p class="heroline">The best risk advisors help you find <span class="ital">yours</span>.</p>
     <div class="herocta">
-      <a class="cta solid" href="find-your-line.html">Find your line <span class="arw">&rarr;</span></a>
-      <div class="sub">Most businesses never do.</div>
+      <a class="cta solid" href="find-advisor.html">Find your risk advisor <span class="arw">&rarr;</span></a>
+      <div class="sub">Advisors who start with your risk appetite &mdash; not an insurer's product.</div>
     </div>
     <div class="herodisc">General information only, not advice.</div>
   </div>
@@ -329,20 +332,20 @@
 <main class="split">
   <section class="panel biz" id="businesses">
     <div class="plabel">How it works</div>
-    <h2>Know what you can carry before the loss <span class="ital">lands</span>.</h2>
+    <h2>The right risk advisor, in three <span class="ital">answers</span>.</h2>
     <ol class="steps">
       <li class="step"><span class="num">01</span><span class="txt">
-        <strong>Your business</strong>
-        <span>Annual revenue and the cash you could reach in the event of a loss.</span></span></li>
+        <strong>Your occupation</strong>
+        <span>What your business does, so we match advisors who understand your industry&rsquo;s risks.</span></span></li>
       <li class="step"><span class="num">02</span><span class="txt">
-        <strong>The worst loss</strong>
-        <span>Set the one-off hit you&rsquo;d most fear in your world, and see whether it sits within your line or past it.</span></span></li>
+        <strong>Your scale</strong>
+        <span>The size of your business affects where the line lands.</span></span></li>
       <li class="step"><span class="num">03</span><span class="txt">
-        <strong>The climb back</strong>
-        <span>For a loss past the line, the extra sales it would take to recover &mdash; and how far that climb really stretches.</span></span></li>
+        <strong>Your postcode</strong>
+        <span>Where you are, so we can surface the risk advisors relevant to your area.</span></span></li>
     </ol>
-    <a class="cta solid" href="find-your-line.html">Start your review <span class="arw">&rarr;</span></a>
-    <div class="chips">Free to start · About 2 minutes · General info, not advice</div>
+    <a class="cta solid" href="find-advisor.html">Find your risk advisor <span class="arw">&rarr;</span></a>
+    <div class="chips">Free · About a minute · General info, not advice</div>
   </section>
 </main>
 
@@ -351,15 +354,15 @@
 <section class="whatis">
   <div class="win">
     <div class="wmtag">What Geometrisk is</div>
-    <h2>Geometrisk is a <span class="ital">risk lab</span></h2>
-    <p class="wlead">We help businesses and their advisors provide clarity on the risks they face &mdash; and the decision tools to act on them.</p>
+    <h2>Your risk is our <span class="ital">business</span>.</h2>
+    <p class="wlead">We connect you with independent risk advisors who begin with the risks you carry &mdash; not the products they can sell.</p>
     <p class="wdisc">Geometrisk is not authorised or licensed to arrange or provide Australian financial product advice or services. We focus on the risk you retain; arranging or advising on insurance is a broker's role, not ours.</p>
   </div>
 </section>
 
 <button class="fab" id="fabAdvisor" type="button">Book your consultation</button>
 
-<a class="fabline" href="find-your-line.html">Find your line</a>
+<a class="fabline" href="find-advisor.html">Find your risk advisor</a>
 
 <div class="overlay" id="advOverlay" role="dialog" aria-modal="true" aria-labelledby="advTitle">
   <div class="modal booking">
