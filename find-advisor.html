@@ -208,12 +208,30 @@
   var num = function(v){ return parseInt((v||'').replace(/[^0-9]/g,''),10)||0; };
   var commas = function(n){ return n?n.toLocaleString('en-AU'):''; };
 
-  // ---- advisor directory (data/advisors.json) ----
+  // ---- advisor directory ----
+  // Live advisors come from the Apps Script (JSONP — dodges CORS on a plain GET to
+  // script.google.com). If it's slow, blocked, or has no live rows yet, we fall back
+  // to the bundled seed file so the finder is never empty.
   var ADVISORS = [];
-  fetch('data/advisors.json',{cache:'no-store'})
-    .then(function(r){ return r.ok?r.json():null; })
-    .then(function(d){ if(d&&d.length){ ADVISORS = d.filter(function(a){ return a.status!=='hidden'; }); } render(); })
-    .catch(function(){ render(); });
+  var ADVISORS_URL = 'https://script.google.com/macros/s/AKfycbwOXYyrRiR0sVkZjKutfUT8mt9oBs6tpYObOSnmNkwVJpLbWihj2q7dHFdd6WgxJnUq/exec';
+  (function loadAdvisors(){
+    var settled = false;
+    function seed(){
+      if(settled) return; settled = true;
+      fetch('data/advisors.json',{cache:'no-store'}).then(function(r){ return r.ok?r.json():null; })
+        .then(function(d){ if(d && d.length && !ADVISORS.length){ ADVISORS = d.filter(function(a){ return a.status!=='hidden'; }); } render(); })
+        .catch(function(){ render(); });
+    }
+    window.__advisorsCb = function(data){
+      if(data && data.length){ settled = true; ADVISORS = data.filter(function(a){ return a.status!=='hidden'; }); render(); }
+      else { seed(); }   // reachable but no live advisors yet → show the seed
+    };
+    var s = document.createElement('script');
+    s.src = ADVISORS_URL + '?type=advisors&callback=__advisorsCb&t=' + Date.now();
+    s.onerror = seed;
+    document.head.appendChild(s);
+    setTimeout(seed, 6000);
+  })();
 
   // Client postcode → state, by leading digit (good enough to rank coverage).
   var STATE_BY_DIGIT={ '0':'NT','2':'NSW','3':'VIC','4':'QLD','5':'SA','6':'WA','7':'TAS' };

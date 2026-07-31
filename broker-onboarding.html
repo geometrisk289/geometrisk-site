@@ -185,11 +185,11 @@
       <div class="bhead">01 · About you</div>
       <div class="btitle">Who clients will see</div>
       <div class="fgrid">
-        <div class="field"><label>Your name</label><input id="f_name" placeholder="e.g. Sarah Whitfield"></div>
-        <div class="field"><label>Firm / brokerage</label><input id="f_firm" placeholder="e.g. Whitfield Risk Partners"></div>
+        <div class="field"><label>Your name</label><input id="f_name" required placeholder="e.g. Sarah Whitfield"></div>
+        <div class="field"><label>Firm / brokerage</label><input id="f_firm" required placeholder="e.g. Whitfield Risk Partners"></div>
         <div class="field"><label>Title / role</label><input id="f_role" value="Risk Advisor" placeholder="Risk Advisor"></div>
         <div class="field"><label>Authorisation <span class="o">(AFSL or AR no.)</span></label><input id="f_afsl" placeholder="e.g. AR 123456"></div>
-        <div class="field"><label>Email</label><input id="f_email" type="email" placeholder="you@brokerage.com.au"></div>
+        <div class="field"><label>Email</label><input id="f_email" type="email" required placeholder="you@brokerage.com.au"></div>
         <div class="field"><label>Phone <span class="o">(optional)</span></label><input id="f_phone" placeholder="04xx xxx xxx"></div>
         <div class="field full"><label>Headshot or logo</label>
           <div class="upload">
@@ -250,7 +250,7 @@
       <div class="field full">
         <label>Paste your Calendly link. Clients click <b>Book</b> on your card and land here to pick a time.</label>
         <div class="linkrow">
-          <input id="f_link" type="url" placeholder="https://calendly.com/your-name/risk-consultation">
+          <input id="f_link" type="url" required placeholder="https://calendly.com/your-name/risk-consultation">
           <button type="button" class="testbtn" id="testBtn">Test link</button>
         </div>
         <div class="linknote" id="linkNote"></div>
@@ -322,7 +322,7 @@
   </div>
   </form>
 
-  <p class="preview-note">Preview — this form is a mockup and doesn&rsquo;t submit anywhere yet</p>
+  <p class="preview-note">Your profile is reviewed before it goes live in the finder</p>
   <p class="disc">Geometrisk introduces businesses to independent risk advisors; it is not an insurance broker or insurer and does not arrange or advise on insurance products.</p>
 </main>
 
@@ -468,11 +468,44 @@
     updatePreview();
   });
 
-  // ---- submit (mockup: local thanks, no endpoint) ----
+  // ---- submit: POST the profile to the Apps Script (Advisors sheet, status=pending) ----
+  var SUBMIT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwOXYyrRiR0sVkZjKutfUT8mt9oBs6tpYObOSnmNkwVJpLbWihj2q7dHFdd6WgxJnUq/exec';
+  function remState(){
+    if($('r_nd').checked) return { disclosed:false, riskSpendPct:null, riskManagedPct:null };
+    var s=parseFloat($('r_spend').value), m=parseFloat($('r_managed').value);
+    s=(!isNaN(s)&&s>0)?s:null; m=(!isNaN(m)&&m>0)?m:null;
+    return { disclosed:(s!=null||m!=null), riskSpendPct:s, riskManagedPct:m };
+  }
   $('profileForm').addEventListener('submit',function(e){
     e.preventDefault();
-    $('formPanel').style.display='none';
-    var t=$('thanks'); t.classList.add('show'); t.scrollIntoView({behavior:'smooth',block:'center'});
+    var form=e.target;
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    if(!selected.length){ $('i_ind').focus(); $('i_ind').placeholder='Please add at least one industry'; return; }
+
+    var fd=new FormData();
+    fd.append('type','advisor_profile');
+    fd.append('name',$('f_name').value.trim());
+    fd.append('firm',$('f_firm').value.trim());
+    fd.append('role',$('f_role').value.trim()||'Risk Advisor');
+    fd.append('afsl',$('f_afsl').value.trim());
+    fd.append('email',$('f_email').value.trim());
+    fd.append('phone',$('f_phone').value.trim());
+    fd.append('blurb',$('f_blurb').value.trim());
+    fd.append('suburb',$('f_suburb').value.trim());
+    fd.append('postcode',$('f_pc').value.trim());
+    fd.append('states',JSON.stringify(states));
+    fd.append('industries',JSON.stringify(selected));
+    fd.append('bookingUrl',$('f_link').value.trim());
+    fd.append('remuneration',JSON.stringify(remState()));
+    fd.append('page',location.pathname);
+    fd.append('ts',new Date().toISOString());
+    // Note: headshot/logo isn't submitted yet (data URLs are too large for a sheet cell) — handled later.
+
+    var btn=$('submitBtn'); btn.disabled=true; btn.textContent='Submitting…';
+    fetch(SUBMIT_ENDPOINT,{method:'POST',body:fd}).catch(function(){}).then(function(){
+      $('formPanel').style.display='none';
+      var t=$('thanks'); t.classList.add('show'); t.scrollIntoView({behavior:'smooth',block:'center'});
+    });
   });
 
   updatePreview();
