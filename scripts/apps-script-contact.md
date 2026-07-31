@@ -35,22 +35,30 @@ function handleContact_(p) {
   var email = String(p.email || '').trim();
   var message = String(p.message || '').trim();
 
-  var subject = 'Website enquiry' + (name ? ' — ' + name : '');
-  var body =
-    'Name: '  + (name  || '—') + '\n' +
-    'Email: ' + (email || '—') + '\n' +
-    'Page: '  + (p.page || '—') + '\n' +
-    'Time: '  + (p.ts   || new Date().toISOString()) + '\n\n' +
-    (message || '(no message)');
+  // 1) Log to the Contact sheet first — so an enquiry is never lost, even if email fails
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sh = ss.getSheetByName('Contact');
+    if (!sh) {
+      sh = ss.insertSheet('Contact');
+      sh.appendRow(['Timestamp', 'Name', 'Email', 'Message', 'Page']);
+    }
+    sh.appendRow([new Date(), name, email, message, p.page || '']);
+  } catch (err) { /* don't let a sheet issue block the email */ }
 
-  var options = {};
-  if (email) options.replyTo = email;              // reply goes straight to the enquirer
-  MailApp.sendEmail(to, subject, body, options);
-
-  // Optional: also log every enquiry to a "Contact" sheet
-  // var ss = SpreadsheetApp.getActive();
-  // var sh = ss.getSheetByName('Contact') || ss.insertSheet('Contact');
-  // sh.appendRow([new Date(), name, email, message, p.page || '']);
+  // 2) Email the enquiry
+  try {
+    var subject = 'Website enquiry' + (name ? ' — ' + name : '');
+    var body =
+      'Name: '  + (name  || '—') + '\n' +
+      'Email: ' + (email || '—') + '\n' +
+      'Page: '  + (p.page || '—') + '\n' +
+      'Time: '  + (p.ts   || new Date().toISOString()) + '\n\n' +
+      (message || '(no message)');
+    var options = {};
+    if (email) options.replyTo = email;            // reply goes straight to the enquirer
+    MailApp.sendEmail(to, subject, body, options);
+  } catch (err2) { /* already saved to the sheet; email can be retried */ }
 
   return json_({ ok: true });
 }
