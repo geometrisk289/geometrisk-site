@@ -4,128 +4,73 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Brokers — Geometrisk</title>
-<meta name="description" content="Every client has three unique risk lines — optimal risk transfer, retention, and spend. Geometrisk calculates them so brokers lead the risk conversation. General information only, not advice.">
+<meta name="description" content="Get found by businesses looking for a risk-first advisor. List your practice, bring your own calendar, and take bookings from clients matched to your industries and area. General information only, not advice.">
 <link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <style>
+  :root{ --serif:'Playfair Display',Georgia,serif; --mono:'JetBrains Mono',ui-monospace,monospace; }
+
   /* ---------- hero ---------- */
-  .hero{padding:48px 32px 72px;max-width:940px;margin:0 auto}
-  .eyebrow{text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
-  h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(36px,5.6vw,62px);line-height:1.05;letter-spacing:-.01em;color:var(--navy);text-align:center;margin:0 auto}
+  .hero{padding:48px 32px 24px;max-width:900px;margin:0 auto;text-align:center}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,5.4vw,60px);line-height:1.05;letter-spacing:-.01em;color:var(--navy);margin:0 auto;max-width:16ch}
   h1 em{font-style:italic;color:var(--gold)}
-
-  .opt{margin:52px auto 0;max-width:860px;transition:opacity .3s ease}
-  .statetitle{text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
-  .optnum{text-align:center;font-family:'Playfair Display',serif;font-weight:500;font-size:38px;line-height:1;color:var(--navy);margin-bottom:14px}
-  .cmp{width:100%;height:auto;display:block}
-  .bizline{margin-top:16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.04em;color:var(--navy)}
-  .note{margin-top:6px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:var(--muted)}
-  .dots{margin-top:24px;display:flex;justify-content:center;gap:10px}
-  .dots button{width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;background:var(--line-grey);transition:background .25s}
-  .dots button.on{background:var(--navy)}
-
-  .herocta{margin-top:48px;text-align:center}
-  .cta{display:inline-flex;align-items:center;gap:12px;background:var(--navy);color:#fff;border:none;font-family:'Inter';font-weight:500;font-size:15px;letter-spacing:.02em;padding:17px 30px;cursor:pointer;text-decoration:none}
+  .hero .lead{font-size:17px;line-height:1.6;color:var(--muted);max-width:60ch;margin:22px auto 0}
+  .herocta{margin-top:34px}
+  .cta{display:inline-flex;align-items:center;gap:12px;background:var(--navy);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:500;font-size:15px;letter-spacing:.02em;padding:17px 30px;cursor:pointer;text-decoration:none;transition:background .2s}
   .cta:hover{background:var(--navy-soft)}
-  .angleline{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-  .illus{margin-top:22px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;color:var(--muted)}
+  .cta.gold{background:var(--gold);color:#fff} .cta.gold:hover{background:var(--gold-soft)}
+  .angleline{margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 
-  svg text{font-family:'JetBrains Mono',monospace}
-  .bignum{font-family:'Playfair Display',serif;font-size:26px;fill:var(--navy)}
-  .caplab{font-size:10px;letter-spacing:.12em;text-transform:uppercase;fill:var(--muted)}
-  .zonelab{font-size:11px;letter-spacing:.12em;text-transform:uppercase}
-  .spendnum{font-family:'Playfair Display',serif;font-size:23px;fill:var(--navy)}
-  .spendcap{font-size:10px;letter-spacing:.12em;text-transform:uppercase;fill:var(--gold)}
-
-  /* ---------- how it works ---------- */
-  section.pad{padding:76px 32px}
-  .win{max-width:820px;margin:0 auto}
-  .seyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+  /* ---------- sections ---------- */
+  section.pad{padding:72px 32px}
+  .win{max-width:860px;margin:0 auto}
+  .seyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px}
   .seyebrow:before{content:"";width:26px;height:1px;background:var(--gold)}
+  .sech{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.6vw,40px);line-height:1.12;letter-spacing:-.01em;color:var(--navy);margin-bottom:8px}
+  .sech em{font-style:italic;color:var(--gold)}
   .howit{background:var(--cream-2)}
-  .steps{margin-top:8px}
-  .step{display:flex;gap:26px;padding:26px 0;border-top:1px solid var(--line-grey)}
-  .step:last-child{border-bottom:1px solid var(--line-grey)}
-  .step .sn{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);padding-top:5px;min-width:30px}
-  .step h3{font-family:'Inter';font-weight:600;font-size:19px;color:var(--navy);margin-bottom:7px}
-  .step p{font-size:15.5px;line-height:1.6;color:#5f6b7f;max-width:600px}
 
-  /* ---------- why partner (navy) ---------- */
+  .steps{margin-top:20px}
+  .step{display:flex;gap:26px;padding:24px 0;border-top:1px solid var(--line-grey)}
+  .step:last-child{border-bottom:1px solid var(--line-grey)}
+  .step .sn{font-family:var(--mono);font-size:13px;color:var(--gold);padding-top:5px;min-width:30px}
+  .step h3{font-family:'Inter',sans-serif;font-weight:600;font-size:19px;color:var(--navy);margin-bottom:7px}
+  .step p{font-size:15.5px;line-height:1.6;color:#5f6b7f;max-width:620px}
+  .stepcta{margin-top:36px}
+
+  /* ---------- sample advisor card ---------- */
+  .samplewrap{margin-top:40px}
+  .samplelabel{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;text-align:center}
+  .acard{display:flex;gap:18px;background:#fff;border:1px solid var(--line-grey);border-radius:12px;padding:20px 22px;align-items:flex-start;max-width:620px;margin:0 auto;box-shadow:0 12px 30px rgba(27,42,74,.07)}
+  .acard .avatar{flex:none;width:56px;height:56px;border-radius:50%;background:var(--navy);color:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;font-weight:600}
+  .acard .info{flex:1;min-width:0}
+  .acard .nm{font-size:17px;color:var(--navy);font-weight:600;line-height:1.2}
+  .acard .role{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 10px}
+  .chip{font-size:12px;color:var(--navy);background:var(--cream-2);border-radius:100px;padding:4px 11px;line-height:1.3}
+  .chip.match{background:#FBF6EC;color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-soft)}
+  .pmeta{font-size:13px;color:var(--muted)} .pmeta b{color:var(--navy);font-weight:600}
+  .acard .act{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:8px;padding-left:6px}
+  .acard .act .book{background:var(--gold);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:11px 20px;border-radius:7px;white-space:nowrap}
+  .acard .act .bookcap{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .acard .act .prof{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line-grey);padding-bottom:2px;text-decoration:none}
+  @media(max-width:620px){ .acard{flex-wrap:wrap} .acard .act{flex-direction:row;align-items:center;width:100%;justify-content:space-between;padding-left:0;margin-top:6px} }
+
+  /* ---------- why (navy) ---------- */
   .why{background:var(--navy);color:#fff}
-  .why .seyebrow{color:var(--gold-soft)}
-  .why .seyebrow:before{background:var(--gold-soft)}
-  .why h2{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,4vw,44px);line-height:1.1;letter-spacing:-.01em;color:#fff;margin-bottom:22px}
+  .why .seyebrow{color:var(--gold-soft)} .why .seyebrow:before{background:var(--gold-soft)}
+  .why h2{font-family:var(--serif);font-weight:500;font-size:clamp(28px,4vw,44px);line-height:1.1;letter-spacing:-.01em;color:#fff;margin-bottom:22px}
   .why h2 em{font-style:italic;color:var(--gold-soft)}
   .why .body{font-size:17px;line-height:1.7;color:#C7CEDA;max-width:640px}
-  .why .body + .body{margin-top:18px}
   .whygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:48px}
-  .wcard h4{font-family:'Inter';font-weight:600;font-size:16px;color:#fff;margin-bottom:8px}
+  .wcard h4{font-family:'Inter',sans-serif;font-weight:600;font-size:16px;color:#fff;margin-bottom:8px}
   .wcard p{font-size:14.5px;line-height:1.55;color:#A9B2C2}
-  .deliver h2{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(27px,4vw,42px);line-height:1.12;letter-spacing:-.01em;color:var(--navy);margin-bottom:6px}
-  .deliver .win{max-width:900px}
-  .dgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:38px}
-  .dcard{background:#fff;border:1px solid var(--line-grey);border-radius:12px;padding:26px 28px}
-  .dcard .dtag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-  .dcard h3{font-family:'Playfair Display',serif;font-weight:600;font-size:22px;color:var(--navy);margin-bottom:12px;line-height:1.15}
-  .dcard p{font-size:15px;line-height:1.6;color:var(--navy);opacity:.85}
-  .dcard ul{list-style:none;margin:14px 0 0;padding:0}
-  .dcard li{position:relative;padding-left:20px;font-size:14.5px;line-height:1.5;color:var(--navy);margin-bottom:8px}
-  .dcard li:last-child{margin-bottom:0}
-  .dcard li:before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
-  .reqform{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;align-items:center}
-  .reqform input{flex:1 1 180px;font-family:'Inter';font-size:14px;color:var(--navy);
-                 background:#fff;border:1px solid var(--line-grey);border-radius:6px;padding:12px 14px}
-  .reqform input:focus{outline:none;border-color:var(--gold)}
-  .reqform .cta{white-space:nowrap}
-  .reqthanks{margin-top:18px;font-size:14px;color:var(--navy);font-weight:600}
-  @media(max-width:760px){ .dgrid{grid-template-columns:1fr;gap:18px} }
-  .whyteaser{padding:72px 32px;text-align:center;background:var(--cream-2);
-             border-top:1px solid var(--line-grey);border-bottom:1px solid var(--line-grey)}
-  .whyteaser .te{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;
-                 text-transform:uppercase;color:var(--gold);margin-bottom:18px}
-  .whyteaser .tline{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(26px,4vw,40px);
-                    line-height:1.12;letter-spacing:-.01em;color:var(--navy);margin-bottom:22px}
-  .whyteaser .tline em{font-style:italic;color:var(--gold)}
-  .whyteaser .tlink{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;
-                    text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
-  .whyteaser .tlink:hover{color:var(--gold)}
-  .why .cta{background:var(--gold);margin-top:48px}
-  .why .cta:hover{background:var(--gold-soft)}
 
-  /* ---------- partner form (navy) ---------- */
-  .formband{background:var(--navy);color:#fff;padding:80px 32px}
-  .formband .win{max-width:820px;margin:0 auto}
-  .formband .seyebrow{color:var(--gold-soft)} .formband .seyebrow:before{background:var(--gold-soft)}
-  .formband h2{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,4vw,44px);line-height:1.1;color:#fff;margin-bottom:16px}
-  .formband h2 em{font-style:italic;color:var(--gold-soft)}
-  .formband .fintro{font-size:16px;line-height:1.7;color:#C7CEDA;max-width:560px;margin-bottom:26px}
-  .joinband{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:36px}
-  .joinband .cta{background:var(--gold)} .joinband .cta:hover{background:var(--gold-soft)}
-  .joinband .joinnote{font-size:13.5px;color:#C7CEDA;line-height:1.5;max-width:320px}
-  .joinor{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8b95a8;margin-bottom:18px}
-  form{background:transparent}
-  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px 24px}
-  .frow{margin-bottom:0}
-  .frow.full{grid-column:1 / -1}
-  .frow label{display:block;font-size:13.5px;font-weight:600;color:#fff;margin-bottom:8px}
-  .frow label .opt{font-weight:400;color:#8b95a8}
-  .frow input,.frow select,.frow textarea{width:100%;background:var(--navy-soft);border:1px solid rgba(255,255,255,.16);color:#fff;font-family:'Inter';font-size:15px;padding:13px 15px;outline:none;transition:border-color .2s}
-  .frow input:focus,.frow select:focus,.frow textarea:focus{border-color:var(--gold-soft)}
-  .frow input::placeholder,.frow textarea::placeholder{color:#7a8398}
-  .frow select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%23C9A96A' stroke-width='1.6' fill='none'/></svg>");background-repeat:no-repeat;background-position:right 15px center}
-  .frow textarea{resize:vertical;min-height:78px}
-  .fbtn{background:var(--gold);color:#fff;border:none;font-family:'Inter';font-weight:600;font-size:15.5px;letter-spacing:.02em;padding:16px 30px;cursor:pointer;transition:background .2s;margin-top:24px}
-  .fbtn:hover{background:var(--gold-soft)} .fbtn:disabled{opacity:.6;cursor:default}
-  .fnote{font-size:12.5px;color:#8b95a8;margin-top:16px;line-height:1.5;max-width:560px}
-  .thanks{display:none;background:var(--navy-soft);border:1px solid var(--gold-soft);padding:34px 30px}
-  .thanks.show{display:block}
-  .thanks h3{font-family:'Playfair Display',serif;font-weight:500;font-size:26px;color:#fff;margin-bottom:12px}
-  .thanks p{font-size:15.5px;line-height:1.65;color:#C7CEDA} .thanks a{color:#fff}
-
-  @media(max-width:760px){ .whygrid{grid-template-columns:1fr;gap:26px} .step{gap:18px} .fgrid{grid-template-columns:1fr;gap:18px} }
+  @media(max-width:760px){ .whygrid{grid-template-columns:1fr;gap:26px} .step{gap:18px} }
 </style>
 </head>
 <body>
@@ -146,268 +91,84 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="eyebrow">The best brokers are trusted risk advisors</div>
-  <h1>Every client has three unique <em>lines</em>.</h1>
-
-  <div class="opt" id="opt">
-    <div class="statetitle" id="statetitle"></div>
-    <div class="optnum" id="optnum"></div>
-    <svg class="cmp" id="cmp" viewBox="0 0 1000 108" role="img" aria-label="A client's three risk lines."></svg>
-    <div class="bizline" id="bizline"></div>
-    <div class="dots" id="dots"></div>
-  </div>
-
+  <div class="eyebrow">Win on risk</div>
+  <h1>Clients are looking for a risk-first advisor. Be the one they <em>find</em>.</h1>
+  <p class="lead">Geometrisk sends businesses to independent risk advisors who start with the client&rsquo;s risk appetite &mdash; not an insurer&rsquo;s product. List your practice, bring your own calendar, and take bookings from clients matched to what you know best.</p>
   <div class="herocta">
-    <a class="cta" href="broker-report.html">Find client's risk lines &nbsp;&rarr;</a>
-    <div class="angleline">Most brokers never do.</div>
-    <div class="illus">Illustrative model. Figures are not tailored to any business.</div>
+    <a class="cta gold" href="broker-onboarding.html">Create your advisor profile &nbsp;&rarr;</a>
+    <div class="angleline">Free to list while we build the network.</div>
   </div>
 </div>
 
-<!-- WHY PARTNER TEASER -->
-<section class="whyteaser">
-  <div class="te">Why partner with Geometrisk</div>
-  <div class="tline">Our risk expertise. Your <em>unfair edge.</em></div>
-  <a class="tlink" href="#why">Why that matters &rarr;</a>
-</section>
-
-<!-- THREE LINES FOR YOU / TWO FOR THEM -->
-<section class="pad deliver">
-  <div class="win">
-    <div class="seyebrow">The lines, and who sees them</div>
-    <h2>Three lines for you. Two that matter to them.</h2>
-    <div class="dgrid">
-      <div class="dcard">
-        <div class="dtag">For you</div>
-        <h3>Three lines, calculated together</h3>
-        <p>Optimal risk retention, transfer and spend. We work the three out together for each business &mdash; from its factual financial information and a stated set of loss assumptions.</p>
-        <ul>
-          <li>Factual financials: the balance sheet and cash flows</li>
-          <li>Our stated loss assumptions &mdash; loss ratio, and the annual chance of a loss crossing the line</li>
-        </ul>
-        <a class="cta" href="#" id="reqBtn" style="margin-top:18px;display:inline-flex">Request a sample report &nbsp;&rarr;</a>
-        <form class="reqform" id="reqForm" style="display:none">
-          <input type="email" id="reqEmail" required placeholder="you@brokerage.com.au" aria-label="Your email for the sample report">
-          <button type="submit" class="cta" id="reqSend">Send &nbsp;&rarr;</button>
-        </form>
-        <p class="reqthanks" id="reqThanks" style="display:none">Thanks &mdash; we&rsquo;ll send a sample your way.</p>
-      </div>
-      <div class="dcard">
-        <div class="dtag">For your client</div>
-        <h3>The two lines that matter</h3>
-        <p>The sample report shows a client the risks that matter: the loss their balance sheet can absorb, and the steep climb in revenue required to recover from one.</p>
-        <ul>
-          <li>The line: the loss they can carry without risking the business</li>
-          <li>The recovery: the sales growth a loss demands to earn it back</li>
-        </ul>
-        <a class="cta" href="broker-report.html" style="margin-top:18px;display:inline-flex">See the client sample &nbsp;&rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
+<!-- HOW CLIENTS FIND YOU -->
 <section class="pad howit">
   <div class="win">
-    <div class="seyebrow">How it works</div>
+    <div class="seyebrow">How clients find you</div>
+    <h2 class="sech">Matched on what you know. Booked on your <em>calendar</em>.</h2>
     <div class="steps">
-      <div class="step"><div class="sn">01</div><div><h3>Register to partner</h3><p>A short application. We work with a limited number of brokers, so every one comes past us first.</p></div></div>
-      <div class="step"><div class="sn">02</div><div><h3>Set up referral agreements</h3><p>We agree how referrals flow, both ways, and how fees work. Clear, and documented.</p></div></div>
-      <div class="step"><div class="sn">03</div><div><h3>Receive risk profiles</h3><p>Refer a client for us to work out their risk lines, or run your own. Either way you get what they can carry, transfer, and retain, ready for the conversation.</p></div></div>
+      <div class="step"><div class="sn">01</div><div><h3>A client runs the finder</h3><p>They enter their occupation, scale and postcode &mdash; the risk they carry, in their own words.</p></div></div>
+      <div class="step"><div class="sn">02</div><div><h3>Your profile appears</h3><p>If you cover their industry and their area, your card shows up &mdash; with your specialisms and a Book button.</p></div></div>
+      <div class="step"><div class="sn">03</div><div><h3>They book your calendar</h3><p>Book opens your own Calendly. The consultation lands straight in your diary &mdash; no lead forms, no middle step.</p></div></div>
+    </div>
+
+    <div class="samplewrap">
+      <div class="samplelabel">What a client sees</div>
+      <div class="acard">
+        <div class="avatar">SW</div>
+        <div class="info">
+          <div class="nm">Sarah Whitfield · Whitfield Risk Partners</div>
+          <div class="role">Risk Advisor</div>
+          <div class="chips">
+            <span class="chip match">Electrician</span>
+            <span class="chip">Plumber / Gasfitter</span>
+            <span class="chip">Builder (residential)</span>
+            <span class="chip">+2 more</span>
+          </div>
+          <div class="pmeta"><b>Sydney CBD, NSW</b> · Covers NSW, ACT</div>
+        </div>
+        <div class="act">
+          <button class="book" type="button" tabindex="-1">Book &rarr;</button>
+          <span class="bookcap">View availability</span>
+          <a class="prof" href="#" tabindex="-1" onclick="return false">View profile</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- WHY PARTNER -->
+<!-- WHY LIST -->
 <section class="pad why" id="why">
   <div class="win">
-    <div class="seyebrow">Why that matters</div>
+    <div class="seyebrow">Why list with Geometrisk</div>
     <h2>Where your <em>edge</em> comes from.</h2>
-    <p class="body">The future of broking isn't comparison — it's risk optimisation, and that starts with clearly understanding the risk tolerance of your client, not just the insurer's. We help you do that.</p>
-    <p class="body">Think of us as a risk lab supporting you, much the way a doctor relies on pathology: you own the delivery of advice and judgement, and we run the tests no one else bothers to order.</p>
+    <p class="body">The future of broking isn&rsquo;t comparison &mdash; it&rsquo;s risk optimisation, and that starts with the client&rsquo;s risk appetite, not the insurer&rsquo;s. Geometrisk sends you the clients who already think that way.</p>
     <div class="whygrid">
-      <div class="wcard"><h4>Win on risk, not price</h4><p>Know your client's risk profile — their appetite, risk of ruin, source of losses and buffers, and optimal risk spend.</p></div>
-      <div class="wcard"><h4>Benchmark solutions, not policies</h4><p>Weigh every solution (not just insurance) against the client's risk appetite and budget.</p></div>
-      <div class="wcard"><h4>Monetise judgement, not placement</h4><p>Earn fees for delivering trusted advice and judgement on optimising risk that clients keep, not just transfer.</p></div>
+      <div class="wcard"><h4>Win on risk, not price</h4><p>Meet clients who came looking for a risk-first advisor &mdash; not the cheapest quote.</p></div>
+      <div class="wcard"><h4>Benchmark solutions, not policies</h4><p>Weigh every solution (not just insurance) against the client&rsquo;s risk appetite and budget.</p></div>
+      <div class="wcard"><h4>Monetise judgement, not placement</h4><p>Earn fees for trusted advice on the risk clients keep, not just the risk they transfer.</p></div>
     </div>
-    <a class="cta" href="#partner">Partner with us &nbsp;&rarr;</a>
   </div>
 </section>
 
-<!-- PARTNER FORM -->
-<div class="formband" id="partner">
+<!-- GETTING LISTED -->
+<section class="pad">
   <div class="win">
-    <div class="seyebrow">Become a partner</div>
-    <h2>Your risk conversations. With our <em>lines.</em></h2>
-    <p class="fintro">Tell us where you write business and what you know best. If it's a fit, we'll set up a short call and run a client through the process together, on us.</p>
-    <div class="joinband">
-      <a class="cta" href="broker-onboarding.html">Create your advisor profile &nbsp;&rarr;</a>
-      <span class="joinnote">A few minutes &mdash; you&rsquo;ll appear in the risk-advisor finder with your own booking link.</span>
+    <div class="seyebrow">Getting listed</div>
+    <h2 class="sech">Three steps to being <em>found</em>.</h2>
+    <div class="steps">
+      <div class="step"><div class="sn">01</div><div><h3>Create your profile</h3><p>The industries you serve (from the ANZSIC list), where you&rsquo;re based, and the areas you cover. A few minutes.</p></div></div>
+      <div class="step"><div class="sn">02</div><div><h3>Add your booking link</h3><p>Paste your Calendly &mdash; or any public booking link. We show your availability and clients book you directly. No link yet? We walk you through setting one up.</p></div></div>
+      <div class="step"><div class="sn">03</div><div><h3>Get found and booked</h3><p>We review your profile, then you&rsquo;re live in the finder &mdash; matched to clients by industry and area.</p></div></div>
     </div>
-    <div class="joinor">Or send an enquiry first</div>
-    <form id="brokerForm">
-      <div class="fgrid">
-        <div class="frow"><label>Name</label><input type="text" name="name" required placeholder="Your full name"></div>
-        <div class="frow"><label>Email</label><input type="email" name="email" required placeholder="you@brokerage.com.au"></div>
-        <div class="frow"><label>Phone <span class="opt">(optional)</span></label><input type="tel" name="phone" placeholder="04xx xxx xxx"></div>
-        <div class="frow"><label>Business name</label><input type="text" name="business" required placeholder="Your brokerage"></div>
-        <div class="frow"><label>Risk specialisation <span class="opt">(optional)</span></label>
-          <select name="specialisation">
-            <option value="">Select the area you know best</option>
-            <option>Trades and construction</option>
-            <option>Hospitality and retail</option>
-            <option>Professional services</option>
-            <option>Manufacturing and logistics</option>
-            <option>Property and strata</option>
-            <option>Health and care</option>
-            <option>Agriculture and rural</option>
-            <option>General SME, no single focus</option>
-          </select>
-        </div>
-        <div class="frow"><label>Where do you write business? <span class="opt">(optional)</span></label><input type="text" name="radius" placeholder="e.g. Greater Sydney, or NSW &amp; ACT"></div>
-        <div class="frow full"><label>Anything you want us to know? <span class="opt">(optional)</span></label><textarea name="notes" placeholder="How you work today, the clients you have in mind, or a question."></textarea></div>
-      </div>
-      <button type="submit" class="fbtn" id="fbtn">Start the conversation &nbsp;&rarr;</button>
-      <p class="fnote">We are looking to partner with a handful of brokers at a time across Australia.</p>
-    </form>
-    <div class="thanks" id="thanks">
-      <h3>Thanks – that's with us.</h3>
-      <p>Give us a day or two. If it looks like a fit, we'll be in touch to set up a short call and run a client through the process together. In the meantime, the <a href="broker-report.html">client sample report</a> is the quickest way to see what your clients would see.</p>
+    <div class="stepcta">
+      <a class="cta gold" href="broker-onboarding.html">Create your advisor profile &nbsp;&rarr;</a>
     </div>
   </div>
-</div>
+</section>
 
 <footer class="site">
-  General information only, not advice. &nbsp;·&nbsp; <a href="about.html">About Akash</a> &nbsp;·&nbsp; Geometrisk
+  General information only, not advice. &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; Geometrisk
 </footer>
 
-<script>
-(function(){
-  var NS='http://www.w3.org/2000/svg';
-  // One client — a freight operator (revenue $28m, surplus cash $2.1m, line ~$1.33m) — each line shown BEFORE
-  // (risk on its balance sheet) and AFTER (optimised by the broker). Navy amount shrinks; gold value grows.
-  var STATES=[
-    // 1) Transfer — before: the full risk exposure sits on the balance sheet; after: it's transferred, only the line (~$1.33m) retained
-    { title:'Risk transfer', kind:'ba', show:'gold', axmax:21327200, left:'On the balance sheet', right:'Risk Exposure',
-      A:{ val:21327200 }, B:{ val:1327200 } },
-    // 2) Retention — before: exposed up to the full cash buffer; after: retention sits well within it
-    { title:'Risk retention', kind:'ba', axmax:2100000, left:'Retained', right:'Cash headroom',
-      A:{ val:2100000 }, B:{ val:1327200 } },
-    // 3) Spend — before: the geometric optimal spend; after: actual spend comes in under it
-    { title:'Risk spend', kind:'ba', axmax:120000, left:'Optimal', right:'Rational',
-      A:{ val:120000 }, B:{ val:80000 } }
-  ];
-  var X0=70, X1=930, yT=22, yB=80;
-  var svg=document.getElementById('cmp'), stEl=document.getElementById('statetitle'),
-      bizline=document.getElementById('bizline'), optnum=document.getElementById('optnum'),
-      opt=document.getElementById('opt'), dotsEl=document.getElementById('dots');
-
-  function el(t,a){ var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); return e; }
-  function kfmt(n){ if(n>=1e6) return '$'+(''+(n/1e6).toFixed(1)).replace('.0','')+'m'; var k=Math.round(n/1000); return k===0?'$0':'$'+k+'k'; }
-  function pfmt(n){ return '$'+Math.round(n).toLocaleString('en-AU'); }
-  function lerp(a,b,t){ return a+(b-a)*t; }
-  function anchorFor(x){ return x<140?'start':(x>860?'end':'middle'); }
-
-  function bar(x0,x1,fill,op){ return el('rect',{x:x0,y:yT,width:x1-x0,height:yB-yT,fill:fill,'fill-opacity':op==null?1:op}); }
-  function marker(mx){
-    svg.appendChild(el('line',{x1:mx,y1:16,x2:mx,y2:yB,stroke:'#1B2A4A','stroke-width':2.5}));
-    svg.appendChild(el('circle',{cx:mx,cy:16,r:6,fill:'#B08D4F','stroke':'#FBF9F4','stroke-width':2.5}));
-  }
-  function ghost(mx){ svg.appendChild(el('line',{x1:mx,y1:16,x2:mx,y2:yB,stroke:'#1B2A4A','stroke-width':2,'stroke-opacity':.22})); svg.appendChild(el('circle',{cx:mx,cy:16,r:4,fill:'#1B2A4A','fill-opacity':.22})); }
-  function bignum(mx,val,cap){
-    var a=anchorFor(mx);
-    var bn=el('text',{x:mx,y:32,'text-anchor':a,'class':'bignum'}); bn.textContent=kfmt(val); svg.appendChild(bn);
-    var cl=el('text',{x:mx,y:44,'text-anchor':a,'class':'caplab'}); cl.textContent=cap; svg.appendChild(cl);
-  }
-  function zonelabels(l,r,rcol){
-    var zl=el('text',{x:X0,y:100,'class':'zonelab',fill:'#5f6b7f'}); zl.textContent=l; svg.appendChild(zl);
-    var zr=el('text',{x:X1,y:100,'text-anchor':'end','class':'zonelab',fill:rcol||'#B08D4F'}); zr.textContent=r; svg.appendChild(zr);
-  }
-
-  function render(i,t){
-    var s=STATES[i];
-    var axmax = s.axmax;
-    var x=function(v){ return X0+v/axmax*(X1-X0); };
-    while(svg.firstChild) svg.removeChild(svg.firstChild);
-    var defs=el('defs',{});
-    var h=el('pattern',{id:'hatch',width:8,height:8,patternTransform:'rotate(-45)',patternUnits:'userSpaceOnUse'});
-    h.appendChild(el('line',{x1:0,y1:0,x2:0,y2:8,stroke:'#B08D4F','stroke-width':1.4,'stroke-opacity':.5})); defs.appendChild(h); svg.appendChild(defs);
-
-    if(s.kind==='ba'){
-      var v=lerp(s.A.val,s.B.val,t), mx=x(v);
-      svg.appendChild(bar(X0,mx,'#1B2A4A'));                                   // the amount that remains (the number)
-      svg.appendChild(bar(mx,X1,'url(#hatch)')); svg.appendChild(bar(mx,X1,'#B08D4F',.05));  // optimised away by the broker
-      if(t>0.02) ghost(x(s.A.val));                                           // ghost of the "before" position
-      marker(mx);
-      zonelabels(s.left,s.right);
-      optnum.textContent=kfmt(s.show==='gold' ? axmax-v : v);   // transfer shows what's moved; others what remains
-    }
-
-    stEl.textContent=s.title;
-    bizline.textContent='Freight operator  ·  revenue $28m  ·  surplus cash $2.1m';
-    for(var k=0;k<dots.length;k++) dots[k].className=(k===i?'on':'');
-  }
-
-  var idx=0, raf=null, timers=[], paused=false, dots;
-  var HOLD_A=1200, SLIDE=1100, HOLD_B=2100, FADE=320;
-  var EASE=function(t){ return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2; };
-  function clearAll(){ timers.forEach(clearTimeout); timers=[]; if(raf) cancelAnimationFrame(raf); }
-
-  function play(i, advance){
-    clearAll(); idx=i; opt.style.opacity='1'; render(i,0);
-    timers.push(setTimeout(function(){
-      var start=performance.now();
-      (function step(now){
-        var t=Math.min(1,(now-start)/SLIDE);
-        render(i,EASE(t));
-        if(t<1){ raf=requestAnimationFrame(step); }
-        else { timers.push(setTimeout(function(){ if(advance && !paused){ next(); } }, HOLD_B)); }
-      })(performance.now());
-    }, HOLD_A));
-  }
-  function next(){ var n=(idx+1)%STATES.length; opt.style.opacity='0'; timers.push(setTimeout(function(){ play(n,true); }, FADE)); }
-
-  dots=STATES.map(function(_,i){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','View '+(i+1));
-    b.addEventListener('click',function(){ paused=true; play(i,false); }); dotsEl.appendChild(b); return b; });
-  play(0,true);
-})();
-</script>
-
-<script>
-  // Broker enquiries post to the Geometrisk Apps Script (Brokers tab, type=broker).
-  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwOXYyrRiR0sVkZjKutfUT8mt9oBs6tpYObOSnmNkwVJpLbWihj2q7dHFdd6WgxJnUq/exec';
-  document.getElementById('brokerForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    var form = e.target, fd = new FormData();
-    fd.append('type','broker');
-    ['name','email','phone','business','specialisation','radius','notes'].forEach(function(k){
-      fd.append(k, (form.elements[k] && form.elements[k].value || '').trim());
-    });
-    var btn = document.getElementById('fbtn');
-    btn.disabled = true; btn.textContent = 'Sending…';
-    fetch(ENDPOINT,{method:'POST',body:fd})
-      .catch(function(){})
-      .then(function(){
-        form.style.display = 'none';
-        var t = document.getElementById('thanks');
-        t.classList.add('show');
-        t.scrollIntoView({behavior:'smooth',block:'center'});
-      });
-  });
-
-  // Sample-report request — posts silently to the same endpoint (type=sample_report).
-  var reqBtn=document.getElementById('reqBtn'), reqForm=document.getElementById('reqForm');
-  if(reqBtn && reqForm){
-    reqBtn.addEventListener('click',function(e){ e.preventDefault(); reqBtn.style.display='none'; reqForm.style.display='flex'; document.getElementById('reqEmail').focus(); });
-    reqForm.addEventListener('submit',function(e){
-      e.preventDefault();
-      var send=document.getElementById('reqSend'); send.disabled=true; send.textContent='Sending…';
-      var fd=new FormData(); fd.append('type','sample_report'); fd.append('email',document.getElementById('reqEmail').value.trim());
-      fetch(ENDPOINT,{method:'POST',body:fd}).catch(function(){}).then(function(){
-        reqForm.style.display='none'; document.getElementById('reqThanks').style.display='block';
-      });
-    });
-  }
-</script>
 </body>
 </html>
