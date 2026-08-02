@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Client risk report — Geometrisk for brokers</title>
+<title>Client risk report – Geometrisk for brokers</title>
 <meta name="description" content="Draw your client's risk line: an illustrative sample report showing loss-tolerance capacity and the extra sales required to recover from a loss. Not financial advice.">
 <link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -263,12 +263,12 @@
 
   <div class="twonum">
     <div class="nblock a">
-      <div class="cap">The line — the largest loss it can carry without risking the business</div>
-      <div class="fig" id="o_line">—</div>
+      <div class="cap">The line – the largest loss it can carry without risking the business</div>
+      <div class="fig" id="o_line">–</div>
     </div>
     <div class="nblock b">
       <div class="cap">Extra sales to recover a loss at the line</div>
-      <div class="fig" id="o_recov">—</div>
+      <div class="fig" id="o_recov">–</div>
     </div>
   </div>
 
@@ -283,8 +283,8 @@
   </div>
 
   <div class="recov">
-    <div class="rtitle">Recovering a loss — the extra sales it takes</div>
-    <div class="rhead" id="o_rhead">—</div>
+    <div class="rtitle">Recovering a loss – the extra sales it takes</div>
+    <div class="rhead" id="o_rhead">–</div>
     <svg id="recovChart" viewBox="0 0 640 210" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Extra sales required to recover a loss"></svg>
     <div class="rcap" id="o_rcap"></div>
   </div>
@@ -302,7 +302,7 @@
 <!-- DOWNLOAD + DISCLOSURE -->
 <div class="dl">
   <button class="btn" type="button" onclick="window.print()">Download report &nbsp;&darr;</button>
-  <p class="disc"><b>This is risk intelligence, not financial advice.</b> Illustration only — each business has a different capital structure and financial position that affects the calculations.</p>
+  <p class="disc"><b>This is risk intelligence, not financial advice.</b> Illustration only – each business has a different capital structure and financial position that affects the calculations.</p>
 </div>
 </div><!-- /reportZone -->
 
@@ -421,21 +421,21 @@ function drawChart(line, margin){
 function render(){
   const d = read(), r = compute(d);
   $('o_date').textContent = new Date().toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'});
-  $('o_name').textContent = d.name || '—';
-  $('o_abn').textContent = d.abn ? 'ABN '+d.abn : '—';
-  $('o_ind').textContent = picked ? (picked.label + (picked.anzsic ? ' · ANZSIC '+picked.anzsic : '')) : (d.indText || '—');
-  $('o_broker').textContent = d.broker || '—';
+  $('o_name').textContent = d.name || '–';
+  $('o_abn').textContent = d.abn ? 'ABN '+d.abn : '–';
+  $('o_ind').textContent = picked ? (picked.label + (picked.anzsic ? ' · ANZSIC '+picked.anzsic : '')) : (d.indText || '–');
+  $('o_broker').textContent = d.broker || '–';
   $('o_prac').textContent = d.prac || '';
   $('o_pracsep').textContent = (d.broker && d.prac) ? ', ' : (d.prac ? '' : '');
-  $('o_afsl').textContent = d.afsl || '—';
-  $('o_lic').textContent = [d.prac, d.afsl].filter(Boolean).join(' · ') || '—';
-  $('o_rev').textContent = d.revenue>0 ? money(d.revenue) : '—';
-  $('o_gp').textContent = d.grossProfit>0 ? money(d.grossProfit) : '—';
-  $('o_gm').textContent = d.revenue>0 ? pct(r.margin) : '—';
+  $('o_afsl').textContent = d.afsl || '–';
+  $('o_lic').textContent = [d.prac, d.afsl].filter(Boolean).join(' · ') || '–';
+  $('o_rev').textContent = d.revenue>0 ? money(d.revenue) : '–';
+  $('o_gp').textContent = d.grossProfit>0 ? money(d.grossProfit) : '–';
+  $('o_gm').textContent = d.revenue>0 ? pct(r.margin) : '–';
 
   if(r.netDebt){ $('o_cashlbl').textContent='Net debt'; $('o_cash').innerHTML = money(Math.abs(d.cash))+' <small>net debt</small>'; }
   else if(r.cashEntered){ $('o_cashlbl').textContent='Surplus cash'; $('o_cash').innerHTML = money(d.cash)+' <small>liquid</small>'; }
-  else { $('o_cashlbl').textContent='Surplus cash'; $('o_cash').textContent='—'; }
+  else { $('o_cashlbl').textContent='Surplus cash'; $('o_cash').textContent='–'; }
 
   // hero bar + the line
   if(r.netDebt){
@@ -451,7 +451,7 @@ function render(){
     $('o_axmid').textContent = money(r.line)+' · the line';
     $('o_axend').textContent = money(r.W)+' · buffer exhausted';
   } else {
-    $('o_line').textContent = '—';
+    $('o_line').textContent = '–';
     $('o_seg_carry').style.flex='0.632'; $('o_seg_cannot').style.flex='0.368';
     $('o_mark').style.display='none';
     $('o_axmid').textContent=''; $('o_axend').textContent='';
@@ -460,11 +460,11 @@ function render(){
   // recovery number + chart
   if(r.recovSales){
     $('o_recov').innerHTML = money(r.recovSales);
-    $('o_rhead').innerHTML = 'A loss at the line takes about <b>'+money(r.recovSales)+'</b> in extra sales to earn back — every $1 lost needs about $'+(1/r.margin).toFixed(2).replace(/\.00$/,'')+' of new sales.';
+    $('o_rhead').innerHTML = 'A loss at the line takes about <b>'+money(r.recovSales)+'</b> in extra sales to earn back – every $1 lost needs about $'+(1/r.margin).toFixed(2).replace(/\.00$/,'')+' of new sales.';
     $('o_rcap').textContent = 'Before tax and fixed costs, so a floor. Read any loss on the axis against the sales it would take to rebuild.';
     drawChart(r.line, r.margin);
   } else {
-    $('o_recov').textContent = '—';
+    $('o_recov').textContent = '–';
     $('o_rhead').textContent = r.netDebt ? 'With no surplus cash, any material loss must be transferred; there is no base to rebuild from.' : 'Enter revenue, gross profit and surplus cash to draw the recovery.';
     $('o_rcap').textContent = '';
     drawChart(0,0);

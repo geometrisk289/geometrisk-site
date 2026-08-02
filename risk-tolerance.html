@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Risk tolerance — Riskled</title>
+<title>Risk tolerance – Riskled</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -118,7 +118,7 @@
       </div>
       <div class="field full">
         <label for="wc">Surplus cash</label>
-        <p class="help">Cash reserves beyond day-to-day operating needs — the buffer that would take the hit if a loss landed tomorrow. Not property, not equipment.</p>
+        <p class="help">Cash reserves beyond day-to-day operating needs – the buffer that would take the hit if a loss landed tomorrow. Not property, not equipment.</p>
         <div class="input-money" style="max-width:340px"><span class="sym">$</span><input type="text" id="wc" inputmode="numeric" placeholder="500,000" autocomplete="off"></div>
       </div>
       <div class="margin-derived" id="marginDerived" style="display:none"></div>
@@ -192,7 +192,7 @@
   groom(revEl);groom(gpEl);groom(wcEl);
   function val(el){var d=el.value.replace(/[^\d]/g,'');return d?parseInt(d,10):0;}
 
-  // chart geometry — x spans full width so it aligns with the slider
+  // chart geometry – x spans full width so it aligns with the slider
   var VB_W=720,VB_H=220,padT=14,padB=10,innerH=VB_H-padT-padB,MAXF=0.985;
   function xOfL(L){return (L/(2*W))*VB_W;}
   function felt(L){return Math.log(W/(W-L));}

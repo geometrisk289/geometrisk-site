@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Risk Analytics — Geometrisk</title>
-<meta name="description" content="How big a loss could the business carry — and climb back from? Enter a few numbers, set the worst loss you could wake up to, and see the sales it would take to recover. General information only.">
+<title>Risk Analytics – Geometrisk</title>
+<meta name="description" content="How big a loss could the business carry – and climb back from? Enter a few numbers, set the worst loss you could wake up to, and see the sales it would take to recover. General information only.">
 <link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,7 +120,7 @@
 <main>
   <div class="intro">
     <div class="eyebrow">Risk Analytics</div>
-    <h1>The loss you keep &mdash; and the climb <em>back</em>.</h1>
+    <h1>The loss you keep – and the climb <em>back</em>.</h1>
     <p class="sub">A few numbers, the worst loss you could wake up to, and the sales it would take to recover. About 2 minutes.</p>
   </div>
 
@@ -323,14 +323,14 @@
     if(state.cash<=0 || state.rev<=0){
       out.innerHTML='<div class="head" style="color:var(--muted)">Enter revenue and cash to see the climb.</div>';
     } else if(shortfall<=0){
-      out.innerHTML='<div class="safe"><b>Within your line.</b> The business could absorb this loss from cash and keep trading &mdash; no climb needed. Drag the loss higher to find where it bites.</div>';
+      out.innerHTML='<div class="safe"><b>Within your line.</b> The business could absorb this loss from cash and keep trading – no climb needed. Drag the loss higher to find where it bites.</div>';
     } else {
       var reqRev = state.rev + climb, m = reqRev/state.rev;
       var maxBar = reqRev;
       var pctStr = climbPct!=null ? climbPct.toFixed(climbPct<10?1:0) : '–';
       out.innerHTML =
         '<div class="plain">'+climbWords(m)+'</div>'+
-        '<div class="head">That&rsquo;s <b>'+money(climb)+'</b> in extra sales to cover the '+kfmt(shortfall)+' above the line &mdash; a +'+pctStr+'% lift on today.</div>'+
+        '<div class="head">That&rsquo;s <b>'+money(climb)+'</b> in extra sales to cover the '+kfmt(shortfall)+' above the line – a +'+pctStr+'% lift on today.</div>'+
         '<div class="twobar">'+
           '<div class="trow"><div class="tlab"><span>Today’s revenue</span><span>'+money(state.rev)+'</span></div>'+
             '<div class="track"><div class="fill-now" style="width:'+(state.rev/maxBar*100)+'%"></div></div></div>'+

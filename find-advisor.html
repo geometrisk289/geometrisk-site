@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Find your risk advisor — Geometrisk</title>
-<meta name="description" content="Tell us what you do and where you are. See the risk advisors who fit your industry and your area — with live availability, ready to book. General information only.">
+<title>Find your risk advisor – Geometrisk</title>
+<meta name="description" content="Tell us what you do and where you are. See the risk advisors who fit your industry and your area – with live availability, ready to book. General information only.">
 <link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,6 +68,7 @@
   .srow{display:grid;grid-template-columns:1fr 1fr;gap:20px 30px;max-width:620px}
   .fld{display:flex;flex-direction:column;gap:6px}
   .fld label{font-size:13px;color:var(--muted)}
+  .fhelp{font-size:12px;color:var(--muted);line-height:1.5;margin-top:2px}
   .money{display:flex;align-items:center;border-bottom:2px solid var(--line-grey);transition:border-color .2s}
   .money:focus-within{border-color:var(--gold)}
   .money span{font-family:var(--serif);font-size:22px;color:var(--muted);padding-right:4px}
@@ -120,6 +121,25 @@
   .preview-note{max-width:680px;margin:16px auto 0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
                 text-transform:uppercase;color:var(--amber);text-align:center;opacity:.8}
 
+  /* ---------- lead capture (shown when no advisors match yet) ---------- */
+  .lead{background:#fff;border:1px solid var(--line-grey);border-radius:14px;padding:30px 28px;
+        box-shadow:0 12px 40px rgba(27,42,74,.06);max-width:560px;margin:0 auto}
+  .lead h3{font-family:var(--serif);font-weight:500;font-size:clamp(22px,3vw,26px);color:var(--navy);line-height:1.2;margin-bottom:10px}
+  .lead .lcopy{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:24px}
+  .lead .lfields{display:grid;gap:18px;margin-bottom:24px}
+  .lead .lfld{display:flex;flex-direction:column;gap:6px}
+  .lead .lfld label{font-size:13px;color:var(--muted)}
+  .lead .lfld input{border:none;border-bottom:2px solid var(--line-grey);background:none;outline:none;
+                    font-family:var(--serif);font-size:20px;color:var(--navy);padding:6px 0;transition:border-color .2s}
+  .lead .lfld input:focus{border-color:var(--gold)}
+  .lead .lfld input::placeholder{color:var(--line-grey)}
+  .lead .lbtn{background:var(--gold);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:600;
+              font-size:15px;padding:13px 26px;border-radius:8px;cursor:pointer;transition:background .2s}
+  .lead .lbtn:hover{background:var(--gold-soft)}
+  .lead .lbtn[disabled]{opacity:.6;cursor:default}
+  .lead .lctx{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted);opacity:.8;line-height:1.5}
+  .lead .lthanks{font-size:16px;color:var(--navy);line-height:1.6}
+
   @media(max-width:680px){
     .opts.four{grid-template-columns:1fr 1fr}
     .acard{flex-wrap:wrap}
@@ -146,8 +166,8 @@
 <main>
   <div class="intro">
     <div class="eyebrow">Find your risk advisor</div>
-    <h1>Advisors who start with your <em>risk</em> — not a product.</h1>
-    <p class="sub">Tell us what you do and where you are. We&rsquo;ll show the risk advisors who fit your industry and your area, with their live availability — ready to book.</p>
+    <h1>Advisors who start with your <em>risk</em> – not a product.</h1>
+    <p class="sub">Tell us what you do and where you are. We&rsquo;ll show the risk advisors who fit your industry and your area, with their live availability – ready to book.</p>
   </div>
 
   <div class="panel">
@@ -156,7 +176,7 @@
       <div class="blabel"><span class="k">How you&rsquo;d like to meet:</span><span class="v" id="v_meet">In person</span></div>
       <div class="opts two" data-group="meet" data-single="1">
         <button class="opt sel" data-val="In person"><span class="t">In person</span><span class="d">Meet at the advisor&rsquo;s office or your site.</span></button>
-        <button class="opt" data-val="Call"><span class="t">Call</span><span class="d">A phone or video consult — the advisor&rsquo;s call.</span></button>
+        <button class="opt" data-val="Call"><span class="t">Call</span><span class="d">A phone or video consult – the advisor&rsquo;s call.</span></button>
       </div>
     </div>
 
@@ -164,7 +184,7 @@
     <div class="bsec">
       <div class="blabel"><span class="k">Your occupation:</span><span class="v" id="v_occ">Not selected</span></div>
       <div class="ac">
-        <input id="i_occ" autocomplete="off" placeholder="Start typing — e.g. electrician, cafe, freight, accountant">
+        <input id="i_occ" autocomplete="off" placeholder="Start typing – e.g. electrician, cafe, freight, accountant">
         <div class="aclist" id="aclist"></div>
       </div>
     </div>
@@ -176,7 +196,8 @@
         <div class="fld"><label>Annual revenue</label>
           <div class="money"><span>$</span><input id="i_rev" inputmode="numeric" placeholder="0"></div></div>
         <div class="fld"><label>Working capital / surplus cash</label>
-          <div class="money"><span>$</span><input id="i_cash" inputmode="numeric" placeholder="0"></div></div>
+          <div class="money"><span>$</span><input id="i_cash" inputmode="numeric" placeholder="0"></div>
+          <p class="fhelp">Cash is often your first line of defence against a loss, well before insurance kicks in.</p></div>
       </div>
     </div>
 
@@ -189,14 +210,14 @@
 
   <!-- results -->
   <div class="results">
-    <div class="rhead">
+    <div class="rhead" id="rhead">
       <div class="rt"><b id="rcount">5</b> risk advisors <span id="rnear"></span></div>
       <div class="rsort">Best match first</div>
     </div>
     <div id="rlist"></div>
   </div>
 
-  <p class="preview-note">Preview — placeholder advisors and illustrative availability</p>
+  <p class="preview-note" id="previewNote">Preview – placeholder advisors and illustrative availability</p>
   <p class="disc">Geometrisk introduces businesses to independent risk advisors; it is not an insurance broker or insurer and does not arrange or advise on insurance products. General information only, not financial product advice.</p>
 </main>
 
@@ -212,7 +233,7 @@
   var commas = function(n){ return n?n.toLocaleString('en-AU'):''; };
 
   // ---- advisor directory ----
-  // Live advisors come from the Apps Script (JSONP — dodges CORS on a plain GET to
+  // Live advisors come from the Apps Script (JSONP – dodges CORS on a plain GET to
   // script.google.com). If it's slow, blocked, or has no live rows yet, we fall back
   // to the bundled seed file so the finder is never empty.
   var ADVISORS = [];
@@ -253,7 +274,7 @@
   function advisorDist(a){ var c=latlng(state.pc), p=latlng(a.postcode); return (c&&p)?haversine(c,p):Infinity; }
   function fmtKm(d){ if(d<1) return '<1 km'; if(d<10) return (Math.round(d*10)/10)+' km'; return Math.round(d)+' km'; }
   function initials(name){ var p=(name||'').trim().split(/\s+/).filter(Boolean);
-    return p.length ? (p[0][0]+(p.length>1?p[p.length-1][0]:'')).toUpperCase() : '—'; }
+    return p.length ? (p[0][0]+(p.length>1?p[p.length-1][0]:'')).toUpperCase() : '–'; }
 
   // Broad industry categories shown on the card, rolled up from the advisors' ANZSIC divisions.
   var CATLABEL = {
@@ -276,7 +297,7 @@
     });
     return out;
   }
-  var REM_TIP = '<span class="tip"><b>Risk spend</b> — what you pay to transfer risk, including insurance premiums and other risk mitigation expenses incurred from implementing advice.<br><br><b>Risk managed</b> — your total exposure, including risk retained and transferred to insurers.</span>';
+  var REM_TIP = '<span class="tip"><b>Risk spend</b> – what you pay to transfer risk, including insurance premiums and other risk mitigation expenses incurred from implementing advice.<br><br><b>Risk managed</b> – your total exposure, including risk retained and transferred to insurers.</span>';
   function remLine(r){
     r = r || {};
     var disclosed = r.disclosed!==false && (r.riskSpendPct!=null || r.riskManagedPct!=null);
@@ -292,7 +313,7 @@
   function coversState(a){ var cs=clientState(); if(!cs) return false;
     var s=a.states||[]; return s.indexOf(cs)>-1 || s.indexOf('AU')>-1; }
 
-  // Availability rank — placeholder until we track advisors' live availability
+  // Availability rank – placeholder until we track advisors' live availability
   // (Option 1 only deep-links today, so there's no slot data yet).
   function availScore(a){ return a.availabilityScore || 0; }
 
@@ -311,15 +332,88 @@
       .map(function(o){ return o.a; });
   }
 
+  // ---- lead capture (no advisors match yet) ----
+  // Posts to the shared Geometrisk Apps Script (same /exec the About contact form uses),
+  // fire-and-forget like the other forms. The visitor's search inputs ride along so we can
+  // introduce the right advisor.
+  // TODO (before launch): add an `advisor_lead` branch to the Apps Script doPost
+  // (mirroring scripts/apps-script-contact.md) and redeploy the Web App, so these leads
+  // email info@geometrisk.com.au. Until then the POST is received but not forwarded.
+  var LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwOXYyrRiR0sVkZjKutfUT8mt9oBs6tpYObOSnmNkwVJpLbWihj2q7dHFdd6WgxJnUq/exec';
+
+  function leadContext(){
+    var parts=[];
+    if(state.occ) parts.push(state.occ);
+    if(state.rev>0) parts.push(kfmt(state.rev)+' revenue');
+    if(state.pc) parts.push('postcode '+state.pc);
+    if(state.meet) parts.push(state.meet.toLowerCase());
+    return parts;
+  }
+  function updateLeadCtx(){
+    var el=$('lctx'); if(!el) return;
+    var ctx=leadContext();
+    if(ctx.length){ el.innerHTML='We&rsquo;ll match you on: '+ctx.join(' · '); el.style.display=''; }
+    else { el.textContent=''; el.style.display='none'; }
+  }
+  function captureCard(){
+    return '<div class="lead">'+
+      '<form id="leadForm">'+
+        '<h3>We&rsquo;re onboarding advisors now.</h3>'+
+        '<p class="lcopy">No advisor is listed for your area yet. Leave your details and we&rsquo;ll introduce you to an independent risk advisor as they come on.</p>'+
+        '<div class="lfields">'+
+          '<div class="lfld"><label for="l_name">Name</label><input id="l_name" type="text" autocomplete="name" placeholder="Your name"></div>'+
+          '<div class="lfld"><label for="l_email">Email</label><input id="l_email" type="email" autocomplete="email" placeholder="you@example.com.au"></div>'+
+          '<div class="lfld"><label for="l_phone">Phone (optional)</label><input id="l_phone" type="tel" autocomplete="tel" placeholder="Optional"></div>'+
+        '</div>'+
+        '<button class="lbtn" type="submit" id="l_send">Match me when ready</button>'+
+        '<div class="lctx" id="lctx"></div>'+
+      '</form>'+
+      '<div class="lthanks" id="leadThanks" style="display:none">Thanks. We&rsquo;ll be in touch as advisors join.</div>'+
+    '</div>';
+  }
+  function wireLead(){
+    var form=$('leadForm'); if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name=($('l_name').value||'').trim();
+      var email=($('l_email').value||'').trim();
+      var phone=($('l_phone').value||'').trim();
+      var btn=$('l_send'); btn.disabled=true; btn.textContent='Sending…';
+      var fd=new FormData();
+      fd.append('type','advisor_lead');
+      fd.append('to','info@geometrisk.com.au');
+      fd.append('name',name);
+      fd.append('email',email);
+      fd.append('phone',phone);
+      fd.append('occupation',state.occ||'');
+      fd.append('anzsic',state.anzsic||'');
+      fd.append('postcode',state.pc||'');
+      fd.append('revenue',state.rev||'');
+      fd.append('surplusCash',state.cash||'');
+      fd.append('meet',state.meet||'');
+      fd.append('page',location.pathname);
+      fd.append('ts',new Date().toISOString());
+      fetch(LEAD_ENDPOINT,{method:'POST',body:fd}).catch(function(){}).then(function(){
+        form.style.display='none';
+        $('leadThanks').style.display='';
+      });
+    });
+  }
+
   function render(){
-    var list = $('rlist'); list.innerHTML='';
+    var list = $('rlist');
     var rows = ranked();
     if(!rows.length){
-      list.innerHTML = '<div class="empty">No advisors are listed yet &mdash; Geometrisk is in beta and onboarding risk advisors now. Please check back soon.<br>Are you an advisor? <a href="broker-onboarding.html">Join the directory</a>.</div>';
-      $('rcount').textContent = '0';
-      $('rnear').textContent = '';
+      // No match yet → capture the visitor as a lead, hide the count and sort label.
+      $('rhead').style.display='none';
+      var pn=$('previewNote'); if(pn) pn.style.display='none';
+      if(!$('leadForm')){ list.innerHTML = captureCard(); wireLead(); }
+      updateLeadCtx();   // keep the "match you on" line fresh without clobbering typed input
       return;
     }
+    $('rhead').style.display='';
+    var pn2=$('previewNote'); if(pn2) pn2.style.display='';
+    list.innerHTML='';
     rows.forEach(function(a){
       // broad industry categories, matched one first so the highlighted chip is always visible
       var cats = categories(a).sort(function(x,y){

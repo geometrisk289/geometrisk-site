@@ -146,7 +146,7 @@
                            border-radius:50%;background:var(--gold)}
   .whatis .wdisc{font-size:13px;color:var(--muted);line-height:1.6;max-width:600px;margin:0 auto}
 
-  /* Why it matters — qualitative */
+  /* Why it matters – qualitative */
   .whymatters{background:var(--cream);padding:76px 32px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .whymatters .win{max-width:1000px;margin:0 auto;text-align:center}
   .whymatters .wmtag,.whatis .wmtag{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
@@ -159,7 +159,7 @@
   .wmcard p{font-size:15px;line-height:1.6;color:var(--ink);opacity:.85}
   @media(max-width:760px){ .wmgrid{grid-template-columns:1fr} }
 
-  /* Why that matters — recovery calculator */
+  /* Why that matters – recovery calculator */
   .whyfin{background:var(--cream-hi);padding:78px 32px;border-top:1px solid var(--line)}
   .whyfin .win{max-width:760px;margin:0 auto;text-align:center}
   .whyfin .plabel{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;
@@ -195,12 +195,8 @@
   .recover .mult b{color:var(--navy);font-weight:700}
   @media (max-width:560px){ .recover .ctrls{grid-template-columns:1fr;gap:18px} }
 
-  /* ---------- referral: floating button + panel ---------- */
-  .fab{position:fixed;right:24px;bottom:24px;z-index:60;background:var(--gold);color:var(--deep);
-       border:none;border-radius:2px;padding:14px 22px;font-family:var(--body);font-weight:600;
-       font-size:15px;cursor:pointer;box-shadow:0 6px 18px rgba(14,29,56,.28);transition:background .22s ease}
-  .fab:hover{background:var(--gold-soft)}
-  .fabline{position:fixed;left:24px;bottom:24px;z-index:60;background:var(--navy);color:var(--cream-hi);
+  /* ---------- referral: floating link ---------- */
+  .fabline{position:fixed;right:24px;bottom:24px;z-index:60;background:var(--navy);color:var(--cream-hi);
            border-radius:2px;padding:14px 22px;font-family:var(--body);font-weight:600;font-size:15px;
            text-decoration:none;box-shadow:0 6px 18px rgba(14,29,56,.28);transition:background .22s ease}
   .fabline:hover{background:var(--deep)}
@@ -217,20 +213,6 @@
   .fnav a{font-family:var(--mono);font-size:12px;letter-spacing:.6px;text-transform:uppercase;
           color:rgba(241,232,214,.7);text-decoration:none;transition:color .2s}
   .fnav a:hover{color:#fff}
-  .overlay{position:fixed;inset:0;z-index:70;background:rgba(14,29,56,.55);display:none;
-           align-items:flex-start;justify-content:center;padding:6vh 20px 40px;overflow-y:auto}
-  .overlay.open{display:flex}
-  .modal{background:var(--cream-hi);border-radius:4px;max-width:480px;width:100%;
-         padding:34px 32px;position:relative}
-  .modal .mclose{position:absolute;top:12px;right:12px;background:none;border:none;font-size:24px;
-                 line-height:1;color:var(--muted);cursor:pointer;padding:6px}
-  .modal .mclose:hover{color:var(--navy)}
-  .modal h3{font-family:var(--serif);font-weight:600;font-size:24px;color:var(--navy);
-            line-height:1.15;margin-bottom:10px}
-  .modal .mnote{font-size:14px;color:var(--muted);margin-bottom:20px}
-  .modal.booking{max-width:820px}
-  #bookingEmbed iframe{display:block;width:100%;height:620px;border:1px solid var(--line);border-radius:4px;background:#fff}
-
   footer{background:var(--navy);color:rgba(241,232,214,.6);padding:52px 32px 96px}
   .foot{max-width:1180px;margin:0 auto;display:flex;align-items:flex-start;
         justify-content:flex-start;gap:32px;flex-wrap:wrap}
@@ -308,7 +290,7 @@
     <p class="heroline">The best risk advisors help you find <span class="ital">yours</span>.</p>
     <div class="herocta">
       <a class="cta solid" href="find-advisor.html">Find your risk advisor <span class="arw">&rarr;</span></a>
-      <div class="sub">Advisors who start with your risk appetite &mdash; not an insurer's product.</div>
+      <div class="sub">Advisors who start with your risk appetite – not an insurer's product.</div>
     </div>
     <div class="herodisc">General information only, not advice.</div>
   </div>
@@ -319,9 +301,9 @@
   <div class="win">
     <div class="wmtag">Why Risk Matters</div>
     <h2>Profit is finite. Risk is <span class="ital">uncapped</span>.</h2>
-    <p class="wmlead">You keep a fixed slice of every sale. The loss you keep has no such limit &mdash; and no policy is coming for it.</p>
+    <p class="wmlead">You keep a fixed slice of every sale. The loss you keep has no such limit – and no policy is coming for it.</p>
     <div class="wmgrid">
-      <div class="wmcard"><h4>The downside has no ceiling</h4><p>Your profit is a fixed slice of each sale. A loss you keep is not &mdash; one bad day can undo years of them.</p></div>
+      <div class="wmcard"><h4>The downside has no ceiling</h4><p>Your profit is a fixed slice of each sale. A loss you keep is not – one bad day can undo years of them.</p></div>
       <div class="wmcard"><h4>Insurance stops at the exclusions</h4><p>Sub-limits, exclusions, and the risks no insurer will write. Whatever&rsquo;s left sits on your balance sheet, usually unmeasured.</p></div>
       <div class="wmcard"><h4>A loss costs more than the loss</h4><p>To rebuild what you retain, you have to sell it many times over. Knowing that climb before it lands is the whole point.</p></div>
     </div>
@@ -355,27 +337,12 @@
   <div class="win">
     <div class="wmtag">What Geometrisk is</div>
     <h2>Your risk is our <span class="ital">business</span>.</h2>
-    <p class="wlead">We connect you with independent risk advisors who begin with the risks you carry &mdash; not the products they can sell.</p>
+    <p class="wlead">We connect you with independent risk advisors who begin with the risks you carry – not the products they can sell.</p>
     <p class="wdisc">Geometrisk is not authorised or licensed to arrange or provide Australian financial product advice or services. We focus on the risk you retain; arranging or advising on insurance is a broker's role, not ours.</p>
   </div>
 </section>
 
-<button class="fab" id="fabAdvisor" type="button">Book your consultation</button>
-
 <a class="fabline" href="find-advisor.html">Find your risk advisor</a>
-
-<div class="overlay" id="advOverlay" role="dialog" aria-modal="true" aria-labelledby="advTitle">
-  <div class="modal booking">
-    <button class="mclose" id="advClose" type="button" aria-label="Close">&times;</button>
-    <h3 id="advTitle">Book your consultation</h3>
-    <p class="mnote">A 30-minute look at your line and your list, and a couple of moves you can actually make. No pitch. Pick a time that suits.</p>
-    <div id="bookingEmbed">
-      <iframe id="bookingFrame" title="Book a consultation" loading="lazy"
-              data-src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0TeMW59az6l0kuB2lBWGXXpeA4s1Cl8Jg3SaHPuk0Yoe3REX5TW5AF_lgUrPgbJNw7KQ0ZUQzE?gv=true"
-              src="about:blank" frameborder="0"></iframe>
-    </div>
-  </div>
-</div>
 
 <footer>
   <div class="foot">
@@ -402,7 +369,7 @@
   /* ---------------- HERO: the partition ---------------- */
   // Each business appears in a good year, then slides to its lean year.
   // Marker position = ln((line / revenue) * 52) / ln(52) as a %, floored at
-  // 2% — precomputed to match the Step 1 calculator; never placed by hand.
+  // 2% – precomputed to match the Step 1 calculator; never placed by hand.
   var BUSINESSES=[
     { good:{line:2020000, pos:21.5, caption:'Food manufacturer, good year · $45m revenue · $3.2m surplus cash'},
       lean:{line:1010000, pos:8.2,  caption:'Food manufacturer, lean year · $38m revenue · $1.6m surplus cash'} },
@@ -485,26 +452,6 @@
 </script>
 
 
-
-<script>
-/* ---------------- BOOKING: floating button + calendar modal ---------------- */
-(function(){
-  "use strict";
-  var overlay=document.getElementById('advOverlay'),
-      frame=document.getElementById('bookingFrame');
-
-  function open(){
-    // load the Google Appointment Schedule on first open only
-    if(frame.getAttribute('src')==='about:blank') frame.setAttribute('src',frame.dataset.src);
-    overlay.classList.add('open');document.body.style.overflow='hidden';
-  }
-  function close(){overlay.classList.remove('open');document.body.style.overflow='';}
-  document.getElementById('fabAdvisor').addEventListener('click',open);
-  document.getElementById('advClose').addEventListener('click',close);
-  overlay.addEventListener('click',function(e){if(e.target===overlay)close();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('open'))close();});
-})();
-</script>
 
 </body>
 </html>
