@@ -159,6 +159,24 @@
   .wmcard p{font-size:15px;line-height:1.6;color:var(--ink);opacity:.85}
   @media(max-width:760px){ .wmgrid{grid-template-columns:1fr} }
 
+  /* By the numbers – what risk costs */
+  .risks{background:var(--cream-hi);padding:76px 32px;border-bottom:1px solid var(--line)}
+  .risks .win{max-width:1000px;margin:0 auto;text-align:center}
+  .risks .wmtag{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .risks h2{font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.8vw,44px);line-height:1.08;letter-spacing:-.4px;color:var(--navy);margin-bottom:16px}
+  .risks h2 .ital{font-style:italic;color:var(--gold)}
+  .risks .rlead{font-size:17px;color:var(--muted);line-height:1.6;max-width:660px;margin:0 auto 40px}
+  .rkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;text-align:left}
+  .rkcard{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:24px 24px;display:flex;flex-direction:column}
+  .rkcard .rkfig{font-family:var(--serif);font-weight:700;font-size:34px;line-height:1;letter-spacing:-.5px;color:var(--gold)}
+  .rkcard .rkunit{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:9px}
+  .rkcard h4{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--navy);margin:16px 0 6px;line-height:1.2}
+  .rkcard p{font-size:14px;line-height:1.55;color:var(--ink);opacity:.85}
+  .rkcard .rksrc{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);
+                 font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--muted);opacity:.85}
+  .rknote{margin:30px auto 0;font-size:12px;color:var(--muted);line-height:1.6;max-width:760px}
+  @media(max-width:760px){ .rkgrid{grid-template-columns:1fr} }
+
   /* Why that matters – recovery calculator */
   .whyfin{background:var(--cream-hi);padding:78px 32px;border-top:1px solid var(--line)}
   .whyfin .win{max-width:760px;margin:0 auto;text-align:center}
@@ -307,6 +325,67 @@
       <div class="wmcard"><h4>Insurance stops at the exclusions</h4><p>Sub-limits, exclusions, and the risks no insurer will write. Whatever&rsquo;s left sits on your balance sheet, usually unmeasured.</p></div>
       <div class="wmcard"><h4>A loss costs more than the loss</h4><p>To rebuild what you retain, you have to sell it many times over. Knowing that climb before it lands is the whole point.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ============ BY THE NUMBERS: WHAT RISK COSTS ============ -->
+<section class="risks">
+  <div class="win">
+    <div class="wmtag">By the numbers</div>
+    <h2>What risk costs Australian <span class="ital">business</span>.</h2>
+    <p class="rlead">A handful of familiar risks quietly drain billions from Australian businesses each year. A sense of the scale that sits on the balance sheet:</p>
+    <div class="rkgrid">
+
+      <div class="rkcard">
+        <div class="rkfig">$4.5bn</div>
+        <div class="rkunit">Insured losses a year</div>
+        <h4>Floods, storms &amp; cyclones</h4>
+        <p>Extreme weather claims have more than doubled in five years, driven largely by flood.</p>
+        <div class="rksrc">Insurance Council of Australia</div>
+      </div>
+
+      <div class="rkcard">
+        <div class="rkfig">$28.6bn</div>
+        <div class="rkunit">Cost to the economy a year</div>
+        <h4>Workplace injury &amp; illness</h4>
+        <p>The productivity, wage and health toll of work-related injury and illness.</p>
+        <div class="rksrc">Safe Work Australia</div>
+      </div>
+
+      <div class="rkcard">
+        <div class="rkfig">$2.0bn</div>
+        <div class="rkunit">Reported losses, 2024</div>
+        <h4>Scams &amp; fraud</h4>
+        <p>Payment redirection and business email compromise hit businesses hardest.</p>
+        <div class="rksrc">ACCC &middot; National Anti-Scam Centre</div>
+      </div>
+
+      <div class="rkcard">
+        <div class="rkfig">$49,600</div>
+        <div class="rkunit">Average loss per incident, small business</div>
+        <h4>Cybercrime</h4>
+        <p>A cybercrime is reported every six minutes. Most never reach the headlines.</p>
+        <div class="rksrc">Australian Signals Directorate</div>
+      </div>
+
+      <div class="rkcard">
+        <div class="rkfig">$500k+</div>
+        <div class="rkunit">A severe escape-of-liquid claim</div>
+        <h4>Water damage</h4>
+        <p>Burst pipes and failed flexi-hoses &ndash; one of the most common property claims.</p>
+        <div class="rksrc">Insurer claims data</div>
+      </div>
+
+      <div class="rkcard">
+        <div class="rkfig">$2.4bn</div>
+        <div class="rkunit">Insured losses, one season</div>
+        <h4>Bushfire</h4>
+        <p>Black Summer alone. A single season can eclipse years of ordinary claims.</p>
+        <div class="rksrc">Insurance Council of Australia</div>
+      </div>
+
+    </div>
+    <p class="rknote">Indicative figures drawn from the most recent public reporting by the Insurance Council of Australia, the Australian Signals Directorate, the ACCC and Safe Work Australia. Most losses land on the businesses that carry them, not on a policy. General information only, not advice.</p>
   </div>
 </section>
 
