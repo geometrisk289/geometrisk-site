@@ -21,7 +21,7 @@
     text-rendering:geometricPrecision;
   }
 
-  /* Type block — top third */
+  /* Type block */
   .headline{
     position:absolute;left:96px;top:150px;
     font-family:'Playfair Display';font-weight:500;font-size:64px;
@@ -33,32 +33,30 @@
     color:#F1E8D6;opacity:0.65;line-height:1.35;letter-spacing:0.1px;
   }
 
-  /* Chart — latitude lines run full-bleed off both edges */
+  /* Latitude lines — cream @14%, full-bleed off both edges */
   .lat{
     position:absolute;left:-40px;width:1160px;height:1px;
-    background:#16294A;transform:translateY(-0.5px);
+    background:#F1E8D6;opacity:0.14;transform:translateY(-0.5px);
   }
   .lat-label{
     position:absolute;left:96px;
     font-family:'IBM Plex Mono';font-weight:400;font-size:11px;
     letter-spacing:1px;
-    color:#F1E8D6;opacity:0.40;
+    color:#F1E8D6;opacity:0.60;
     transform:translateY(-50%);
   }
 
   .dot{
-    position:absolute;width:14px;height:14px;border-radius:50%;
-    background:#A8843E;
-    transform:translate(-7px,-7px);
+    position:absolute;border-radius:50%;
   }
 
-  /* Footer — bottom */
+  /* Footer */
   .foot{
     position:absolute;bottom:96px;
     font-family:'IBM Plex Mono';font-weight:400;font-size:12px;
     letter-spacing:2px;
   }
-  .foot-left{left:96px;color:#A8843E;opacity:0.70;}
+  .foot-left{left:96px;color:#A8843E;opacity:1;}
   .foot-right{right:96px;color:#F1E8D6;opacity:0.35;}
 </style>
 </head>
@@ -67,22 +65,22 @@
     <div class="headline">Latitude only.</div>
     <div class="subline">A position fixed on one axis is not a position.</div>
 
-    <div class="lat" style="top:520px"></div>
-    <div class="lat-label" style="top:520px">Extreme</div>
-    <div class="lat" style="top:620px"></div>
-    <div class="lat-label" style="top:620px">High</div>
-    <div class="lat" style="top:720px"></div>
-    <div class="lat-label" style="top:720px">Medium</div>
-    <div class="lat" style="top:820px"></div>
-    <div class="lat-label" style="top:820px">Low</div>
-    <div class="lat" style="top:920px"></div>
-    <div class="lat-label" style="top:920px">Negligible</div>
+    <div class="lat" style="top:455px"></div>
+    <div class="lat-label" style="top:455px">Extreme</div>
+    <div class="lat" style="top:560px"></div>
+    <div class="lat-label" style="top:560px">High</div>
+    <div class="lat" style="top:665px"></div>
+    <div class="lat-label" style="top:665px">Medium</div>
+    <div class="lat" style="top:770px"></div>
+    <div class="lat-label" style="top:770px">Low</div>
+    <div class="lat" style="top:875px"></div>
+    <div class="lat-label" style="top:875px">Negligible</div>
 
-    <div class="dot" style="left:15%;top:620px;opacity:0.15"></div>
-    <div class="dot" style="left:35%;top:620px;opacity:0.15"></div>
-    <div class="dot" style="left:60%;top:620px;opacity:1"></div>
-    <div class="dot" style="left:80%;top:620px;opacity:0.15"></div>
-    <div class="dot" style="left:95%;top:620px;opacity:0.15"></div>
+    <div class="dot" style="left:15%;top:560px;width:10px;height:10px;background:#F1E8D6;opacity:0.28;transform:translate(-5px,-5px)"></div>
+    <div class="dot" style="left:35%;top:560px;width:10px;height:10px;background:#F1E8D6;opacity:0.28;transform:translate(-5px,-5px)"></div>
+    <div class="dot" style="left:60%;top:560px;width:18px;height:18px;background:#A8843E;opacity:1;transform:translate(-9px,-9px)"></div>
+    <div class="dot" style="left:80%;top:560px;width:10px;height:10px;background:#F1E8D6;opacity:0.28;transform:translate(-5px,-5px)"></div>
+    <div class="dot" style="left:95%;top:560px;width:10px;height:10px;background:#F1E8D6;opacity:0.28;transform:translate(-5px,-5px)"></div>
 
     <div class="foot foot-left">GEOMETRISK</div>
     <div class="foot foot-right">geometrisk.com.au</div>
