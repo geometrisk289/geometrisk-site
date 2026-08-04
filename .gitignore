@@ -4,3 +4,8 @@
 !.dev.vars.example
 .env*
 !.env.example
+
+# node / build tooling (playwright for image rendering)
+node_modules/
+package.json
+package-lock.json
