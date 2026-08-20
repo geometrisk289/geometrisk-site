@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Risk Analytics — Geometrisk</title>
-<meta name="description" content="How big a loss could the business carry — and climb back from? Enter a few numbers, set the worst loss you could wake up to, and see the sales it would take to recover. General information only.">
+<meta name="description" content="Model a client’s risk line live: the loss they can absorb, the loss they cannot, and the extra sales a recovery would take. A working tool for brokers and advisers.">
 <link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,8 +111,8 @@
     <span class="beta" style="font-family:var(--mono),ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:100px;padding:3px 9px;line-height:1;white-space:nowrap;align-self:center">Beta</span>
   </a>
   <nav>
-    <a href="index.html#businesses">For Businesses</a>
-    <a href="for-brokers.html">For Brokers</a>
+    <a href="index.html#tools" class="on">Tools</a>
+    <a href="methodology.html">Insights</a>
     <a href="about.html">About</a>
   </nav>
 </header>
@@ -120,23 +120,23 @@
 <main>
   <div class="intro">
     <div class="eyebrow">Risk Analytics</div>
-    <h1>The loss you keep &mdash; and the climb <em>back</em>.</h1>
-    <p class="sub">A few numbers, the worst loss you could wake up to, and the sales it would take to recover. About 2 minutes.</p>
+    <h1>The loss your client keeps &mdash; and the climb <em>back</em>.</h1>
+    <p class="sub">A few of your client’s numbers, the worst loss they could wake up to, and the sales it would take to recover. About 2 minutes.</p>
   </div>
 
   <div class="wsteps" id="wsteps">
-    <button class="ws on" data-step="1"><span class="wn">1</span><span class="slabel">Your numbers</span></button>
+    <button class="ws on" data-step="1"><span class="wn">1</span><span class="slabel">The figures</span></button>
     <button class="ws" data-step="2"><span class="wn">2</span><span class="slabel">Worst loss</span></button>
     <button class="ws" data-step="3"><span class="wn">3</span><span class="slabel">The climb</span></button>
   </div>
 
   <!-- STEP 1 -->
   <section class="step screen on" id="scr1">
-    <div class="steptag">01 · Your numbers</div>
+    <div class="steptag">01 · The client’s figures</div>
     <div class="row">
       <div class="fld"><label>Annual revenue</label>
         <div class="money"><span>$</span><input id="i_rev" inputmode="numeric" placeholder="0"></div></div>
-      <div class="fld"><label>Surplus cash you can reach</label>
+      <div class="fld"><label>Surplus cash the client can reach</label>
         <div class="money"><span>$</span><input id="i_cash" inputmode="numeric" placeholder="0"></div></div>
     </div>
     <div class="fld ac" style="margin-top:18px">
@@ -149,8 +149,8 @@
 
   <!-- STEP 2 -->
   <section class="step screen" id="scr2" hidden>
-    <div class="steptag">02 · The worst loss you could wake up to</div>
-    <p class="ctx" id="ctx">A one-off hit the business can't insure away, or wouldn't. Move the slider to yours.</p>
+    <div class="steptag">02 · The worst loss the client could wake up to</div>
+    <p class="ctx" id="ctx">A one-off hit the business can't insure away, or wouldn't. Move the slider to theirs.</p>
     <div class="slval" id="lossVal">$5,000,000</div>
     <input type="range" class="slider" id="lossR" min="0" max="1000" step="1" value="500" aria-label="Worst loss">
     <div class="scale"><span>$500k</span><span>$50m</span></div>
@@ -164,8 +164,8 @@
 
   <!-- STEP 3 -->
   <section class="step screen" id="scr3" hidden>
-    <div class="steptag">03 · Could you climb back?</div>
-    <p class="ctx">Two levers you actually control: how much you make on each sale, and the cash you hold. Move them and watch the climb.</p>
+    <div class="steptag">03 · Could they climb back?</div>
+    <p class="ctx">Two levers the business actually controls: the margin on each sale, and the cash it holds. Move them and watch the climb.</p>
     <div class="lever">
       <div class="lh"><label>Gross margin</label><b id="marVal">35%</b></div>
       <input type="range" class="slider" id="marR" min="5" max="60" step="1" value="35" aria-label="Gross margin">
@@ -181,20 +181,19 @@
     </div>
     <div class="navbtns"><button class="btn ghost2" data-back="2">&larr; Back</button><span class="spacer"></span></div>
     <div class="endcta">
-      <p>Numbers are a starting point, not the answer. A short risk review turns them into the moves worth making on the risk you keep.</p>
-      <a class="btn gold" href="#" id="bookBtn">Schedule a risk review &nbsp;&rarr;</a>
+      <p>Numbers are a starting point, not the answer. Take them into the client report to issue the analysis under your own licence.</p>
+      <a class="btn gold" href="broker-report.html" id="bookBtn">Build the client report &nbsp;&rarr;</a>
     </div>
   </section>
 
-  <p class="disc">General information only, not financial product advice. Illustrative figures, not tailored to your business.</p>
+  <p class="disc">General information only, not financial product advice. Illustrative figures, not tailored to any particular business.</p>
 </main>
 
 <footer class="site">
-  General information only, not advice. &nbsp;·&nbsp; <a href="methodology.html">Risk Insights</a> &nbsp;·&nbsp; <a href="find-your-line.html">Risk Analytics</a> &nbsp;·&nbsp; Geometrisk
+  General information only, not advice. &nbsp;·&nbsp; <a href="broker-report.html">Client risk report</a> &nbsp;·&nbsp; <a href="find-your-line.html">Risk Analytics</a> &nbsp;·&nbsp; <a href="methodology.html">Risk Insights</a> &nbsp;·&nbsp; Geometrisk
 </footer>
 
 <script>
-  var BOOKING_URL = 'https://calendar.app.google/oPBbKhGHU44FATAGA';
   // Wizard leads post to the shared Geometrisk Apps Script (leads tab, type=line_lead).
   var LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwOXYyrRiR0sVkZjKutfUT8mt9oBs6tpYObOSnmNkwVJpLbWihj2q7dHFdd6WgxJnUq/exec';
   var LEAD_SID = 'L' + Date.now().toString(36) + Math.random().toString(36).slice(2,7);
@@ -283,7 +282,7 @@
     try{ fetch(LEAD_ENDPOINT,{method:'POST',body:fd}).catch(function(){}); }catch(e){}
   }
 
-  $('bookBtn').addEventListener('click',function(e){ e.preventDefault(); captureLine('book'); if(BOOKING_URL) window.open(BOOKING_URL,'_blank','noopener'); });
+  $('bookBtn').addEventListener('click',function(e){ e.preventDefault(); captureLine('report'); window.location.href='broker-report.html'; });
 
   function climbWords(m){
     var names={2:'double',3:'triple',4:'quadruple',5:'quintuple'};

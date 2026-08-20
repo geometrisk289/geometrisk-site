@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Geometrisk · Every business has a line</title>
-<meta name="description" content="Geometrisk is a risk and capital advisory. Find the loss your business can carry, and the line it cannot cross. General information only, not financial product advice.">
+<title>Geometrisk · Risk tools for brokers</title>
+<meta name="description" content="Geometrisk builds risk tools for insurance brokers and advisers: draw a client’s risk line, show the loss they retain and the sales it takes to recover. General information only, not financial product advice.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="assets/geometrisk-logo.png">
@@ -127,6 +127,22 @@
   .cta.gold:hover{background:var(--gold-soft)}
   .chips{margin-top:18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.4px;color:var(--muted)}
 
+
+
+  /* ---------- tool cards ---------- */
+  .toolgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:8px}
+  .tool{display:flex;flex-direction:column;gap:8px;background:var(--cream);border:1px solid var(--line);
+        border-radius:10px;padding:24px 22px 22px;text-decoration:none;transition:border-color .2s,transform .2s,box-shadow .2s}
+  .tool:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 10px 26px rgba(14,29,56,.08)}
+  .tool .tnum{font-family:var(--mono);font-size:12px;letter-spacing:1.4px;color:var(--gold)}
+  .tool strong{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:-.2px;color:var(--navy);line-height:1.15}
+  .tool .tdesc{font-size:14.5px;line-height:1.6;color:var(--muted);flex:1}
+  .tool .tgo{font-family:var(--mono);font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;
+             color:var(--navy);margin-top:6px;display:inline-flex;align-items:center;gap:7px}
+  .tool:hover .tgo{color:var(--gold)}
+  .tool:hover .arw{transform:translateX(4px)}
+  .tool .arw{transition:transform .22s ease}
+  @media(max-width:860px){ .toolgrid{grid-template-columns:1fr} }
 
   /* ---------- positioning band ---------- */
   .whatis{background:var(--cream);padding:72px 32px}
@@ -264,7 +280,7 @@
 
 <nav>
   <div class="brand">
-    <a class="wordmark" href="#">
+    <a class="wordmark" href="index.html">
       <img class="logoimg" src="assets/geometrisk-logo.png" alt="Geometrisk">
     </a>
     <div class="divider"></div>
@@ -272,16 +288,16 @@
     <span class="beta" style="font-family:var(--mono),ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:100px;padding:3px 9px;line-height:1;white-space:nowrap;align-self:center">Beta</span>
   </div>
   <div class="navlinks">
-    <a href="#businesses">For businesses</a>
-    <a href="for-brokers.html">For brokers</a>
+    <a href="#tools">Tools</a>
+    <a href="methodology.html">Insights</a>
     <a href="about.html">About</a>
   </div>
 </nav>
 
 <!-- ============ HERO: THE PARTITION ============ -->
 <header class="hero">
-  <div class="eyebrow">Clarity on your risks</div>
-  <h1>Every business has a <span class="ital">line</span>.</h1>
+  <div class="eyebrow">Risk tools for brokers</div>
+  <h1>Every client has a <span class="ital">line</span>.</h1>
 
   <div class="lineblock">
     <div class="herofade" id="heroFade">
@@ -300,52 +316,76 @@
         <span class="r">Losses it cannot</span>
       </div>
       <div class="readout">
-        <div class="who" id="who">Food manufacturer, good year · $45m revenue · $3.2m surplus cash</div>
+        <div class="who" id="who">Food manufacturer, good year &middot; $45m revenue &middot; $3.2m surplus cash</div>
       </div>
     </div>
     <div class="dots" id="heroDots"></div>
 
-    <p class="heroline">The best risk advisors help you find <span class="ital">yours</span>.</p>
+    <p class="heroline">You are the one who <span class="ital">draws</span> it.</p>
     <div class="herocta">
-      <a class="cta solid" href="find-advisor.html">Find your risk advisor <span class="arw">&rarr;</span></a>
-      <div class="sub">Advisors who start with your risk appetite &mdash; not an insurer's product.</div>
+      <a class="cta solid" href="broker-report.html">Open the client risk report <span class="arw">&rarr;</span></a>
+      <div class="sub">Enter a client&rsquo;s figures. Issue the report under your own name and licence.</div>
     </div>
-    <div class="herodisc">General information only, not advice.</div>
+    <div class="herodisc">Built for licensed brokers and advisers. General information only, not advice.</div>
   </div>
 </header>
 
 <!-- ============ WHY IT MATTERS ============ -->
 <section class="whymatters">
   <div class="win">
-    <div class="wmtag">Why Risk Matters</div>
-    <h2>Profit is finite. Risk is <span class="ital">uncapped</span>.</h2>
-    <p class="wmlead">You keep a fixed slice of every sale. The loss you keep has no such limit &mdash; and no policy is coming for it.</p>
+    <div class="wmtag">Why it matters</div>
+    <h2>Price is a comparison. Risk is a <span class="ital">conversation</span>.</h2>
+    <p class="wmlead">Every quote you present competes on premium. The loss your client keeps appears on no schedule &mdash; and it is the ground no comparison site can take from you.</p>
     <div class="wmgrid">
-      <div class="wmcard"><h4>The downside has no ceiling</h4><p>Your profit is a fixed slice of each sale. A loss you keep is not &mdash; one bad day can undo years of them.</p></div>
-      <div class="wmcard"><h4>Insurance stops at the exclusions</h4><p>Sub-limits, exclusions, and the risks no insurer will write. Whatever&rsquo;s left sits on your balance sheet, usually unmeasured.</p></div>
-      <div class="wmcard"><h4>A loss costs more than the loss</h4><p>To rebuild what you retain, you have to sell it many times over. Knowing that climb before it lands is the whole point.</p></div>
+      <div class="wmcard"><h4>Comparison is a race you cannot win</h4><p>When premium is the only number on the table, the cheapest quote wins and your judgement counts for nothing. Start with what the client retains and the ground shifts.</p></div>
+      <div class="wmcard"><h4>The retained loss has no number</h4><p>Deductibles, sub-limits, exclusions, and the risks no insurer will write. It all sits on the client&rsquo;s balance sheet, usually unmeasured &mdash; which is why it goes undiscussed.</p></div>
+      <div class="wmcard"><h4>Give them a figure they can act on</h4><p>The largest loss the business can carry, and the sales it would take to climb back from one. That is the case for the cover, in the client&rsquo;s own language.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ FOR BUSINESSES ============ -->
+<!-- ============ THE TOOLS ============ -->
 <main class="split">
-  <section class="panel biz" id="businesses">
-    <div class="plabel">How it works</div>
-    <h2>The right risk advisor, in three <span class="ital">answers</span>.</h2>
+  <section class="panel biz" id="tools">
+    <div class="plabel">The tools</div>
+    <h2>Built for the risk conversation, not the <span class="ital">quote</span>.</h2>
+
+    <div class="toolgrid">
+      <a class="tool" href="broker-report.html">
+        <span class="tnum">01</span>
+        <strong>Client risk report</strong>
+        <span class="tdesc">Enter a client&rsquo;s revenue, gross profit and surplus cash. Out comes a report that draws their line, the loss sitting above it, and the extra sales a recovery would take &mdash; carrying your practice name, AR and AFSL.</span>
+        <span class="tgo">Open the report builder <span class="arw">&rarr;</span></span>
+      </a>
+      <a class="tool" href="find-your-line.html">
+        <span class="tnum">02</span>
+        <strong>Risk analytics</strong>
+        <span class="tdesc">Model a client&rsquo;s line live in the meeting. Move the loss, move the margin, move the cash &mdash; and watch the climb back change in front of them. About two minutes.</span>
+        <span class="tgo">Open risk analytics <span class="arw">&rarr;</span></span>
+      </a>
+      <a class="tool" href="methodology.html">
+        <span class="tnum">03</span>
+        <strong>The method</strong>
+        <span class="tdesc">The model behind every figure: the base, the climb, the felt cost, and what is deliberately left out. Seven short sections, one idea each, so you can defend it in the room.</span>
+        <span class="tgo">Read the method <span class="arw">&rarr;</span></span>
+      </a>
+    </div>
+
+    <div class="plabel" style="margin-top:60px">How the report works</div>
+    <h2>Three inputs, one <span class="ital">line</span>.</h2>
     <ol class="steps">
       <li class="step"><span class="num">01</span><span class="txt">
-        <strong>Your occupation</strong>
-        <span>What your business does, so we match advisors who understand your industry&rsquo;s risks.</span></span></li>
+        <strong>Enter the client&rsquo;s figures</strong>
+        <span>Revenue, gross profit and surplus cash. Nothing is stored &mdash; the report is built in the browser from what you type.</span></span></li>
       <li class="step"><span class="num">02</span><span class="txt">
-        <strong>Your scale</strong>
-        <span>The size of your business affects where the line lands.</span></span></li>
+        <strong>Draw the line</strong>
+        <span>The largest loss the business can carry, the loss it cannot, and the extra sales it would take to recover either one.</span></span></li>
       <li class="step"><span class="num">03</span><span class="txt">
-        <strong>Your postcode</strong>
-        <span>Where you are, so we can surface the risk advisors relevant to your area.</span></span></li>
+        <strong>Issue it under your licence</strong>
+        <span>Your practice, your AR and AFSL on the front. The analysis is ours; the advice that follows is yours.</span></span></li>
     </ol>
-    <a class="cta solid" href="find-advisor.html">Find your risk advisor <span class="arw">&rarr;</span></a>
-    <div class="chips">Free · About a minute · General info, not advice</div>
+    <a class="cta solid" href="broker-report.html">Open the client risk report <span class="arw">&rarr;</span></a>
+    <div class="chips">Free while in beta &middot; Nothing saved &middot; General info, not advice</div>
   </section>
 </main>
 
@@ -354,23 +394,23 @@
 <section class="whatis">
   <div class="win">
     <div class="wmtag">What Geometrisk is</div>
-    <h2>Your risk is our <span class="ital">business</span>.</h2>
-    <p class="wlead">We connect you with independent risk advisors who begin with the risks you carry &mdash; not the products they can sell.</p>
-    <p class="wdisc">Geometrisk is not authorised or licensed to arrange or provide Australian financial product advice or services. We focus on the risk you retain; arranging or advising on insurance is a broker's role, not ours.</p>
+    <h2>We build the tools. You give the <span class="ital">advice</span>.</h2>
+    <p class="wlead">Geometrisk builds risk tools for insurance brokers and advisers. We do not compete for your clients, and we do not place business.</p>
+    <p class="wdisc">Geometrisk is not authorised or licensed to arrange or provide Australian financial product advice or services. Our tools produce general information about the risk a business retains; any advice that follows is issued by your practice, under its own licence.</p>
   </div>
 </section>
 
-<button class="fab" id="fabAdvisor" type="button">Book your consultation</button>
+<button class="fab" id="fabAdvisor" type="button">Book a walkthrough</button>
 
-<a class="fabline" href="find-advisor.html">Find your risk advisor</a>
+<a class="fabline" href="broker-report.html">Open the client risk report</a>
 
 <div class="overlay" id="advOverlay" role="dialog" aria-modal="true" aria-labelledby="advTitle">
   <div class="modal booking">
     <button class="mclose" id="advClose" type="button" aria-label="Close">&times;</button>
-    <h3 id="advTitle">Book your consultation</h3>
-    <p class="mnote">A 30-minute look at your line and your list, and a couple of moves you can actually make. No pitch. Pick a time that suits.</p>
+    <h3 id="advTitle">Book a walkthrough</h3>
+    <p class="mnote">Thirty minutes on the tools and how they land in a client meeting &mdash; bring a live example if you have one. No pitch. Pick a time that suits.</p>
     <div id="bookingEmbed">
-      <iframe id="bookingFrame" title="Book a consultation" loading="lazy"
+      <iframe id="bookingFrame" title="Book a walkthrough" loading="lazy"
               data-src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0TeMW59az6l0kuB2lBWGXXpeA4s1Cl8Jg3SaHPuk0Yoe3REX5TW5AF_lgUrPgbJNw7KQ0ZUQzE?gv=true"
               src="about:blank" frameborder="0"></iframe>
     </div>
@@ -383,13 +423,14 @@
       <img src="assets/geometrisk-logo-light.png" alt="Geometrisk">
     </a>
     <nav class="fnav" aria-label="Footer">
-      <a href="methodology.html">Risk Insights</a>
+      <a href="broker-report.html">Client risk report</a>
       <a href="find-your-line.html">Risk Analytics</a>
+      <a href="methodology.html">Risk Insights</a>
       <a href="privacy.html">Privacy</a>
     </nav>
   </div>
   <div class="footbar">
-    <div class="disc">Illustrative figures only. General information, not financial product advice. Geometrisk helps businesses understand the risk they retain; it is not an insurance broker or insurer and does not arrange or advise on insurance products.</div>
+    <div class="disc">Illustrative figures only. General information, not financial product advice. Geometrisk builds risk tools for licensed insurance brokers and advisers; it is not an insurance broker or insurer and does not arrange or advise on insurance products.</div>
     <div class="fcopy">&copy; 2026 Geometrisk</div>
   </div>
 </footer>
