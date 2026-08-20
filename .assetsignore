@@ -1,0 +1,20 @@
+# The Worker serves this whole folder as static assets
+# (wrangler.jsonc -> assets.directory: "."), so without this file everything
+# here is fetchable at https://geometrisk.com.au/<path> — including .git.
+# Patterns are gitignore-style: wrangler feeds these lines to the `ignore`
+# package, so a trailing slash excludes a directory and everything under it.
+# Listed paths stay in the repo, they are just not uploaded.
+
+# Repository internals — the whole history was being served
+.git/
+.gitignore
+.wrangler/
+
+# Apps Script handler source and the data-build tooling
+scripts/
+
+# Config, not content
+wrangler.jsonc
+
+# Source workbook behind data/industry_losses.json
+data/*.xlsx
